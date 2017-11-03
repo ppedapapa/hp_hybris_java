@@ -1,51 +1,46 @@
 package hello;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
+import java.util.Arrays;
 
-/**
- * @SpringBootApplication is a convenience annotation that adds all of the
- *                        following:
- * 
- * @Configuration tags the class as a source of bean definitions for the
- *                application context.
- * @EnableAutoConfiguration tells Spring Boot to start adding beans based on
- *                          classpath settings, other beans, and various
- *                          property settings. Normally you would
- *                          add @EnableWebMvc for a Spring MVC app, but Spring
- *                          Boot adds it automatically when it sees
- *                          spring-webmvc on the classpath. This flags the
- *                          application as a web application and activates key
- *                          behaviors such as setting up a DispatcherServlet.
- * @ComponentScan tells Spring to look for other components, configurations, and
- *                services in the hello package, allowing it to find the
- *                controllers.
- * 
- * 
- * 
- * @author Elli Albek
- */
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
+public class Application {
 
-@ComponentScan(lazyInit = true, basePackages = "hello")
-public class Application extends SpringBootServletInitializer {
-	// @Override
-	// protected SpringApplicationBuilder configure(SpringApplicationBuilder
-	// application) {
-	// //return application.sources(Application.class);
-	// }
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
-	// @Component
-	// @Primary
-	// public class CustomObjectMapper extends ObjectMapper {
-	// public CustomObjectMapper() {
-	// setSerializationInclusion(JsonInclude.Include.NON_NULL);
-	// configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-	// configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-	// configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	// enable(SerializationFeature.INDENT_OUTPUT);
-	// }
-	// }
+    @Bean
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+        return args -> {
+
+            System.out.println("Let's inspect the beans provided by Spring Boot:");
+
+            String[] beanNames = ctx.getBeanDefinitionNames();
+            Arrays.sort(beanNames);
+            for (String beanName : beanNames) {
+                System.out.println(beanName);
+            }
+
+        };
+    }
+    
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/*").allowedOrigins("https://storage.googleapis.com");
+            }
+        };
+    }
+
 }

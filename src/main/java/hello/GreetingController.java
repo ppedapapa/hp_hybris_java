@@ -6,13 +6,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@SpringBootApplication
 @RestController
 public class GreetingController {
-
+	
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
 
