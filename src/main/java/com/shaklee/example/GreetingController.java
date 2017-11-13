@@ -1,4 +1,4 @@
-package hello;
+package com.shaklee.example;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 

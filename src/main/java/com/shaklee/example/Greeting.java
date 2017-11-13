@@ -1,4 +1,4 @@
-package hello;
+package com.shaklee.example;
 
 public class Greeting {
 
