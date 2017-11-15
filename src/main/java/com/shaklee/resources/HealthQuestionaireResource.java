@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shaklee.DAO.UserDataStorageDAO;
 
-@SpringBootApplication
 @RestController
 public class HealthQuestionaireResource {
 	
