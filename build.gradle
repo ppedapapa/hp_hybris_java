@@ -4,12 +4,17 @@ buildscript {
 	  }
     repositories {
         mavenCentral()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
         classpath 'com.google.cloud.tools:appengine-gradle-plugin:+'
-        classpath 'org.akhikhl.gretty:gretty:1.4.0' // This version is because latest gretty has a bug with "tasks", check again in the future
-    // https://github.com/akhikhl/gretty/issues/331
+        //classpath 'org.akhikhl.gretty:gretty:1.4.0' // This version is because latest gretty has a bug with "tasks", check again in the future
+        classpath 'org.akhikhl.gretty:gretty:+'
+        // https://github.com/akhikhl/gretty/issues/331
    	
     }
 }
@@ -33,8 +38,13 @@ jar {
 repositories {   // repositories for JARs you access in your code
   maven {
     url 'https://maven-central.storage.googleapis.com'             // Google's mirror of Maven Central
+
     //  url 'https://oss.sonatype.org/content/repositories/snapshots' // SNAPSHOT repository if needed
   }
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
+    mavenLocal()
   jcenter()
   mavenCentral()
 }
@@ -45,14 +55,13 @@ appengine {
     promote = true              // default - & make this the current version
     project = 'shaklee-gps'
   }
-  
 }
 
 // [START gretty]
 gretty {
     httpPort = 8080
     contextPath = '/'
-    servletContainer = 'jetty9'  // What App Engine Flexible uses
+    servletContainer = 'jetty92'  // What App Engine Flexible uses
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
