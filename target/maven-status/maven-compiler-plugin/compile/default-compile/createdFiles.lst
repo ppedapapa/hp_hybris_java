@@ -1,11 +1,8 @@
+com/shaklee/resources/HealthQuestionaireResource$QuestionsResponse.class
 com/shaklee/resources/HealthQuestionaireResource$UserRequest.class
 com/shaklee/resources/HealthQuestionaireResource.class
-com/shaklee/util/PropertiesObject.class
 com/shaklee/Application$1.class
 com/shaklee/example/Greeting.class
+com/shaklee/example/HelloController.class
 com/shaklee/Application.class
 com/shaklee/example/GreetingController.class
-com/shaklee/DAO/UserDataStorageDAO.class
-com/shaklee/resources/HealthQuestionaireResource$QuestionsResponse.class
-com/shaklee/util/ClasspathFileLoader.class
-com/shaklee/HelloController.class

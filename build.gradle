@@ -12,8 +12,8 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
         classpath 'com.google.cloud.tools:appengine-gradle-plugin:+'
-        //classpath 'org.akhikhl.gretty:gretty:1.4.0' // This version is because latest gretty has a bug with "tasks", check again in the future
-        classpath 'org.akhikhl.gretty:gretty:+'
+        classpath 'org.akhikhl.gretty:gretty:1.4.0' // This version is because latest gretty has a bug with "tasks", check again in the future
+        // classpath 'org.akhikhl.gretty:gretty:+'
         // https://github.com/akhikhl/gretty/issues/331
    	
     }
@@ -61,7 +61,7 @@ appengine {
 gretty {
     httpPort = 8080
     contextPath = '/'
-    servletContainer = 'jetty92'  // What App Engine Flexible uses
+    servletContainer = 'jetty9'  // What App Engine Flexible uses
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -89,5 +89,13 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     // end::tests[]
     compile group: 'org.springframework.cloud', name: 'spring-cloud-gcp-starter-sql', version: '1.0.0.M1'
+    
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.2'
+    
+    
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider
+	compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.9.2'
+    
 }
 
