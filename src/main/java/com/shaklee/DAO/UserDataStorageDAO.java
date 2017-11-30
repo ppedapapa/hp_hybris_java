@@ -1,24 +1,12 @@
 package com.shaklee.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.shaklee.util.BaseJDBCTemplateDAO;
-import com.shaklee.util.JSONSerializer;
 
 
 @Component
@@ -30,9 +18,6 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 	@Value("${GET_QUESTIONS}")
 	private String GET_QUESTIONS;
 	
-	@Value("${CREATE}")
-	private String CREATE;
-
 
 	public List getQuestions(final String healthProfileId) {
 
@@ -41,7 +26,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 		final String sql = GET_QUESTIONS.replace("??", "S.HEALTH_PROFILE_ID");
 		String param = healthProfileId;
 
-		List data = jdbcTemplate.queryForList(sql, param);
+		List data = jdbcTemplate.queryForList(sql, new Object[] { param});
 		
 		return data;
 	}

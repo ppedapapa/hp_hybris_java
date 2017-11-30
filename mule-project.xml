@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project">
+    <name>gs-spring-boot</name>
+    <description>Parent pom providing dependency and plugin management for applications
+		built with Maven</description>
+</mule-project>
