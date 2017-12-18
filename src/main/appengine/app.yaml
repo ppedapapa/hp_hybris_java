@@ -29,6 +29,9 @@ handlers:
 
 runtime_config:  # Optional
   jdk: openjdk8
-#  server: jetty9
+  server: jetty9
+
+resources:
+  memory_gb: 2.0
 
 # [END runtime]
