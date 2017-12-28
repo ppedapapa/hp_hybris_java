@@ -18,7 +18,7 @@
 runtime: java
 env: flex
 
-service: hp2
+service: hp-hybris-java-https
 
 handlers:
 - url: /.*
@@ -26,6 +26,8 @@ handlers:
 
 runtime_config:  # Optional
   jdk: openjdk8
+  server: jetty9
+    port: 8443
  
 
 manual_scaling:
@@ -34,6 +36,7 @@ manual_scaling:
 
 resources:
   memory_gb: 2.0
+ 
 
 
 # [END runtime]
