@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://shaklee--hybris.cs14.my.salesforce.com" validUntil="2027-12-28T21:53:55.797Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://shaklee--hybris.cs14.my.salesforce.com" validUntil="2027-12-28T21:30:01.397Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
    <md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
       <md:KeyDescriptor use="signing">
          <ds:KeyInfo>
@@ -9,7 +9,7 @@
       </md:KeyDescriptor>
       <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shaklee--hybris.cs14.my.salesforce.com/services/auth/idp/saml2/logout"/>
       <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shaklee--hybris.cs14.my.salesforce.com/services/auth/idp/saml2/logout"/>
-      <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
       <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shaklee--hybris.cs14.my.salesforce.com/idp/endpoint/HttpPost"/>
       <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shaklee--hybris.cs14.my.salesforce.com/idp/endpoint/HttpRedirect"/>
    </md:IDPSSODescriptor>

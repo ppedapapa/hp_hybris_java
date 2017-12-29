@@ -284,7 +284,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	extendedMetadata.setEcpEnabled(true);
         extendedMetadata.setAlias(env.getProperty("app.security.saml.keystore.key"));
         extendedMetadata.setSigningKey(env.getProperty("app.security.saml.keystore.key"));
-        //extendedMetadata.set
     	return extendedMetadata;
     }
     
@@ -344,7 +343,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         metadataGenerator.setExtendedMetadata(extendedMetadata());
         metadataGenerator.setIncludeDiscoveryExtension(false);
         metadataGenerator.setKeyManager(keyManager());
+        metadataGenerator.setEntityBaseURL(env.getProperty("baseUrl"));
+        
         return metadataGenerator;
+        
+     
     }
  
     // The filter is waiting for connections on URL suffixed with filterSuffix
@@ -536,6 +539,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/").permitAll()
             .antMatchers("/error").permitAll()
             .antMatchers("/saml/**").permitAll()
+            .antMatchers("/public/**").permitAll()
             .anyRequest().authenticated();
         http
             .logout()
