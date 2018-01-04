@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
 import com.shaklee.resources.HealthQuestionaireResource.BaseStorageRequest;
@@ -44,7 +46,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 	@Value("${GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES}")
 	private String GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES;
 		
-
+	ObjectMapper objectMapper = new ObjectMapper();
 
 	public List<Map<String,Object>> getQuestions(final String healthProfileId) {
 
@@ -71,78 +73,31 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 				+ " ,downlineId:" + downlineId);
 		final List<UserDataResponse> top20HealthPrints = jdbcTemplate.query(sql, userRowMapper, param);
 
-		/*
-		if (top20HealthPrints != null && top20HealthPrints.size() > 0) {
-			response = new ArrayList<UserDataResponse>();
-			for (Map<String, Object> healthPrintsObject : top20HealthPrints) {
-				UserDataResponse healthPrint = new UserDataResponse();
-				healthPrint.setHealth_profile_id((String) healthPrintsObject.get("HEALTH_PROFILE_ID"));
-				healthPrint.setS_first_name((String) healthPrintsObject.get("S_FIRST_NAME"));
-				healthPrint.setS_last_name((String) healthPrintsObject.get("S_LAST_NAME"));
-				//healthPrint.setE_first_name((String) healthPrintsObject.get("E_FIRST_NAME"));
-				//healthPrint.setE_last_name((String) healthPrintsObject.get("E_LAST_NAME"));
-				healthPrint.setUser_id((String) healthPrintsObject.get("USER_ID"));
-				healthPrint.setS_email((String) healthPrintsObject.get("S_EMAIL"));
-				//healthPrint.setE_email((String) healthPrintsObject.get("E_EMAIL"));
-				healthPrint.opt_in = getBoolean(healthPrintsObject, "OPT_IN");
-				healthPrint.completed_time_stamp = dateFormatForCompletedTimeStamp
-						.format((Date) healthPrintsObject.get("COMPLETED_TIMESTAMP")).toString();
-				healthPrint.setShare_with_distributors(getBoolean(healthPrintsObject, "SHARE_WITH_DISTRIBUTORS")); 
-
-				String answers_json = (String) healthPrintsObject.get("ANSWERS_JSON");
-
-				healthPrint.questions = deserialize(Questions.class, healthPrint.getHealth_profile_id(), answers_json);
-
-				if (healthPrint.questions != null)
-					response.add(healthPrint);
-			}
+	
+	
+		for (UserDataResponse healthPrintsObject : top20HealthPrints) {
+			healthPrintsObject.setQuestions( deserialize(Questions.class, healthPrintsObject.getHealth_profile_id(), healthPrintsObject.getAnswers_json()));
+		}
 			
-		}*/
-
+		
 		return top20HealthPrints;
 
 	}
 
-	static Boolean getBoolean(Map<String, Object> row, String key) {
-		Object value = row.get(key);
 
-		if (value == null)
-			return null;
-
-		if (value instanceof Boolean)
-			return (Boolean) value;
-
-		if (value instanceof Number) {
-			Number num = (Number) value;
-			return num.intValue() > 0;
-		}
-
-		throw new ClassCastException(
-				"Cannot cast value '" + value + "' type " + value.getClass().getSimpleName() + " to boolean");
-	}
-
-	/*
+	
 	<T> T deserialize(Class<T> type, String profileId, String answers_json) {
 		if (answers_json == null)
 			return null;
 
-		T data;
 		try {
-			data = type.newInstance();
-		} catch (Exception e) {
-			logger.error("Deserialization failed for healthprint " + profileId, e);
-			return null;
-		}
-
-		try {
-			jsonLoader.deserialize(data, answers_json);
-			return data;
+			return objectMapper.readValue(answers_json, type);
 		} catch (IOException e) {
 			logger.error("Deserialization failed for healthprint " + profileId + " " + answers_json, e);
 			return null;
 		}
 	}
-	*/
+	
 	public static class UserDataResponse extends UserDataRequest {
 
 		public String completed_time_stamp;
@@ -190,8 +145,8 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 
 		private String health_profile_id;
 		
-		@JsonIgnoreProperties
 		private String answers_json;
+		
 		private String s_first_name;
 		private String s_last_name;
 		private String s_email;
@@ -199,6 +154,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 		private String e_last_name;
 		private String e_email;
 
+		@JsonIgnore
 		public String getAnswers_json() {
 			return answers_json;
 		}
@@ -239,7 +195,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.last_name = last_name;
 		}
 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		public String getS_first_name() {
 			return s_first_name;
 		}
@@ -248,7 +204,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.s_first_name = s_first_name;
 		}
 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		public String getS_last_name() {
 			return s_last_name;
 		}
@@ -257,7 +213,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.s_last_name = s_last_name;
 		}
 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		public String getS_email() {
 			return s_email;
 		}
@@ -266,7 +222,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.s_email = s_email;
 		}
 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		public String getE_first_name() {
 			return e_first_name;
 		}
@@ -275,7 +231,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.e_first_name = e_first_name;
 		}
 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		public String getE_last_name() {
 			return e_last_name;
 		}
@@ -284,7 +240,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.e_last_name = e_last_name;
 		}
 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		public String getE_email() {
 			return e_email;
 		}
