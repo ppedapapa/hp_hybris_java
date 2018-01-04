@@ -1,0 +1,17 @@
+use ICSHKTST;
+
+
+CREATE TABLE HQ_USER_DATA_STORAGE (ID BIGINT NOT NULL AUTO_INCREMENT, USER_ID CHARACTER(7), EMAIL VARCHAR(128), FIRST_NAME VARCHAR(100),
+ LAST_NAME VARCHAR(100), HEALTH_PROFILE_ID VARCHAR(50) NOT NULL, ANSWERS_JSON TEXT, COUNTER INTEGER DEFAULT 1, OPT_IN SMALLINT, 
+ UPDATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, CREATED TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+ HOST_NAME VARCHAR(255), FOLLOWUP_DATE DATETIME, REFERRER_CODE VARCHAR(30), SHARE_WITH_DISTRIBUTORS SMALLINT DEFAULT 1, 
+ PRIMARY KEY (HEALTH_PROFILE_ID), UNIQUE (ID));
+
+ INSERT INTO HQ_USER_DATA_STORAGE (ID, USER_ID, EMAIL, FIRST_NAME, LAST_NAME,
+  HEALTH_PROFILE_ID, ANSWERS_JSON, COUNTER, OPT_IN, UPDATED, CREATED, HOST_NAME, FOLLOWUP_DATE, 
+  REFERRER_CODE, SHARE_WITH_DISTRIBUTORS) VALUES (1, 'BX01340', null, null, null, 'a5he2ptf2bjnspk0444exjv76',
+   '{"user_id":"BX01340","country_code":"CA","language":"en","age":27,"gender":"F","pregnant":"TRYING","is_guest":false,
+   "health_goals":["HEART","WEIGHT","FITNESS"],"weight_lbs":178,"height_inches":63,"energy":3,"stress":0,"sleep":3,"memory":3,
+   "exercise_frequency":0,"exercise_intensity":0,"toxins":0,"spending":1,"fruits":3,"vegetables":2,"grains":3,"dairy":2,"healthy_fats":3,
+   "water":3,"sugar_drinks":0,"junk_food":0,"breakfast":0,"organic":3,"dietary_restrictions":["SOY","KOSHER","GLUTEN"]}',
+    3, null, '2016-08-03 23:01:25', '2016-08-03 22:47:10', null, null, null, 1);

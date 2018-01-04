@@ -1,48 +1,95 @@
 package com.shaklee.resources;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shaklee.DAO.UserDataStorageDAO;
+import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
+import com.shaklee.model.HealthQuestionnaireModel;
+import com.shaklee.util.StatusResponse;
+import com.shaklee.util.Questions;
 
-@RequestMapping("/public")
-@Controller
+
+
+@RestController
+@RequestMapping("/public/hp")
 public class HealthQuestionaireResource {
 	
-	@Value("${server.port}")
-	private int port;
+	@Autowired
+	HealthQuestionnaireModel healthQuestionnaireModel;
+	
+	// Logger
+	private static final Logger LOG = LoggerFactory
+				.getLogger(HealthQuestionaireResource.class);
 
 	
-	@Autowired 
-	UserDataStorageDAO userDataStorageDAO;
-	
-	@RequestMapping(path = "/hp/get", method = GET)
-	public String get()
+	/*
+	@RequestMapping(path = "/questionsByHealthProfileId", method = POST)
+	public ResponseEntity< List<Map<String,Object>> > questionsByHealthProfileId(@RequestBody UserRequest request)
 	{
-		return "redirect:/public/hp/getByHp";
-		/*List data = userDataStorageDAO.getQuestions(request.health_profile_id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		return new ResponseEntity<Object>( new QuestionsResponse("Got the data" + data.size()), HttpStatus.OK);
-		*/
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		    String currentUserName = authentication.getName();
+		}
+		
+		 List<Map<String,Object>>  data = userDataStorageDAO.getQuestions(request.health_profile_id);
+		
+		LOG.info("Got data from cloud: " + data.size());
+		
+		return new ResponseEntity< List<Map<String,Object>> >( data, HttpStatus.OK);
+	}
+	*/
+
+	@RequestMapping(path = "/getAllHealthPrints", method = POST)
+	public MultipleHealthProfilesResponse getAllHealthPrints(@RequestBody UserRequestForGetAllHealthPrints request)
+	{
+		String currentUserName = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		    currentUserName = authentication.getName();
+		}
+		
+		return healthQuestionnaireModel.getAllHealthPrints(currentUserName, request.email, request.downline_id);
 	}
 
-	@RequestMapping(path = "/hp/getByHp", method = GET)
-	public ResponseEntity<Object> getByHp()
-	{
-		List data = userDataStorageDAO.getQuestions("a5he2ptf2bjnspk0444exjv76");
-		
-		return new ResponseEntity<Object>( new QuestionsResponse("Got the data" + data.size() +"port:" + port), HttpStatus.OK);
+	public static class UserRequestForGetAllHealthPrints {
+		// @ShakleeID
+		// public String user_id;
+		public String email;
+		public String downline_id;
+	}
+	
+	public static final class MultipleHealthProfilesResponse extends StatusResponse {
+
+		public List<UserDataResponse> data;
+
+		public MultipleHealthProfilesResponse(List<UserDataResponse> data) {
+			super(SUCCESS);
+			this.data = data;
+		}
+
+		public MultipleHealthProfilesResponse(int status) {
+			super(status);
+		}
 	}
 
 
@@ -59,4 +106,20 @@ public class HealthQuestionaireResource {
 			public String health_profile_id;
 		}
 
+		public static class BaseStorageRequest extends CommonStorageRequest {
+			public String user_id;
+		}
+		
+		public static class CommonStorageRequest {
+			public String email;
+
+			@Size(max = 50)
+			public String first_name;
+
+			@Size(max = 50)
+			public String last_name;
+
+			@NotNull
+			public Questions questions;
+		}
 }
