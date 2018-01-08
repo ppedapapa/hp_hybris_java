@@ -1,18 +1,16 @@
 package com.shaklee.resources;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
 import com.shaklee.model.HealthQuestionnaireModel;
 import com.shaklee.util.StatusResponse;
@@ -57,9 +54,24 @@ public class HealthQuestionaireResource {
 		return new ResponseEntity< List<Map<String,Object>> >( data, HttpStatus.OK);
 	}
 	*/
+	
+	@RequestMapping(path = "/testUserId", method = GET)
+	public String testUserId()
+	{
+		String currentUserName = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		    currentUserName = authentication.getName();
+		}
+		
+		return currentUserName;
+		
+	}
 
 	@RequestMapping(path = "/getAllHealthPrints", method = POST)
-	public MultipleHealthProfilesResponse getAllHealthPrints(@RequestBody UserRequestForGetAllHealthPrints request)
+	public MultipleHealthProfilesResponse getAllHealthPrints(
+			@RequestBody UserRequestForGetAllHealthPrints request)
 	{
 		String currentUserName = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

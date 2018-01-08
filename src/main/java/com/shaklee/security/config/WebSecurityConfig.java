@@ -278,7 +278,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Setup advanced info about metadata
     @Bean
     public ExtendedMetadata extendedMetadata() {
-    	ExtendedMetadata extendedMetadata = new ExtendedMetadata();
+    	ExtendedMetadata extendedMetadata = new ExtendedMetadata();    
     	extendedMetadata.setIdpDiscoveryEnabled(true); 
     	extendedMetadata.setSignMetadata(false);
     	extendedMetadata.setEcpEnabled(true);
@@ -291,7 +291,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public SAMLDiscovery samlIDPDiscovery() {
         SAMLDiscovery idpDiscovery = new SAMLDiscovery();
-        idpDiscovery.setIdpSelectionPath("/saml/idpSelection");
+       // idpDiscovery.setIdpSelectionPath("/saml/idpSelection");
         return idpDiscovery;
     }
     
@@ -318,7 +318,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         ((AbstractReloadingMetadataProvider)metadataProvider).setParserPool(parserPool());
 		ExtendedMetadataDelegate extendedMetadataDelegate = new ExtendedMetadataDelegate(metadataProvider, extendedMetadata());
-		extendedMetadataDelegate.setMetadataTrustCheck(true);
+		extendedMetadataDelegate.setMetadataTrustCheck(false);
 		extendedMetadataDelegate.setMetadataRequireSignature(false);
 		backgroundTaskTimer.purge();
 		return extendedMetadataDelegate;
@@ -344,7 +344,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         metadataGenerator.setIncludeDiscoveryExtension(false);
         metadataGenerator.setKeyManager(keyManager());
         metadataGenerator.setEntityBaseURL(env.getProperty("baseUrl"));
-        
         return metadataGenerator;
         
      

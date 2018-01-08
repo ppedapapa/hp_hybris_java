@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 @PropertySource(value = "classpath:UserDataStorage.properties")
 public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 
-	private static Logger logger = Logger.getLogger(UserDataStorageDAO.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(UserDataStorageDAO.class);
 
 	public static final DateFormat dateFormatForCompletedTimeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

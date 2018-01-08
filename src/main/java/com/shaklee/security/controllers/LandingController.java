@@ -16,6 +16,9 @@
 
 package com.shaklee.security.controllers;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +30,13 @@ import com.shaklee.security.stereotypes.CurrentUser;
 public class LandingController {
 
 	@RequestMapping("/landing")
-	public String landing(@CurrentUser User user, Model model) {
+	public String landing(@CurrentUser User user, Model model, HttpServletResponse response) {
 		model.addAttribute("username", 	user.getUsername());
+		Cookie cookie = new Cookie("username", user.getUsername());
+        cookie.setPath("/");//<-- important
+        cookie.setDomain("localhost");
+        response.addCookie(cookie);
+        
 		return "landing";
 	}
 

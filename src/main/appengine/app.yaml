@@ -18,7 +18,7 @@
 runtime: java
 env: flex
 
-service: hp-hybris-java-https
+service: hp-test
 
 handlers:
 - url: /.*
