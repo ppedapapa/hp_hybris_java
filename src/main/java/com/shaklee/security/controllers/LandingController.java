@@ -32,11 +32,6 @@ public class LandingController {
 	@RequestMapping("/landing")
 	public String landing(@CurrentUser User user, Model model, HttpServletResponse response) {
 		model.addAttribute("username", 	user.getUsername());
-		Cookie cookie = new Cookie("username", user.getUsername());
-        cookie.setPath("/");//<-- important
-        cookie.setDomain("localhost");
-        response.addCookie(cookie);
-        
 		return "landing";
 	}
 

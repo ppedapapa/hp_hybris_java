@@ -65,6 +65,9 @@ public class HealthQuestionaireResource {
 		    currentUserName = authentication.getName();
 		}
 		
+		if (currentUserName == null)
+			return "user_not_logged";
+		
 		return currentUserName;
 		
 	}
