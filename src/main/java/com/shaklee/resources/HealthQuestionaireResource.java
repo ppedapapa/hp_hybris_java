@@ -68,7 +68,7 @@ public class HealthQuestionaireResource {
 		if (currentUserName == null)
 			return "user_not_logged";
 		
-		return currentUserName;
+		return "user_valid";
 		
 	}
 
