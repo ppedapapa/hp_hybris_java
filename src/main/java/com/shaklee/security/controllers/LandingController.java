@@ -30,9 +30,14 @@ import com.shaklee.security.stereotypes.CurrentUser;
 public class LandingController {
 
 	@RequestMapping("/landing")
+	
 	public String landing(@CurrentUser User user, Model model, HttpServletResponse response) {
 		model.addAttribute("username", 	user.getUsername());
 		return "landing";
 	}
+	/*
+	public String landing() {
+		return "landing";
+	}*/
 
 }

@@ -12,8 +12,9 @@ import com.shaklee.security.stereotypes.CurrentUser;
 @Controller
 public class LoginResource {
 
-	@RequestMapping("/index")
-	public String landing(@CurrentUser User user, Model model) {
-		return "redirect:/landing";
+	@RequestMapping("/login")
+	public String login() {
+		
+		return "redirect:/saml/login";
 	}
 }
