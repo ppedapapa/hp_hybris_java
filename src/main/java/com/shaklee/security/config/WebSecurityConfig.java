@@ -535,7 +535,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(samlFilter(), BasicAuthenticationFilter.class);
         http        
             .authorizeRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/").permitAll()
+            .antMatchers("/error").permitAll()
+            .antMatchers("/saml/**").permitAll()
+            .antMatchers("/public/**").permitAll()
             .anyRequest().authenticated();
         http
             .logout()

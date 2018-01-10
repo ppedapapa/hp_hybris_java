@@ -35,9 +35,6 @@ public class LandingController {
 		model.addAttribute("username", 	user.getUsername());
 		return "landing";
 	}
-	/*
-	public String landing() {
-		return "landing";
-	}*/
+	
 
 }
