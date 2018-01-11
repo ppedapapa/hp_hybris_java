@@ -361,7 +361,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public SavedRequestAwareAuthenticationSuccessHandler successRedirectHandler() {
         SavedRequestAwareAuthenticationSuccessHandler successRedirectHandler =
                 new SavedRequestAwareAuthenticationSuccessHandler();
-        successRedirectHandler.setDefaultTargetUrl("/landing");
+        successRedirectHandler.setDefaultTargetUrl("/");
         return successRedirectHandler;
     }
     
@@ -535,11 +535,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(samlFilter(), BasicAuthenticationFilter.class);
         http        
             .authorizeRequests()
-            .antMatchers("/").permitAll()
+            //.antMatchers("/").permitAll()
+            .antMatchers("/**").permitAll()
+            .antMatchers("/index.html").permitAll()
             .antMatchers("/error").permitAll()
             .antMatchers("/saml/**").permitAll()
             .antMatchers("/public/**").permitAll()
-            .anyRequest().authenticated();
+            .antMatchers("/shakleeintegration/**").permitAll()
+            .anyRequest().permitAll();
         http
             .logout()
                 .logoutSuccessUrl("/");

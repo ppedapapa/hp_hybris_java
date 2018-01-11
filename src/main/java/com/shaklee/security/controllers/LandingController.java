@@ -33,8 +33,7 @@ public class LandingController {
 	
 	public String landing(@CurrentUser User user, Model model, HttpServletResponse response) {
 		model.addAttribute("username", 	user.getUsername());
-		return "landing";
+		return "forward:/index";
 	}
-	
 
 }
