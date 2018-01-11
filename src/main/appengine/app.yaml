@@ -33,7 +33,7 @@ manual_scaling:
 
 
 resources:
-  memory_gb: 2.0
+  memory_gb: 3.0
  
 
 

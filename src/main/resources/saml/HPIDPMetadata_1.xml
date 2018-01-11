@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://shaklee--hybrisdev.cs13.my.salesforce.com" validUntil="2028-01-11T22:14:03.869Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://shaklee--hybrisdev.cs13.my.salesforce.com" validUntil="2028-01-08T18:09:32.820Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
    <md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
       <md:KeyDescriptor use="signing">
          <ds:KeyInfo>
@@ -7,10 +7,10 @@
             </ds:X509Data>
          </ds:KeyInfo>
       </md:KeyDescriptor>
-      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/services/auth/idp/saml2/logout"/>
-      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/services/auth/idp/saml2/logout"/>
+      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shaklee--hybrisdev.cs13.my.salesforce.com/services/auth/idp/saml2/logout"/>
+      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shaklee--hybrisdev.cs13.my.salesforce.com/services/auth/idp/saml2/logout"/>
       <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
-      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/idp/endpoint/HttpPost"/>
-      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/idp/endpoint/HttpRedirect"/>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shaklee--hybrisdev.cs13.my.salesforce.com/idp/endpoint/HttpPost"/>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shaklee--hybrisdev.cs13.my.salesforce.com/idp/endpoint/HttpRedirect"/>
    </md:IDPSSODescriptor>
 </md:EntityDescriptor>
