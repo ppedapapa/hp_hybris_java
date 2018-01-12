@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { Buffer } from 'buffer';
 import { CookieService } from 'ngx-cookie-service';
+import { CartService } from '../../../services/cart.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-hp-add-cart',
@@ -10,28 +12,16 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HpAddCartComponent implements OnInit {
 
-  constructor( private cookieService: CookieService ) { }
+  constructor( private cookieService: CookieService, private cartService: CartService ) { }
 
   ngOnInit() {
   }
 
   addToCart(sku, event, bundle) {
-    const item = {};
-    item[sku] = 1;
-    const productsToAdd = {};
-      productsToAdd[sku] = 1;
-      productsToAdd['89384'] = 1;
-    const healthprintCart = {};
-    healthprintCart['recommendationBundle'] = bundle;
-    healthprintCart['recommendationTotal'] = 10.21;
-    healthprintCart['addAllToCart'] = false;
-    healthprintCart['productsToAdd'] = productsToAdd;
-    healthprintCart['freeProduct'] = '89384';
-
-     const hpCartCookie = JSON.stringify(healthprintCart);
-     const hpCartObjJsonB64 = new Buffer(hpCartCookie).toString('base64');
-    this.cookieService.set('shakleeUS-healthprint-cart', hpCartObjJsonB64, 100, '/', '.shakleedev.com');
-      window.location.href = 'https://www.shakleedev.com:9002/cart';
+    this.cartService.addToCart('20282');
+  }
+  addBundleToCart() {
+      this.cartService.addBundleToCart(['52355', '21261'], 'ADVANCED', '12.15', '20282');
   }
 
 }
