@@ -12,7 +12,7 @@ import com.shaklee.security.stereotypes.CurrentUser;
 @Controller
 public class LoginResource {
 
-	@RequestMapping("/login")
+	@RequestMapping("/healthprint-login")
 	public String login() {
 		
 		return "redirect:/saml/login";

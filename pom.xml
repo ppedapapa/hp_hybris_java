@@ -135,23 +135,23 @@
         </plugin>
 
 		<plugin>
-		<artifactId>maven-resources-plugin</artifactId>
-			<executions>
-			      <execution>
-			          <id>copy-resources</id>
-			          <phase>validate</phase>
-			          <goals><goal>copy-resources</goal></goals>
-			          <configuration>
-			              <outputDirectory>/Users/dchitaur/healthprint_workspace/hp_hybris_java/target/static/</outputDirectory>
-			              <resources>
-			                  <resource>
-			                      <directory>/Users/dchitaur/google-cloud-workspace/hp-hybris-web/dist</directory>
-			                  </resource>
-			              </resources>
-			          </configuration>
-			      </execution>
-			</executions>
-		</plugin>
+			<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+				      <execution>
+				          <id>copy-resources</id>
+				          <phase>validate</phase>
+				          <goals><goal>copy-resources</goal></goals>
+				          <configuration>
+				              <outputDirectory>/Users/dchitaur/healthprint_workspace/hp_hybris_java/target/gs-spring-boot-0.1.0/WEB-INF/classes/static</outputDirectory>
+				              <resources>
+				                  <resource>
+				                      <directory>/Users/dchitaur/google-cloud-workspace/hp-hybris-web/dist</directory>
+				                  </resource>
+				              </resources>
+				          </configuration>
+				      </execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

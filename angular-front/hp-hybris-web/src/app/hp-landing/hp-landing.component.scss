@@ -1,0 +1,52 @@
+@import "../../assets/scss/variables";
+
+.landing {
+  .hp-landing-title{
+    color: $shaklee-blue;
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 1em;
+    text-align: center;
+    margin: 0 0 30px;
+  }
+  .shaklee-logo-section {
+    text-align: center;
+    .guarantee-logo {
+      margin: 20px auto;
+      width: 15%;
+    }
+    h3{
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+  }
+  .shaklee-guarantee-section {
+    border-bottom: 1px solid $grey-color1;
+    margin: 20px 0;
+    padding: 0 0 35px;
+    text-align: center;
+    p{
+      margin:10px 0;
+      font-size:15px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  .trademarks {
+    margin:10px 0;
+    font-size:12.5px;
+    text-align: center;
+  }
+  .img-landing {
+    margin: 0 0 25px;
+  }
+  .img-landing-logo {
+    margin: 0 0 25px;
+    padding:40px 50px;
+    border:1px solid $grey-color1;
+  }
+}
