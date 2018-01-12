@@ -1,0 +1,8 @@
+<div class="row buttons">
+  <!--*ngIf="pager.index !== 0">-->
+  <div class="col-12">
+    <button class="btn btn-primary float-left" *ngIf="config.allowBack" (click)="goTo(pager.index -1);">Back</button>
+    <button class="btn btn-primary float-right" *ngIf="pager.index + 1 !== pager.count" (click)="goTo(pager.index + 1);">Next</button>
+    <button class="btn btn-primary float-right" *ngIf="pager.index + 1 === pager.count" (click)="onSubmit();">Get Results</button>
+  </div>
+</div>

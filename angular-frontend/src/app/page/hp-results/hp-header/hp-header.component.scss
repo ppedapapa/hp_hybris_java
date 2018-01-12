@@ -1,0 +1,19 @@
+.hp-results-banner {
+  border-bottom: 2px solid #dbdbdb;
+  padding:10px 0;
+  .logo-img {
+    width:20%;
+  }
+  .hp-results-selection {
+    .searchable {
+      margin:20px auto 0;
+    }
+  }
+  .resultTopLinks {
+    margin-top:20px;
+    a {
+      color: #999;
+      font-size:12px;
+    }
+  }
+}

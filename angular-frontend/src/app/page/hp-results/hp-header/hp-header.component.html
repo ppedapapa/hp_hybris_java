@@ -1,0 +1,25 @@
+<div class="row health-results-above-banner hp-results-banner">
+  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <img class="logo-img" src="//images.shaklee.com/healthprint/Healthprint-Logo.png">
+    <span class="logo-text ng-binding" ng-bind-html="'personalize-health.results.shaklee_healthprint'|translate">Shaklee <b>HEALTHPRINT</b><sup>TM</sup></span>
+  </div>
+  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 hp-results-selection">
+    <ng-select [items]="allHealthPrintsResults"
+               bindLabel="first_name"
+               bindValue="health_profile_id"
+               placeholder="Select healthprint"
+               name="healthPrintResults"
+               [clearable]="false"
+               [(ngModel)]="healthProfileId"
+               (change)="changeHealthPrintResultInfo($event)">
+    </ng-select>
+  </div>
+
+  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">
+      <div class="resultTopLinks">
+        <a href="#" (click)="startOverQuiz($event)">RETAKE YOUR ASSESSMENT</a>
+        <a href="#" (click)="printResults($event)"><i class="fa fa-print fa-2x" aria-hidden="true"></i></a>
+        <a href="#" (click)="openEmailResultMore($event)"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a>
+      </div>
+   </div>
+</div>

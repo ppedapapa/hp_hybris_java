@@ -1,0 +1,539 @@
+{
+    "id": 1,
+    "label": "Healthprint",
+    "description": "Personalized health questions",
+    "pages": [
+        {
+            "component": "question-mixed-content",
+            "questions": [
+                {
+                    "name": "gender",
+                    "label": "What is your gender?",
+                    "image": "//images.shaklee.com/healthprint//02-gender-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Male",
+                            "class": "fa-male"
+                        },
+                        {
+                            "index": 1,
+                            "label": "Female",
+                            "class": "fa-female"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "fruits",
+                    "label": "How many times per week do you eat fruit?",
+                    "image": "//images.shaklee.com/healthprint/12-fruit-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 7 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "14-20 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 20 times"
+                        }
+                    ]
+                },
+                {
+                    "name": "vegetables",
+                    "label": "How many times per week do you eat vegetables?",
+                    "image": "//images.shaklee.com/healthprint/13-vegies-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 7 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "14-20 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 20 times"
+                        }
+                    ]
+                },
+                {
+                    "name": "grains",
+                    "label": "How many times per week do you eat whole grains?",
+                    "image": "//images.shaklee.com/healthprint/14-grains-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 7 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "14-20 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 20 times"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "dairy",
+                    "label": "How many times per week do you eat dairy?",
+                    "image": "//images.shaklee.com/healthprint/15-dairy-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 7 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "14-20 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 20 times"
+                        }
+                    ]
+                },
+                {
+                    "name": "healthy_fats",
+                    "label": "How many times per week do you eat omega-3-rich fish, such as salmon?",
+                    "image": "//images.shaklee.com/healthprint/16-fish-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 7 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "14-20 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 20 times"
+                        }
+                    ]
+                },
+                {
+                    "name": "water",
+                    "label": "How many 8-ounce glasses of water do you drink each day?",
+                    "image": "//images.shaklee.com/healthprint/17-water-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 7 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "14-20 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 20 times"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "sugar_drinks",
+                    "label": "How many times per week do you consume sugary drinks (ex: soda, juices, etc.)?",
+                    "image": "//images.shaklee.com/healthprint/18-sugary-drinks-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Rarely"
+                        },
+                        {
+                            "index": 1,
+                            "label": "1-2 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "3-6 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 6 times"
+                        }
+                    ]
+                },
+                {
+                    "name": "junk_food",
+                    "label": "How many times per week do you eat unhealthy snacks or fast food?",
+                    "image": "//images.shaklee.com/healthprint/19-fast-food-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 2 times"
+                        },
+                        {
+                            "index": 1,
+                            "label": "2-6 times"
+                        },
+                        {
+                            "index": 2,
+                            "label": "7-13 times"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 13 times"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "breakfast",
+                    "label": "What do you typically eat for breakfast?",
+                    "image": "//images.shaklee.com/healthprint/20-breakfast-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "I rarely eat breakfast"
+                        },
+                        {
+                            "index": 1,
+                            "label": "I tend to eat things like toast, bagels, muffins, cereal, and oatmeal"
+                        },
+                        {
+                            "index": 2,
+                            "label": "I eat a classic breakfast (bacon, eggs, hash browns, etc.)"
+                        },
+                        {
+                            "index": 3,
+                            "label": "I opt for lighter options like yogurt and fruit"
+                        },
+                        {
+                            "index": 4,
+                            "label": "I get a mix of protein, fruit, and/or veggies from shakes and smoothies, or look for other sources of lean protein like eggs or egg-whites"
+                        }
+                    ]
+                },
+                {
+                    "name": "organic",
+                    "label": "Do you purchase organic foods?",
+                    "image": "//images.shaklee.com/healthprint/21-organic2-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Always, whenever available"
+                        },
+                        {
+                            "index": 1,
+                            "label": "I do, for certain types of food"
+                        },
+                        {
+                            "index": 2,
+                            "label": "I’d like to, but it’s too expensive"
+                        },
+                        {
+                            "index": 3,
+                            "label": "No, I don't think it's worth it"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "toxins",
+                    "label": "Do any of your cleaning products contain bleach or ammonia?",
+                    "image": "//images.shaklee.com/healthprint/11-cleaning-products-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "No"
+                        },
+                        {
+                            "index": 1,
+                            "label": "Yes"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "energy",
+                    "label": "How is your energy level on a normal day?",
+                    "image": "//images.shaklee.com/healthprint/05-energy-level-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "I can take the day by storm"
+                        },
+                        {
+                            "index": 1,
+                            "label": "I’ve got just enough to make it through the day"
+                        },
+                        {
+                            "index": 2,
+                            "label": "I occasionally need a little pick-me-up"
+                        },
+                        {
+                            "index": 3,
+                            "label": "I feel tired all the time"
+                        }
+                    ]
+                },
+                {
+                    "name": "stress",
+                    "label": "How often do you get stressed?",
+                    "image": "//images.shaklee.com/healthprint/06-stress-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Rarely: I don’t let things bother me"
+                        },
+                        {
+                            "index": 1,
+                            "label": "Occasionally: I have my moments but it's manageable"
+                        },
+                        {
+                            "index": 2,
+                            "label": "Frequently: I’ve got a lot on my plate"
+                        },
+                        {
+                            "index": 3,
+                            "label": "Always: I’m a total stress-mess"
+                        }
+                    ]
+                },
+                {
+                    "name": "sleep",
+                    "label": "How do you sleep?",
+                    "image": "//images.shaklee.com/healthprint/17-water-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Great: 7–8 hours of uninterrupted bliss"
+                        },
+                        {
+                            "index": 1,
+                            "label": "Fine: I just don’t get enough"
+                        },
+                        {
+                            "index": 2,
+                            "label": "I have trouble falling asleep"
+                        },
+                        {
+                            "index": 3,
+                            "label": "Not great: I wake up several times throughout the night"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "memory",
+                    "label": "How is your memory and concentration?",
+                    "image": "//images.shaklee.com/healthprint/08-memory-concentration-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Great: I’m sharp as a tack"
+                        },
+                        {
+                            "index": 1,
+                            "label": "No problems now, but I worry about it getting worse"
+                        },
+                        {
+                            "index": 2,
+                            "label": "OK, but I occasionally lose my train of thought"
+                        },
+                        {
+                            "index": 3,
+                            "label": "It seems to be progressively deteriorating"
+                        }
+                    ]
+                },
+                {
+                    "name": "exercise_frequency",
+                    "label": "How often do you exercise each week?",
+                    "image": "//images.shaklee.com/healthprint/09-exercize-week-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than 1 hour"
+                        },
+                        {
+                            "index": 1,
+                            "label":"1–2 hours"
+                        },
+                        {
+                            "index": 2,
+                            "label": "2–4 hours"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than 4 hours"
+                        }
+                    ]
+                },
+                {
+                    "name": "exercise_intensity",
+                    "label": "How would you describe your weekly exercise?",
+                    "image": "//images.shaklee.com/healthprint/10-exercize-describe-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Light (walking, some stretching, etc.)"
+                        },
+                        {
+                            "index": 1,
+                            "label": "Mostly cardio (jogging, elliptical machine, etc.)"
+                        },
+                        {
+                            "index": 2,
+                            "label": "Moderate balance of cardio and weight training"
+                        },
+                        {
+                            "index": 3,
+                            "label": "Intense (interval training, weight lifting, training for marathons, etc.)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-age-weight",
+            "questions": [
+                {
+                    "name": "age",
+                    "label": "What is your age?",
+                    "image": "//images.shaklee.com/healthprint/01-age-150x150.png",
+                    "options": [
+                        {
+                            "name": "age"
+                        }
+                    ]
+                },
+                {
+                    "label": "What is your weight and height?",
+                    "image": "//images.shaklee.com/healthprint/03-weight-height-150x150.png",
+                    "options": [
+                        {
+                            "name": "weight_lbs"
+                        },
+                        {
+                            "name": "height_inches"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-goals",
+            "questions": [
+                {
+                    "name": "health_goals",
+                    "label": "Please identify your top 3 health goals.",
+                    "image": "//images.shaklee.com/healthprint/23-top3-goals-150x150.png",
+                    "goals": [ "OVERALL", "WEIGHT", "FITNESS", "PERFORMANCE", "AGING", "ENERGY", "HEART", "BRAIN", "JOINT", "IMMUNE", "STRESS", "DIGESTIVE", "BONE", "SLEEP" ]
+                }
+            ]
+        },
+        {
+            "component": "question-dietary-restrictions",
+            "questions": [
+                {
+                    "name": "dietary_restrictions",
+                    "label": "Do you have any <b>dietary restrictions</b>?",
+                    "image": "//images.shaklee.com/healthprint/22-dietary-restrictions-150x150.png",
+                    "options": ["GLUTEN","SOY","NUTS","DAIRY","VEGETERIAN","KOSHER","NONE"]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
+                    "name": "spending",
+                    "label": "How much would you spend each day to achieve your optimum health?",
+                    "image": "//images.shaklee.com/healthprint/24-spend-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "Less than $3 per day"
+                        },
+                        {
+                            "index": 1,
+                            "label": "$3 - $5 per day"
+                        },
+                        {
+                            "index": 2,
+                            "label": "$5 - $8 per day"
+                        },
+                        {
+                            "index": 3,
+                            "label": "More than $8"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-form",
+            "questions": [
+                {
+                    "label": "Please enter your label and email to receive your personalized results.",
+                    "fields": ["first_name", "last_name", "email"],
+                    "captcha": true
+                }
+            ]
+        }
+    ]
+
+}

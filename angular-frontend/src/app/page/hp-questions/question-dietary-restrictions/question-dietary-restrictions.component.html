@@ -1,0 +1,11 @@
+<div class="question-content col-12" *ngFor="let question of questions;">
+  <div class="text-center">
+    <img class="img-fluid question-img" src="{{question.image}}">
+    <p class="question-text"><span [innerHTML]="question.label"></span></p>
+    <div *ngFor="let option of question.options" (click)="setValue(option)" class="checkbox-selection-option">
+      <label for="option"></label>
+      <input type="checkbox" id="option"/>
+      <span>{{'label.dietary-restrictions-'+option|lowercase|translate}}</span>
+    </div>
+  </div>
+</div>

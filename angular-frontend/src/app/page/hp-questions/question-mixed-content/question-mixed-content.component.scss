@@ -1,0 +1,165 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
+.landing {
+  .hp-landing-title {
+    color: $shaklee-blue;
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 1em;
+    text-align: center;
+    margin: 0 0 30px;
+  }
+  .shaklee-logo-section {
+    text-align: center;
+    .guarantee-logo {
+      margin: 20px auto;
+      width: 15%;
+    }
+    h3 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+  }
+  .start-btn {
+    margin: 20px 16px;
+    border-radius: 0;
+    padding: 15px;
+    background-color: $shaklee-blue;
+    border-color: #00b3cb;
+    color: $white-color;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 1em;
+    cursor: pointer;
+    width: 92%;
+  }
+  .shaklee-guarantee-section {
+    border-bottom: 1px solid $grey-color1;
+    margin: 20px 0;
+    padding: 0 0 35px;
+    text-align: center;
+    p {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  .trademarks {
+    margin: 10px 0;
+    font-size: 12.5px;
+    text-align: center;
+  }
+  .img-landing {
+    margin: 0 0 25px;
+  }
+  .img-landing-logo {
+    margin: 0 0 25px;
+    padding: 40px 50px;
+    border: 1px solid $grey-color1;
+  }
+  .landing-question {
+    background-color: $question-background-color;
+    border: 1px solid $grey-color1;
+    padding: 15px 20px;
+    min-height: 490px;
+    margin-bottom: 25px;
+
+    .landing-header {
+      h4 {
+        color: $landing-header;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 5px;
+        @include question-text;
+      }
+      h2 {
+        color: $shaklee-blue;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.1em;
+        margin: 10px 5px 20px;
+        @include question-text;
+      }
+    }
+
+    .question {
+      border: 1px solid $grey-color1;
+      background: $white-color;
+
+      ::ng-deep .question-content {
+        margin: 0;
+        max-width: 100%;
+      }
+
+      .question-img {
+        width: 120px;
+        height: auto;
+      }
+      .question-text {
+        text-align: center;
+        height: 3.5em;
+        font-weight: 400;
+        font-size: 20px;
+        color: $shaklee-question-text-color;
+        margin: 20px 10px 15px;
+        font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+      }
+
+      .hq-btn {
+        color: $grey-color2;
+        border: 1px solid $dark-grey;
+        border-radius: 2px;
+        background: $white-color;
+        font-size: 14px;
+        line-height: 1.35em;
+        margin: 15px 0;
+        padding: 10px 18px;
+        text-transform: none;
+        white-space: normal;
+        min-height: 4.25em;
+        font-weight: bold;
+      }
+
+      .hq-gender {
+        font-size: 24px;
+        height: 24px;
+        line-height: 24px;
+        vertical-align: middle;
+        margin-right: 15px;
+      }
+
+      button.hq-btn {
+        background-color: #FFFFFF;
+        color: #333;
+        border: 1px solid #aaa;
+        border-radius: 2px;
+        font-size: 14px;
+        line-height: 1.35em;
+        margin: 15px 0;
+        padding: 10px 18px;
+        text-transform: none;
+        white-space: normal;
+        font-weight: normal;
+        min-height: 4.25em;
+        width: 100%;
+      }
+
+      button.hq-btn:hover, button.hq-selected-item {
+        background-color: #5d9732;
+        color: #FFF;
+      }
+      .question-img {
+        width: 120px;
+        height: auto;
+      }
+
+    }
+  }
+}

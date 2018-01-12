@@ -1,0 +1,25 @@
+<div class ="hp-health-scores">
+  <h1 class="section-title">
+    YOUR PERSONALIZED HEALTH SCORES
+  </h1>
+
+  <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+          <app-hp-health-score [healthPrintResultInfo]="healthPrintResultInfo"></app-hp-health-score>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <app-hp-health-score [healthPrintResultInfo]="healthPrintResultInfo"></app-hp-health-score>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+           <div class="bmi-scale">
+             <h3 class="title">Your Body Mass Index (BMI) is <b>32.7</b></h3>
+             <span class="bmi">32.7 <br> <b class="bmi-text">BMI</b></span>
+               <p class="info">
+                 <span ng-bind-html="'personalize-health.results.content-recom.'+contRecomInfo.bmi.key|translate:bmiWeightRange" class="ng-binding">You meet the clinical definition for obese. Ideally you should weigh between <span>104</span>  (BMI 18.5) and <span>140</span> (BMI 24.99)</span>
+               </p><div class="read-more-box">
+               <a class="learn-more ng-binding" ng-href="http://go.shaklee.com/need-know-bmi/" ng-click="trackEventOnResults('learn more - BMI', 'BMI');" ng-bind-html="'personalize-health.label.learn-more'|translate" target="_blank" href="http://go.shaklee.com/need-know-bmi/">Learn More</a>
+           </div>
+        </div>
+        </div>
+  </div>
+</div>

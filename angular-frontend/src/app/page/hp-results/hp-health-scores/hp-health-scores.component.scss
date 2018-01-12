@@ -1,0 +1,170 @@
+.hp-health-scores {
+    margin:15px;
+   .learn-more {
+     font-size: 10px;
+     text-transform: uppercase;
+     color: #5d9732;
+     font-weight: 700;
+     text-shadow: none !important;
+     cursor: pointer;
+     margin-top: 0;
+     display: block;
+   }
+   .section-title {
+     color: #06b5cb;
+     font-weight: 700;
+     text-transform: uppercase;
+     font-size: 22px;
+     text-align: center;
+     margin:15px auto;
+     b {
+       font-size: 120%;
+       color: #5d9732;
+     }
+   }
+   .section-score{
+     .title {
+       font-size: 15px;
+       font-weight: 700;
+       line-height: 22px;
+       padding: 10px 0;
+       height: 4.25em;
+       margin: 10px 0;
+       b{
+         font-size: 120%;
+         color: #5d9732;
+       }
+     }
+     .score-bar {
+       img {
+         margin: 15px 0 0 40px;
+         width: 70%;
+       }
+       .img-label {
+         font-size: 16px;
+         font-weight: 600;
+         text-align: left;
+         margin: 60px 0 0 -17px;
+       }
+
+       .legend {
+         text-align: left;
+         margin: 5px 0 0;
+         .score-mover {
+           display: inline-block;
+           text-align: right;
+           font-weight: bold;
+           position: relative;
+
+           em {
+             background: #fff;
+             border-radius: 50%;
+             color: #5c993d;
+             text-align: center;
+             top: -0.45em;
+             position: absolute;
+             right: -0.5em;
+             box-shadow: 0 0 10px 0 #999;
+             font-weight: 400;
+             font-size: 1.3em;
+             font-style: normal;
+             height: 2em;
+             line-height: 2em;
+             width: 2em;
+           }
+         }
+       }
+       .bar {
+         clear: both;
+         .scale {
+           height: 15px;
+           margin: 0;
+           padding: 0;
+           display: inline-block;
+           float: left;
+         }
+         .red {
+           background: #e63939;
+           width: 50%;
+           border-top-left-radius: 7px;
+           border-bottom-left-radius: 7px;
+         }
+         .orange {
+           background: #f2b63d;
+           width: 20%;
+         }
+         .yellow {
+           background: #faea3e;
+           width: 20%;
+         }
+         .green {
+           background: #5c993d;
+           width: 10%;
+           border-top-right-radius: 7px;
+           border-bottom-right-radius: 7px;
+         }
+       }
+       .line {
+         clear: both;
+         height: 11px;
+         font-size: 11px;
+         font-weight: bold;
+         .left {
+           float: left;
+           width: 50%;
+           text-align: left;
+           display: inline-block;
+         }
+         .right {
+           width: 50%;
+           text-align: right;
+           display: inline-block;
+         }
+       }
+     }
+     .info{
+       margin: 25px 0 0;
+       padding: 0;
+       line-height: 19px;
+       font-size: 12px;
+     }
+   }
+   .bmi-scale {
+     margin:15px;
+     .title {
+       font-size: 15px;
+       font-weight: 700;
+       line-height: 22px;
+       padding: 10px 0;
+       height: 4.25em;
+       margin: 10px 0;
+       b{
+         font-size: 120%;
+         color: #5d9732;
+       }
+     }
+     .info{
+       margin: 60px 0 0;
+       padding: 0;
+       line-height: 19px;
+       font-size: 12px;
+     }
+     .bmi{
+       background:url(//images.shaklee.com/healthprint/scale.png) no-repeat scroll center center;
+       display: block;
+       font-size: 23px;
+       font-weight: bold;
+       height: 140px;
+       line-height: 18px;
+       padding: 70px 0;
+       text-align: center;
+       width: 100%;
+       background-size: 100%;
+       max-width: 95px;
+       margin: 10px auto 0;
+     }
+     .bmi-text {
+
+     }
+   }
+}

@@ -1,0 +1,28 @@
+@import "../../../assets/scss/variables";
+
+.questions{
+  margin: 30px 0;
+  .hp-banner {
+    overflow: auto;
+    border: 2px solid #dbdbdb;
+    padding: 30px;
+    text-align: left;
+    font: 44px/90px "Open Sans",Helvetica,Arial,Verdana,sans-serif;
+    color: #5c993d;
+    font-weight: 300;
+    .img-banner-placeholder{
+      text-align: right;
+      img {
+        width: 100px;
+        height: auto;
+      }
+    }
+    span {
+      font-weight: 300;
+    }
+  }
+
+  .question{
+    margin: 40px 0;
+  }
+}

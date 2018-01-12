@@ -142,10 +142,10 @@
 				          <phase>validate</phase>
 				          <goals><goal>copy-resources</goal></goals>
 				          <configuration>
-				              <outputDirectory>/Users/dchitaur/healthprint_workspace/hp_hybris_java/target/gs-spring-boot-0.1.0/WEB-INF/classes/static</outputDirectory>
+				              <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes/static/</outputDirectory>
 				              <resources>
 				                  <resource>
-				                      <directory>/Users/dchitaur/google-cloud-workspace/hp-hybris-web/dist</directory>
+				                      <directory>${project.basedir}/angular-frontend/dist</directory>
 				                  </resource>
 				              </resources>
 				          </configuration>

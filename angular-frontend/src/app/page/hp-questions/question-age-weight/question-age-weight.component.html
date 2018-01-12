@@ -1,0 +1,13 @@
+<div class="question-content col-5" *ngFor="let question of questions;">
+  <div class="text-center">
+    <img class="img-fluid question-img" src="{{question.image}}">
+    <p class="question-text"><span [innerHTML]="question.label"></span></p>
+  </div>
+  <div class="options" *ngFor="let option of question.options">
+    <input type="text" placeholder="{{ ('questions.' +option.name+ '-placeholder') | translate}}" value="{{answered[option.name]}}" class="form-control" *ngIf="option.name !== 'height_inches'" (change)="inputChange(option.name, $event)"/>
+    <div *ngIf="option.name === 'height_inches'" class="row">
+      <app-question-dropdown [dropdown]="height_feet" firstLabel="height-ft" label="foot" class="col-6"></app-question-dropdown>
+      <app-question-dropdown [dropdown]="height_inches" firstLabel="height-in" label="inches" class="col-6"></app-question-dropdown>
+    </div>
+  </div>
+</div>

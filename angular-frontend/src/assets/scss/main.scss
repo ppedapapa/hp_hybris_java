@@ -1,0 +1,7 @@
+// This is the main file which includes all custom *.scss file
+// used as an entry point, referenced in .angular-cli.json
+@import "~bootstrap/scss/bootstrap";
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import "variables";
+@import "mixins";
+@import "global";

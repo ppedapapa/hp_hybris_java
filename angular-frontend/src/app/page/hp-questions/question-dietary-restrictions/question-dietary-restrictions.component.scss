@@ -1,0 +1,29 @@
+.checkbox-selection-option {
+  border: 1px solid #aaa;
+  margin: 10px 0;
+  padding: 18px 10px;
+  border-radius: 2px;
+
+  input[type=checkbox] {
+    // display: none;
+    border: 1px solid #999;
+    padding: 18px 15px;
+    line-height: 1.4em;
+    text-align: center;
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  input[type=checkbox]+label {
+    float: left;
+    position: relative;
+    background: #fff;
+    height: 22px;
+    width: 22px;
+    display: inline-block;
+    border-radius: 1px;
+    transition: box-shadow .4s, border .4s;
+    border: solid 1px #5d9732;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+  }
+}

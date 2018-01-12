@@ -1,0 +1,35 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
+.question-content {
+  border: none;
+  border-right: 1px solid $grey-color1;
+
+  &:last-child {
+    border: none;
+  }
+
+  .question-img {
+    width: 120px;
+    height: auto;
+  }
+  .question-text {
+    text-align: center;
+    height:3.5em;
+    font-weight: 400;
+    font-size: 20px;
+    color: $shaklee-question-text-color;
+    margin: 20px 10px 15px;
+    font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+  }
+  input {
+    width: 100%;
+    border: 1px solid #aaa;
+    padding: 15px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 15px;
+    margin: 5px 0 0;
+    border-radius: 2px;
+  }
+}
