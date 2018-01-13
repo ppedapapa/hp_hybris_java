@@ -12,6 +12,7 @@ export class HealthPrintResultsService {
 
     endPointAllHealthPrintResults = '/assets/mockjson/getAllHealthPrints.json';
     endPointContent =  '/assets/mockjson/content.json';
+    endPointRecommendation = '/assets/mockjson/recommendation.json';
     endPointProduct = 'https://35.188.18.139:9002//shakleeintegration/v2/shakleeUS/products?fields=DEFAULT';
 
     constructor(private http: HttpClient) {}
@@ -20,6 +21,9 @@ export class HealthPrintResultsService {
         return this.http.get(this.endPointAllHealthPrintResults);
     }
 
+    getRecommendation() {
+       return this.http.get(this.endPointRecommendation);
+    }
     getContent() {
         return this.http.get(this.endPointContent);
     }
