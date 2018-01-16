@@ -500,6 +500,38 @@
             "component": "question-selections",
             "questions": [
                 {
+                    "name": "pregnant",
+                    "label": "Please select which of the following apply to you",
+                    "image": "//images.shaklee.com/healthprint/04-select-any-150x150.png",
+                    "options": [
+                        {
+                            "index": 0,
+                            "label": "I am trying to conceive"
+                        },
+                        {
+                            "index": 1,
+                            "label": "I am pregnant or nursing"
+                        },
+                        {
+                            "index": 2,
+                            "label": "I experience PMS"
+                        },
+                        {
+                            "index": 3,
+                            "label": "I'm having perimenopause or menopause challenges"
+                        },
+                        {
+                            "index": 4,
+                            "label": "None"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component": "question-selections",
+            "questions": [
+                {
                     "name": "spending",
                     "label": "How much would you spend each day to achieve your optimum health?",
                     "image": "//images.shaklee.com/healthprint/24-spend-150x150.png",
@@ -528,8 +560,8 @@
             "component": "question-form",
             "questions": [
                 {
-                    "label": "Please enter your label and email to receive your personalized results.",
-                    "fields": ["first_name", "last_name", "email"],
+                    "label": "Please enter your name and email to receive your personalized results.",
+                    "fields": ["first-name", "last-name", "email"],
                     "captcha": true
                 }
             ]

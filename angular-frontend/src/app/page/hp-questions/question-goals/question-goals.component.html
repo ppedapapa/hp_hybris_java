@@ -1,10 +1,15 @@
-<div class="question-content col-5" *ngFor="let question of questions;">
+<div class="question-content col-12  col-md-6 col-lg-6" *ngFor="let question of questions;">
   <div class="text-center">
     <img class="img-fluid question-img" src="{{question.image}}">
     <p class="question-text"><span [innerHTML]="question.label"></span></p>
   </div>
 
-  <app-question-dropdown [dropdown]="question.goals" firstLabel="select-option-goal" label="health-goals-" fromComponent="goal" class="col-6"></app-question-dropdown>
-  <app-question-dropdown [dropdown]="question.goals" firstLabel="select-option-goal" label="health-goals-" fromComponent="goal" class="col-6"></app-question-dropdown>
-  <app-question-dropdown [dropdown]="question.goals" firstLabel="select-option-goal" label="health-goals-" fromComponent="goal" class="col-6"></app-question-dropdown>
+  <div class="row" *ngFor="let i of dropdownCount">
+    <div class="col-2 text-right">
+      <span class="health-goals">{{i+1}}</span>
+    </div>
+    <div class="col-10">
+      <app-question-dropdown [dropdown]="question.goals" firstLabel="select-option-goal" label="health-goals-" fromComponent="goal"></app-question-dropdown>
+    </div>
+  </div>
 </div>

@@ -13,6 +13,7 @@ export class QuestionDropdownComponent implements OnInit {
   @Input() firstLabel;
   @Input() label;
   @Input() fromComponent;
+  @Input() type;
   currentDropdown = {};
   selectedOption;
 
@@ -33,21 +34,21 @@ export class QuestionDropdownComponent implements OnInit {
                   this.currentDropdown[item] = item + ' ' + res;
               });
           }
-          console.log(this.currentDropdown);
       });
   }
 
-  setValue(label, val) {
-      console.log(val);
-        if (this.fromComponent === 'goal') {
-            this.translate.get('label.' + label + val.toLowerCase()).subscribe((res: string) => {
-                this.selectedOption = res;
-            });
-        } else {
-            this.translate.get('label.' + label).subscribe((res: string) => {
-                this.selectedOption = val + ' ' + res;
-            });
-        }
-    this.questionsService.setDropdown(label, val);
+  setValue(label, val, type) {
+    console.log(label, val, type);
+    if (this.fromComponent === 'goal') {
+        this.translate.get('label.' + label + val.toLowerCase()).subscribe((res: string) => {
+            this.selectedOption = res;
+            this.questionsService.setGoalDropdown(label, val);
+        });
+    } else {
+        this.translate.get('label.' + label).subscribe((res: string) => {
+            this.selectedOption = val + ' ' + res;
+            this.questionsService.setDropdown(label, val, type);
+        });
+    }
   }
 }

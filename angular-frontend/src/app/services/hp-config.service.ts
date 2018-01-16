@@ -53,7 +53,7 @@ export class HpConfigService {
       organic: undefined,
       spending: undefined,
       dietary_restrictions: {},
-      health_goals: {goal0: undefined, goal1: undefined, goal2: undefined},
+      health_goals: {},
       is_guest: (!isMC) ? true : false,
       noShareWithDistributors: false,
       share_with_distributors: true
