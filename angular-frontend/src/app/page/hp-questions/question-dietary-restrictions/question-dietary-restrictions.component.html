@@ -1,11 +1,15 @@
-<div class="question-content col-12" *ngFor="let question of questions;">
+<div class="question-content col-8" *ngFor="let question of questions;">
   <div class="text-center">
     <img class="img-fluid question-img" src="{{question.image}}">
     <p class="question-text"><span [innerHTML]="question.label"></span></p>
-    <div *ngFor="let option of question.options" (click)="setValue(option)" class="checkbox-selection-option">
-      <label for="option"></label>
-      <input type="checkbox" id="option"/>
-      <span>{{'label.dietary-restrictions-'+option|lowercase|translate}}</span>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-6" *ngFor="let option of question.options">
+      <div class="checkbox-selection-option">
+        <input type="checkbox" [id]="option" (click)="setValue(option, $event)" [checked]="checked.includes(option)"/>
+        <label [for]="option"></label>
+        <span>{{'label.dietary-restrictions-'+option|lowercase|translate}}</span>
+      </div>
     </div>
   </div>
 </div>

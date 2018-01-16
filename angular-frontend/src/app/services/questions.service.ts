@@ -14,6 +14,7 @@ export class QuestionsService {
   quiz: Quiz[];
   questions: string;
   answered = this.hpconfigService.getAnsweredJsonObj();
+  goals: string[] = [];
 
   constructor(private http: HttpClient,
               private hpconfigService: HpConfigService,
@@ -51,28 +52,27 @@ export class QuestionsService {
     console.log(this.answered);
     this.answered[question.name] = option.index;
 
-    // question.options.forEach((x) => {
-    //   if (x.index !== option.index) {
-    //     x.selected = false;
-    //   } else {
-    //     x.selected = true;
-    //   }
-    // });
-
-    // this.hpconfigService.setAutomove(1);
+      // this.hpconfigService.setAutomove(1);
   }
 
   setInput(name, val) {
     console.log(this.answered);
     this.answered[name] = val;
 
-    // question.answered = val;
-
     // this.hpconfigService.setAutomove(1);
   }
 
-  setDropdown(name, val) {
-      this.answered['height_inches'][name] = val;
-      console.log(this.answered);
+  setDropdown(name, val, type) {
+    this.answered[type][name] = val;
+    console.log(this.answered);
+  }
+
+  setGoalDropdown(name, val) {
+    const index = this.goals.indexOf(val);
+    if (index === -1) {
+      this.goals.push(val);
+    }
+    this.answered['health_goals'] = this.goals;
+    console.log(this.answered);
   }
 }

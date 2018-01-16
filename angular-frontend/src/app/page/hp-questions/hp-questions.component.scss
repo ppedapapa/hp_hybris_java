@@ -1,28 +1,73 @@
 @import "../../../assets/scss/variables";
+.hp {
+  color: #1f1f1f;
+  font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.6em;
 
-.questions{
-  margin: 30px 0;
-  .hp-banner {
-    overflow: auto;
-    border: 2px solid #dbdbdb;
-    padding: 30px;
-    text-align: left;
-    font: 44px/90px "Open Sans",Helvetica,Arial,Verdana,sans-serif;
-    color: #5c993d;
-    font-weight: 300;
-    .img-banner-placeholder{
-      text-align: right;
-      img {
-        width: 100px;
-        height: auto;
+  .questions {
+    margin: 30px 0;
+    .hp-banner {
+      overflow: auto;
+      border: 2px solid #dbdbdb;
+      padding: 30px;
+      text-align: left;
+      font: 44px/90px "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+      color: #5c993d;
+      font-weight: 300;
+      .img-banner-placeholder {
+        text-align: right;
+        img {
+          width: 100px;
+          height: auto;
+        }
+      }
+      span {
+        font-weight: 300;
       }
     }
-    span {
-      font-weight: 300;
+
+    .question {
+      margin: 40px 0;
+      .question-text {
+        text-align: center;
+        height: 3.5em;
+        font-weight: 300;
+        color: #333;
+        font-size: 22px;
+        font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+      }
+    }
+
+    .continue-answered-btn {
+      background-color: #679f39;
+      color: #fff;
+      pointer-events: auto;
+    }
+
+    .hq-nav-btn {
+      padding: 10px 15px;
+      background: #f5f5f5;
+      width: 100%;
+      color: #ccc;
+      font-size: 12.8px;
+      line-height: 2em;
+      min-height: 3em;
+      text-align: center;
+      border-radius: 2px;
+      white-space: normal !important;
+      word-wrap: break-word;
+      border-color: #ccc;
+      pointer-events: none;
+      text-transform: uppercase;
+      box-shadow: none;
     }
   }
 
-  .question{
-    margin: 40px 0;
+  .nav-disclaimer {
+    font-size: 15px;
+    line-height: 1em;
+    padding: 3px 2em;
+    margin: 20px 0;
   }
 }

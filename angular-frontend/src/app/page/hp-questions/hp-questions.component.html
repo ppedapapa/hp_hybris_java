@@ -8,12 +8,12 @@
     </div>
   </div>
 
-  <div class="row question" *ngFor="let page of pages;">
+  <div class="question" *ngFor="let page of pages;">
     <app-question-mixed-content [questions]="page.questions" *ngIf="page.component === 'question-mixed-content'" class="row"></app-question-mixed-content>
     <app-question-selections [questions]="page.questions" *ngIf="page.component === 'question-selections'" class="row justify-content-center"></app-question-selections>
-    <app-question-age-weight [questions]="page.questions" *ngIf="page.component === 'question-age-weight'" class="row col justify-content-center"></app-question-age-weight>
+    <app-question-age-weight [questions]="page.questions" *ngIf="page.component === 'question-age-weight'" class="row justify-content-center"></app-question-age-weight>
     <app-question-goals [questions]="page.questions" *ngIf="page.component === 'question-goals'" class="row justify-content-center"></app-question-goals>
-    <app-question-dietary-restrictions [questions]="page.questions" *ngIf="page.component === 'question-dietary-restrictions'" class="row"></app-question-dietary-restrictions>
+    <app-question-dietary-restrictions [questions]="page.questions" *ngIf="page.component === 'question-dietary-restrictions'" class="row justify-content-center"></app-question-dietary-restrictions>
     <app-question-form [questions]="page.questions" *ngIf="page.component === 'question-form'" class="row justify-content-center"></app-question-form>
   </div>
 </div>

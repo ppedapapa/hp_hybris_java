@@ -7,7 +7,7 @@ import { QuestionsService } from '../../services/questions.service';
   selector: 'app-hp-questions',
   templateUrl: './hp-questions.component.html',
   styleUrls: ['./hp-questions.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class HpQuestionsComponent implements OnInit {
 

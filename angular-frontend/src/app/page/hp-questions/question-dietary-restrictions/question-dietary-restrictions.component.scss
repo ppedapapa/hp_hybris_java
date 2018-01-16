@@ -4,15 +4,10 @@
   padding: 18px 10px;
   border-radius: 2px;
 
-  input[type=checkbox] {
-    // display: none;
-    border: 1px solid #999;
-    padding: 18px 15px;
-    line-height: 1.4em;
-    text-align: center;
-    font-size: 18px;
-    margin: 5px 0;
+  input[type="checkbox"] {
+    display: none;
   }
+
   input[type=checkbox]+label {
     float: left;
     position: relative;
@@ -25,5 +20,28 @@
     border: solid 1px #5d9732;
     cursor: pointer;
     margin: 0 10px 0 0;
+  }
+  input[type=checkbox]+label:hover, input[type=checkbox]:checked+label{
+    border:solid 2px #5d9732;
+    box-shadow:0 0 1px #5d9732
+  }
+  input[type=checkbox]:checked+label:after{
+    content:'\2713';
+    height:1em;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    color:#5d9732;
+    line-height:1;
+    font-size:15px;
+    text-align:center
+  }
+
+  &:hover{
+    background-color:#5d9732;
+    color:#fff
   }
 }

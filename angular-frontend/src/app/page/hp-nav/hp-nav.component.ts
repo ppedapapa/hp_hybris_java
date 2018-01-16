@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {QuestionsService} from '../../services/questions.service';
 import {HpConfigService} from '../../services/hp-config.service';
 
@@ -11,6 +11,7 @@ export class HpNavComponent implements OnInit {
 
   pager;
   config;
+  pages;
 
   constructor(private questionsService: QuestionsService,
               private hpconfigService: HpConfigService) { }
@@ -18,6 +19,7 @@ export class HpNavComponent implements OnInit {
   ngOnInit() {
     this.pager = this.hpconfigService.getPager();
     this.config = this.hpconfigService.getConfig();
+    this.pages = this.questionsService.getPages();
   }
 
   goTo(index: number) {

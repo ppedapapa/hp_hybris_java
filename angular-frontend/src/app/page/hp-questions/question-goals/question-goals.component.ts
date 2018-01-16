@@ -8,8 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class QuestionGoalsComponent implements OnInit {
 
   @Input() questions;
+  dropdownCount;
 
-  constructor() { }
+  constructor() {
+    this.dropdownCount = Array(3).fill(0).map((x, i) => i);
+  }
 
   ngOnInit() {
   }

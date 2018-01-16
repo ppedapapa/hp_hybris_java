@@ -1,3 +1,26 @@
-<p>
-  question-form works!
-</p>
+<div class="question-content col-8 offset-2" *ngFor="let question of questions;">
+    <h4 class="text-center">Thank You for completing your Shaklee HealthPrint!</h4>
+    <p class="text-center" [innerHTML]="question.label"></p>
+    <div class="row">
+      <div class="col-12 options" *ngFor="let option of question.fields" [ngClass]="{'col-md-6 col-lg-6':option === 'first-name'||option === 'last-name'}">
+          <input *ngIf="option === 'first-name'" type="text" placeholder="{{ ('label.'+option) | translate}}" value="" class="form-control" (change)="inputChange(option, $event)"/>
+          <input *ngIf="option === 'last-name'" type="text" placeholder="{{ ('label.'+option) | translate}}" value="" class="form-control" (change)="inputChange(option, $event)"/>
+          <input *ngIf="option === 'email'" type="text" placeholder="{{ ('label.'+option) | translate}}" value="" class="form-control" (change)="inputChange(option, $event)"/>
+      </div>
+    </div>
+    <div class="row btn-container">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 guest-results-btn">
+          <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn" ng-click="nextQuestion()">
+            <span>Get Results</span>
+            <i class="fa fa-chevron-circle-right"></i>
+          </button>
+        </div>
+    </div>
+    <div class="disclaimer">
+        <p class="get-results-info" [innerHtml]="'questions.email-disclaimer-3'|translate"></p>
+        <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn ng-binding" type="submit" (click)="trackGuestEvent()">
+            {{'questions.member-login-view-results'|translate}}
+        </button>
+    </div>
+</div>
+<div class="col-2"></div>
