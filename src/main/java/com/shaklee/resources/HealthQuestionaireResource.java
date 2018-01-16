@@ -3,6 +3,7 @@ package com.shaklee.resources;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.security.Principal;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -56,7 +57,7 @@ public class HealthQuestionaireResource {
 	*/
 	
 	@RequestMapping(path = "/testUserId", method = GET)
-	public String testUserId()
+	public String testUserId(Principal principal)
 	{
 		String currentUserName = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -68,7 +69,7 @@ public class HealthQuestionaireResource {
 		if (currentUserName == null)
 			return "user_not_logged";
 		
-		return currentUserName;
+		return principal.getName();
 		
 	}
 
