@@ -1,11 +1,12 @@
+@import "../../../assets/scss/variables";
 .hq-nav-container {
   margin: 20px 0;
   padding: 0;
   .hq-nav-btn {
     padding: 10px 15px;
-    background: #f5f5f5;
+    background: $button1;
     width: 100%;
-    color: #ccc;
+    color: $grey-color1;
     font-size: 12.8px;
     line-height: 2em;
     min-height: 3em;
@@ -13,11 +14,11 @@
     border-radius: 2px;
     white-space: normal !important;
     word-wrap: break-word;
-    border-color: #ccc;
+    border-color: $grey-color1;
     pointer-events: none;
     box-shadow: none;
     i {
-      border: 1px solid #6dab3c;
+      border: 1px solid $button-text;
       border-radius: 50%;
       margin-right: 20px;
       padding: 3px;
@@ -26,16 +27,16 @@
   }
   .continue-btn {
     i {
-      border: 1px solid #ccc;
+      border: 1px solid $grey-color1;
       margin-left: 20px;
     }
   }
   .continue-answered-btn {
-    background-color: #679f39;
-    color: #fff;
+    background-color: $questions1;
+    color: $white-color;
     pointer-events: auto;
     i {
-      border: 1px solid #FFF;
+      border: 1px solid $white-color;
     }
   }
   .lang-progress-indicator {
@@ -56,20 +57,20 @@
     margin: 0;
 
     li {
-      background: #CCC;
+      background: $grey-color1;
       margin: 1px 5px;
       cursor: default;
       display: inline-block;
       width:  10px;
       height: 10px;
       text-indent: -999px;
-      border: 1px solid #f2f2f2;
+      border: 1px solid $light-border;
       border-radius: 10px;
     }
 
     .active {
-      background-color: #679f39;
-      border-color: #CCC;
+      background-color: $questions1;
+      border-color: $grey-color1;
       margin: 1px 5px;
       width:  12px;
       height: 12px;

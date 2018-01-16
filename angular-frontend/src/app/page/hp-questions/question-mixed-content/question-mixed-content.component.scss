@@ -27,7 +27,7 @@
     border-radius: 0;
     padding: 15px;
     background-color: $shaklee-blue;
-    border-color: #00b3cb;
+    border-color: $shaklee-blue2;
     color: $white-color;
     font-weight: 400;
     text-transform: uppercase;
@@ -136,8 +136,8 @@
       }
 
       button.hq-btn:hover, button.hq-selected-item {
-        background-color: #5d9732;
-        color: #FFF;
+        background-color: $shaklee-green1;
+        color: $white-color;
       }
       .question-img {
         width: 120px;

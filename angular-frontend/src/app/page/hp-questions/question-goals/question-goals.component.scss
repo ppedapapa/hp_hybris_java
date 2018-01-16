@@ -1,7 +1,8 @@
+@import "../../../../assets/scss/variables";
 .health-goals {
-  background: #6dab3c;
+  background: $button-text;
   border-radius: 50%;
-  color: #fff;
+  color: $white-color;
   display: inline-block;
   margin: 20px 0;
   text-align: center;
