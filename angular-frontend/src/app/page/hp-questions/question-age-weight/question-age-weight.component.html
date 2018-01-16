@@ -6,8 +6,8 @@
   <div class="options" *ngFor="let option of question.options">
     <input type="text" placeholder="{{ ('questions.' +option.name+ '-placeholder') | translate}}" value="{{answered[option.name]}}" class="form-control" *ngIf="option.name !== 'height_inches'" (change)="inputChange(option.name, $event)"/>
     <div *ngIf="option.name === 'height_inches'" class="row">
-      <app-question-dropdown [dropdown]="height_feet" firstLabel="height-ft" label="foot" class="col-6"></app-question-dropdown>
-      <app-question-dropdown [dropdown]="height_inches" firstLabel="height-in" label="inches" class="col-6"></app-question-dropdown>
+      <app-question-dropdown [dropdown]="height_feet" firstLabel="height-ft" label="foot" type="height_inches" class="col-6"></app-question-dropdown>
+      <app-question-dropdown [dropdown]="height_inches" firstLabel="height-in" label="inches" type="height_inches" class="col-6"></app-question-dropdown>
     </div>
   </div>
 </div>

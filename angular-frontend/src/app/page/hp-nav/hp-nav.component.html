@@ -1,8 +1,26 @@
-<div class="row buttons">
-  <!--*ngIf="pager.index !== 0">-->
-  <div class="col-12">
-    <button class="btn btn-primary float-left" *ngIf="config.allowBack" (click)="goTo(pager.index -1);">Back</button>
-    <button class="btn btn-primary float-right" *ngIf="pager.index + 1 !== pager.count" (click)="goTo(pager.index + 1);">Next</button>
-    <button class="btn btn-primary float-right" *ngIf="pager.index + 1 === pager.count" (click)="onSubmit();">Get Results</button>
+<div class="row buttons hq-nav-container" *ngIf="pager.index !== 0">
+  <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
+    <button class="btn btn-primary hq-nav-btn continue-btn" *ngIf="config.allowBack" (click)="goTo(pager.index -1);" [ngClass]="{'continue-answered-btn':pager.index >= 1 && pager.index < pager.count}">
+      <i class="fa fa-chevron-circle-left"></i>
+      <span>{{'questions.back' |translate}}</span>
+    </button>
   </div>
+  <div class="col-xs-2 col-sm-6 col-md-6 col-lg-6">
+    <ol class="hq-indicators">
+      <li *ngFor="let q of pages; let i = index;" [ngClass]="{'active': pager.index === i}">
+        <span class="sr-only"></span>
+      </li>
+    </ol>
+  </div>
+  <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
+    <button *ngIf="pager.index + 1 !== pager.count" class="btn btn-primary hq-nav-btn continue-btn" [ngClass]="{'continue-answered-btn':pager.index < pager.count}"  (click)="goTo(pager.index + 1);">
+      <span>{{'questions.continue' |translate}}</span>
+      <i class="fa fa-chevron-circle-right"></i>
+    </button>
+    <button *ngIf="pager.index + 1 === pager.count"  class="btn btn-primary hq-nav-btn continue-btn" [ngClass]="{'continue-answered-btn':pager.index + 1 === pager.count}" (click)="onSubmit();">
+      <span>{{'questions.get-results' |translate}}</span>
+      <i class="fa fa-chevron-circle-right"></i>
+    </button>
+  </div>
+  <div class="col-12 nav-disclaimer">{{'questions.disclaimer'|translate}}</div>
 </div>

@@ -1,5 +1,6 @@
+@import "../../../../assets/scss/variables";
 .hp-results-banner {
-  border-bottom: 2px solid #dbdbdb;
+  border-bottom: 2px solid $hp-banner1;
   padding:10px 0;
   .logo-img {
     width:20%;
@@ -12,7 +13,7 @@
   .resultTopLinks {
     margin-top:20px;
     a {
-      color: #999;
+      color: $black1;
       font-size:12px;
     }
   }

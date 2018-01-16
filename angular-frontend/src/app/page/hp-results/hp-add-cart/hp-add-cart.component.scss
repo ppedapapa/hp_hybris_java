@@ -1,7 +1,8 @@
+@import "../../../../assets/scss/variables";
 .add-item{
-  border: 1px solid #666;
+  border: 1px solid $grey1;
   border-radius: 2px;
-  color: #FFFFFF !important;
-  background-color: #666;
+  color: $white-color !important;
+  background-color: $grey1;
   cursor: pointer;
 }

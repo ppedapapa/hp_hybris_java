@@ -1,3 +1,4 @@
+@import "../../../../assets/scss/variables";
 .btn-group-select-option {
   width: 100%;
 }
@@ -9,15 +10,15 @@
 }
 
 .btn-group-select-option .btn-select-option {
-  color: #333;
-  border: 1px solid #aaa;
+  color: $grey-color2;
+  border: 1px solid $dark-grey;
   border-radius: 2px;
   font-size: 14px;
   line-height: 1.4em;
   margin: 15px 0 0;
   min-height: 4.1em;
   width: 100%;
-  background: #fff;
+  background: $white-color;
   padding: 1em 2em 1em .75em;
   text-align: left;
   text-transform: none;
