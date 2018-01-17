@@ -15,12 +15,14 @@ export class AppComponent implements OnInit {
               private serverService: AppService) {
     translate.setDefaultLang('us-en');
   }
-  appGreetings = this.serverService.getGreetings();
+  //appGreetings = this.serverService.getGreetings();
 
   switchLanguage(language: string) {
     this.translate.use(language);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.serverService.isUserLogin();
+  }
 
 }
