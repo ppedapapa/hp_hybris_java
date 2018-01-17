@@ -361,7 +361,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public SavedRequestAwareAuthenticationSuccessHandler successRedirectHandler() {
         SavedRequestAwareAuthenticationSuccessHandler successRedirectHandler =
                 new SavedRequestAwareAuthenticationSuccessHandler();
-        successRedirectHandler.setDefaultTargetUrl("/");
+        successRedirectHandler.setDefaultTargetUrl(env.getProperty("app.security.saml.returnUrl"));
         return successRedirectHandler;
     }
     
