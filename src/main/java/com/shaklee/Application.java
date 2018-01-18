@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer{
+	
+	@Value("${baseUrl}")
+	String baseUrl; 
 
 	    @Override
 	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -45,12 +49,13 @@ public class Application extends SpringBootServletInitializer{
         };
     }
     
+    
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*").allowedOrigins("https://storage.googleapis.com");
+                registry.addMapping("/*").allowedOrigins(baseUrl);
             }
         };
     }
