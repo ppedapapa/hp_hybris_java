@@ -5,6 +5,7 @@ import { PageComponent } from './page/page.component';
 import { HpResultsComponent } from './page/hp-results/hp-results.component';
 
 import { QuizResolver } from './services/quiz.resolver';
+import { AuthGuard } from './services/auth-guard.service';
 import { HealthPrintResultsResolveService} from './services/hp-results-resolve.service';
 
 const appRoutes: Routes = [
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
         resolve: {quizList: QuizResolver}
     },
     {
+        canActivate: [AuthGuard],
         path: 'healthprint-results',
         component: HpResultsComponent,
         resolve: {
@@ -26,6 +28,7 @@ const appRoutes: Routes = [
         }
     } ,
     {
+        canActivateChild: [AuthGuard],
         path: 'healthprint-results/:hpID',
         component: HpResultsComponent,
         resolve: {
