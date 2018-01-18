@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
     this.translate.use(language);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.serverService.isUserLogin();
+  }
 
 }
