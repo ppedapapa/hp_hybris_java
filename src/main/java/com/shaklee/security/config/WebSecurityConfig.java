@@ -536,11 +536,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http        
             .authorizeRequests()
             //.antMatchers("/").permitAll()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/").permitAll()
             .antMatchers("/index.html").permitAll()
             .antMatchers("/google289ec5249037f1af.html").permitAll()
             .antMatchers("/error").permitAll()
             .antMatchers("/saml/**").permitAll()
+            .antMatchers("/services/**").permitAll()
             .antMatchers("/public/**").permitAll()
             .antMatchers("/shakleeintegration/**").permitAll()
             .anyRequest().permitAll();
