@@ -25,11 +25,8 @@ export class CartService {
         healthprintCart['productsToAdd'] = skuWithQtyAddCartList;
         healthprintCart['addAllToCart'] = 'false';
         const hpCartCookie = JSON.stringify(healthprintCart);
-       console.log('hpCartCookie', hpCartCookie);
-        const hpCartObjJsonB64 = new Buffer(hpCartCookie).toString('base64');
-      console.log('hpCartObjJsonB64', hpCartObjJsonB64);
-        this.cookieService.set('shakleeUS-healthprint-cart', hpCartObjJsonB64, 100, '/', environment.domainName);
-      console.log('shakleeUS-healthprint-cart', this.cookieService.get('shakleeUS-healthprint-cart'));
+        const hpcartCookieeEncode = btoa(hpCartCookie);
+        document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
         this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
     }
 
@@ -52,9 +49,10 @@ export class CartService {
         healthprintCart['recommendationTotal'] = recommendationTotal;
         healthprintCart['addAllToCart'] = 'true';
         healthprintCart['freeProduct'] = freeProduct;
+
         const hpCartCookie = JSON.stringify(healthprintCart);
-        const hpCartObjJsonB64 = new Buffer(hpCartCookie).toString('base64');
-        this.cookieService.set('shakleeUS-healthprint-cart', hpCartObjJsonB64, 100, '/', environment.domainName);
+        const hpcartCookieeEncode = btoa(hpCartCookie);
+        document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
         this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
     }
 }

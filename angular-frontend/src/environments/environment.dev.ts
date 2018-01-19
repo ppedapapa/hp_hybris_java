@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   domainName: '.shakleedev.com',
-  hybrisServerName: 'local.shakleedev.com:9002'
+  hybrisServerName: 'www.shakleedev.com:9002'
 };
