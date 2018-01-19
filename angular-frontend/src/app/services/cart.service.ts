@@ -1,7 +1,7 @@
 
 import { Injectable, Inject } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { DOCUMENT } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 import { Buffer } from 'buffer';
 import { environment } from '../../environments/environment';
 
@@ -26,7 +26,7 @@ export class CartService {
         healthprintCart['addAllToCart'] = 'false';
         const hpCartCookie = JSON.stringify(healthprintCart);
         const hpcartCookieeEncode = btoa(hpCartCookie);
-        document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
+        this.document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
         this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
     }
 
@@ -34,7 +34,7 @@ export class CartService {
 
         const skuWithQtyAddCartList = {};
         const healthprintCart = {};
-        const curCookie = this.cookieService.get('shakleeUS-healthprint-cart');
+        const curCookie = this.document['cookie']['shakleeUS-healthprint-cart'];
         for (const sku of skuList) {
           if (curCookie) {
             const curItemsInCart = JSON.parse(atob(curCookie));
@@ -52,7 +52,7 @@ export class CartService {
 
         const hpCartCookie = JSON.stringify(healthprintCart);
         const hpcartCookieeEncode = btoa(hpCartCookie);
-        document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
+        this.document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
         this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
     }
 }
