@@ -7,9 +7,11 @@ import java.security.Principal;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shaklee.security.stereotypes.CurrentUser;
 import com.shaklee.util.StatusResponse;
 
 @RestController
@@ -17,7 +19,7 @@ import com.shaklee.util.StatusResponse;
 public class UserResource {
 	
 	@RequestMapping(path = "/isUserLoggedIn", method = GET)
-	public UserData testUserId(Principal principal)
+	public UserData testUserId(@CurrentUser User user)
 	{
 		/*String currentUserName = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -26,10 +28,10 @@ public class UserResource {
 		    currentUserName = authentication.getName();
 		}*/
 		
-		if (principal == null)
+		if (user == null)
 			return new UserData("user_not_logged", null) ;
 		
-		return new UserData("user_logged", principal.getName()) ;
+		return new UserData("user_logged", user.getUsername()) ;
 		
 	}
 	
