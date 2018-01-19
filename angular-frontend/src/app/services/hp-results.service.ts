@@ -13,7 +13,7 @@ export class HealthPrintResultsService {
     endPointAllHealthPrintResults = '/assets/mockjson/getAllHealthPrints.json';
     endPointContent =  '/assets/mockjson/content.json';
     endPointRecommendation = '/assets/mockjson/recommendation.json';
-    endPointProduct = 'https://35.188.18.139:9002//shakleeintegration/v2/shakleeUS/products?fields=DEFAULT';
+    endPointProduct = 'https://www.shakleedev.com:9002/shakleeintegration/v2/shakleeUS/products?fields=DEFAULT';
 
     constructor(private http: HttpClient) {}
 

@@ -1,4 +1,4 @@
-<div class="questions">
+<section class="container questions">
   <div class="row hp-banner" *ngIf="pager.index !== 0">
     <div class="col-2">
       <img src="https://images.shaklee.com/healthprint/Healthprint-Logo.png" class="img-fluid">
@@ -16,5 +16,5 @@
     <app-question-dietary-restrictions [questions]="page.questions" *ngIf="page.component === 'question-dietary-restrictions'" class="row justify-content-center"></app-question-dietary-restrictions>
     <app-question-form [questions]="page.questions" *ngIf="page.component === 'question-form'" class="row justify-content-center"></app-question-form>
   </div>
-</div>
+</section>
 

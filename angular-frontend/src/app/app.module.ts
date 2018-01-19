@@ -16,6 +16,8 @@ import { DataService } from './services/data.service';
 import { HealthPrintResultsService } from './services/hp-results.service';
 import { HealthPrintResultsResolveService} from './services/hp-results-resolve.service';
 import { CartService } from './services/cart.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './page/page.component';
@@ -85,7 +87,9 @@ export function createTranslateLoader(http: HttpClient) {
         DataService,
         HealthPrintResultsService,
         HealthPrintResultsResolveService,
-        CartService
+        CartService,
+        AuthService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })
