@@ -9,26 +9,28 @@ import { environment } from '../../environments/environment';
 export class CartService {
     constructor( private cookieService: CookieService, @Inject(DOCUMENT) private document: any) { }
 
-    addToCart(sku) {
+    addToCart(skuList) {
+         const skuWithQtyAddCartList = {};
         const healthprintCart = {};
-        const skuWithQtyAddCartList = {};
         const curCookie = this.cookieService.get('shakleeUS-healthprint-cart');
-        if (curCookie) {
+        for (const sku of skuList) {
+          if (curCookie) {
             const curItemsInCart = JSON.parse(atob(curCookie));
             skuWithQtyAddCartList[sku] = (curItemsInCart['productsToAdd'][sku]) ? curItemsInCart['productsToAdd'][sku] + 1 : 1;
-        } else {
-            skuWithQtyAddCartList[sku] = 1;
+          } else {
+              skuWithQtyAddCartList[sku] = 1;
+          }
         }
 
         healthprintCart['productsToAdd'] = skuWithQtyAddCartList;
-        healthprintCart['addAllToCart'] = false;
-        healthprintCart['freeProduct'] = '89384'; /**remove from hybris */
-        console.log('healthprintCart', healthprintCart);
-
+        healthprintCart['addAllToCart'] = 'false';
         const hpCartCookie = JSON.stringify(healthprintCart);
+       console.log('hpCartCookie', hpCartCookie);
         const hpCartObjJsonB64 = new Buffer(hpCartCookie).toString('base64');
+      console.log('hpCartObjJsonB64', hpCartObjJsonB64);
         this.cookieService.set('shakleeUS-healthprint-cart', hpCartObjJsonB64, 100, '/', environment.domainName);
-        window.location.href = 'https://' + environment.hybrisServerName + '/cart';
+      console.log('shakleeUS-healthprint-cart', this.cookieService.get('shakleeUS-healthprint-cart'));
+        this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
     }
 
     addBundleToCart(skuList, bundle, recommendationTotal, freeProduct) {

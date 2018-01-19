@@ -1,18 +1,18 @@
 {
    "/api":{
-		"target":"https://localhost:8443",
+		"target":"https://local.shakleedev.com:8443",
 		"secure":false,
 		"logLevel":"debug",
 		"changeOrigin":true
 	},
 	"/public":{
-		"target":"https://localhost:8443",
+		"target":"https://local.shakleedev.com:8443",
 		"secure":false,
 		"logLevel":"debug",
 		"changeOrigin":true
 	},
 	"/healthprint-login":{
-		"target":"https://localhost:8443",
+		"target":"https://local.shakleedev.com:8443",
 		"secure":false,
 		"logLevel":"debug",
 		"changeOrigin":true

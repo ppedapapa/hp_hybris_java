@@ -18,7 +18,7 @@ export class HpAddCartComponent implements OnInit {
   }
 
   addToCart(sku, event, bundle) {
-    this.cartService.addToCart('20282');
+    this.cartService.addToCart(['20282', '21261']);
   }
   addBundleToCart() {
       this.cartService.addBundleToCart(['52355', '21261'], 'ADVANCED', '12.15', '20282');
