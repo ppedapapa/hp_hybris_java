@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CookieService } from 'ngx-cookie-service';
 
+import { MultiTranslateHttpLoader } from './MultiTranslateHttpLoader';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppService } from './app.service';
 import { QuestionsService } from './services/questions.service';
@@ -39,8 +41,16 @@ import { QuestionDietaryRestrictionsComponent } from './page/hp-questions/questi
 import { HpAddCartComponent } from './page/hp-results/hp-add-cart/hp-add-cart.component';
 
 // AoT requires an exported function for factories
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/translation/hp/', '.json');
+/* export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/translation/', '.json');
+} */
+
+export function translateLoader(http: HttpClient) {
+
+    return new MultiTranslateHttpLoader(http, [
+        {prefix: './assets/translation/app/', suffix: '.json'},
+        {prefix: './assets/translation/hp/', suffix: '.json'}
+    ]);
 }
 
 @NgModule({
@@ -69,7 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
+                useFactory: (translateLoader),
                 deps: [HttpClient]
             }
         }),

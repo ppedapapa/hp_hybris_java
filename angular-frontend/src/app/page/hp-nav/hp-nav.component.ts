@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {QuestionsService} from '../../services/questions.service';
-import {HpConfigService} from '../../services/hp-config.service';
+import { Component, OnInit } from '@angular/core';
+import { QuestionsService } from '../../services/questions.service';
+import { HpConfigService } from '../../services/hp-config.service';
 
 @Component({
   selector: 'app-hp-nav',

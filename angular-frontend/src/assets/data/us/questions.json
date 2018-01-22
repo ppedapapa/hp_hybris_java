@@ -13,12 +13,12 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Male",
+                            "label": "male",
                             "class": "fa-male"
                         },
                         {
                             "index": 1,
-                            "label": "Female",
+                            "label": "female",
                             "class": "fa-female"
                         }
                     ]
@@ -35,19 +35,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 },
@@ -58,19 +58,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 },
@@ -81,19 +81,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 }
@@ -109,19 +109,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 },
@@ -132,19 +132,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "healthy-fats0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "healthy-fats1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "healthy-fats2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "healthy-fats3"
                         }
                     ]
                 },
@@ -155,19 +155,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "water0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "water1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "water2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "water3"
                         }
                     ]
                 }
@@ -183,19 +183,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Rarely"
+                            "label": "sugar-drinks0"
                         },
                         {
                             "index": 1,
-                            "label": "1-2 times"
+                            "label": "sugar-drinks1"
                         },
                         {
                             "index": 2,
-                            "label": "3-6 times"
+                            "label": "sugar-drinks2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 6 times"
+                            "label": "sugar-drinks3"
                         }
                     ]
                 },
@@ -206,19 +206,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 2 times"
+                            "label": "junk-food0"
                         },
                         {
                             "index": 1,
-                            "label": "2-6 times"
+                            "label": "junk-food1"
                         },
                         {
                             "index": 2,
-                            "label": "7-13 times"
+                            "label": "junk-food2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 13 times"
+                            "label": "junk-food3"
                         }
                     ]
                 }
@@ -234,23 +234,23 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "I rarely eat breakfast"
+                            "label": "breakfast0"
                         },
                         {
                             "index": 1,
-                            "label": "I tend to eat things like toast, bagels, muffins, cereal, and oatmeal"
+                            "label": "breakfast1"
                         },
                         {
                             "index": 2,
-                            "label": "I eat a classic breakfast (bacon, eggs, hash browns, etc.)"
+                            "label": "breakfast2"
                         },
                         {
                             "index": 3,
-                            "label": "I opt for lighter options like yogurt and fruit"
+                            "label": "breakfast3"
                         },
                         {
                             "index": 4,
-                            "label": "I get a mix of protein, fruit, and/or veggies from shakes and smoothies, or look for other sources of lean protein like eggs or egg-whites"
+                            "label": "breakfast4"
                         }
                     ]
                 },
@@ -261,19 +261,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Always, whenever available"
+                            "label": "organic0"
                         },
                         {
                             "index": 1,
-                            "label": "I do, for certain types of food"
+                            "label": "organic1"
                         },
                         {
                             "index": 2,
-                            "label": "I’d like to, but it’s too expensive"
+                            "label": "organic2"
                         },
                         {
                             "index": 3,
-                            "label": "No, I don't think it's worth it"
+                            "label": "organic3"
                         }
                     ]
                 }
@@ -289,11 +289,11 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "No"
+                            "label": "no"
                         },
                         {
                             "index": 1,
-                            "label": "Yes"
+                            "label": "yes"
                         }
                     ]
                 }
@@ -309,19 +309,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "I can take the day by storm"
+                            "label": "energy0"
                         },
                         {
                             "index": 1,
-                            "label": "I’ve got just enough to make it through the day"
+                            "label": "energy1"
                         },
                         {
                             "index": 2,
-                            "label": "I occasionally need a little pick-me-up"
+                            "label": "energy2"
                         },
                         {
                             "index": 3,
-                            "label": "I feel tired all the time"
+                            "label": "energy3"
                         }
                     ]
                 },
@@ -332,19 +332,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Rarely: I don’t let things bother me"
+                            "label": "stress0"
                         },
                         {
                             "index": 1,
-                            "label": "Occasionally: I have my moments but it's manageable"
+                            "label": "stress1"
                         },
                         {
                             "index": 2,
-                            "label": "Frequently: I’ve got a lot on my plate"
+                            "label": "stress2"
                         },
                         {
                             "index": 3,
-                            "label": "Always: I’m a total stress-mess"
+                            "label": "stress3"
                         }
                     ]
                 },
@@ -355,19 +355,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Great: 7–8 hours of uninterrupted bliss"
+                            "label": "sleep0"
                         },
                         {
                             "index": 1,
-                            "label": "Fine: I just don’t get enough"
+                            "label": "sleep1"
                         },
                         {
                             "index": 2,
-                            "label": "I have trouble falling asleep"
+                            "label": "sleep2"
                         },
                         {
                             "index": 3,
-                            "label": "Not great: I wake up several times throughout the night"
+                            "label": "sleep3"
                         }
                     ]
                 }
@@ -383,19 +383,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Great: I’m sharp as a tack"
+                            "label": "memory0"
                         },
                         {
                             "index": 1,
-                            "label": "No problems now, but I worry about it getting worse"
+                            "label": "memory1"
                         },
                         {
                             "index": 2,
-                            "label": "OK, but I occasionally lose my train of thought"
+                            "label": "memory2"
                         },
                         {
                             "index": 3,
-                            "label": "It seems to be progressively deteriorating"
+                            "label": "memory3"
                         }
                     ]
                 },
@@ -406,19 +406,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 1 hour"
+                            "label": "exercise-frequency0"
                         },
                         {
                             "index": 1,
-                            "label":"1–2 hours"
+                            "label":"exercise-frequency1"
                         },
                         {
                             "index": 2,
-                            "label": "2–4 hours"
+                            "label": "exercise-frequency2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 4 hours"
+                            "label": "exercise-frequency3"
                         }
                     ]
                 },
@@ -429,19 +429,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Light (walking, some stretching, etc.)"
+                            "label": "exercise-intensity0"
                         },
                         {
                             "index": 1,
-                            "label": "Mostly cardio (jogging, elliptical machine, etc.)"
+                            "label": "exercise-intensity1"
                         },
                         {
                             "index": 2,
-                            "label": "Moderate balance of cardio and weight training"
+                            "label": "exercise-intensity2"
                         },
                         {
                             "index": 3,
-                            "label": "Intense (interval training, weight lifting, training for marathons, etc.)"
+                            "label": "exercise-intensity3"
                         }
                     ]
                 }
@@ -506,23 +506,23 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "I am trying to conceive"
+                            "label": "pregnant-trying"
                         },
                         {
                             "index": 1,
-                            "label": "I am pregnant or nursing"
+                            "label": "pregnant-pregnant"
                         },
                         {
                             "index": 2,
-                            "label": "I experience PMS"
+                            "label": "pregnant-pms"
                         },
                         {
                             "index": 3,
-                            "label": "I'm having perimenopause or menopause challenges"
+                            "label": "pregnant-menopause"
                         },
                         {
                             "index": 4,
-                            "label": "None"
+                            "label": "pregnant-no"
                         }
                     ]
                 }
@@ -538,19 +538,19 @@
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than $3 per day"
+                            "label": "spending0"
                         },
                         {
                             "index": 1,
-                            "label": "$3 - $5 per day"
+                            "label": "spending1"
                         },
                         {
                             "index": 2,
-                            "label": "$5 - $8 per day"
+                            "label": "spending2"
                         },
                         {
                             "index": 3,
-                            "label": "More than $8"
+                            "label": "spending3"
                         }
                     ]
                 }

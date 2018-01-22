@@ -10,6 +10,7 @@ import { QuestionsService } from '../../../services/questions.service';
 export class QuestionSelectionsComponent implements OnInit{
 
   @Input() questions;
+  @Input() className;
   answered;
 
   constructor(private questionsService: QuestionsService) {
