@@ -49,7 +49,7 @@ export class CartService {
         healthprintCart['recommendationTotal'] = recommendationTotal;
         healthprintCart['addAllToCart'] = 'true';
         healthprintCart['freeProduct'] = freeProduct;
-
+        console.log(healthprintCart);
         const hpCartCookie = JSON.stringify(healthprintCart);
         const hpcartCookieeEncode = btoa(hpCartCookie);
         this.document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
