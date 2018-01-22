@@ -21,7 +21,7 @@ export class HpAddCartComponent implements OnInit {
     this.cartService.addToCart(['20282', '21261']);
   }
   addBundleToCart() {
-      this.cartService.addBundleToCart(['52355', '21261'], 'ADVANCED', '80.15', '20282');
+      this.cartService.addBundleToCart(['20282', '21261'], 'COMPREHENSIVE', '80.15', '52355');
   }
 
 }
