@@ -2,6 +2,9 @@
 // used as an entry point, referenced in .angular-cli.json
 @import "~bootstrap/scss/bootstrap";
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url(//fonts.googleapis.com/css?family=Roboto:400,900,700,500,300);
+@import url(//fonts.googleapis.com/css?family=Montserrat:200,500,800);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 @import "variables";
 @import "mixins";
 @import "global";

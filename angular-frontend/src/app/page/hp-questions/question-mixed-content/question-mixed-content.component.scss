@@ -5,10 +5,12 @@
   .hp-landing-title {
     color: $shaklee-blue;
     font-size: 40px;
-    font-weight: 100;
     line-height: 1em;
     text-align: center;
     margin: 0 0 30px;
+    span {
+      font-weight: 100 !important;
+    }
   }
   .shaklee-logo-section {
     text-align: center;
@@ -98,20 +100,6 @@
         max-width: 100%;
       }
 
-      .question-img {
-        width: 120px;
-        height: auto;
-      }
-      .question-text {
-        text-align: center;
-        height: 3.5em;
-        font-weight: 400;
-        font-size: 20px;
-        color: $shaklee-question-text-color;
-        margin: 20px 10px 15px;
-        font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
-      }
-
       .hq-gender {
         font-size: 24px;
         height: 24px;
@@ -133,15 +121,11 @@
         text-transform: none;
         white-space: normal;
         min-height: 4.25em;
+        font-weight: bold !important;
       }
 
-      button.hq-btn:hover, button.hq-selected-item {
-        background-color: $shaklee-green1;
-        color: $white-color;
-      }
-      .question-img {
-        width: 120px;
-        height: auto;
+      .question-text {
+        height: 1em;
       }
 
     }

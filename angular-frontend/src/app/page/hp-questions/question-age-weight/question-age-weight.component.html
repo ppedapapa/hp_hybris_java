@@ -1,7 +1,7 @@
 <div class="question-content col-5" *ngFor="let question of questions;">
   <div class="text-center">
     <img class="img-fluid question-img" src="{{question.image}}">
-    <p class="question-text"><span [innerHTML]="question.label"></span></p>
+    <p class="question-text"><span [innerHTML]="'questions.'+question.label|translate"></span></p>
   </div>
   <div class="options" *ngFor="let option of question.options">
     <input type="text" placeholder="{{ ('questions.' +option.name+ '-placeholder') | translate}}" value="{{answered[option.name]}}" class="form-control" *ngIf="option.name !== 'height_inches'" (change)="inputChange(option.name, $event)"/>

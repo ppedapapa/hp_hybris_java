@@ -8,8 +8,8 @@
             "questions": [
                 {
                     "name": "gender",
-                    "label": "What is your gender?",
-                    "image": "//images.shaklee.com/healthprint//02-gender-150x150.png",
+                    "label": "question2",
+                    "image": "//images.shaklee.com/healthprint/02-gender-150x150.png",
                     "options": [
                         {
                             "index": 0,
@@ -30,7 +30,7 @@
             "questions": [
                 {
                     "name": "fruits",
-                    "label": "How many times per week do you eat fruit?",
+                    "label": "fruits",
                     "image": "//images.shaklee.com/healthprint/12-fruit-150x150.png",
                     "options": [
                         {
@@ -53,7 +53,7 @@
                 },
                 {
                     "name": "vegetables",
-                    "label": "How many times per week do you eat vegetables?",
+                    "label": "vegetables",
                     "image": "//images.shaklee.com/healthprint/13-vegies-150x150.png",
                     "options": [
                         {
@@ -76,7 +76,7 @@
                 },
                 {
                     "name": "grains",
-                    "label": "How many times per week do you eat whole grains?",
+                    "label": "grains",
                     "image": "//images.shaklee.com/healthprint/14-grains-150x150.png",
                     "options": [
                         {
@@ -104,7 +104,7 @@
             "questions": [
                 {
                     "name": "dairy",
-                    "label": "How many times per week do you eat dairy?",
+                    "label": "dairy",
                     "image": "//images.shaklee.com/healthprint/15-dairy-150x150.png",
                     "options": [
                         {
@@ -127,7 +127,7 @@
                 },
                 {
                     "name": "healthy_fats",
-                    "label": "How many times per week do you eat omega-3-rich fish, such as salmon?",
+                    "label": "healthy-fats",
                     "image": "//images.shaklee.com/healthprint/16-fish-150x150.png",
                     "options": [
                         {
@@ -150,7 +150,7 @@
                 },
                 {
                     "name": "water",
-                    "label": "How many 8-ounce glasses of water do you drink each day?",
+                    "label": "water",
                     "image": "//images.shaklee.com/healthprint/17-water-150x150.png",
                     "options": [
                         {
@@ -178,7 +178,7 @@
             "questions": [
                 {
                     "name": "sugar_drinks",
-                    "label": "How many times per week do you consume sugary drinks (ex: soda, juices, etc.)?",
+                    "label": "sugar-drinks",
                     "image": "//images.shaklee.com/healthprint/18-sugary-drinks-150x150.png",
                     "options": [
                         {
@@ -201,7 +201,7 @@
                 },
                 {
                     "name": "junk_food",
-                    "label": "How many times per week do you eat unhealthy snacks or fast food?",
+                    "label": "junk-food",
                     "image": "//images.shaklee.com/healthprint/19-fast-food-150x150.png",
                     "options": [
                         {
@@ -229,7 +229,7 @@
             "questions": [
                 {
                     "name": "breakfast",
-                    "label": "What do you typically eat for breakfast?",
+                    "label": "breakfast",
                     "image": "//images.shaklee.com/healthprint/20-breakfast-150x150.png",
                     "options": [
                         {
@@ -256,7 +256,7 @@
                 },
                 {
                     "name": "organic",
-                    "label": "Do you purchase organic foods?",
+                    "label": "organic",
                     "image": "//images.shaklee.com/healthprint/21-organic2-150x150.png",
                     "options": [
                         {
@@ -284,7 +284,7 @@
             "questions": [
                 {
                     "name": "toxins",
-                    "label": "Do any of your cleaning products contain bleach or ammonia?",
+                    "label": "toxins",
                     "image": "//images.shaklee.com/healthprint/11-cleaning-products-150x150.png",
                     "options": [
                         {
@@ -304,7 +304,7 @@
             "questions": [
                 {
                     "name": "energy",
-                    "label": "How is your energy level on a normal day?",
+                    "label": "energy",
                     "image": "//images.shaklee.com/healthprint/05-energy-level-150x150.png",
                     "options": [
                         {
@@ -327,7 +327,7 @@
                 },
                 {
                     "name": "stress",
-                    "label": "How often do you get stressed?",
+                    "label": "stress",
                     "image": "//images.shaklee.com/healthprint/06-stress-150x150.png",
                     "options": [
                         {
@@ -350,7 +350,7 @@
                 },
                 {
                     "name": "sleep",
-                    "label": "How do you sleep?",
+                    "label": "sleep",
                     "image": "//images.shaklee.com/healthprint/17-water-150x150.png",
                     "options": [
                         {
@@ -378,7 +378,7 @@
             "questions": [
                 {
                     "name": "memory",
-                    "label": "How is your memory and concentration?",
+                    "label": "memory",
                     "image": "//images.shaklee.com/healthprint/08-memory-concentration-150x150.png",
                     "options": [
                         {
@@ -401,7 +401,7 @@
                 },
                 {
                     "name": "exercise_frequency",
-                    "label": "How often do you exercise each week?",
+                    "label": "exercise-frequency",
                     "image": "//images.shaklee.com/healthprint/09-exercize-week-150x150.png",
                     "options": [
                         {
@@ -424,7 +424,7 @@
                 },
                 {
                     "name": "exercise_intensity",
-                    "label": "How would you describe your weekly exercise?",
+                    "label": "exercise-intensity",
                     "image": "//images.shaklee.com/healthprint/10-exercize-describe-150x150.png",
                     "options": [
                         {
@@ -452,7 +452,7 @@
             "questions": [
                 {
                     "name": "age",
-                    "label": "What is your age?",
+                    "label": "question1",
                     "image": "//images.shaklee.com/healthprint/01-age-150x150.png",
                     "options": [
                         {
@@ -461,7 +461,7 @@
                     ]
                 },
                 {
-                    "label": "What is your weight and height?",
+                    "label": "question3",
                     "image": "//images.shaklee.com/healthprint/03-weight-height-150x150.png",
                     "options": [
                         {
@@ -479,7 +479,7 @@
             "questions": [
                 {
                     "name": "health_goals",
-                    "label": "Please identify your top 3 health goals.",
+                    "label": "health-goals",
                     "image": "//images.shaklee.com/healthprint/23-top3-goals-150x150.png",
                     "goals": [ "OVERALL", "WEIGHT", "FITNESS", "PERFORMANCE", "AGING", "ENERGY", "HEART", "BRAIN", "JOINT", "IMMUNE", "STRESS", "DIGESTIVE", "BONE", "SLEEP" ]
                 }
@@ -490,7 +490,7 @@
             "questions": [
                 {
                     "name": "dietary_restrictions",
-                    "label": "Do you have any <b>dietary restrictions</b>?",
+                    "label": "dietary-restrictions",
                     "image": "//images.shaklee.com/healthprint/22-dietary-restrictions-150x150.png",
                     "options": ["GLUTEN","SOY","NUTS","DAIRY","VEGETERIAN","KOSHER","NONE"]
                 }
@@ -501,7 +501,7 @@
             "questions": [
                 {
                     "name": "pregnant",
-                    "label": "Please select which of the following apply to you",
+                    "label": "pregnant",
                     "image": "//images.shaklee.com/healthprint/04-select-any-150x150.png",
                     "options": [
                         {
@@ -533,7 +533,7 @@
             "questions": [
                 {
                     "name": "spending",
-                    "label": "How much would you spend each day to achieve your optimum health?",
+                    "label": "spending",
                     "image": "//images.shaklee.com/healthprint/24-spend-150x150.png",
                     "options": [
                         {
@@ -560,7 +560,7 @@
             "component": "question-form",
             "questions": [
                 {
-                    "label": "Please enter your name and email to receive your personalized results.",
+                    "label": "email-results-to-you",
                     "fields": ["first-name", "last-name", "email"],
                     "captcha": true
                 }

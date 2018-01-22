@@ -3,13 +3,11 @@
     <div class="col-2">
       <img src="https://images.shaklee.com/healthprint/Healthprint-Logo.png" class="img-fluid">
     </div>
-    <div class="col-8">
-      <h1>Your Personalized Health Builder</h1>
-    </div>
+    <div class="col-10" [innerHTML]="'questions.banner-text'|translate"></div>
   </div>
 
   <div class="question" *ngFor="let page of pages;">
-    <app-question-mixed-content [questions]="page.questions" *ngIf="page.component === 'question-mixed-content'" class="row"></app-question-mixed-content>
+    <app-question-mixed-content [questions]="page.questions" *ngIf="page.component === 'question-mixed-content'" class="row mixed-content"></app-question-mixed-content>
     <app-question-selections [questions]="page.questions" *ngIf="page.component === 'question-selections'" class="row justify-content-center"></app-question-selections>
     <app-question-age-weight [questions]="page.questions" *ngIf="page.component === 'question-age-weight'" class="row justify-content-center"></app-question-age-weight>
     <app-question-goals [questions]="page.questions" *ngIf="page.component === 'question-goals'" class="row justify-content-center"></app-question-goals>

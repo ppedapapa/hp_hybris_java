@@ -1,7 +1,7 @@
 <div class="question-content" *ngFor="let question of questions;" [ngClass]="{'col-4':questions.length === 3, 'col-5':questions.length === 2, 'col-6':questions.length === 1}">
   <div class="text-center">
     <img class="img-fluid question-img" src="{{question.image}}">
-    <p class="question-text"><span [innerHTML]="question.label"></span></p>
+    <p class="question-text"><span [innerHTML]="'questions.'+question.label|translate"></span></p>
   </div>
   <div class="options" *ngFor="let option of question.options">
     <button class="btn btn-block hq-btn" type="button" id="{{option.index}}" (click)="onSelect(question, option);" [ngClass]="{'hq-selected-item': answered[question.name] === option.index}">
