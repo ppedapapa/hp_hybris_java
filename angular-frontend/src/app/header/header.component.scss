@@ -1,8 +1,5 @@
 @import "../../assets/scss/variables";
 .hp {
-  .container {
-    max-width: 1200px;
-  }
   .header {
     .header-top {
       background: $shaklee-green1;
@@ -53,5 +50,11 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 992px) {
+  .hp .container {
+    max-width: 940px !important;
   }
 }

@@ -3,9 +3,7 @@
     <div class="col-2">
       <img src="https://images.shaklee.com/healthprint/Healthprint-Logo.png" class="img-fluid">
     </div>
-    <div class="col-8">
-      <h1>Your Personalized Health Builder</h1>
-    </div>
+    <div class="col-10 title" [innerHTML]="'questions.banner-text'|translate"></div>
   </div>
 
   <div class="question" *ngFor="let page of pages;">

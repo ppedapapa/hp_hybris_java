@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Rx';
 export class QuestionsService {
   questionUrl = '';
   quiz: Quiz[];
+  baseQuiz: Quiz[];
   questions: string;
   answered = this.hpconfigService.getAnsweredJsonObj();
   goals: string[] = [];
@@ -31,6 +32,36 @@ export class QuestionsService {
   setQuiz(quiz: Quiz[]) {
     console.log('set quiz', quiz);
     this.quiz = quiz;
+    this.baseQuiz = quiz;
+  }
+
+  setMaleQuiz() {
+    const tempQuiz = Object.assign({}, this.baseQuiz);
+    const result = tempQuiz['pages'].filter(function (page) {
+      if('restrict' in page) {
+          const restricted = page.restrict;
+          return restricted.indexOf('male') === -1;
+      } else {
+        return true;
+      }
+    });
+    tempQuiz['pages'] = result;
+    return tempQuiz;
+  }
+
+  setKidsQuiz() {
+      const tempQuiz = Object.assign({}, this.baseQuiz);
+      const result = tempQuiz['pages'].filter(function (page) {
+          if('restrict' in page) {
+              const restricted = page.restrict;
+              console.log('restricted', restricted);
+              return restricted.indexOf('kids') === -1;
+          } else {
+              return true;
+          }
+      });
+      tempQuiz['pages'] = result;
+      return tempQuiz;
   }
 
   getAnswered() {
@@ -51,6 +82,18 @@ export class QuestionsService {
   setSelected(question: Question, option: Option) {
     console.log(this.answered);
     this.answered[question.name] = option.index;
+    let index = option.index;
+
+    if(question.name === 'gender') {
+      if(index === 0) {
+        this.quiz = this.setMaleQuiz();
+      } else if(index === 1 && question.name === 'gender') {
+        this.quiz = this.baseQuiz;
+      }
+    }
+    this.hpconfigService.updatelength(this.quiz['pages'].length);
+    console.log('update quiz', this.quiz);
+    console.log('Base quiz', this.baseQuiz);
 
       // this.hpconfigService.setAutomove(1);
   }
