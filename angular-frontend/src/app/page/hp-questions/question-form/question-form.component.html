@@ -2,7 +2,7 @@
     <h4 class="text-center" [innerHTML]="'questions.thank-you'|translate"></h4>
     <p class="text-center" [innerHTML]="'questions.'+question.label|translate"></p>
     <div class="row">
-      <div class="col-12 options" *ngFor="let option of question.fields" [ngClass]="{'col-md-6 col-lg-6':option === 'first-name'||option === 'last-name'}">
+      <div class="col-12 options" *ngFor="let option of question.options" [ngClass]="{'col-md-6 col-lg-6':option === 'first-name'||option === 'last-name'}">
           <input *ngIf="option === 'first-name'" type="text" placeholder="{{ ('label.'+option) | translate}}" value="" class="form-control" (change)="inputChange(option, $event)"/>
           <input *ngIf="option === 'last-name'" type="text" placeholder="{{ ('label.'+option) | translate}}" value="" class="form-control" (change)="inputChange(option, $event)"/>
           <input *ngIf="option === 'email'" type="text" placeholder="{{ ('label.'+option) | translate}}" value="" class="form-control" (change)="inputChange(option, $event)"/>

@@ -476,12 +476,13 @@
         },
         {
             "component": "question-goals",
+            "restrict": ["kids"],
             "questions": [
                 {
                     "name": "health_goals",
                     "label": "health-goals",
                     "image": "//images.shaklee.com/healthprint/23-top3-goals-150x150.png",
-                    "goals": [ "OVERALL", "WEIGHT", "FITNESS", "PERFORMANCE", "AGING", "ENERGY", "HEART", "BRAIN", "JOINT", "IMMUNE", "STRESS", "DIGESTIVE", "BONE", "SLEEP" ]
+                    "options": [ "OVERALL", "WEIGHT", "FITNESS", "PERFORMANCE", "AGING", "ENERGY", "HEART", "BRAIN", "JOINT", "IMMUNE", "STRESS", "DIGESTIVE", "BONE", "SLEEP" ]
                 }
             ]
         },
@@ -498,6 +499,7 @@
         },
         {
             "component": "question-selections",
+            "restrict": ["male", "kids"],
             "questions": [
                 {
                     "name": "pregnant",
@@ -530,6 +532,7 @@
         },
         {
             "component": "question-selections",
+            "restrict": ["kids"],
             "questions": [
                 {
                     "name": "spending",
@@ -561,8 +564,7 @@
             "questions": [
                 {
                     "label": "email-results-to-you",
-                    "fields": ["first-name", "last-name", "email"],
-                    "captcha": true
+                    "options": ["first-name", "last-name", "email"]
                 }
             ]
         }

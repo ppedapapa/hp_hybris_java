@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+
 import { QuestionConfig } from '../models/index';
 
 @Injectable()
@@ -8,6 +10,14 @@ export class HpConfigService {
     size: 1,
     count: 1
   };
+
+  private pageLength = new Subject<number>();
+
+  length = this.pageLength.asObservable();
+
+  updatelength(length: number) {
+      this.pageLength.next(length);
+  }
 
   config: QuestionConfig = {
     'allowBack': true,
@@ -76,7 +86,6 @@ export class HpConfigService {
   setPagerIndex(index: number) {
     this.pager.index = index;
   }
-
 
   getConfig() {
     return this.config;

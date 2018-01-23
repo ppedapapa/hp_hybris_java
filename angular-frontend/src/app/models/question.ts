@@ -1,20 +1,15 @@
 import { Option } from './option';
 
 export class Question {
-    public id: number;
-    public image: string;
     public name: string;
     public label: string;
-    public questionTypeId: number;
+    public image: string;
     public options: Option[];
-    public answered: boolean;
 
-    constructor(id: number, image: string, name: string,  label: string, questionTypeId: number, options: Option[]) {
-        this.id = id;
-        this.image = image;
+    constructor(name: string,  label: string, image: string, options: Option[]) {
         this.name = name;
         this.label = label;
-        this.questionTypeId = questionTypeId;
+        this.image = image;
         this.options = options;
     }
 }

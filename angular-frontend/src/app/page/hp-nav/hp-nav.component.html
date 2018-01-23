@@ -8,7 +8,7 @@
     </div>
     <div class="col-xs-2 col-sm-6 col-md-6 col-lg-6">
       <ol class="hq-indicators">
-        <li *ngFor="let q of pages; let i = index;" [ngClass]="{'active': pager.index === i}">
+        <li *ngFor="let q of arr(pagelength).fill(1); let i = index;" [ngClass]="{'active': pager.index === i}">
           <span class="sr-only"></span>
         </li>
       </ol>
