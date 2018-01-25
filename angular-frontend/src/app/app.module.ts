@@ -16,10 +16,11 @@ import { QuestionsService } from './services/questions.service';
 import { HpConfigService } from './services/hp-config.service';
 import { DataService } from './services/data.service';
 import { HealthPrintResultsService } from './services/hp-results.service';
-import { HealthPrintResultsResolveService} from './services/hp-results-resolve.service';
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+
+import { ShortStringPipe } from './pipe/shortString';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './page/page.component';
@@ -39,6 +40,8 @@ import { QuestionAgeWeightComponent } from './page/hp-questions/question-age-wei
 import { QuestionGoalsComponent } from './page/hp-questions/question-goals/question-goals.component';
 import { QuestionDietaryRestrictionsComponent } from './page/hp-questions/question-dietary-restrictions/question-dietary-restrictions.component';
 import { HpAddCartComponent } from './page/hp-results/hp-add-cart/hp-add-cart.component';
+import { HpGoalsComponent } from './page/hp-results/hp-goals/hp-goals.component';
+import { HpBundleComponent } from './page/hp-results/hp-bundle/hp-bundle.component';
 
 // AoT requires an exported function for factories
 /* export function createTranslateLoader(http: HttpClient) {
@@ -49,7 +52,8 @@ export function translateLoader(http: HttpClient) {
 
     return new MultiTranslateHttpLoader(http, [
         {prefix: './assets/translation/app/', suffix: '.json'},
-        {prefix: './assets/translation/hp/', suffix: '.json'}
+        {prefix: './assets/translation/hp/', suffix: '.json'},
+        {prefix: './assets/translation/hp/content/', suffix: '.json'},
     ]);
 }
 
@@ -72,7 +76,10 @@ export function translateLoader(http: HttpClient) {
         HpHeaderComponent,
         HpHealthScoresComponent,
         HpHealthScoreComponent,
-        HpAddCartComponent
+        HpAddCartComponent,
+        HpGoalsComponent,
+        ShortStringPipe,
+        HpBundleComponent
     ],
     imports: [
         NgbModule.forRoot(),
@@ -96,7 +103,6 @@ export function translateLoader(http: HttpClient) {
         HpConfigService,
         DataService,
         HealthPrintResultsService,
-        HealthPrintResultsResolveService,
         CartService,
         AuthService,
         AuthGuard

@@ -1,0 +1,17 @@
+@import "../../../../assets/scss/variables";
+
+.bundle {
+  background: $background-grey;
+  margin: 40px 0;
+  .section-title {
+    color: $shaklee-question-text-color;
+    font-weight: 400;
+    font-size: 28px;
+    text-align: center;
+    margin: 20px;
+    padding: 0 15px 60px 15px;
+  }
+  .img-res img{
+    width: 15%;
+  }
+}
