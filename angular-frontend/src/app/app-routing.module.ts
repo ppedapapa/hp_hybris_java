@@ -43,7 +43,11 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(appRoutes)
     ],
-    providers: [QuizResolver, HealthPrintBundlesResolver, HealthPrintResultsResolver],
+    providers: [
+        QuizResolver,
+        HealthPrintBundlesResolver,
+        HealthPrintResultsResolver
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

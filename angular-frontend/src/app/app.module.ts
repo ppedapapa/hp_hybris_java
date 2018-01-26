@@ -21,6 +21,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 
 import { ShortStringPipe } from './pipe/shortString';
+import { FormatPricePipe } from './pipe/formatPrice';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './page/page.component';
@@ -78,8 +79,9 @@ export function translateLoader(http: HttpClient) {
         HpHealthScoreComponent,
         HpAddCartComponent,
         HpGoalsComponent,
+        HpBundleComponent,
         ShortStringPipe,
-        HpBundleComponent
+        FormatPricePipe
     ],
     imports: [
         NgbModule.forRoot(),
