@@ -69,7 +69,7 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 		List<UserDataResponse> response = null;
 		// make the SQL based on email OR downline_Id or user_Id
 		final String sql = (email != null) ? GET_TOP_20_HEALTHPRINTS.replace("??", "S.EMAIL")
-				: (downlineId != null) ? GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES.replace("??", "S.USER_ID") : GET_TOP_20_HEALTHPRINTS.replace("??", "S.USER_ID");
+				: GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES.replace("??", "S.CONTACT_ID");
 		String param = (email != null) ? email : (downlineId != null) ? downlineId : userId;
 
 		logger.debug(sql + "PARAM : " + param + " ,input sent are: userId:" + userId + " ,email:" + email

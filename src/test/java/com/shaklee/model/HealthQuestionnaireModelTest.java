@@ -22,9 +22,9 @@ public class HealthQuestionnaireModelTest {
 	@Test
 	public void testGetAllHealthPrints()
 	{
-		MultipleHealthProfilesResponse r = healthQuestionnaireModel.getAllHealthPrints("FA53210", null, null);
-		
-		Assert.assertEquals(r.status, 200);
+		MultipleHealthProfilesResponse r = healthQuestionnaireModel.getAllHealthPrints("FA53210-1", null, null);
+		System.out.println(r.toJSON());
+		Assert.assertEquals(r.status, 0);
 	}
 
 }
