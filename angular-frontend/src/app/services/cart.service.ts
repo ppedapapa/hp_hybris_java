@@ -25,9 +25,10 @@ export class CartService {
         healthprintCart['productsToAdd'] = skuWithQtyAddCartList;
         healthprintCart['addAllToCart'] = 'false';
         const hpCartCookie = JSON.stringify(healthprintCart);
+        console.log('hpCartCookie', hpCartCookie);
         const hpcartCookieeEncode = btoa(hpCartCookie);
         this.document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
-        this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
+        this.document.location.href = environment.hybrisServerName + '/cart';
     }
 
     addBundleToCart(skuList, bundle, recommendationTotal, freeProduct) {
