@@ -27,7 +27,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 
 @Component
-@PropertySource(value = "classpath:UserDataStorage.properties")
+@PropertySource(value = "classpath:props/UserDataStorage.properties")
 public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 
 	private static Logger logger = LoggerFactory
@@ -166,12 +166,19 @@ public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
 			this.answers_json = answers_json;
 		}
 
-		public String getUser_id() {
-			return user_id;
+		public String getAccount_id() {
+			return account_id;
 		}
 
-		public void setUser_id(String user_id) {
-			this.user_id = user_id;
+		public void setAccount_id(String account_id) {
+			this.account_id = account_id;
+		}
+		public String getContact_id() {
+			return contact_id;
+		}
+
+		public void setContact_id(String contact_id) {
+			this.contact_id = contact_id;
 		}
 
 		public String getEmail() {
