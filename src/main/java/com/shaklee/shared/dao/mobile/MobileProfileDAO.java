@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import com.shaklee.common.util.StringUtils;
 import com.shaklee.common.util.cache.CachingLoader;
 import com.shaklee.common.util.cache.Loader;
-import com.shaklee.itrack.common.util.PropertiesObject;
+import com.shaklee.common.util.PropertiesObject;
 import com.shaklee.shared.dao.JdbcTemplateDAO;
 import com.shaklee.shared.data.Country2;
 import com.shaklee.shared.data.Language;

@@ -16,7 +16,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.shaklee.itrack.common.util.ClasspathFileLoader;
+import com.shaklee.common.util.ClasspathFileLoader;
 import com.shaklee.shared.dao.json.ParsedQueryCache.ParsedQuery;
 import com.shaklee.shared.util.StatusResponse;
 import com.shaklee.shared.validation.InputValidationException;

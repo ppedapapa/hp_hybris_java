@@ -12,7 +12,7 @@ import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.shaklee.itrack.common.util.PropertiesObject;
+import com.shaklee.common.util.PropertiesObject;
 import com.shaklee.shared.dao.json.JsonSqlServiceModel;
 
 /**

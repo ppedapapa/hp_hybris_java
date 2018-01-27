@@ -6,17 +6,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.shaklee.itrack.DAO.HQReportDAO;
-import com.shaklee.itrack.DAO.HQReportDAO.HealthPrintReportDetails;
-import com.shaklee.itrack.DAO.HQReportDAO.HealthPrintSummaryDetails;
-import com.shaklee.itrack.DAO.SearchDistributorDAO;
-import com.shaklee.itrack.DAO.SearchDistributorDAO.UserData;
-import com.shaklee.itrack.DAO.UserDAO;
-import com.shaklee.itrack.DAO.UserDataStorageDAO;
-import com.shaklee.itrack.resources.HealthQuestionnaireResource.IgnoreUnknownFieldsQuestions;
-import com.shaklee.itrack.resources.PublicHealthQuestionnaireResource.FollowupDate;
-import com.shaklee.itrack.resources.PublicHealthQuestionnaireResource.FollowupDateResponse;
-import com.shaklee.itrack.resources.data.HQReportDetails.HQUsers;
+import com.shaklee.DAO.HQReportDAO;
+import com.shaklee.DAO.HQReportDAO.HealthPrintReportDetails;
+import com.shaklee.DAO.HQReportDAO.HealthPrintSummaryDetails;
+import com.shaklee.DAO.SearchDistributorDAO;
+import com.shaklee.DAO.SearchDistributorDAO.UserData;
+import com.shaklee.DAO.UserDAO;
+import com.shaklee.DAO.UserDataStorageDAO;
+import com.shaklee.resources.HealthQuestionnaireResource.IgnoreUnknownFieldsQuestions;
+import com.shaklee.resources.PublicHealthQuestionnaireResource.FollowupDate;
+import com.shaklee.resources.PublicHealthQuestionnaireResource.FollowupDateResponse;
+import com.shaklee.resources.data.HQReportDetails.HQUsers;
 import com.shaklee.shared.util.StatusResponse;
 
 /**

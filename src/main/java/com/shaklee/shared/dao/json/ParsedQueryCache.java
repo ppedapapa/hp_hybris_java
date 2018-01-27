@@ -1,6 +1,6 @@
 package com.shaklee.shared.dao.json;
 
-import static com.shaklee.itrack.common.util.ClasspathFileLoader.removeComments;
+import static com.shaklee.common.util.ClasspathFileLoader.removeComments;
 
 import java.util.ArrayList;
 import java.util.List;

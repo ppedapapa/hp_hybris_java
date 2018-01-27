@@ -9,15 +9,22 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
-//import com.shaklee.DAO.EventStreamDAO;
-//import com.shaklee.DAO.SearchDistributorDAO;
-//import com.shaklee.DAO.SearchDistributorDAO.UserData;
+import com.shaklee.DAO.EventStreamDAO;
+import com.shaklee.DAO.SearchDistributorDAO;
+import com.shaklee.DAO.SearchDistributorDAO.UserData;
+import com.shaklee.DAO.UserDataStorageDAO;
+import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
+import com.shaklee.DAO.UserDataStorageDAO.UserDataRequest;
 import com.shaklee.common.util.LazyLoadingSecureRandom;
 import com.shaklee.common.util.UTCDateUtils;
-//import com.shaklee.resources.EventStreamResource;
-//import com.shaklee.resources.mulesoft.MuleSoftLeadResource;
+import com.shaklee.resources.EventStreamResource;
+import com.shaklee.resources.HealthQuestionnaireResource.AssociateRequest;
+import com.shaklee.resources.HealthQuestionnaireResource.IgnoreUnknownFieldsQuestions;
+import com.shaklee.resources.HealthQuestionnaireResource.StorageRequest;
+import com.shaklee.resources.mulesoft.MuleSoftLeadResource;
 import com.shaklee.shared.util.StatusResponse;
 import com.shaklee.shared.validation.InputValidationException;
 import com.shaklee.shared.validation.Validators;
@@ -65,6 +72,16 @@ public class HQUserDataStorageModel {
 
 			// healthProfileId will change only when we get
 			// DuplicateKeyException
+			
+			try {
+				UserData userData = searchDistributorDAO.findByEmail(request.email);
+
+				if (userData != null && userData.shakleeID != null) {
+					return insertByUserId(request, userData.shakleeID);
+				}
+			} catch (EmptyResultDataAccessException e) {
+				// normal case, not a shaklee user
+			}
 
 			long hqId;
 			String healthProfileId = getNewId();

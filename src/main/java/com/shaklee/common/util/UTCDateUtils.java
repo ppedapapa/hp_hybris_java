@@ -1,4 +1,4 @@
-package com.shaklee.itrack.common.util;
+package com.shaklee.common.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

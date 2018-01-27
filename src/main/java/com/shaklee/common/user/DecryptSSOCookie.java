@@ -1,13 +1,13 @@
-package com.shaklee.itrack.common.user;
+package com.shaklee.common.user;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import com.shaklee.itrack.common.util.Blowfish;
-import com.shaklee.itrack.common.util.HexBytesConversion;
-import com.shaklee.itrack.common.util.Md5;
+import com.shaklee.common.util.Blowfish;
+import com.shaklee.common.util.HexBytesConversion;
+import com.shaklee.common.util.Md5;
 
 /**
  * Decrypts the user name from cookie values, and verifies the signature cookie.

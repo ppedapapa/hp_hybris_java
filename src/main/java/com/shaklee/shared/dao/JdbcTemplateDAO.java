@@ -2,7 +2,7 @@ package com.shaklee.shared.dao;
 
 import javax.sql.DataSource;
 
-import com.shaklee.itrack.common.util.PropertiesObject;
+import com.shaklee.common.util.PropertiesObject;
 
 /**
  * Base class for DAOs with some utilities.

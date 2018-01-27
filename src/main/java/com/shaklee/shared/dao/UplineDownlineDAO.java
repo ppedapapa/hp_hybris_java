@@ -10,7 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.shaklee.itrack.common.util.PropertiesObject;
+import com.shaklee.common.util.PropertiesObject;
 
 /**
  * UplineDownlineDAO

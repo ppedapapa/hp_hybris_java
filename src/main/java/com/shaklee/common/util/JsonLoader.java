@@ -8,7 +8,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectReader;
 import org.springframework.stereotype.Component;
 
-import com.shaklee.itrack.common.util.UTCDateUtils;
+import com.shaklee.common.util.UTCDateUtils;
 
 /**
  * Loads object configuration from json. It is assumed that the objects come

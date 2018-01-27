@@ -1,4 +1,4 @@
-package com.shaklee.itrack.common.util;
+package com.shaklee.common.util;
 
 /**
  * Converts hex strings to byte arrays and back.

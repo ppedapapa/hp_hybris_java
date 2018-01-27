@@ -6,7 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.shaklee.common.util.StringUtils;
-import com.shaklee.itrack.common.util.PropertiesObject;
+import com.shaklee.common.util.PropertiesObject;
 
 /**
  * Configuration of mobile events.

@@ -1,4 +1,4 @@
-package com.shaklee.itrack.common.util;
+package com.shaklee.common.util;
 
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;

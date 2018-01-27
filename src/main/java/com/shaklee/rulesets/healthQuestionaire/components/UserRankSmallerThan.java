@@ -4,7 +4,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.shaklee.itrack.DAO.UserDAO;
+import com.shaklee.DAO.UserDAO;
 import com.shaklee.promo.Condition;
 import com.shaklee.promo.PromoRequest;
 import com.shaklee.promo.basic.AbstractComponent;

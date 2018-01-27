@@ -1,4 +1,4 @@
-package com.shaklee.itrack.common.user;
+package com.shaklee.common.user;
 
 /**
  * Package private exception for invalid cookies, such as invalid user names and
