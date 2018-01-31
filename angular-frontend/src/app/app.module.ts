@@ -8,16 +8,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CookieService } from 'ngx-cookie-service';
 
+import { MultiTranslateHttpLoader } from './MultiTranslateHttpLoader';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppService } from './app.service';
 import { QuestionsService } from './services/questions.service';
 import { HpConfigService } from './services/hp-config.service';
 import { DataService } from './services/data.service';
 import { HealthPrintResultsService } from './services/hp-results.service';
-import { HealthPrintResultsResolveService} from './services/hp-results-resolve.service';
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+
+import { ShortStringPipe } from './pipe/shortString';
+import { FormatPricePipe } from './pipe/formatPrice';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './page/page.component';
@@ -37,10 +41,21 @@ import { QuestionAgeWeightComponent } from './page/hp-questions/question-age-wei
 import { QuestionGoalsComponent } from './page/hp-questions/question-goals/question-goals.component';
 import { QuestionDietaryRestrictionsComponent } from './page/hp-questions/question-dietary-restrictions/question-dietary-restrictions.component';
 import { HpAddCartComponent } from './page/hp-results/hp-add-cart/hp-add-cart.component';
+import { HpGoalsComponent } from './page/hp-results/hp-goals/hp-goals.component';
+import { HpBundleComponent } from './page/hp-results/hp-bundle/hp-bundle.component';
 
 // AoT requires an exported function for factories
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/translation/hp/', '.json');
+/* export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/translation/', '.json');
+} */
+
+export function translateLoader(http: HttpClient) {
+
+    return new MultiTranslateHttpLoader(http, [
+        {prefix: './assets/translation/app/', suffix: '.json'},
+        {prefix: './assets/translation/hp/', suffix: '.json'},
+        {prefix: './assets/translation/hp/content/', suffix: '.json'},
+    ]);
 }
 
 @NgModule({
@@ -62,14 +77,18 @@ export function createTranslateLoader(http: HttpClient) {
         HpHeaderComponent,
         HpHealthScoresComponent,
         HpHealthScoreComponent,
-        HpAddCartComponent
+        HpAddCartComponent,
+        HpGoalsComponent,
+        HpBundleComponent,
+        ShortStringPipe,
+        FormatPricePipe
     ],
     imports: [
         NgbModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
+                useFactory: (translateLoader),
                 deps: [HttpClient]
             }
         }),
@@ -86,7 +105,6 @@ export function createTranslateLoader(http: HttpClient) {
         HpConfigService,
         DataService,
         HealthPrintResultsService,
-        HealthPrintResultsResolveService,
         CartService,
         AuthService,
         AuthGuard

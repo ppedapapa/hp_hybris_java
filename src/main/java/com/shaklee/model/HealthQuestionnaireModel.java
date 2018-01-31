@@ -50,7 +50,7 @@ public class HealthQuestionnaireModel {
 	}
 
 	public static String normalizeEmail(String s) {
-		s = StringUtils.clean(s);
+		s = StringUtils.trim(s);
 		if (s != null)
 			return s.toLowerCase();
 

@@ -6,7 +6,7 @@ export class AppService {
 
     constructor(private http: HttpClient) {}
 
-    getGreetings() {
+    /* getGreetings() {
 
     const headers = new HttpHeaders();
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
@@ -22,7 +22,7 @@ export class AppService {
              return data;
          }
      );
-    }
+    } */
   
   isUserLogin() {
       const headers = new HttpHeaders();

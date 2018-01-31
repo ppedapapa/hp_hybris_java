@@ -522,29 +522,28 @@
       {
          "skus":[
             {
-               "sku":"21293",
-               "category":"personalized_nutrition",
-               "goal":[
-                  "heart"
-               ]
+               "sku":"89451",
+               "category":"performance",
+               "sub_sku":["21307","21316","21314","21312","76671"]
             },
             {
-               "sku":"21261",
-               "category":"fitness",
-               "goal":[
-                  "fitness"
-               ]
+               "sku":"20608",
+               "category":"pms"
             },
             {
-               "sku":"20962",
-               "category":"immunity",
-               "goal":[
-                  "immune"
-               ]
+               "sku":"21501",
+               "category":"aging",
+               "goal":["aging"]
             },
             {
-               "sku":"21217",
-               "category":"bone_health"
+               "sku":"20732",
+               "category":"energy"
+            },
+            {
+               "sku":"59710",
+               "category":"membership",
+               "membership":true,
+               "sn_price":0
             }
          ],
          "bundle":"TIER_3"

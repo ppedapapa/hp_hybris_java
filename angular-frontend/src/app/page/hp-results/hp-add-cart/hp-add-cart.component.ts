@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { Buffer } from 'buffer';
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from '../../../services/cart.service';
@@ -12,16 +12,22 @@ import { environment } from '../../../../environments/environment';
 })
 export class HpAddCartComponent implements OnInit {
 
+  @Input() bundle;
+  @Input() sku;
   constructor( private cookieService: CookieService, private cartService: CartService ) { }
 
   ngOnInit() {
   }
 
-  addToCart(sku, event, bundle) {
-    this.cartService.addToCart(['20282', '21261']);
+  addToCart() {
+    let sku = [];
+    sku.push(this.sku.sku);
+    this.cartService.addToCart(this.sku);
+    console.log(sku);
+    // this.cartService.addToCart(['20282', '21261']);
   }
-  addBundleToCart() {
-      this.cartService.addBundleToCart(['20282', '21261'], 'COMPREHENSIVE', '80.15', '52355');
-  }
+  // addBundleToCart() {
+  //     this.cartService.addBundleToCart(['20282', '21261'], 'COMPREHENSIVE', '80.15', '52355');
+  // }
 
 }

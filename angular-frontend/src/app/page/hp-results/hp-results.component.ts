@@ -12,6 +12,7 @@ export class HpResultsComponent implements OnInit {
 
     private productInfo: any;
     private recommendationInfo: any;
+    private resultsBundle: any;
     constructor(private route: ActivatedRoute, private healthPrintResultsService: HealthPrintResultsService) { }
 
   ngOnInit() {
@@ -20,7 +21,7 @@ export class HpResultsComponent implements OnInit {
           this.healthPrintResultsService.setHealthPrintResultInfo(data['healthPrintResults'][0]);
       });
 
-      const skus = '22067,89384';
+      /* const skus = '22067,89384';
       this.healthPrintResultsService.getProductContent(skus).subscribe(responseData => {
           this.productInfo = responseData['products'];
          console.log(this.productInfo);
@@ -29,6 +30,8 @@ export class HpResultsComponent implements OnInit {
       this.healthPrintResultsService.getRecommendation().subscribe(responseData => {
          this.recommendationInfo = {data: responseData['data'], bundles: responseData['bundles']};
          console.log("asdfs", this.recommendationInfo);
-      });
+      }); */
+
+      this.resultsBundle = this.route.snapshot.data['healthPrintBundles']['bundles'];
   }
 }

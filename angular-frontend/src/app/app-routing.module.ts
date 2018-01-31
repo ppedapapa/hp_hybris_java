@@ -6,7 +6,8 @@ import { HpResultsComponent } from './page/hp-results/hp-results.component';
 
 import { QuizResolver } from './services/quiz.resolver';
 import { AuthGuard } from './services/auth-guard.service';
-import { HealthPrintResultsResolveService} from './services/hp-results-resolve.service';
+import { HealthPrintResultsResolver } from './services/hp-results-resolver';
+import { HealthPrintBundlesResolver } from "./services/hp-bundles-resolver";
 
 const appRoutes: Routes = [
     {
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
         path: 'healthprint-results',
         component: HpResultsComponent,
         resolve: {
-            healthPrintResults: HealthPrintResultsResolveService
+            healthPrintResults: HealthPrintResultsResolver,
+            healthPrintBundles: HealthPrintBundlesResolver
         }
     } ,
     {
@@ -32,7 +34,7 @@ const appRoutes: Routes = [
         path: 'healthprint-results/:hpID',
         component: HpResultsComponent,
         resolve: {
-            healthPrintResults: HealthPrintResultsResolveService
+            healthPrintResults: HealthPrintResultsResolver
         }
     }
 ];
@@ -41,7 +43,11 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(appRoutes)
     ],
-    providers: [QuizResolver],
+    providers: [
+        QuizResolver,
+        HealthPrintBundlesResolver,
+        HealthPrintResultsResolver
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

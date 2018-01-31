@@ -1,54 +1,14 @@
-@import "../../../../assets/scss/variables";
-@import "../../../../assets/scss/mixins";
-
-.question-content {
-  border: none;
-  border-right: 1px solid $grey-color1;
-  margin: 40px 0;
-
-  &:last-child {
-    border: none;
-  }
-
-  .question-img {
-    width: 120px;
-    height: auto;
-  }
+.mixed-content-question {
   .question-text {
-    text-align: center;
-    height:3.5em;
-    font-weight: 400;
-    font-size: 20px;
-    color: $shaklee-question-text-color;
-    margin: 20px 10px 15px;
-    font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+    height: 1.5em !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
   }
-
-  .hq-gender {
+  button {
+    font-weight: 900;
+  }
+  .fa {
     font-size: 24px;
-    height: 24px;
-    line-height: 24px;
-    vertical-align: middle;
-    margin-right: 15px;
-  }
-
-  button.hq-btn {
-    color: $grey-color2;
-    border: 1px solid $dark-grey;
-    border-radius: 2px;
-    box-shadow: none;
-    background: $white-color;
-    font-size: 14px;
-    line-height: 1.35em;
-    margin: 15px 0;
-    padding: 10px 18px;
-    text-transform: none;
-    white-space: normal;
-    min-height: 4.25em;
-  }
-
-  button.hq-btn:hover, button.hq-selected-item {
-    background-color: $shaklee-green1;
-    color: $white-color;
+    padding-right: 20px;
   }
 }

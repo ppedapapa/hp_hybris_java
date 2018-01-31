@@ -193,7 +193,8 @@ public class HealthQuestionaireResource {
 		}
 
 		public static class BaseStorageRequest extends CommonStorageRequest {
-			public String user_id;
+			public String account_id;
+			public String contact_id;
 		}
 		
 		public static class CommonStorageRequest {

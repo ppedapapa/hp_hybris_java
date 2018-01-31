@@ -8,17 +8,17 @@
             "questions": [
                 {
                     "name": "gender",
-                    "label": "What is your gender?",
-                    "image": "//images.shaklee.com/healthprint//02-gender-150x150.png",
+                    "label": "question2",
+                    "image": "//images.shaklee.com/healthprint/02-gender-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Male",
+                            "label": "male",
                             "class": "fa-male"
                         },
                         {
                             "index": 1,
-                            "label": "Female",
+                            "label": "female",
                             "class": "fa-female"
                         }
                     ]
@@ -30,70 +30,70 @@
             "questions": [
                 {
                     "name": "fruits",
-                    "label": "How many times per week do you eat fruit?",
+                    "label": "fruits",
                     "image": "//images.shaklee.com/healthprint/12-fruit-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 },
                 {
                     "name": "vegetables",
-                    "label": "How many times per week do you eat vegetables?",
+                    "label": "vegetables",
                     "image": "//images.shaklee.com/healthprint/13-vegies-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 },
                 {
                     "name": "grains",
-                    "label": "How many times per week do you eat whole grains?",
+                    "label": "grains",
                     "image": "//images.shaklee.com/healthprint/14-grains-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 }
@@ -104,70 +104,70 @@
             "questions": [
                 {
                     "name": "dairy",
-                    "label": "How many times per week do you eat dairy?",
+                    "label": "dairy",
                     "image": "//images.shaklee.com/healthprint/15-dairy-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "times0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "times1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "times2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "times3"
                         }
                     ]
                 },
                 {
                     "name": "healthy_fats",
-                    "label": "How many times per week do you eat omega-3-rich fish, such as salmon?",
+                    "label": "healthy-fats",
                     "image": "//images.shaklee.com/healthprint/16-fish-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "healthy-fats0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "healthy-fats1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "healthy-fats2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "healthy-fats3"
                         }
                     ]
                 },
                 {
                     "name": "water",
-                    "label": "How many 8-ounce glasses of water do you drink each day?",
+                    "label": "water",
                     "image": "//images.shaklee.com/healthprint/17-water-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 7 times"
+                            "label": "water0"
                         },
                         {
                             "index": 1,
-                            "label": "7-13 times"
+                            "label": "water1"
                         },
                         {
                             "index": 2,
-                            "label": "14-20 times"
+                            "label": "water2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 20 times"
+                            "label": "water3"
                         }
                     ]
                 }
@@ -178,47 +178,47 @@
             "questions": [
                 {
                     "name": "sugar_drinks",
-                    "label": "How many times per week do you consume sugary drinks (ex: soda, juices, etc.)?",
+                    "label": "sugar-drinks",
                     "image": "//images.shaklee.com/healthprint/18-sugary-drinks-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Rarely"
+                            "label": "sugar-drinks0"
                         },
                         {
                             "index": 1,
-                            "label": "1-2 times"
+                            "label": "sugar-drinks1"
                         },
                         {
                             "index": 2,
-                            "label": "3-6 times"
+                            "label": "sugar-drinks2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 6 times"
+                            "label": "sugar-drinks3"
                         }
                     ]
                 },
                 {
                     "name": "junk_food",
-                    "label": "How many times per week do you eat unhealthy snacks or fast food?",
+                    "label": "junk-food",
                     "image": "//images.shaklee.com/healthprint/19-fast-food-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 2 times"
+                            "label": "junk-food0"
                         },
                         {
                             "index": 1,
-                            "label": "2-6 times"
+                            "label": "junk-food1"
                         },
                         {
                             "index": 2,
-                            "label": "7-13 times"
+                            "label": "junk-food2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 13 times"
+                            "label": "junk-food3"
                         }
                     ]
                 }
@@ -229,51 +229,51 @@
             "questions": [
                 {
                     "name": "breakfast",
-                    "label": "What do you typically eat for breakfast?",
+                    "label": "breakfast",
                     "image": "//images.shaklee.com/healthprint/20-breakfast-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "I rarely eat breakfast"
+                            "label": "breakfast0"
                         },
                         {
                             "index": 1,
-                            "label": "I tend to eat things like toast, bagels, muffins, cereal, and oatmeal"
+                            "label": "breakfast1"
                         },
                         {
                             "index": 2,
-                            "label": "I eat a classic breakfast (bacon, eggs, hash browns, etc.)"
+                            "label": "breakfast2"
                         },
                         {
                             "index": 3,
-                            "label": "I opt for lighter options like yogurt and fruit"
+                            "label": "breakfast3"
                         },
                         {
                             "index": 4,
-                            "label": "I get a mix of protein, fruit, and/or veggies from shakes and smoothies, or look for other sources of lean protein like eggs or egg-whites"
+                            "label": "breakfast4"
                         }
                     ]
                 },
                 {
                     "name": "organic",
-                    "label": "Do you purchase organic foods?",
+                    "label": "organic",
                     "image": "//images.shaklee.com/healthprint/21-organic2-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Always, whenever available"
+                            "label": "organic0"
                         },
                         {
                             "index": 1,
-                            "label": "I do, for certain types of food"
+                            "label": "organic1"
                         },
                         {
                             "index": 2,
-                            "label": "I’d like to, but it’s too expensive"
+                            "label": "organic2"
                         },
                         {
                             "index": 3,
-                            "label": "No, I don't think it's worth it"
+                            "label": "organic3"
                         }
                     ]
                 }
@@ -284,16 +284,16 @@
             "questions": [
                 {
                     "name": "toxins",
-                    "label": "Do any of your cleaning products contain bleach or ammonia?",
+                    "label": "toxins",
                     "image": "//images.shaklee.com/healthprint/11-cleaning-products-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "No"
+                            "label": "no"
                         },
                         {
                             "index": 1,
-                            "label": "Yes"
+                            "label": "yes"
                         }
                     ]
                 }
@@ -304,70 +304,70 @@
             "questions": [
                 {
                     "name": "energy",
-                    "label": "How is your energy level on a normal day?",
+                    "label": "energy",
                     "image": "//images.shaklee.com/healthprint/05-energy-level-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "I can take the day by storm"
+                            "label": "energy0"
                         },
                         {
                             "index": 1,
-                            "label": "I’ve got just enough to make it through the day"
+                            "label": "energy1"
                         },
                         {
                             "index": 2,
-                            "label": "I occasionally need a little pick-me-up"
+                            "label": "energy2"
                         },
                         {
                             "index": 3,
-                            "label": "I feel tired all the time"
+                            "label": "energy3"
                         }
                     ]
                 },
                 {
                     "name": "stress",
-                    "label": "How often do you get stressed?",
+                    "label": "stress",
                     "image": "//images.shaklee.com/healthprint/06-stress-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Rarely: I don’t let things bother me"
+                            "label": "stress0"
                         },
                         {
                             "index": 1,
-                            "label": "Occasionally: I have my moments but it's manageable"
+                            "label": "stress1"
                         },
                         {
                             "index": 2,
-                            "label": "Frequently: I’ve got a lot on my plate"
+                            "label": "stress2"
                         },
                         {
                             "index": 3,
-                            "label": "Always: I’m a total stress-mess"
+                            "label": "stress3"
                         }
                     ]
                 },
                 {
                     "name": "sleep",
-                    "label": "How do you sleep?",
+                    "label": "sleep",
                     "image": "//images.shaklee.com/healthprint/17-water-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Great: 7–8 hours of uninterrupted bliss"
+                            "label": "sleep0"
                         },
                         {
                             "index": 1,
-                            "label": "Fine: I just don’t get enough"
+                            "label": "sleep1"
                         },
                         {
                             "index": 2,
-                            "label": "I have trouble falling asleep"
+                            "label": "sleep2"
                         },
                         {
                             "index": 3,
-                            "label": "Not great: I wake up several times throughout the night"
+                            "label": "sleep3"
                         }
                     ]
                 }
@@ -378,70 +378,70 @@
             "questions": [
                 {
                     "name": "memory",
-                    "label": "How is your memory and concentration?",
+                    "label": "memory",
                     "image": "//images.shaklee.com/healthprint/08-memory-concentration-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Great: I’m sharp as a tack"
+                            "label": "memory0"
                         },
                         {
                             "index": 1,
-                            "label": "No problems now, but I worry about it getting worse"
+                            "label": "memory1"
                         },
                         {
                             "index": 2,
-                            "label": "OK, but I occasionally lose my train of thought"
+                            "label": "memory2"
                         },
                         {
                             "index": 3,
-                            "label": "It seems to be progressively deteriorating"
+                            "label": "memory3"
                         }
                     ]
                 },
                 {
                     "name": "exercise_frequency",
-                    "label": "How often do you exercise each week?",
+                    "label": "exercise-frequency",
                     "image": "//images.shaklee.com/healthprint/09-exercize-week-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than 1 hour"
+                            "label": "exercise-frequency0"
                         },
                         {
                             "index": 1,
-                            "label":"1–2 hours"
+                            "label":"exercise-frequency1"
                         },
                         {
                             "index": 2,
-                            "label": "2–4 hours"
+                            "label": "exercise-frequency2"
                         },
                         {
                             "index": 3,
-                            "label": "More than 4 hours"
+                            "label": "exercise-frequency3"
                         }
                     ]
                 },
                 {
                     "name": "exercise_intensity",
-                    "label": "How would you describe your weekly exercise?",
+                    "label": "exercise-intensity",
                     "image": "//images.shaklee.com/healthprint/10-exercize-describe-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Light (walking, some stretching, etc.)"
+                            "label": "exercise-intensity0"
                         },
                         {
                             "index": 1,
-                            "label": "Mostly cardio (jogging, elliptical machine, etc.)"
+                            "label": "exercise-intensity1"
                         },
                         {
                             "index": 2,
-                            "label": "Moderate balance of cardio and weight training"
+                            "label": "exercise-intensity2"
                         },
                         {
                             "index": 3,
-                            "label": "Intense (interval training, weight lifting, training for marathons, etc.)"
+                            "label": "exercise-intensity3"
                         }
                     ]
                 }
@@ -452,7 +452,7 @@
             "questions": [
                 {
                     "name": "age",
-                    "label": "What is your age?",
+                    "label": "question1",
                     "image": "//images.shaklee.com/healthprint/01-age-150x150.png",
                     "options": [
                         {
@@ -461,7 +461,7 @@
                     ]
                 },
                 {
-                    "label": "What is your weight and height?",
+                    "label": "question3",
                     "image": "//images.shaklee.com/healthprint/03-weight-height-150x150.png",
                     "options": [
                         {
@@ -476,12 +476,13 @@
         },
         {
             "component": "question-goals",
+            "restrict": ["kids"],
             "questions": [
                 {
                     "name": "health_goals",
-                    "label": "Please identify your top 3 health goals.",
+                    "label": "health-goals",
                     "image": "//images.shaklee.com/healthprint/23-top3-goals-150x150.png",
-                    "goals": [ "OVERALL", "WEIGHT", "FITNESS", "PERFORMANCE", "AGING", "ENERGY", "HEART", "BRAIN", "JOINT", "IMMUNE", "STRESS", "DIGESTIVE", "BONE", "SLEEP" ]
+                    "options": [ "OVERALL", "WEIGHT", "FITNESS", "PERFORMANCE", "AGING", "ENERGY", "HEART", "BRAIN", "JOINT", "IMMUNE", "STRESS", "DIGESTIVE", "BONE", "SLEEP" ]
                 }
             ]
         },
@@ -490,7 +491,7 @@
             "questions": [
                 {
                     "name": "dietary_restrictions",
-                    "label": "Do you have any <b>dietary restrictions</b>?",
+                    "label": "dietary-restrictions",
                     "image": "//images.shaklee.com/healthprint/22-dietary-restrictions-150x150.png",
                     "options": ["GLUTEN","SOY","NUTS","DAIRY","VEGETERIAN","KOSHER","NONE"]
                 }
@@ -498,31 +499,32 @@
         },
         {
             "component": "question-selections",
+            "restrict": ["male", "kids"],
             "questions": [
                 {
                     "name": "pregnant",
-                    "label": "Please select which of the following apply to you",
+                    "label": "pregnant",
                     "image": "//images.shaklee.com/healthprint/04-select-any-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "I am trying to conceive"
+                            "label": "pregnant-trying"
                         },
                         {
                             "index": 1,
-                            "label": "I am pregnant or nursing"
+                            "label": "pregnant-pregnant"
                         },
                         {
                             "index": 2,
-                            "label": "I experience PMS"
+                            "label": "pregnant-pms"
                         },
                         {
                             "index": 3,
-                            "label": "I'm having perimenopause or menopause challenges"
+                            "label": "pregnant-menopause"
                         },
                         {
                             "index": 4,
-                            "label": "None"
+                            "label": "pregnant-no"
                         }
                     ]
                 }
@@ -530,27 +532,28 @@
         },
         {
             "component": "question-selections",
+            "restrict": ["kids"],
             "questions": [
                 {
                     "name": "spending",
-                    "label": "How much would you spend each day to achieve your optimum health?",
+                    "label": "spending",
                     "image": "//images.shaklee.com/healthprint/24-spend-150x150.png",
                     "options": [
                         {
                             "index": 0,
-                            "label": "Less than $3 per day"
+                            "label": "spending0"
                         },
                         {
                             "index": 1,
-                            "label": "$3 - $5 per day"
+                            "label": "spending1"
                         },
                         {
                             "index": 2,
-                            "label": "$5 - $8 per day"
+                            "label": "spending2"
                         },
                         {
                             "index": 3,
-                            "label": "More than $8"
+                            "label": "spending3"
                         }
                     ]
                 }
@@ -560,9 +563,8 @@
             "component": "question-form",
             "questions": [
                 {
-                    "label": "Please enter your name and email to receive your personalized results.",
-                    "fields": ["first-name", "last-name", "email"],
-                    "captcha": true
+                    "label": "email-results-to-you",
+                    "options": ["first-name", "last-name", "email"]
                 }
             ]
         }
