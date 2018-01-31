@@ -21,8 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
 import com.shaklee.resources.HealthQuestionaireResource.BaseStorageRequest;
+import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.util.BaseJDBCTemplateDAO;
-import com.shaklee.util.Questions;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 
