@@ -12,7 +12,6 @@ import com.shaklee.healthPrint.data.SKU;
 import com.shaklee.healthPrint.data.SKUList;
 import com.shaklee.promo.Condition;
 import com.shaklee.promo.basic.AbstractComponent;
-import com.shaklee.rulesets.healthQuestionaire.ProductPriceDAO;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.rulesets.healthQuestionaire.components.AddMembershipSku.JoinSKU;
 
@@ -29,16 +28,16 @@ public class PacksContainsJoinKit extends AbstractComponent<Questions>
 
 	public boolean contains = true;
 
-	@Autowired
-	ProductPriceDAO dao;
+	//@Autowired
+	//ProductPriceDAO dao;
 
 	@Override
 	public boolean evaluate(HPRequest<Questions, Bundle, SKU> q) {
 		if (q.bundles == null)
 			return false;
 
-		Collection<String> joinKits = dao.getJoinKits();
-
+		//Collection<String> joinKits = dao.getJoinKits();
+		Collection<String> joinKits = null;
 		for (SKUList<Bundle, SKU> b : q.bundles) {
 			if (bundle.contains(b.getBundle())) {
 				if (evalBundle(joinKits, b))

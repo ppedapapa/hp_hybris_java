@@ -14,7 +14,6 @@ import com.shaklee.healthPrint.data.SKUList;
 import com.shaklee.promo.Condition;
 import com.shaklee.promo.basic.AbstractComponent;
 import com.shaklee.rulesets.healthQuestionaire.Product;
-import com.shaklee.rulesets.healthQuestionaire.ProductPriceDAO;
 import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.rulesets.healthQuestionaire.components.AddMembershipSku.JoinSKU;
@@ -34,8 +33,8 @@ public class PackTotalGreaterThan extends AbstractComponent<Questions>
 	public float total;
 	public boolean excludeJoinSKU = true;
 
-	@Autowired
-	ProductPriceDAO dao;
+	//@Autowired
+	//ProductPriceDAO dao;
 
 	@Override
 	public boolean evaluate(HPRequest<Questions, Bundle, SKU> q) {
@@ -62,7 +61,8 @@ public class PackTotalGreaterThan extends AbstractComponent<Questions>
 			if (excludeJoinSKU ^ (sku instanceof JoinSKU))
 				skus.add(new ProductSkuKey(country, sku.sku));
 		}
-		final Map<ProductSkuKey, Product> products = dao.getProducts(skus);
+		//final Map<ProductSkuKey, Product> products = dao.getProducts(skus);
+		final Map<ProductSkuKey, Product> products = null;
 
 		float sum = 0f;
 		for (Product product : products.values()) {

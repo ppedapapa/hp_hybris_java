@@ -1,6 +1,7 @@
 package com.shaklee.common.util.cache;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.shaklee.common.util.CollectionFunctions.Function;
 
@@ -16,7 +17,7 @@ import com.shaklee.common.util.CollectionFunctions.Function;
 public class CachingLoader<K, V> implements Loader<K, V> {
 
 	// can be replaced
-	private static final Logger logger = Logger.getLogger(CachingLoader.class);
+	private static final Logger logger = LoggerFactory.getLogger(CachingLoader.class);
 
 	private final boolean synchronoizeOrigin;
 

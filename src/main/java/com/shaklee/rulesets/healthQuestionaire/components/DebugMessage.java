@@ -2,7 +2,8 @@ package com.shaklee.rulesets.healthQuestionaire.components;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.shaklee.promo.Action;
@@ -14,7 +15,7 @@ import com.shaklee.rulesets.healthQuestionaire.Questions;
 @Component
 public class DebugMessage extends AbstractComponent<PromoRequest<Questions>>implements Action<PromoRequest<Questions>> {
 
-	private static final Logger logger = Logger.getLogger(DebugMessage.class);
+	private static final Logger logger = LoggerFactory.getLogger(DebugMessage.class);
 	private static final boolean isDebugEnabled = logger.isDebugEnabled();
 
 	@NotNull

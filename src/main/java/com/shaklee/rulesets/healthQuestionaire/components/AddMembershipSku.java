@@ -16,7 +16,6 @@ import com.shaklee.promo.PromoRequest;
 import com.shaklee.promo.basic.AbstractComponent;
 import com.shaklee.promo.basic.PromoActionUtils;
 import com.shaklee.rulesets.healthQuestionaire.Product;
-import com.shaklee.rulesets.healthQuestionaire.ProductPriceDAO;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.shared.data.Language;
 
@@ -32,8 +31,8 @@ public class AddMembershipSku extends AbstractComponent<PromoRequest<Questions>>
 
 	public String category;
 
-	@Autowired
-	ProductPriceDAO productDAO;
+	//@Autowired
+	//ProductPriceDAO productDAO;
 
 	@Override
 	public void exec(PromoRequest<Questions> r) {
@@ -41,8 +40,8 @@ public class AddMembershipSku extends AbstractComponent<PromoRequest<Questions>>
 		if (q.country_code == null || q.language == null)
 			return;
 
-		Product p = productDAO.getMembershipSku(q.country_code, Language.valueOf(q.language));
-
+		//Product p = productDAO.getMembershipSku(q.country_code, Language.valueOf(q.language));
+		Product p = null;
 		for (Bundle b : bundle) {
 			JoinSKUAction s = new JoinSKUAction();
 			s.item_sku = p.sku;

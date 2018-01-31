@@ -32,7 +32,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -46,7 +47,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommonHttpClient {
 
-	private static final Logger logger = Logger.getLogger(CommonHttpClient.class);
+	private static final Logger logger = LoggerFactory.getLogger(CommonHttpClient.class);
 
 	@Value("${PoolingClientConnectionManager.MaxPerRoute:100}")
 	int maxPerRoute;

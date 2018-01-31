@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Loader implementation that delegates to a loader and caches the results. The
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
 public class MultiCachingLoader<K, V> implements Loader<Collection<K>, Map<K, V>> {
 
 	// can be replaced
-	private static final Logger logger = Logger.getLogger(MultiCachingLoader.class);
+	private static final Logger logger = LoggerFactory.getLogger(MultiCachingLoader.class);
 	private static final boolean debugEnabled = logger.isDebugEnabled();
 
 	final TimeBoundCache<K, V> cache;

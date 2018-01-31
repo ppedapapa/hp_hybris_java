@@ -10,7 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -41,7 +42,7 @@ public class JsonSqlServiceModel {
 
 	public JsonSqlServiceModel(Class<?> clazz) {
 		sqlFiles = new ClasspathFileLoader(clazz);
-		logger = Logger.getLogger(clazz);
+		logger = LoggerFactory.getLogger(clazz);
 	}
 
 	public JsonSqlServiceModel(Class<?> clazz, DataSource dataSource) {

@@ -1,6 +1,7 @@
 package com.shaklee.shared.log;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.shaklee.common.util.JSONSerializer;
 
@@ -11,7 +12,7 @@ import com.shaklee.common.util.JSONSerializer;
  */
 public class ActivityLogUtil {
 
-	private static final Logger logger = Logger.getLogger(ActivityLogUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(ActivityLogUtil.class);
 	
 	public static String toJson(Object request, Object response) {
 		request = toJson(request);

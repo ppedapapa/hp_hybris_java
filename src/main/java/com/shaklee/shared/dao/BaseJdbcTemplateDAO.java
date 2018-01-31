@@ -23,7 +23,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.SqlProvider;
 import org.springframework.jdbc.core.SqlTypeValue;
 import org.springframework.jdbc.core.StatementCreatorUtils;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.util.Assert;
 
@@ -165,21 +165,21 @@ public abstract class BaseJdbcTemplateDAO {
 		}
 	}
 
-	public static final ParameterizedRowMapper<String> STRING_ROW_MAPPER = new ParameterizedRowMapper<String>() {
+	public static final RowMapper<String> STRING_ROW_MAPPER = new RowMapper<String>() {
 		@Override
 		public String mapRow(ResultSet rs, int i) throws SQLException {
 			return rs.getString(1);
 		}
 	};
 
-	protected static final ParameterizedRowMapper<Long> LONG_ROW_MAPPER = new ParameterizedRowMapper<Long>() {
+	protected static final RowMapper<Long> LONG_ROW_MAPPER = new RowMapper<Long>() {
 		@Override
 		public Long mapRow(ResultSet rs, int i) throws SQLException {
 			return rs.getLong(1);
 		}
 	};
 
-	protected static final ParameterizedRowMapper<Timestamp> TIMESTAMP_ROW_MAPPER = new ParameterizedRowMapper<Timestamp>() {
+	protected static final RowMapper<Timestamp> TIMESTAMP_ROW_MAPPER = new RowMapper<Timestamp>() {
 		@Override
 		public Timestamp mapRow(ResultSet rs, int i) throws SQLException {
 			return rs.getTimestamp(1);

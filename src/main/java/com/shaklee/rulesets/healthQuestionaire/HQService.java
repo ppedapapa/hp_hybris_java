@@ -26,7 +26,7 @@ import com.shaklee.shared.validation.InputValidationException;
 @Component
 public class HQService {
 
-	// Logger logger = Logger.getLogger(PromoService.class);
+	// Logger logger = LoggerFactory.getLogger(PromoService.class);
 
 	
 	PromoDatabase<Questions> db;

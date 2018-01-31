@@ -3,7 +3,8 @@ package com.shaklee.common.util;
 import java.security.SecureRandom;
 import java.util.Random;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Loads a secure random lazily. On some boxes a secure random can take up to a
@@ -21,8 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class LazyLoadingSecureRandom {
 
-	private static final Logger logger = Logger
-			.getLogger(LazyLoadingSecureRandom.class);
+	private static final Logger logger = LoggerFactory.getLogger(LazyLoadingSecureRandom.class);
 
 	private static volatile int threadCounter = 0;
 

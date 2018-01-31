@@ -1,6 +1,7 @@
 package com.shaklee.common.util.cache;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.shaklee.common.util.cache.TimeBoundCache.TimeCacheEntry;
 
@@ -19,7 +20,7 @@ import com.shaklee.common.util.cache.TimeBoundCache.TimeCacheEntry;
 public class CachingSingletonLoader<V> implements Loader<Object, V> {
 
 	// can be replaced
-	Logger logger = Logger.getLogger(CachingSingletonLoader.class);
+	Logger logger = LoggerFactory.getLogger(CachingSingletonLoader.class);
 
 	private final boolean synchronoizeOrigin;
 	private final int expiresMs;
