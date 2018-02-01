@@ -1,3 +1,5 @@
+drop table PROMO_ARBITRATOR;
+
 CREATE TABLE
     PROMO_ARBITRATOR
     (
