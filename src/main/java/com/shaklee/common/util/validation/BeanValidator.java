@@ -24,6 +24,7 @@ import com.shaklee.shared.validation.InputValidationException;
  * 
  * @author Elli Albek
  */
+
 public class BeanValidator {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

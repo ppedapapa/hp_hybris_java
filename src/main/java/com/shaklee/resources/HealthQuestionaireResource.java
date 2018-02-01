@@ -63,11 +63,8 @@ public class HealthQuestionaireResource {
 	HealthQuestionnaireModel healthQuestionnaireModel;
 	
 
-	@POST
-	@Path("/recommendations")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public HQResponse runQuestionnaire(Questions questions) throws InputValidationException {
+	@RequestMapping(path = "/recommendations", method = POST)
+	public HQResponse runQuestionnaire(@RequestBody Questions questions) throws InputValidationException {
 		if (logger.isDebugEnabled())
 			logger.debug("Request: " + JSONSerializer.toJacksonJaxbJson(questions, true));
 
