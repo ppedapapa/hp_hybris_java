@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 
 import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
-import com.shaklee.resources.HealthQuestionaireResource.MultipleHealthProfilesResponse;
-import com.shaklee.util.StatusResponse;
+import com.shaklee.resources.HealthQuestionnaireResource.MultipleHealthProfilesResponse;
+import com.shaklee.shared.util.StatusResponse;
 
 @Controller
 public class HealthQuestionnaireModel {
@@ -44,8 +44,7 @@ public class HealthQuestionnaireModel {
 					+ " , downline_id:" + downline_id;
 
 			
-			return (MultipleHealthProfilesResponse) new MultipleHealthProfilesResponse(StatusResponse.SERVER_ERROR)
-					.message("");
+			return (MultipleHealthProfilesResponse) new MultipleHealthProfilesResponse(StatusResponse.SERVER_ERROR);
 		}
 	}
 
