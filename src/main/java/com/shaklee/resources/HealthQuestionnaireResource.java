@@ -42,16 +42,16 @@ import com.shaklee.model.HealthQuestionnaireModel;
 import com.shaklee.promo.PromoRequest;
 import com.shaklee.promo.PromoRequest.PromoAction;
 import com.shaklee.shared.data.Country2;
+import com.shaklee.shared.util.StatusResponse;
 import com.shaklee.shared.validation.InputValidationException;
-import com.shaklee.util.StatusResponse;
 
 
 
 @RestController
 @RequestMapping("/public/hp")
-public class HealthQuestionaireResource {
+public class HealthQuestionnaireResource {
 	
-	Logger logger = LoggerFactory.getLogger(HealthQuestionaireResource.class);
+	Logger logger = LoggerFactory.getLogger(HealthQuestionnaireResource.class);
 
 	BeanValidator bval = BeanValidator.INSTANCE;
 

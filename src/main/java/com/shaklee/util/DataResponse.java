@@ -1,8 +1,8 @@
 package com.shaklee.util;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.shaklee.shared.util.StatusResponse;
 
-import com.shaklee.util.StatusResponse;
 
 /**
  * Generic response with data object. Most services need this object for

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.shaklee.Application;
-import com.shaklee.resources.HealthQuestionaireResource.MultipleHealthProfilesResponse;
+import com.shaklee.resources.HealthQuestionnaireResource.MultipleHealthProfilesResponse;
 
 import junit.framework.Assert;
 

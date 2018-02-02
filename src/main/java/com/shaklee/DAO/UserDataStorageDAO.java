@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.sql.DataSource;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +22,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
-import com.shaklee.resources.HealthQuestionaireResource.BaseStorageRequest;
+import com.shaklee.resources.HealthQuestionnaireResource.BaseStorageRequest;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
-import com.shaklee.util.BaseJDBCTemplateDAO;
+import com.shaklee.shared.dao.BaseJdbcTemplateDAO;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 
 @Component
 @PropertySource(value = "classpath:props/UserDataStorage.properties")
-public class UserDataStorageDAO extends BaseJDBCTemplateDAO {
+public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
+
+	public UserDataStorageDAO(DataSource dataSource) {
+		super(dataSource);
+	}
 
 	private static Logger logger = LoggerFactory
 			.getLogger(UserDataStorageDAO.class);

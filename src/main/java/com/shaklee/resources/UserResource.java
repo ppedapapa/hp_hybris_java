@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shaklee.security.stereotypes.CurrentUser;
-import com.shaklee.util.StatusResponse;
+import com.shaklee.shared.util.StatusResponse;
 
 @RestController
 @RequestMapping("/services/user")
