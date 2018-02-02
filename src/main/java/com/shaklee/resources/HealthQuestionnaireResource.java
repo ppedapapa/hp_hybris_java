@@ -48,7 +48,7 @@ import com.shaklee.shared.validation.InputValidationException;
 
 
 @RestController
-@RequestMapping("/public/hp")
+@RequestMapping("/services/hp")
 public class HealthQuestionnaireResource {
 	
 	Logger logger = LoggerFactory.getLogger(HealthQuestionnaireResource.class);

@@ -44,7 +44,7 @@ import com.shaklee.promo.PromoRequest;
  * @author Elli Albek
  */
 @Component
-@PropertySource(value = "classpath:DefaultPromoDatabase.properties")
+@PropertySource(value = "classpath:props/DefaultPromoDatabase.properties")
 public class DefaultPromoDatabase<T> implements PromoDatabase<T> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultPromoDatabase.class);

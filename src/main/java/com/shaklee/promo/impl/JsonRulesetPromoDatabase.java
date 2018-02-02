@@ -38,7 +38,7 @@ import com.shaklee.promo.impl.json.PromoComponentDeserializer;
 import com.shaklee.shared.validation.InputValidationException;
 
 @Component
-@PropertySource(value = "classpath:JsonRulesetPromoDatabase.properties")
+@PropertySource(value = "classpath:props/JsonRulesetPromoDatabase.properties")
 public class JsonRulesetPromoDatabase<T> implements PromoDatabase<T> {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonRulesetPromoDatabase.class);
