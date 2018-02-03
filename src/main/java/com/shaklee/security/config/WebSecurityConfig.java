@@ -535,14 +535,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(samlFilter(), BasicAuthenticationFilter.class);
         http        
             .authorizeRequests()
+            //.antMatchers("/").permitAll()
             .antMatchers("/").permitAll()
-            .antMatchers("/healthprint-login").permitAll()
-            .antMatchers("/healthprint").permitAll()
+            .antMatchers("/index.html").permitAll()
+            .antMatchers("/google289ec5249037f1af.html").permitAll()
             .antMatchers("/error").permitAll()
             .antMatchers("/saml/**").permitAll()
             .antMatchers("/services/**").permitAll()
+            .antMatchers("/public/**").permitAll()
             .antMatchers("/shakleeintegration/**").permitAll()
-            .anyRequest().authenticated();
+            .anyRequest().permitAll();
         http
             .logout()
                 .logoutSuccessUrl("/");
