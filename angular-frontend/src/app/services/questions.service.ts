@@ -4,7 +4,6 @@ import {Injectable, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Quiz } from '../models/quiz';
 import { HpConfigService } from './hp-config.service';
-import { DataService } from './data.service';
 import { Question, Option } from '../models/index';
 import { Observable } from 'rxjs/Rx';
 
@@ -18,11 +17,14 @@ export class QuestionsService {
   goals: string[] = [];
 
   constructor(private http: HttpClient,
-              private hpconfigService: HpConfigService,
-              private dataService: DataService) { }
+              private hpconfigService: HpConfigService) { }
 
   get(url: string) {
     return this.http.get(url);
+  }
+
+  getQuestions() {
+      return this.http.get<Quiz[]>('./assets/data/us/questions.json').map(res => res);
   }
 
   getPages() {

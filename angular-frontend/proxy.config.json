@@ -5,7 +5,7 @@
 		"logLevel":"debug",
 		"changeOrigin":true
 	},
-	"/public":{
+	"/services":{
 		"target":"https://local.shakleedev.com:8443",
 		"secure":false,
 		"logLevel":"debug",
