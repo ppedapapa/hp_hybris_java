@@ -2,7 +2,6 @@ package com.shaklee.promo;
 
 import static com.shaklee.promo.JsonTestUtils.assertFound;
 import static com.shaklee.promo.JsonTestUtils.assertJson;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -204,7 +203,7 @@ public class QuestionsTestutils {
 	}
 
 	public static JSONObject callQuestions(HealthQuestionnaireResource resource, Questions questions)
-			throws InputValidationException, JSONException {
+			throws InputValidationException {
 		HealthQuestionnaireResource.HQResponse resp = resource.runQuestionnaire(questions);
 		if (resp instanceof DebugHQResponse) {
 			DebugHQResponse debug = (DebugHQResponse) resp;
@@ -216,7 +215,7 @@ public class QuestionsTestutils {
 		}
 
 		JSONObject r = resp.toJSON();
-		Assert.assertEquals(r.get("status"), 0);
+		assertJson(r, 0, "status");
 		return r;
 	}
 
