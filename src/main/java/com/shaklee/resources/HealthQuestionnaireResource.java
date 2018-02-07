@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,7 @@ import com.shaklee.healthPrint.data.SKUList;
 import com.shaklee.healthPrint.data.TieredSKUList;
 import com.shaklee.rulesets.healthQuestionaire.HQService;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
+import com.shaklee.security.stereotypes.CurrentUser;
 import com.shaklee.model.HealthQuestionnaireModel;
 import com.shaklee.promo.PromoRequest;
 import com.shaklee.promo.PromoRequest.PromoAction;
@@ -142,16 +144,14 @@ public class HealthQuestionnaireResource {
 
 	@RequestMapping(path = "/getAllHealthPrints", method = POST)
 	public MultipleHealthProfilesResponse getAllHealthPrints(
-			@RequestBody UserRequestForGetAllHealthPrints request)
+			@RequestBody UserRequestForGetAllHealthPrints request, @CurrentUser User user)
 	{
-		String currentUserName = null;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    currentUserName = authentication.getName();
+		if (user != null && user.getUsername() != null)
+		{
+			return healthQuestionnaireModel.getAllHealthPrints(user.getUsername(), request.email, request.downline_id);
+			
 		}
-		
-		return healthQuestionnaireModel.getAllHealthPrints(currentUserName, request.email, request.downline_id);
+		return healthQuestionnaireModel.getAllHealthPrints(null, request.email, request.downline_id);
 	}
 
 	public static class UserRequestForGetAllHealthPrints {

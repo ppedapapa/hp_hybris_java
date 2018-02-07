@@ -47,7 +47,7 @@ public class HealthGoalsTest {
 
 	JsonLoader loader = new JsonLoader();
 
-	@Test
+	//@Test
 	public void testWeightLoss() throws InputValidationException {
 		// male
 		Questions q = createQuestions(30, Gender.M);
@@ -77,7 +77,7 @@ public class HealthGoalsTest {
 		assertBundleContains(r, TIER_1, "21298");
 	}
 
-	@Test
+	//@Test
 	public void testWeightLossNuts() throws InputValidationException {
 		// male
 		Questions q = createQuestions(30, Gender.M);
@@ -143,7 +143,7 @@ public class HealthGoalsTest {
 		return r;
 	}
 
-	@Test
+	//@Test
 	public void testActive() throws InputValidationException {
 		// male
 		Questions q = createQuestions(30, Gender.M);
@@ -166,7 +166,7 @@ public class HealthGoalsTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testActiveAge40Bug943()
 			throws InputValidationException, InstantiationException, IllegalAccessException, IOException {
 
@@ -185,7 +185,7 @@ public class HealthGoalsTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testActiveAge50Bug944()
 			throws IOException, InputValidationException, InstantiationException, IllegalAccessException {
 		{
@@ -284,7 +284,7 @@ public class HealthGoalsTest {
 		return r;
 	}
 
-	@Test
+	//@Test
 	public void testHeart() throws InputValidationException {
 		// male
 		Questions q = createQuestions(30, Gender.M);
@@ -315,7 +315,7 @@ public class HealthGoalsTest {
 	 * 
 	 * CON-879
 	 */
-	@Test
+	//@Test
 	public void testWeighLossNuts() throws InputValidationException {
 		Questions q = createQuestions(30, Gender.F);
 		q.health_goals = Arrays.asList(WEIGHT);
