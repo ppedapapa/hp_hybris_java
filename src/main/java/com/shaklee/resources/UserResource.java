@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shaklee.DAO.UserDAO;
 import com.shaklee.security.stereotypes.CurrentUser;
 import com.shaklee.shared.util.StatusResponse;
 
@@ -18,16 +20,12 @@ import com.shaklee.shared.util.StatusResponse;
 @RequestMapping("/services/user")
 public class UserResource {
 	
+	@Autowired
+	UserDAO userDao;
+	
 	@RequestMapping(path = "/isUserLoggedIn", method = GET)
-	public UserData testUserId(@CurrentUser User user)
-	{
-		/*String currentUserName = null;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    currentUserName = authentication.getName();
-		}*/
-		
+	public UserData getUserDetails(@CurrentUser User user)
+	{	
 		if (user == null)
 			return new UserData("user_not_logged", null) ;
 		
@@ -39,16 +37,21 @@ public class UserResource {
 	{
 		public String message;
 
-		public String userName;
+		public String email;
+		public String userId;
+		public String first_name;
+		public String last_name;
 
 		public UserData(String message, String userName) {
 			super(SUCCESS);
 			this.message = message;
-			this.userName = userName;
+
 		}
 		
 		
 		
 	}
+	
+	
 
 }

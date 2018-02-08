@@ -126,19 +126,13 @@ public class HealthQuestionnaireResource {
 	}
 	
 	@RequestMapping(path = "/testUserId", method = GET)
-	public String testUserId(Principal principal)
+	public String testUserId(@CurrentUser User user)
 	{
-		String currentUserName = null;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    currentUserName = authentication.getName();
-		}
-		
-		if (currentUserName == null)
+		if (user == null)
 			return "user_not_logged" ;
 		
-		return currentUserName ;
+		return user.getUsername() ;
 		
 	}
 
@@ -146,6 +140,7 @@ public class HealthQuestionnaireResource {
 	public MultipleHealthProfilesResponse getAllHealthPrints(
 			@RequestBody UserRequestForGetAllHealthPrints request, @CurrentUser User user)
 	{
+		
 		if (user != null && user.getUsername() != null)
 		{
 			return healthQuestionnaireModel.getAllHealthPrints(user.getUsername(), request.email, request.downline_id);
