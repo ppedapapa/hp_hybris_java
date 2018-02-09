@@ -4,7 +4,7 @@
     <p class="question-text"><span [innerHTML]="'questions.'+question.label|translate"></span></p>
   </div>
   <div class="options" *ngFor="let option of question.options">
-    <input type="text" placeholder="{{ ('questions.' +option.name+ '-placeholder') | translate}}" value="{{answered[option.name]}}" class="form-control" *ngIf="option.name !== 'height_inches'" (change)="inputChange(option.name, $event)"/>
+    <input type="text" placeholder="{{ ('questions.' +option.name+ '-placeholder') | translate}}" value="{{answered[option.name]}}" pattern="/^[1-9][0-9]*$/" class="form-control" *ngIf="option.name !== 'height_inches'" (change)="inputChange(option.name, $event)"/>
     <div *ngIf="option.name === 'height_inches'" class="row">
       <app-question-dropdown [dropdown]="height_feet" firstLabel="height-ft" label="foot" type="height_inches" class="col-6"></app-question-dropdown>
       <app-question-dropdown [dropdown]="height_inches" firstLabel="height-in" label="inches" type="height_inches" class="col-6"></app-question-dropdown>

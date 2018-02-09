@@ -9,6 +9,7 @@ import { QuestionsService } from '../../../services/questions.service';
 })
 export class QuestionSelectionsComponent implements OnInit{
 
+  @Input() pageIndex;
   @Input() questions;
   @Input() className;
   answered;
@@ -21,7 +22,6 @@ export class QuestionSelectionsComponent implements OnInit{
   }
 
   onSelect(question: Question, option: Option) {
-    console.log('ques', question);
     this.questionsService.setSelected(question, option);
   }
 }

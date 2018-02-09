@@ -14,14 +14,12 @@ export class HpNavComponent implements OnInit, OnDestroy {
   pagelength: number = 0;
   arr = Array;
   pager;
-  config;
 
   constructor(private questionsService: QuestionsService,
               private hpconfigService: HpConfigService) { }
 
   ngOnInit() {
     this.pager = this.hpconfigService.getPager();
-    this.config = this.hpconfigService.getConfig();
     this.pagelengthSub = this.hpconfigService.length.subscribe(length => this.pagelength = length);
   }
 

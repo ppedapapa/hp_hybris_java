@@ -9,6 +9,7 @@ import { QuestionsService } from '../../../services/questions.service';
 })
 export class QuestionAgeWeightComponent implements OnInit {
   @Input() questions;
+  @Input() pageIndex;
   answered;
 
   height_feet =  [3, 4, 5, 6, 7];

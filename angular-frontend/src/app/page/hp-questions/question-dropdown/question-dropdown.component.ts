@@ -14,8 +14,10 @@ export class QuestionDropdownComponent implements OnInit {
   @Input() label;
   @Input() fromComponent;
   @Input() type;
+  @Input() index;
   currentDropdown = {};
   selectedOption;
+  answered = this.questionsService.getAnswered();
 
   constructor(private translate: TranslateService,
               private questionsService: QuestionsService) { }
@@ -28,10 +30,18 @@ export class QuestionDropdownComponent implements OnInit {
           if (this.fromComponent === 'goal') {
               this.translate.get('label.' + this.label + item.toLowerCase()).subscribe((res: string) => {
                   this.currentDropdown[item] = res;
+                  const selectedAnswer = this.answered['health_goals'][this.index];
+                  if(selectedAnswer !== undefined) {
+                      this.selectedOption = this.currentDropdown[selectedAnswer];
+                  }
               });
           } else {
               this.translate.get('label.' + this.label).subscribe((res: string) => {
                   this.currentDropdown[item] = item + ' ' + res;
+                  const selectedAnswer = this.answered[this.type][this.label];
+                  if(selectedAnswer !== undefined) {
+                      this.selectedOption = this.currentDropdown[selectedAnswer];
+                  }
               });
           }
       });

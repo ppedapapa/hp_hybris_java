@@ -1,11 +1,12 @@
 import 'rxjs/add/operator/map';
 
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable, Input, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Quiz } from '../models/quiz';
 import { HpConfigService } from './hp-config.service';
 import { Question, Option } from '../models/index';
-import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class QuestionsService {
@@ -16,8 +17,23 @@ export class QuestionsService {
   answered = this.hpconfigService.getAnsweredJsonObj();
   goals: string[] = [];
 
+  private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
+
   constructor(private http: HttpClient,
-              private hpconfigService: HpConfigService) { }
+              private hpconfigService: HpConfigService) {}
+
+  getAnsweredSubject(): Observable<any>  {
+    return this.answeredSubject.asObservable();
+  }
+
+  setAnsweredSubject(answered: any) {
+      console.log('setAnsweredSubject', answered);
+      this.answeredSubject.next(answered);
+  }
+
+  getAnswered(): any {
+      return this.answered;
+  }
 
   get(url: string) {
     return this.http.get(url);
@@ -66,14 +82,6 @@ export class QuestionsService {
       return tempQuiz;
   }
 
-  getAnswered() {
-    return this.answered;
-  }
-
-  setAnswered(answered) {
-    this.answered = answered;
-  }
-
   goTo(index: number) {
     const pageCount = this.hpconfigService.getPagerCount();
     if (index >= 0 && index < pageCount) {
@@ -94,17 +102,26 @@ export class QuestionsService {
       }
     }
     this.hpconfigService.updatelength(this.quiz['pages'].length);
-    console.log('update quiz', this.quiz);
-    console.log('Base quiz', this.baseQuiz);
-
-      // this.hpconfigService.setAutomove(1);
+    this.setAutomove();
   }
 
   setInput(name, val) {
-    console.log(this.answered);
+    console.log('setInput answered', this.answered);
     this.answered[name] = val;
+  }
 
-    // this.hpconfigService.setAutomove(1);
+  setAutomove() {
+      let pageNum = this.hpconfigService.getPager();
+      let pages = this.getPages();
+      let currentPage = pages[pageNum.index];
+      let currentAnsweredSet = [];
+      console.log('pages', currentPage.autoMove);
+      currentPage.questions.forEach(item => {
+          currentAnsweredSet.push(this.answered[item.name]);
+      });
+      if(currentAnsweredSet.indexOf(undefined) === -1 && currentPage.autoMove !== false) {
+          this.goTo(pageNum.index+1);
+      }
   }
 
   setDropdown(name, val, type) {
