@@ -46,4 +46,6 @@ public interface UserDAO {
 			throws Exception;
 
 	int getUserRank(String shakleeId);
+	
+	public User findByEmail(String email);
 }
