@@ -1,6 +1,7 @@
 package com.shaklee.DAO;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
+import com.shaklee.common.util.JSONSerializer;
 import com.shaklee.resources.HealthQuestionnaireResource.BaseStorageRequest;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.shared.dao.BaseJdbcTemplateDAO;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 
 
 @Component
@@ -55,10 +58,19 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 	
 	@Value("${GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES}")
 	private String GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES;
+	
+	@Value("${GET_LAST_UPDATED}")
+	private String GET_LAST_UPDATED;
+	
+	@Value("${CREATE}")
+	private String CREATE;
+	
+	@Value("${DELETE_BY_USER_OR_EMAIL}")
+	private String DELETE_BY_USER_OR_EMAIL;
 		
 	ObjectMapper objectMapper = new ObjectMapper();
 
-	public List<Map<String,Object>> getQuestions(final String healthProfileId) {
+	/*public List<Map<String,Object>> getQuestions(final String healthProfileId) {
 
 		
 		// make the SQL based on userId OR healthProfileId
@@ -68,7 +80,7 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 		List<Map<String,Object>> data = jdbcTemplate.queryForList(sql, new Object[] { param});
 		
 		return data;
-	}
+	}*/
 	
 	public <T> List<UserDataResponse> getTop20HealthPrints(final String userId, final String email,
 			final String downlineId) {
@@ -94,6 +106,30 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 
 	}
 
+	public Timestamp lastCreatedDate(String email, String shakleeId) {
+		return selectByUserOrEmail(email, shakleeId, GET_LAST_UPDATED, TIMESTAMP_ROW_MAPPER);
+	}
+
+	public <T> long insert(final String contactId, final String accountId, final String email, final String firstName, final String lastName,
+			final String healthProfileId, T data, final Boolean optIn, final String hostName, 
+			final String referrerCode, final Boolean shareWithDistributors) {
+
+		final String json = JSONSerializer.toJacksonJaxbJson(data, false);
+		
+		return insert(CREATE, contactId, accountId, email, firstName, lastName, healthProfileId, json, optIn, hostName, 
+				referrerCode, shareWithDistributors, dateFormatForCompletedTimeStamp.format(new Date()),dateFormatForCompletedTimeStamp.format(new Date()));
+	}
+
+	private <T> T selectByUserOrEmail(final String email, final String userId, String sql,
+			final RowMapper<T> mapper) {
+
+		// make the SQL based on email or user_Id
+		sql = (email != null) ? sql.replace("??", "EMAIL") : sql.replace("??", "CONTACT_ID");
+		String param = (email != null) ? email : userId;
+
+		// logger.debug(sql + "PARAM :" + param);
+		return queryForObject(sql, mapper, param);
+	}
 
 	
 	<T> T deserialize(Class<T> type, String profileId, String answers_json) {
@@ -106,6 +142,10 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 			logger.error("Deserialization failed for healthprint " + profileId + " " + answers_json, e);
 			return null;
 		}
+	}
+	
+	public void delete(final String user, final String email) {
+		jdbcTemplate.update(DELETE_BY_USER_OR_EMAIL, user, email);
 	}
 	
 	public static class UserDataResponse extends UserDataRequest {

@@ -3,27 +3,16 @@ package com.shaklee.resources;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,11 +30,11 @@ import com.shaklee.rulesets.healthQuestionaire.HQService;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.security.stereotypes.CurrentUser;
 import com.shaklee.model.HealthQuestionnaireModel;
-import com.shaklee.promo.PromoRequest;
 import com.shaklee.promo.PromoRequest.PromoAction;
 import com.shaklee.shared.data.Country2;
 import com.shaklee.shared.util.StatusResponse;
 import com.shaklee.shared.validation.InputValidationException;
+import com.shaklee.shared.validation.ShakleeIDValidator.ShakleeID;
 
 
 
@@ -126,26 +115,34 @@ public class HealthQuestionnaireResource {
 	}
 	
 	@RequestMapping(path = "/testUserId", method = GET)
-	public String testUserId(Principal principal)
+	public String testUserId(@CurrentUser User user)
 	{
-		String currentUserName = null;
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    currentUserName = authentication.getName();
-		}
-		
-		if (currentUserName == null)
+		if (user == null)
 			return "user_not_logged" ;
 		
-		return currentUserName ;
+		return user.getUsername() ;
 		
 	}
 
+	@RequestMapping(path = "/questions/update", method = POST)
+	public StorageResponse update(@RequestBody StorageRequest request, @CurrentUser User user) throws InputValidationException
+	{
+		if (user == null)
+			return healthQuestionnaireModel.insert(request, null);
+		
+		else
+			return healthQuestionnaireModel.insert(request, user.getUsername());
+		
+		
+	}
+	
+	
 	@RequestMapping(path = "/getAllHealthPrints", method = POST)
 	public MultipleHealthProfilesResponse getAllHealthPrints(
 			@RequestBody UserRequestForGetAllHealthPrints request, @CurrentUser User user)
 	{
+		
 		if (user != null && user.getUsername() != null)
 		{
 			return healthQuestionnaireModel.getAllHealthPrints(user.getUsername(), request.email, request.downline_id);
@@ -232,5 +229,44 @@ public class HealthQuestionnaireResource {
 				super(message);
 			}
 		}
+		
+		@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+		public static class StorageResponse extends com.shaklee.shared.util.StatusResponse {
+
+			public String healthProfileId;
+			
+			public boolean no_recent_submissions = false;
+
+			public StorageResponse() {
+				super(SUCCESS);
+			}
+
+			public StorageResponse(int status) {
+				super(status);
+			}
+		}
+		
+		
+		
+		
+		public static class StorageRequest extends CommonStorageRequest {
+			@ShakleeID
+			public String referrer_id;
+
+			public String recaptcha_response;
+
+			public Boolean opt_in;
+
+			public Boolean is_mobile = false;
+
+			public String host_name;
+			
+			public String referrer_code;
+			
+			public Boolean share_with_distributors = true;
+			
+			
+		}
+
 }
 
