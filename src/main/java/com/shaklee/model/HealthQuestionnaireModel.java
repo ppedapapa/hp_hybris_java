@@ -173,7 +173,7 @@ public class HealthQuestionnaireModel {
 				User userData = userDao.findByEmail(request.email);
 
 				if (userData != null && userData.getContactId() != null) {
-					return insertByUserId(request, userData.getContactId(), userData.getAccountId());
+					return insertByUserId(request, userData.getContactId(), userData.getShakleeId());
 				}
 			} catch (EmptyResultDataAccessException e) {
 				// normal case, not a shaklee user
@@ -202,7 +202,7 @@ public class HealthQuestionnaireModel {
 		{
 			User userData = userDao.findUser(shakleeId);
 			// email flow is over, proceed with userId flow
-			return insertByUserId(request, shakleeId, userData.getAccountId());
+			return insertByUserId(request, shakleeId, userData.getShakleeId());
 		}
 		// TODO:else return error
 	}

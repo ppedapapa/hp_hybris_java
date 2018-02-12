@@ -70,7 +70,7 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 		
 	ObjectMapper objectMapper = new ObjectMapper();
 
-	public List<Map<String,Object>> getQuestions(final String healthProfileId) {
+	/*public List<Map<String,Object>> getQuestions(final String healthProfileId) {
 
 		
 		// make the SQL based on userId OR healthProfileId
@@ -80,7 +80,7 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 		List<Map<String,Object>> data = jdbcTemplate.queryForList(sql, new Object[] { param});
 		
 		return data;
-	}
+	}*/
 	
 	public <T> List<UserDataResponse> getTop20HealthPrints(final String userId, final String email,
 			final String downlineId) {

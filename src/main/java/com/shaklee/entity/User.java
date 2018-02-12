@@ -15,12 +15,12 @@ public class User extends AttributeEntity {
 	private String sponsorShakleeId;
 	private Date created;
 
-	public String getAccountId() {
+	public String getShakleeId() {
 		return shakleeId;
 	}
 
-	public void setAccountId(String accountId) {
-		this.shakleeId = accountId;
+	public void setShakleeId(String shakleeId) {
+		this.shakleeId = shakleeId;
 	}
 
 	public String getContactId() {

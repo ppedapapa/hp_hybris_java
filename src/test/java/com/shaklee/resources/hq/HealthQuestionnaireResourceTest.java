@@ -67,6 +67,7 @@ import junit.framework.Assert;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+@WithMockUser(username = "WN09078-1")
 public class HealthQuestionnaireResourceTest {
 	
 	  @Autowired
@@ -253,7 +254,6 @@ public class HealthQuestionnaireResourceTest {
 	}
 
 	@Test
-	@WithMockUser(username = "AB00000-1")
 	public void testUpsert() throws JSONException, InputValidationException {
 
 		// 1. AG80332, 2. AG80348, 3. ZV68946
@@ -412,7 +412,7 @@ public class HealthQuestionnaireResourceTest {
 
 		userDataStorageDAO.delete(null, "iwerk@ewr.com");
 
-		userDataStorageDAO.delete(null, "ldflsdf@wrrew.com");
+		userDataStorageDAO.delete(null, "test@test1.com");
 
 	}
 
@@ -435,6 +435,8 @@ public class HealthQuestionnaireResourceTest {
 			// assertJson(r, 0, "status");
 			 
 			JSONObject json = new JSONObject(responseString);
+			
+			System.out.println(json.toString());
 				
 			return json.getString("healthProfileId");
 		}
@@ -541,20 +543,21 @@ public class HealthQuestionnaireResourceTest {
 	}
 
 	@Test
-
 	public void testGetAllHealthPrints() throws JSONException, InputValidationException {
 
 		deleteTestData();
 		// Scenario 1: testing with shakleeId
 
 		final String email = "test@test1.com";
-		final String shakleeID = "AG80348";
-		createStorageRequest(email, shakleeID, "ZV68934");
+		createStorageRequestForGuest(email, "ZV68934");
 		
 		UserRequestForGetAllHealthPrints req = new UserRequestForGetAllHealthPrints();
+	
 		req.email = email;
 
 		MultipleHealthProfilesResponse response = resource.getAllHealthPrints(req, null);
+		
+		System.out.println(response.toString());
 		Assert.assertEquals(response.status, 0);
 
 	
@@ -629,8 +632,7 @@ public class HealthQuestionnaireResourceTest {
 	// @Test
 	public void testHealthPrintReport() throws InputValidationException, JSONException {
 		final String email = "test@test.shaklee.com";
-		final String shakleeID = "ZV68934";
-		createStorageRequest(email, shakleeID, "AG80348");
+		createStorageRequest(email, "AG80348");
 		//HealthPrintReportResponse response = phr.getHealthPrintReport("AG80348");
 
 		//System.out.println(response.toJSON().toString(2));
@@ -652,7 +654,7 @@ public class HealthQuestionnaireResourceTest {
 		*/
 	}
 
-	private String createStorageRequest(String email, String shakleeID, String referrerId)
+	private String createStorageRequest(String email, String referrerId)
 			throws JSONException, InputValidationException {
 		StorageRequest re = new StorageRequest();
 		re.email = email;
@@ -662,6 +664,22 @@ public class HealthQuestionnaireResourceTest {
 		q.health_goals = Arrays.asList(HealthGoal.AGING, HealthGoal.FITNESS, HealthGoal.JOINT);
 		re.referrer_id = referrerId;
 		re.questions.is_guest = false;
+		re.opt_in = true;
+		re.first_name = "test2";
+		re.last_name = "test2";
+		return setGet(re);
+	}
+	
+	private String createStorageRequestForGuest(String email, String referrerId)
+			throws JSONException, InputValidationException {
+		StorageRequest re = new StorageRequest();
+		re.email = email;
+		Questions q = new Questions();
+		q.age = 100;
+		re.questions = q;
+		q.health_goals = Arrays.asList(HealthGoal.AGING, HealthGoal.FITNESS, HealthGoal.JOINT);
+		re.referrer_id = referrerId;
+		re.questions.is_guest = true;
 		re.opt_in = true;
 		re.first_name = "test2";
 		re.last_name = "test2";
