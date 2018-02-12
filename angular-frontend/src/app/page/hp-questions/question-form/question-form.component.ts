@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
-import {QuestionsService} from "../../../services/questions.service";
-import {Router} from "@angular/router";
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { QuestionsService } from "../../../services/questions.service";
+import { Router } from "@angular/router";
+import { Validators, FormControl, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-question-form',
@@ -10,24 +11,66 @@ import {Router} from "@angular/router";
 })
 export class QuestionFormComponent implements OnInit {
 
-  @Input() questions;
-  @Input() pageIndex;
-  answered = this.questionsService.getAnswered();
+    @Input() questions;
+    @Input() pageIndex;
+    answered = this.questionsService.getAnswered();
+    form: FormGroup;
+    firstLastName = "^[a-zA-Z\s\&/\.()-,']+$";
+    emailPattern = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
 
-  constructor(private questionsService: QuestionsService,
-              private router: Router) { }
+    constructor(private questionsService: QuestionsService,
+              private router: Router) {}
 
-  ngOnInit() {
+    ngOnInit() {
+        this.form = this.toFormGroup(this.questions);
+        this.form.valueChanges.subscribe(
+            val => {
+                console.log('this.form.valid ===========', val, this.form);
+                this.questions.forEach(question => {
+                    question.options.forEach(option => {
+                        console.log( this.answered[option.name], val[option.name]);
+                        if(this.form.valid) {
+                            this.answered[option.name] = val[option.name];
+                        }
+                    });
+                });
 
-  }
+        });
+    }
 
-  inputChange(name, event) {
-      const val = event.target.value;
-      this.questionsService.setInput(name, val);
-      console.log(name, val);
-  }
+    toFormGroup(questions ) {
+        let group: any = {};
+        let pattern;
+        questions.forEach(question => {
+            question.options.forEach(option => {
+                if(option.name == "first_name" || option.name == 'last_name') {
+                    pattern = this.firstLastName;
+                } else {
+                    pattern = this.emailPattern;
+                }
+                group[option.name] =  new FormControl(option.value || '', {validators: [Validators.required, Validators.pattern(pattern)], updateOn: 'change'});
+            });
+        });
+        return new FormGroup(group);
+    }
 
-  getResults() {
+    get first_name() {
+        return this.form.get('first_name');
+    }
+
+    get last_name() {
+        return this.form.get('last_name');
+    }
+
+    get email() {
+        return this.form.get('email');
+    }
+
+    validPage() {
+        return this.questionsService.validCurrentPage();
+    }
+
+    getResults() {
       /*const answered = {
           country_code: "US",
           language: "en",
@@ -65,5 +108,5 @@ export class QuestionFormComponent implements OnInit {
 
       // this.router.navigate(['/healthprint-results', { data:answeredObj, skipLocationChange: true}]);
       this.router.navigate(['/healthprint-results']);
-  }
+    }
 }

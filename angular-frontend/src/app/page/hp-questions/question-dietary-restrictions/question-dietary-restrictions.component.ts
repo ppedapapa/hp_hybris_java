@@ -10,7 +10,7 @@ export class QuestionDietaryRestrictionsComponent implements OnInit {
 
   @Input() questions;
   @Input() pageIndex;
-  checked: string[] = ['NONE'];
+  checked: string[] = [];
   answered = this.questionsService.getAnswered();
 
   constructor(private questionsService: QuestionsService) { }

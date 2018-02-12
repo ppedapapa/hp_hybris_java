@@ -28,7 +28,6 @@ export class HealthPrintBundlesResolver implements Resolve <any>, OnDestroy{
         });
 
         console.log('subscribtion value', this.answered);
-        this.answered.height_inches =  (parseInt(this.answered.height_inches.foot) * 12)+parseInt(this.answered.height_inches.inches);
 
         return this.http.post('/services/hp/recommendations', this.answered, this.httpOptions)
             .map(responseData => {

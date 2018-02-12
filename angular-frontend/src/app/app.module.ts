@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -95,6 +95,7 @@ export function translateLoader(http: HttpClient) {
         BrowserModule,
         AppRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
         NgSelectModule
     ],
     providers: [

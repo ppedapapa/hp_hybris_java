@@ -16,6 +16,7 @@ export class QuestionsService {
   questions: string;
   answered = this.hpconfigService.getAnsweredJsonObj();
   goals: string[] = [];
+  heightInches = {foot: undefined, inches: undefined};
 
   private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
 
@@ -82,13 +83,6 @@ export class QuestionsService {
       return tempQuiz;
   }
 
-  goTo(index: number) {
-    const pageCount = this.hpconfigService.getPagerCount();
-    if (index >= 0 && index < pageCount) {
-      this.hpconfigService.setPagerIndex(index);
-    }
-  }
-
   setSelected(question: Question, option: Option) {
     console.log(this.answered);
     this.answered[question.name] = option.index;
@@ -110,31 +104,44 @@ export class QuestionsService {
     this.answered[name] = val;
   }
 
-  setAutomove() {
+  goTo(index: number) {
+    const pageCount = this.hpconfigService.getPagerCount();
+    if (index >= 0 && index < pageCount && this.validCurrentPage()) {
+        this.hpconfigService.setPagerIndex(index);
+    }
+  }
+
+  validCurrentPage() {
       let pageNum = this.hpconfigService.getPager();
       let pages = this.getPages();
       let currentPage = pages[pageNum.index];
       let currentAnsweredSet = [];
-      console.log('pages', currentPage.autoMove);
+
       currentPage.questions.forEach(item => {
-          currentAnsweredSet.push(this.answered[item.name]);
+          console.log('item.name', item.name);
+          if(item.name == "age" || item.name == "weight" || item.name == "email-form") {
+              item.options.forEach(val => {
+                  currentAnsweredSet.push(this.answered[val.name]);
+              });
+          }
+          else {
+            currentAnsweredSet.push(this.answered[item.name]);
+          }
       });
-      if(currentAnsweredSet.indexOf(undefined) === -1 && currentPage.autoMove !== false) {
+      return currentAnsweredSet.indexOf(undefined) === -1;
+  }
+
+  setAutomove() {
+      let pageNum = this.hpconfigService.getPager();
+      let pages = this.getPages();
+      let currentPage = pages[pageNum.index];
+      if(currentPage.autoMove !== false) {
           this.goTo(pageNum.index+1);
       }
   }
 
   setDropdown(name, val, type) {
-    this.answered[type][name] = val;
-    console.log(this.answered);
-  }
-
-  setGoalDropdown(name, val) {
-    const index = this.goals.indexOf(val);
-    if (index === -1) {
-      this.goals.push(val);
-    }
-    this.answered['health_goals'] = this.goals;
-    console.log(this.answered);
+    this.answered[type] = val;
+    console.log('answered',this.answered);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Question } from '../../../models/question';
 import { QuestionsService } from '../../../services/questions.service';
+import { FormControl, FormGroup, Validators, FormGroupDirective, NgControl } from "@angular/forms";
 
 @Component({
   selector: 'app-question-age-weight',
@@ -18,11 +18,26 @@ export class QuestionAgeWeightComponent implements OnInit {
   constructor(private questionsService: QuestionsService) { }
 
   ngOnInit() {
-    this.answered = this.questionsService.getAnswered();
+      this.questions.forEach(item => {
+          item.options.forEach(val => {
+            if(val.name == "age") {
+                val.pattern = "(([0-9][1-9])|([1-9][0-9])|[4-9])";
+            }
+            if(val.name == "weight_lbs") {
+                val.pattern = "[1-9][0-9]{1,2}";
+            }
+          });
+      });
+      this.answered = this.questionsService.getAnswered();
   }
 
-  inputChange(name, event) {
-    const val = event.target.value;
+  inputChange(name, validate, event) {
+    let val;
+    if(validate.valid) {
+      val = event.target.value;
+    } else {
+      val = undefined;
+    }
     this.questionsService.setInput(name, val);
   }
 }

@@ -463,6 +463,7 @@
                     ]
                 },
                 {
+                    "name": "weight",
                     "label": "question3",
                     "image": "//images.shaklee.com/healthprint/03-weight-height-150x150.png",
                     "options": [
@@ -568,8 +569,19 @@
             "component": "question-form",
             "questions": [
                 {
+                    "name": "email-form",
                     "label": "email-results-to-you",
-                    "options": ["first_name", "last_name", "email"]
+                    "options": [
+                        {
+                            "name": "first_name"
+                        },
+                        {
+                            "name": "last_name"
+                        },
+                        {
+                            "name": "email"
+                        }
+                    ]
                 }
             ]
         }
