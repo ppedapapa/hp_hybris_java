@@ -65,14 +65,12 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-test</artifactId>
-		    <version>4.0.0.RELEASE</version>
 		    <scope>test</scope>
 		</dependency>
 		<!-- end::tests[] -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>5.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -126,7 +124,7 @@
 	<dependency>
     <groupId>org.apache.bval</groupId>
     <artifactId>bval-jsr303</artifactId>
-    <version>0.5</version>
+      <version>0.1-incubating</version>
 	</dependency>
 	
 	</dependencies>
