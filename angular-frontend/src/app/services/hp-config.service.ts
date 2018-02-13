@@ -24,6 +24,7 @@ export class HpConfigService {
     const jsonObject = {
       country_code: 'US',
       language: 'en',
+      opt_in: true,
       email: undefined,
       referrer_id: undefined,
       user_id: undefined,
@@ -55,7 +56,6 @@ export class HpConfigService {
       dietary_restrictions: undefined,
       health_goals: undefined,
       is_guest: (!isMC) ? true : false,
-      noShareWithDistributors: false,
       share_with_distributors: true
     };
     return jsonObject;
@@ -75,5 +75,9 @@ export class HpConfigService {
 
   setPagerIndex(index: number) {
     this.pager.index = index;
+  }
+
+  getExcludeKidQuestionList() {
+      return ["stress", "sleep", "energy", "pregnant", "memory", "stress", "sleep", "exercise_frequency", "exercise_intensity", "fruits", "vegetables", "grains", "dairy", "healthy_fats", "water", "junk_food", "sugar_drinks", "breakfast", "organic", "health_goals"];
   }
 }

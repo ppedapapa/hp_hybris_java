@@ -14,7 +14,6 @@
       </ol>
     </div>
     <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
-      {{pager.index + 1}} {{pager.count}}
       <button *ngIf="pager.index + 1 !== pager.count" class="btn btn-primary hq-nav-btn continue-btn" [ngClass]="{'continue-answered-btn':validPage()}"  (click)="goTo(pager.index + 1);">
         <span>{{'questions.continue' |translate}}</span>
         <i class="fa fa-chevron-right"></i>

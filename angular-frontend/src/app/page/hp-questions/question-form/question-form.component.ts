@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { QuestionsService } from "../../../services/questions.service";
 import { Router } from "@angular/router";
 import { Validators, FormControl, FormGroup } from '@angular/forms'
+import { HpConfigService } from "../../../services/hp-config.service";
 
 @Component({
   selector: 'app-question-form',
@@ -19,16 +20,14 @@ export class QuestionFormComponent implements OnInit {
     emailPattern = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
 
     constructor(private questionsService: QuestionsService,
-              private router: Router) {}
+                private router: Router) {}
 
     ngOnInit() {
         this.form = this.toFormGroup(this.questions);
         this.form.valueChanges.subscribe(
             val => {
-                console.log('this.form.valid ===========', val, this.form);
                 this.questions.forEach(question => {
                     question.options.forEach(option => {
-                        console.log( this.answered[option.name], val[option.name]);
                         if(this.form.valid) {
                             this.answered[option.name] = val[option.name];
                         }
@@ -66,10 +65,6 @@ export class QuestionFormComponent implements OnInit {
         return this.form.get('email');
     }
 
-    validPage() {
-        return this.questionsService.validCurrentPage();
-    }
-
     getResults() {
       /*const answered = {
           country_code: "US",
@@ -103,10 +98,9 @@ export class QuestionFormComponent implements OnInit {
           ],
           is_guest: true
       };*/
-
-      this.questionsService.setAnsweredSubject(this.answered);
-
-      // this.router.navigate(['/healthprint-results', { data:answeredObj, skipLocationChange: true}]);
-      this.router.navigate(['/healthprint-results']);
+      console.log('results');
+        this.questionsService.update();
+        // this.router.navigate(['/healthprint-results', { data:answeredObj, skipLocationChange: true}]);
+        // this.router.navigate(['/healthprint-results']);
     }
 }

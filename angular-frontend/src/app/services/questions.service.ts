@@ -7,6 +7,7 @@ import { HpConfigService } from './hp-config.service';
 import { Question, Option } from '../models/index';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class QuestionsService {
@@ -17,11 +18,15 @@ export class QuestionsService {
   answered = this.hpconfigService.getAnsweredJsonObj();
   goals: string[] = [];
   heightInches = {foot: undefined, inches: undefined};
+  isPWS;
+  isShaklee180;
+  pws_owner_id = null; // update this value based on req -- revisit
 
   private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
 
   constructor(private http: HttpClient,
-              private hpconfigService: HpConfigService) {}
+              private hpconfigService: HpConfigService,
+              private router: Router) {}
 
   getAnsweredSubject(): Observable<any>  {
     return this.answeredSubject.asObservable();
@@ -118,7 +123,6 @@ export class QuestionsService {
       let currentAnsweredSet = [];
 
       currentPage.questions.forEach(item => {
-          console.log('item.name', item.name);
           if(item.name == "age" || item.name == "weight" || item.name == "email-form") {
               item.options.forEach(val => {
                   currentAnsweredSet.push(this.answered[val.name]);
@@ -144,4 +148,56 @@ export class QuestionsService {
     this.answered[type] = val;
     console.log('answered',this.answered);
   }
+
+  update(){
+      let data = this.formatPostData();
+console.log('data answered', data);
+      this.http.post('/services/hp/questions/update', data)
+      .subscribe(responseData => {
+          console.log('responseData', responseData);
+          this.router.navigate(['/healthprint-results']);
+
+      });
+  }
+
+  formatPostData() {
+    let excludeNonQuestions = ["email","first_name","last_name","referrer_id","health_profile_id","opt_in","recaptcha_response","completed_time_stamp","share_with_distributors"];
+    let kidExcludeList = this.hpconfigService.getExcludeKidQuestionList();
+    let tempPostData = Object.assign({}, this.answered);
+
+    //referrer_id logic
+    if(this.isPWS || this.isShaklee180){
+        tempPostData.referrer_id = this.pws_owner_id;
+    }
+    else{
+        tempPostData.referrer_id = null;
+    }
+
+    if ( this.answered.dietary_restrictions !== "NONE" ) {
+      delete tempPostData.dietary_restrictions;
+    }
+
+    let postData = {questions:{}};
+    for(let key in tempPostData){
+        if((excludeNonQuestions.indexOf(key) == -1)) {
+            postData.questions[key] = ((kidExcludeList.indexOf(key) >= 0) && (parseInt(this.answered.age) < 13))?undefined:this.stringToNumber(tempPostData[key]);
+
+        }
+        else if (excludeNonQuestions.indexOf(key) >=0) {
+            postData[key] = ((kidExcludeList.indexOf(key) >= 0) && (parseInt(this.answered.age) < 13))?undefined:tempPostData[key];
+        }
+    }
+    console.log('PostData', postData);
+    this.setAnsweredSubject(postData);
+
+    return postData;
+  }
+
+  stringToNumber(value) {
+    if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
+        return parseInt(value);
+    }
+    return value;
+  }
+
 }
