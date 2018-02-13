@@ -14,8 +14,11 @@ export class QuestionDropdownComponent implements OnInit {
   @Input() label;
   @Input() fromComponent;
   @Input() type;
+  @Input() index;
   currentDropdown = {};
   selectedOption;
+  answered = this.questionsService.getAnswered();
+  goals =  this.questionsService.goals;
 
   constructor(private translate: TranslateService,
               private questionsService: QuestionsService) { }
@@ -28,10 +31,18 @@ export class QuestionDropdownComponent implements OnInit {
           if (this.fromComponent === 'goal') {
               this.translate.get('label.' + this.label + item.toLowerCase()).subscribe((res: string) => {
                   this.currentDropdown[item] = res;
+                  const selectedAnswer = this.goals[this.index];
+                  if(selectedAnswer !== undefined) {
+                      this.selectedOption = this.currentDropdown[selectedAnswer];
+                  }
               });
           } else {
               this.translate.get('label.' + this.label).subscribe((res: string) => {
                   this.currentDropdown[item] = item + ' ' + res;
+                  const selectedAnswer = this.answered['height_inches'];
+                  if(selectedAnswer !== undefined) {
+                      this.selectedOption = this.currentDropdown[selectedAnswer];
+                  }
               });
           }
       });
@@ -42,12 +53,24 @@ export class QuestionDropdownComponent implements OnInit {
     if (this.fromComponent === 'goal') {
         this.translate.get('label.' + label + val.toLowerCase()).subscribe((res: string) => {
             this.selectedOption = res;
-            this.questionsService.setGoalDropdown(label, val);
         });
+        const index = this.goals.indexOf(val);
+        if (index === -1) {
+            this.goals.push(val);
+        }
+        if(this.goals.length === 3) {
+            this.questionsService.setDropdown(label, this.goals, type);
+        }
     } else {
         this.translate.get('label.' + label).subscribe((res: string) => {
             this.selectedOption = val + ' ' + res;
-            this.questionsService.setDropdown(label, val, type);
+            let height = this.questionsService.heightInches;
+            height[label] = val;
+            if(height.foot != undefined && height.inches != undefined) {
+                const height_inches =  (parseInt(height.foot) * 12)+parseInt(height.inches);
+                console.log('height_inches', height_inches);
+                this.questionsService.setDropdown(label, height_inches, type);
+            }
         });
     }
   }

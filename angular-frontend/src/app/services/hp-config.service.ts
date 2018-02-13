@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-import { QuestionConfig } from '../models/index';
-
 @Injectable()
 export class HpConfigService {
   pager = {
     index: 0,
-    size: 1,
     count: 1
   };
 
@@ -19,21 +16,15 @@ export class HpConfigService {
       this.pageLength.next(length);
   }
 
-  config: QuestionConfig = {
-    'allowBack': true,
-    'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'pageSize': 1,
-    'showPager': true
-  };
-
   constructor() { }
 
   getAnsweredJsonObj() {
     // var isMC = (appConst.site === "mc") ? true : false;
     const isMC =  false;
     const jsonObject = {
-      country_code: undefined,
+      country_code: 'US',
       language: 'en',
+      opt_in: true,
       email: undefined,
       referrer_id: undefined,
       user_id: undefined,
@@ -42,7 +33,7 @@ export class HpConfigService {
       age: undefined,
       gender: undefined,
       weight_lbs: undefined,
-      height_inches: {foot: undefined, inches: undefined},
+      height_inches: undefined,
       pregnant: undefined,
       energy: undefined,
       memory: undefined,
@@ -62,10 +53,9 @@ export class HpConfigService {
       breakfast: undefined,
       organic: undefined,
       spending: undefined,
-      dietary_restrictions: {},
-      health_goals: {},
+      dietary_restrictions: undefined,
+      health_goals: undefined,
       is_guest: (!isMC) ? true : false,
-      noShareWithDistributors: false,
       share_with_distributors: true
     };
     return jsonObject;
@@ -87,11 +77,7 @@ export class HpConfigService {
     this.pager.index = index;
   }
 
-  getConfig() {
-    return this.config;
-  }
-
-  setAutomove(index: number) {
-    this.pager.index = index;
+  getExcludeKidQuestionList() {
+      return ["stress", "sleep", "energy", "pregnant", "memory", "stress", "sleep", "exercise_frequency", "exercise_intensity", "fruits", "vegetables", "grains", "dairy", "healthy_fats", "water", "junk_food", "sugar_drinks", "breakfast", "organic", "health_goals"];
   }
 }

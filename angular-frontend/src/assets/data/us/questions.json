@@ -5,6 +5,7 @@
     "pages": [
         {
             "component": "question-mixed-content",
+            "autoMove": false,
             "questions": [
                 {
                     "name": "gender",
@@ -449,6 +450,7 @@
         },
         {
             "component": "question-age-weight",
+            "autoMove": false,
             "questions": [
                 {
                     "name": "age",
@@ -461,6 +463,7 @@
                     ]
                 },
                 {
+                    "name": "weight",
                     "label": "question3",
                     "image": "//images.shaklee.com/healthprint/03-weight-height-150x150.png",
                     "options": [
@@ -476,6 +479,7 @@
         },
         {
             "component": "question-goals",
+            "autoMove": false,
             "restrict": ["kids"],
             "questions": [
                 {
@@ -488,6 +492,7 @@
         },
         {
             "component": "question-dietary-restrictions",
+            "autoMove": false,
             "questions": [
                 {
                     "name": "dietary_restrictions",
@@ -532,6 +537,7 @@
         },
         {
             "component": "question-selections",
+            "autoMove": false,
             "restrict": ["kids"],
             "questions": [
                 {
@@ -563,8 +569,19 @@
             "component": "question-form",
             "questions": [
                 {
+                    "name": "email-form",
                     "label": "email-results-to-you",
-                    "options": ["first-name", "last-name", "email"]
+                    "options": [
+                        {
+                            "name": "first_name"
+                        },
+                        {
+                            "name": "last_name"
+                        },
+                        {
+                            "name": "email"
+                        }
+                    ]
                 }
             ]
         }

@@ -19,6 +19,12 @@
     font-size: 15px;
     margin: 5px 0 0;
     border-radius: 2px;
+    &.error {
+      border-color: $red1;
+    }
+    &.first_name.ng-invalid.ng-touched, &.last_name.ng-invalid.ng-touched, &.email.ng-invalid.ng-touched {
+      border: 1px solid red;
+    }
   }
 
   .guest-results-btn {

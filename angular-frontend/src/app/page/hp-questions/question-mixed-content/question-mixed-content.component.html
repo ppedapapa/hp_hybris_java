@@ -14,7 +14,7 @@
       </div>
       <div class="question">
         <app-question-selections [questions]="questions" class="options" [className]="'mixed-content-question'"></app-question-selections>
-        <a class="btn btn-block start-btn" translate (click)="goTo(pager.index + 1);">landing.text7</a>
+        <a class="btn btn-block start-btn" translate (click)="startQuiz(pager.index + 1);">landing.text7</a>
       </div>
     </div>
     <img [src]="imagePath+image3" class="img-fluid img-landing-logo" />

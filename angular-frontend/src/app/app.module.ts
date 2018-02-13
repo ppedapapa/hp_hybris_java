@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppService } from './app.service';
 import { QuestionsService } from './services/questions.service';
 import { HpConfigService } from './services/hp-config.service';
-import { DataService } from './services/data.service';
 import { HealthPrintResultsService } from './services/hp-results.service';
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
@@ -96,6 +95,7 @@ export function translateLoader(http: HttpClient) {
         BrowserModule,
         AppRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
         NgSelectModule
     ],
     providers: [
@@ -103,7 +103,6 @@ export function translateLoader(http: HttpClient) {
         CookieService,
         QuestionsService,
         HpConfigService,
-        DataService,
         HealthPrintResultsService,
         CartService,
         AuthService,

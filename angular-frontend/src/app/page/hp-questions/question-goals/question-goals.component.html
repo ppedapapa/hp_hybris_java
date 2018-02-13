@@ -9,7 +9,7 @@
       <span class="health-goals">{{i+1}}</span>
     </div>
     <div class="col-10">
-      <app-question-dropdown [dropdown]="question.options" firstLabel="select-option-goal" label="health-goals-" fromComponent="goal"></app-question-dropdown>
+      <app-question-dropdown [dropdown]="question.options" firstLabel="select-option-goal" label="health-goals-" type="health_goals"  fromComponent="goal" [index]="i"></app-question-dropdown>
     </div>
   </div>
 </div>

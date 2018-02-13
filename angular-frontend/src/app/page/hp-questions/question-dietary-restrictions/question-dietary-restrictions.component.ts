@@ -9,11 +9,16 @@ import {QuestionsService} from '../../../services/questions.service';
 export class QuestionDietaryRestrictionsComponent implements OnInit {
 
   @Input() questions;
+  @Input() pageIndex;
   checked: string[] = [];
+  answered = this.questionsService.getAnswered();
 
   constructor(private questionsService: QuestionsService) { }
 
   ngOnInit() {
+      if(this.answered['dietary_restrictions'] !== undefined) {
+          this.checked = this.answered['dietary_restrictions'];
+      }
   }
 
   setValue(val, event) {
