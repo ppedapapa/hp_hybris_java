@@ -25,8 +25,8 @@ const appRoutes: Routes = [
         path: 'healthprint-results',
         component: HpResultsComponent,
         resolve: {
-            healthPrintResults: HealthPrintResultsResolver,
-            healthPrintBundles: HealthPrintBundlesResolver
+            healthPrintResults: HealthPrintResultsResolver
+            // healthPrintBundles: HealthPrintBundlesResolver
         }
     } ,
     {

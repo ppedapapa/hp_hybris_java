@@ -149,15 +149,30 @@ export class QuestionsService {
     console.log('answered',this.answered);
   }
 
+  setHealthProfileInfo(profile) {
+      localStorage.setItem('healthProfile', JSON.stringify(profile) );
+  };
+
+  getHealthProfileInfo() {
+      return localStorage.getItem('healthProfile' );
+  };
+
   update(){
       let data = this.formatPostData();
+
 console.log('data answered', data);
       this.http.post('/services/hp/questions/update', data)
       .subscribe(responseData => {
-          console.log('responseData', responseData);
-          this.router.navigate(['/healthprint-results']);
 
+          let profileInfo = {healthProfileId:responseData['healthProfileId'],email:data['email']};
+console.log('profileInfo responseData', responseData);
+console.log('profileInfo', profileInfo);
+
+          this.setHealthProfileInfo(profileInfo);
+          this.router.navigate(['/healthprint-results']);
       });
+
+     // this.router.navigate(['/healthprint-results']);
   }
 
   formatPostData() {

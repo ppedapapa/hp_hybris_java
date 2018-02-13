@@ -15,7 +15,7 @@ export class HpBundleComponent implements OnInit {
   constructor(private healthPrintResultsService: HealthPrintResultsService) { }
 
   ngOnInit() {
-    this.bundles = this.getBundles(this.recommendedbundles);
+    this.bundles = this.getBundles(this.recommendedbundles.bundles);
   }
 
   getBundles(bundles) {

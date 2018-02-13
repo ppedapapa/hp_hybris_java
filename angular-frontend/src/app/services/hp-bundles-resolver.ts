@@ -29,7 +29,7 @@ export class HealthPrintBundlesResolver implements Resolve <any>, OnDestroy{
 
         console.log('subscribtion value', this.answered);
 
-        return this.http.post('/services/hp/recommendations', this.answered, this.httpOptions)
+        return this.http.post('/services/hp/recommendations', this.answered.questions, this.httpOptions)
             .map(responseData => {
             console.log('responseData', responseData);
             /* if (responseData['bundles'].length == 0) {
