@@ -18,6 +18,12 @@ public class HealthPrintResource {
 		return "forward:/";
 	}
 	
+	@RequestMapping("/healthprint/{country}/{language}")
+	public String healthprintByCountry(@PathVariable(value="country") String country,
+			@PathVariable(value="language") String language) {
+		return "forward:/?country="+country+"&language="+"language";
+	}
+	
 	@RequestMapping("/healthprint-results")
 	public String results() {
 		return "forward:/";

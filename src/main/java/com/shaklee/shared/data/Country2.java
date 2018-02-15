@@ -9,7 +9,7 @@ package com.shaklee.shared.data;
  */
 public enum Country2 {
 
-	us("USA", "us"), ca("CAN", "can"), mx("MEX", "mex");
+	us("US", "us"), ca("CA", "can"), mx("ME", "mex");
 
 	public final String country3, mcCountryUrl;
 
