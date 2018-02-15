@@ -9,20 +9,16 @@ import { HealthPrintResultsService } from '../../services/hp-results.service';
 })
 
 export class HpResultsComponent implements OnInit {
-
-    private productInfo: any;
-    private recommendationInfo: any;
     private resultsData: any;
-    private resultsBundle: any;
 
     constructor(private route: ActivatedRoute, private healthPrintResultsService: HealthPrintResultsService) { }
 
   ngOnInit() {
       this.route.data.subscribe((data: {}) => {
           this.resultsData = this.route.snapshot.data['healthPrintResults'];
-          this.resultsBundle = this.resultsData['recommendations'];
-          console.log('this.resultsBundle ', this.resultsBundle );
-
+          this.healthPrintResultsService.setResultsData(this.resultsData);
+          // this.resultsBundle = this.resultsData['recommendations'];
+          console.log('this.resultsData ', this.resultsData );
           // this.healthPrintResultsService.setAllHealthPrintResult(this.resultsData);
           // this.healthPrintResultsService.setHealthPrintResultInfo(this.resultsData);
       });

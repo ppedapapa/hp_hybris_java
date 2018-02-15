@@ -1,0 +1,83 @@
+.kids-bundle {
+  margin: 30px 0;
+  .have-kids {
+    border: #5d9732 solid 1px;
+    padding: 30px 0;
+    text-align: center;
+
+    a {
+      color: #5d9732;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .image {
+    margin: 0 0 10px 0;
+
+  }
+
+  .show-kids {
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid #ddd;
+    margin: 50px 0 20px;
+
+    .title {
+      font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+      color: #000;
+      font-weight: lighter;
+      font-size: 28px;
+      margin: 10px 0 30px 0;
+    }
+
+    .description {
+      b p {
+        display: inline;
+      }
+    }
+    .add-item, .learn-more {
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .add-item {
+      border: 1px solid #5d9732;
+      border-radius: 3px;
+      color: #5d9732;
+      padding: 8px 12px;
+    }
+    .learn-more {
+      color: #5d9732;
+      padding: 0 0 0 10px;
+      text-transform: uppercase;
+    }
+    .price {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .image {
+      img.img-responsive
+      { max-width: 100px; margin: 0 auto; }
+
+    }
+  }
+  .close-kids-bundle {
+    cursor: pointer;
+    margin: 30px 0 0;
+
+    p {
+      display: inline;
+      text-transform: uppercase;
+      color: #5d9732;
+    }
+
+    img {
+      bottom: 2px;
+      position: relative;
+
+    }
+  }
+
+}

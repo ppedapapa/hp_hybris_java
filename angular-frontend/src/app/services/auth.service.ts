@@ -1,24 +1,17 @@
-// import {AppService } from "../app.service";
+import { ActivatedRoute } from '@angular/router';
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class AuthService {
-    loggedIn = true;
+    loggedIn;
+    constructor() {}
 
-    // constructor(private appService: AppService) {}
-
-    isAuthenticated() {
-        const promise = new Promise(
-            (resolve, reject) => {
-                setTimeout(() => {
-                    resolve(this.loggedIn);
-                });
-            }
-        );
-        // const promise = this.appService.isUserLogin();
-        return promise;
+    setLogin(login) {
+        this.loggedIn = (login === 'true');
     }
 
-    login() {
-        this.loggedIn = true;
+    getLogin() {
+        return this.loggedIn;
     }
 
     logout() {

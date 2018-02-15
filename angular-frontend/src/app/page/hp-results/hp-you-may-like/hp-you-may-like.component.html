@@ -1,0 +1,19 @@
+<div class="you-may-interest" *ngIf="considerBundle.skus.length > 1">
+    <div class="col-12">
+        <div *ngIf="!kids" class="title" [innerHTML]="'results.you-may-like-title'|translate"></div>
+        <div *ngIf="kids" class="title" [innerHTML]="'results.you-may-like-title-kids'|translate"></div>
+    </div>
+    <div class="row justify-content-center" *ngIf="!isMobile">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let considerSku of considerBundle['skus']">
+            <app-hp-sku-list [sku]="considerSku" [bundleType]="considerBundle['bundle']"></app-hp-sku-list>
+        </div>
+    </div>
+</div>
+
+<!--<div *ngIf="isMobile">-->
+  <!--<carousel active="active" interval="myInterval" no-wrap="noWrapSlides" no-transition="true">-->
+    <!--<slide ng-repeat="considerSku in considerBundle['skus']| limitTo:4">-->
+      <!--<div sk-dr-sku-list sk-pr-hide-add-to-item="hideAddToItem" sk-pr-bundle-type="'consider'" sk-pr-sku="considerSku" sk-pr-add-to-cart="addToCart(considerSku, $event, 'Consider');" sk-pr-learn-more="openLearnMoreModal(considerSku, 'Consider');" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 carousel-item"></div>-->
+    <!--</slide>-->
+  <!--</carousel>-->
+<!--</div>-->

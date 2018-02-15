@@ -1,0 +1,16 @@
+<div class="row kids-bundle" *ngIf="!kids">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!showKids">
+    <p class="have-kids">{{'results.you-may-like-desc'|translate}}<a (click)="kidsBundleOn();">{{'results.view-kids'|translate}}</a></p>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 show-kids" *ngIf="showKids">
+    <div class="title" [innerHTML]="'results.bring-out-bash'|translate"></div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!isMobile">
+      {{kidsBundle | json}}
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let kidsSku of kidsBundle">
+        <app-hp-sku-list [sku]="kidsSku" [bundleType]="'kids'"></app-hp-sku-list>
+      </div>
+    </div>
+    <div (click)="kidsBundleOff();" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 close-kids-bundle"><p [innerHTML]="'results.close-kids-bundle'|translate"></p> <img ng-src="//images.shaklee.com/healthprint/ico-close.png"/></div>
+  </div>
+</div>

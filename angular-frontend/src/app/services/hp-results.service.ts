@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { QuestionsService } from "./questions.service";
+import { environment } from "../../environments/environment";
+import { HpConfigService } from "./hp-config.service";
 // import {variable} from "@angular/compiler/src/output/output_ast";
 
 @Injectable()
@@ -18,33 +20,163 @@ export class HealthPrintResultsService {
             'Cache-Control': 'no-cache'
         })
     };
-
+    resultsData;
+    questions;
+    bundles;
     endPointAllHealthPrintResults = '/services/hp/getAllHealthPrints';
     endPointContent =  '/assets/mockjson/content.json';
     endPointRecommendation = '/services/hp/recommendations';
     endPointProduct = 'https://www.shakleedev.com:9002/shakleeintegration/v2/shakleeUS/products?fields=DEFAULT';
 
     constructor(private http: HttpClient,
-                private questionsService:QuestionsService) {}
+                private questionsService: QuestionsService,
+                private hpConfigService: HpConfigService) {}
 
     getAllHealthPrints() {
         let healthProfile = JSON.parse(this.questionsService.getHealthProfileInfo());
         let request = {};
+        let healthprints = [];
+        console.log('getAllHealthPrints', healthProfile, request);
 
-        if(healthProfile.email !== undefined) {
-            request = {email: healthProfile.email};
-            // request = {email: 'qwe@asd.asd'};
-        } else if(healthProfile.healthProfileId !== undefined)  {
-            request = {healthProfileId: healthProfile['healthProfileId']}
+        if(healthProfile !== null) {
+            if (healthProfile.email !== undefined) {
+                request = {email: healthProfile.email};
+                // request = {email: 'qwe@asd.asd'};
+            } else if (healthProfile.healthProfileId !== undefined) {
+                request = {healthProfileId: healthProfile['healthProfileId']}
+            }
         }
-console.log(healthProfile, request);
-       return this.http.post(this.endPointAllHealthPrintResults, request, this.httpOptions);
+        return this.http.post(this.endPointAllHealthPrintResults, request, this.httpOptions);
     }
 
     getRecommendation(healthPrints) {
-        let questions = healthPrints.questions;
-        return this.http.post(this.endPointRecommendation, questions, this.httpOptions);
+        this.questions = healthPrints.questions;
+        return this.http.post(this.endPointRecommendation, this.questions, this.httpOptions);
     }
+
+    setResultsData(data) {
+        this.resultsData = data;
+        this.setBundles(this.resultsData);
+    }
+
+    setBundles(data) {
+        let bundles = data['recommendations']['bundles'];
+        let productDetails;
+        let tmpArray = [];
+
+        //Get healthprint skulist
+        const skuList = this.getSkuList(bundles);
+        for (let sku in skuList) {
+            tmpArray.push(sku);
+        }
+        const kidsSkuList = this.getKidsSkus();
+        const skuString = tmpArray.join() + ',' + kidsSkuList.join();
+
+        // get productInfo using skustring as input
+        this.getProductContent(skuString).subscribe(responseData => {
+            productDetails = responseData['products'];
+            const productInfo = {};
+            let image, price;
+
+            if (!productDetails) {
+                return;
+            }
+
+            productDetails.forEach(function (val) {
+                if (val.images) {
+                    val.images.forEach(function (imgVal) {
+                        if (imgVal.format === 'thumbnail' && imgVal.imageType === 'PRIMARY') {
+                            image = imgVal.url;
+                        }
+                    });
+                }
+                if (val.prices) {
+                    val.prices.forEach(function (priceVal) {
+                        if (priceVal.priceTier === 'SN') {
+                            price = priceVal.value;
+                        }
+                    });
+                }
+                productInfo[val.sku] = {
+                    title: val.baseProductName ? val.baseProductName : 'Title',
+                    healthPrintDescription: val.healthPrintDescription ? val.healthPrintDescription : 'healthPrintDescription',
+                    description: val.longDescription,
+                    shortDescription: val.description,
+                    itemImage: environment.hybrisServerName + image,
+                    price: price
+                };
+            });
+
+            bundles.forEach((value, key) => {
+                value.skus.forEach(function (value2, key2) {
+                    if (value2.category === 'membership') {
+                        bundles[key].skus[key2].info = {
+                            title: 'shaklee-membership-title',
+                            healthPrintDescription: 'shaklee-membership-description',
+                            description: '',
+                            shortDescription: '',
+                            itemImage: '//images.shaklee.com/healthprint/ico-leaf.png'
+                        };
+                    } else {
+                        bundles[key].skus[key2].info = productInfo[value2.sku] ? productInfo[value2.sku] : {
+                            title: 'temp Title',
+                            healthPrintDescription: 'temp healthPrintDescription',
+                            description: 'temp longDescription',
+                            shortDescription: 'temp description',
+                            itemImage: '//images.shaklee.com/healthprint/ico-leaf.png',
+                            price: 'temp price'
+                        };
+                    }
+                });
+            });
+            let kidSkus = [];
+            kidsSkuList.forEach(function (value, key) {
+                const skuInfo =  productInfo[value] ? productInfo[value] : {
+                    title: 'temp Title',
+                    healthPrintDescription: 'temp healthPrintDescription',
+                    description: 'temp longDescription',
+                    shortDescription: 'temp description',
+                    itemImage: '//images.shaklee.com/healthprint/ico-leaf.png',
+                    price: 'temp price'
+                };
+                kidSkus.push({sku: value, info: skuInfo});
+            });
+            const kidsBundle = {skus: kidSkus, bundle: 'KIDS'};
+            bundles.push(kidsBundle);
+        });
+        this.bundles = bundles;
+        console.log('bundles', bundles);
+
+    }
+    getBundles(tiers) {
+        console.log('bundles', this.bundles);
+        return this.bundles
+            .filter((bundle) => tiers.indexOf(bundle.bundle) !== -1)
+            .sort((a, b) => a.bundle < b.bundle ? -1 : 1);
+    }
+
+    getKidsSkus(){
+        let kidsSkus =[];
+        let dietRestrictions = this.questions.dietary_restrictions;
+console.log('this.questions', this.questions);
+        if(dietRestrictions !== null && dietRestrictions.indexOf('KOSHER')){
+            kidsSkus = this.hpConfigService.getKosherSkus();
+        }else{
+            kidsSkus = this.hpConfigService.getNonKosherSkus();
+        }
+
+        if(dietRestrictions !== null && dietRestrictions.indexOf('SOY')){
+            let nonSoySku = this.hpConfigService.getNonSoySku();
+            let soySku = this.hpConfigService.getSoySku();
+            kidsSkus.forEach((value, key) => {
+                if(value === soySku){
+                    kidsSkus[key] = nonSoySku;
+                }
+            });
+        }
+        return kidsSkus;
+    }
+
     getContent() {
         return this.http.get(this.endPointContent);
     }
@@ -60,5 +192,49 @@ console.log(healthProfile, request);
 
     setHealthPrintResultInfo(healthPrintResultInfo:object) {
         this.healthPrintResultInfoSource.next(healthPrintResultInfo);
+    }
+
+    private getSkuList(bundles) {
+        let skuList = {};
+        if (!bundles) {
+            return false;
+        }
+
+        bundles.forEach( function(value, key) {
+            if (!value.skus) {
+                return false;
+            }
+
+            let tmpSkuList = [];
+            let appSku = false;
+            let free_membership=false;
+
+            value.skus.forEach( function(value2, key2) {
+                let sku = value2.sku;
+                if(value2.category==="membership"){
+                    appSku = true;
+                    if(value2.sn_price===0){
+                        free_membership=true;
+                    }
+                }
+
+                skuList[sku] = value2.sku;
+                let dataSku = {sku: value2.sku, qty: 1, freq: 1, selections: value2.sub_sku, membership_sku:appSku,free_membership:free_membership};
+                tmpSkuList.push(dataSku);
+
+                if (tmpSkuList.length > 0) {
+                    bundles[key].skuList = tmpSkuList;
+                }
+                if (value2.sub_sku) {
+                    value2.sub_sku.forEach( function(value3, key3) {
+                        skuList[value3] = value3;
+                    });
+                }
+
+            });
+
+        });
+
+        return skuList;
     }
 }
