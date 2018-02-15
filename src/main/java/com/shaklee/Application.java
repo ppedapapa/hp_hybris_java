@@ -65,7 +65,7 @@ public class Application extends SpringBootServletInitializer{
     public DataSource dataSource() {
         return DataSourceBuilder.create()
         		.driverClassName("com.mysql.jdbc.Driver")
-        		.url("jdbc:mysql://google/ICSHKTST?cloudSqlInstance=shaklee-gps:us-central1:us-dev&socketFactory=com.google.cloud.sql.mysql.SocketFactory")
+        		.url("jdbc:mysql://google/ICSHKTST?cloudSqlInstance=shaklee-gps:us-central1:us-dev&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false")
         		.username("root").
         		password("us@dev").build()
         		;

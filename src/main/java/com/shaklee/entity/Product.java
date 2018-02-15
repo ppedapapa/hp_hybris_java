@@ -1,5 +1,6 @@
 package com.shaklee.entity;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -34,7 +35,17 @@ public class Product  extends ProductSkuKey {
 	}
 
 	
-	
+	public BigDecimal getPriceByPriceTier(String priceTier)
+	{
+		for(ProductPricePerTier pp: prices)
+		{
+			if (pp.getPriceTier().equals(priceTier))
+			{
+				return pp.getValue();
+			}
+		}
+		return null;
+	}
 
 	
 }

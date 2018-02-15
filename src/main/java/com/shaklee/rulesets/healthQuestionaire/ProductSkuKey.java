@@ -1,7 +1,10 @@
 package com.shaklee.rulesets.healthQuestionaire;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import com.shaklee.shared.data.Country2;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductSkuKey {
 	public Country2 country;
 	public String code;

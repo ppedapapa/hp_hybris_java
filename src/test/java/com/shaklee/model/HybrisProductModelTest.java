@@ -3,6 +3,8 @@ package com.shaklee.model;
 import static com.shaklee.promo.JsonTestUtils.assertJson;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.codehaus.jettison.json.JSONObject;
@@ -29,11 +31,11 @@ public class HybrisProductModelTest {
 	public void testGetProducts() throws Exception {
 
 		
-		List<Product> p =  hybrisProductModel.getProducts("US", "89384");
+		List<Product> p =  hybrisProductModel.getProducts("US", Arrays.asList("89384"));
 
 		assertNotNull(p);
 		
-		p = hybrisProductModel.getProducts("US", "89384", "22067");
+		p =hybrisProductModel.getProducts("US", Arrays.asList("89384", "22067"));
 		
 		assertNotNull(p);
 		

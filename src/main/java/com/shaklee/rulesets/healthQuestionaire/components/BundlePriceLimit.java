@@ -15,9 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shaklee.DAO.ProductPriceDAO;
 import com.shaklee.common.util.collections.AbstractCollectionTransformDecorator;
 import com.shaklee.healthPrint.components.AddSku.SKUQuantity;
-import com.shaklee.healthPrint.components.ProductPriceDAO;
 import com.shaklee.healthPrint.data.Bundle;
 import com.shaklee.healthPrint.data.HPRequest;
 import com.shaklee.healthPrint.data.SKU;
@@ -40,8 +40,8 @@ public class BundlePriceLimit<T extends LocalizedData> extends AbstractComponent
 	private static final Logger logger = LoggerFactory.getLogger(BundlePriceLimit.class);
 	private static final boolean isDebugEnabled = logger.isDebugEnabled();
 
-	//@Autowired
-	//ProductPriceDAO dao;
+	@Autowired
+	ProductPriceDAO dao;
 
 	public float tier_1_max, tier_2_max, tier_3_max, price_step;
 
@@ -85,8 +85,8 @@ public class BundlePriceLimit<T extends LocalizedData> extends AbstractComponent
 		// final Country2 country =
 		// Country2.valueOf(q.request.country_code.toLowerCase());
 		final String country = request.request.getCountryCode().toLowerCase();
-		//return dao.getPrices(country, skus);
-		return null;
+		return dao.getPrices(country, skus);
+		
 	}
 
 	private static <T> Collection<SKU> convertBundleToLinkedHashSet(HPRequest<T, Bundle, SKU> request,

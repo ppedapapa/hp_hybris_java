@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
+import org.codehaus.jettison.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ import com.shaklee.shared.data.Country2;
 import com.shaklee.shared.data.Language;
 
 @Component
-public class ProductPriceDAO extends JdbcTemplateDAO {
+public class ProductPriceDAO {
 	
 	Logger logger = LoggerFactory.getLogger(ProductPriceDAO.class);
 
@@ -45,13 +46,6 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 	/** Cache two hours **/
 	private static final int CACHE_EXPIRATION_SEC = (int) TimeUnit.HOURS.toSeconds(2);
 
-	private final String get = props.getSql("GET");
-	private final String getDebug = props.getSql("GET_DEBUG");
-	private final String getPack = props.getSql("GET_PACK");
-	private final String getMembershipSku = props.getSql("GET_MEMBERSHIP_SKUS");
-	private final String getJoinKits = props.getSql("GET_JOIN_KIT");
-	private final String getDistributorKitSku = props.getSql("GET_DISTRIBUTOR_KIT_SKUS");
-
 	private final MultiCachingLoader<ProductSkuKey, Product> productCache;
 	private final CachingSingletonLoader<Map<String, List<String>>> packCache;
 	private final CachingSingletonLoader<Map<String, Product>> membershipSkuCache;
@@ -59,9 +53,8 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 	private final CachingSingletonLoader<Map<String, Product>> distributorKitSkuCache;
 
 	@Autowired
-	public ProductPriceDAO(DataSource dataSource) {
-		super(dataSource);
-
+	public ProductPriceDAO() {
+		
 		/**
 		 * This is an inner class instead of implementing the interface to hide
 		 * this method from external callers.
@@ -151,8 +144,8 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 		Collection<String> skus = new ProductSkuCollection(keys);
 		List<Product> rs;
 		try {
-			rs = hybrisProductModel.getProducts( country.country3, String.join(", ", skus));
-		} catch (IOException e) {
+			rs = hybrisProductModel.getProducts( country.country3, skus);
+		} catch (IOException | JSONException e) {
 			
 			logger.debug("error:" , e);
 			
@@ -167,6 +160,7 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 		return products;
 	}
 
+	/*
 	public Map<String, Product> getDebug(final Country2 country, Collection<String> skus) {
 		// Collection<String> skus = new ProductSkuCollection(keys);
 		if (skus == null || skus.isEmpty())
@@ -179,7 +173,7 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 		}
 
 		return products;
-	}
+	}*/
 
 	public Map<String, List<String>> getPacks() {
 		return packCache.get();
@@ -216,7 +210,8 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 	}
 
 	Set<String> _getJoinKits() {
-		return new HashSet<String>(jdbcTemplate.query(getJoinKits, STRING_ROW_MAPPER));
+		//return new HashSet<String>(jdbcTemplate.query(getJoinKits, STRING_ROW_MAPPER));
+		return null;
 	}
 
 	public Set<String> getJoinKits() {
@@ -273,5 +268,16 @@ public class ProductPriceDAO extends JdbcTemplateDAO {
 		return skus;
 	}
 	
+	public Map<String, Float> getPrices(String country, Collection<String> skus) {
+		Country2 c2 = Country2.valueOf(country);
+		final Map<String, ?> products = get(c2, skus);
+		// dirty low memory conversion by reusing the same collection
+		for (@SuppressWarnings("rawtypes") Map.Entry e : products.entrySet()) {
+			Product p = (Product)e.getValue();
+			e.setValue(Float.valueOf(p.getPriceByPriceTier("MP").floatValue()));
+		}
+		
+		return (Map<String, Float>) products;
+	}
 	
 }
