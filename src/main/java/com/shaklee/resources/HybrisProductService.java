@@ -87,7 +87,7 @@ public class HybrisProductService {
 
 			String restUrl = null;
 			if (skus.size() == 1) {
-				restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst() + uri2;
+				restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2;
 			} else {
 				restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields;
 
