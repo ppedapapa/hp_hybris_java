@@ -4,32 +4,32 @@ import com.shaklee.shared.data.Country2;
 
 public class ProductSkuKey {
 	public Country2 country;
-	public String sku;
+	public String code;
 
 	public ProductSkuKey() {
 	}
 
-	public ProductSkuKey(Country2 country, String sku) {
+	public ProductSkuKey(Country2 country, String code) {
 		this.country = country;
-		this.sku = sku;
+		this.code = code;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof ProductSkuKey) {
 			ProductSkuKey other = (ProductSkuKey) obj;
-			return sku.equals(other.sku) && country == other.country;
+			return code.equals(other.code) && country == other.country;
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return sku.hashCode();
+		return code.hashCode();
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + '(' + country + ' ' + sku + ')';
+		return getClass().getSimpleName() + '(' + country + ' ' + code + ')';
 	}
 }
