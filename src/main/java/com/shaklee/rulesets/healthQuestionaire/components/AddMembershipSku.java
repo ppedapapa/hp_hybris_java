@@ -9,13 +9,13 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shaklee.entity.Product;
 import com.shaklee.healthPrint.data.Bundle;
 import com.shaklee.healthPrint.data.SKU;
 import com.shaklee.promo.Action;
 import com.shaklee.promo.PromoRequest;
 import com.shaklee.promo.basic.AbstractComponent;
 import com.shaklee.promo.basic.PromoActionUtils;
-import com.shaklee.rulesets.healthQuestionaire.Product;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.shared.data.Language;
 
@@ -32,7 +32,7 @@ public class AddMembershipSku extends AbstractComponent<PromoRequest<Questions>>
 	public String category;
 
 	//@Autowired
-	//ProductPriceDAO productDAO;
+	// ProductPriceDAO productDAO;
 
 	@Override
 	public void exec(PromoRequest<Questions> r) {
@@ -44,10 +44,10 @@ public class AddMembershipSku extends AbstractComponent<PromoRequest<Questions>>
 		Product p = null;
 		for (Bundle b : bundle) {
 			JoinSKUAction s = new JoinSKUAction();
-			s.item_sku = p.sku;
+			s.item_sku = p.code;
 			s.bundle = b;
 			s.category = category;
-			s.sn_price = new BigDecimal(p.sn_price).setScale(2, BigDecimal.ROUND_HALF_DOWN);
+			s.sn_price = new BigDecimal(p.getPriceByPriceTier("SN").floatValue()).setScale(2, BigDecimal.ROUND_HALF_DOWN);
 			PromoActionUtils.addAction(r, ruleset, s);
 		}
 	}
