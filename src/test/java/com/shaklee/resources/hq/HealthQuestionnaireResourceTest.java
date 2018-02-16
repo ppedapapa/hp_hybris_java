@@ -34,6 +34,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shaklee.Application;
 import com.shaklee.DAO.UserDataStorageDAO;
@@ -56,7 +57,7 @@ import junit.framework.Assert;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@WithMockUser(username = "WN09078-1")
+@WithMockUser(username = "AC12345-1")
 public class HealthQuestionnaireResourceTest {
 	
 	  @Autowired
@@ -548,7 +549,40 @@ public class HealthQuestionnaireResourceTest {
 		
 		System.out.println(response.toString());
 		Assert.assertEquals(response.status, 0);
+	
 
+	
+		deleteTestData();
+
+	}
+	
+	@Test
+	public void testGetAllHealthPrintsForUserId() throws JsonProcessingException, Exception {
+
+		deleteTestData();
+		// Scenario 1: testing with shakleeId
+
+		final String email = "test@test1.com";
+		createStorageRequestForGuest(email, "ZV68934");
+		
+		UserRequestForGetAllHealthPrints req = new UserRequestForGetAllHealthPrints();
+	
+		req.email = null;
+
+		//MultipleHealthProfilesResponse response = resource.getAllHealthPrints(req);
+		ResultActions actions = mvc.perform(MockMvcRequestBuilders.post("https://local.shakleedev.com:8443/services/hp/getAllHealthPrints")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(new ObjectMapper().writeValueAsString(req)))
+			.andExpect(status().isOk());
+		
+         String responseString = actions.andReturn().getResponse().getContentAsString();
+         
+         JSONObject json = new JSONObject(responseString);
+			
+         
+		System.out.println(responseString);
+		assertJson(json, 0, "status");
+		
 	
 		deleteTestData();
 

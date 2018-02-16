@@ -35,7 +35,7 @@ public class HybrisProductModelTest {
 
 		assertNotNull(p);
 		
-		p =hybrisProductModel.getProducts("US", Arrays.asList("89384", "22067"));
+		p = hybrisProductModel.getProducts("US", Arrays.asList("89384", "22067"));
 		
 		assertNotNull(p);
 		

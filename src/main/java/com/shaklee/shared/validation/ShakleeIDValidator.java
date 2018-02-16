@@ -53,7 +53,7 @@ public class ShakleeIDValidator implements
 			return true;
 
 		final int len = shakleeId.length();
-		if (len != 7)
+		if (len != 9)
 			return false;
 
 		return isUppercaseLetter(shakleeId.charAt(0))
