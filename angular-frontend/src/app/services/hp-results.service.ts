@@ -35,13 +35,11 @@ export class HealthPrintResultsService {
     getAllHealthPrints() {
         let healthProfile = JSON.parse(this.questionsService.getHealthProfileInfo());
         let request = {};
-        let healthprints = [];
         console.log('getAllHealthPrints', healthProfile, request);
 
         if(healthProfile !== null) {
             if (healthProfile.email !== undefined) {
                 request = {email: healthProfile.email};
-                // request = {email: 'qwe@asd.asd'};
             } else if (healthProfile.healthProfileId !== undefined) {
                 request = {healthProfileId: healthProfile['healthProfileId']}
             }
