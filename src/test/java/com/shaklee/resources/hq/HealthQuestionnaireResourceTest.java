@@ -57,7 +57,7 @@ import junit.framework.Assert;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@WithMockUser(username = "AC12345-1")
+@WithMockUser(username = "WN09078-1")
 public class HealthQuestionnaireResourceTest {
 	
 	  @Autowired
