@@ -8,8 +8,8 @@ import { HealthPrintResultsService } from "../../../services/hp-results.service"
 })
 export class HpYouMayLikeComponent implements OnInit {
 
-    bundles;
-    considerBundle;
+    bundles = [];
+    considerBundle = [];
     isMobile = false;
     kids = false;
 
@@ -17,8 +17,14 @@ export class HpYouMayLikeComponent implements OnInit {
 
     ngOnInit() {
         const tiers: string[] = ['CONSIDER'];
-        this.bundles = this.healthPrintResultsService.getBundles(tiers);
-        this.considerBundle = this.bundles[0];
-        console.log('consider bundles', this.bundles);
+        this.healthPrintResultsService.getBundles().subscribe(bundle => {
+            for(let val in bundle) {
+                if(tiers.indexOf(bundle[val]['bundle']) !== -1) {
+                    this.bundles.push(bundle[val]);
+                }
+            }
+
+            this.considerBundle = this.bundles[0];
+        });
     }
 }

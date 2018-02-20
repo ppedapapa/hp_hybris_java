@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HealthPrintResultsService} from "../../../services/hp-results.service";
+import { HealthPrintResultsService } from "../../../services/hp-results.service";
 
 @Component({
   selector: 'app-hp-kids',
@@ -8,14 +8,22 @@ import {HealthPrintResultsService} from "../../../services/hp-results.service";
 })
 export class HpKidsComponent implements OnInit {
   showKids = false;
-  kidsBundle;
+  bundles = [];
+  kidsBundle = [];
   kids = false;
 
-  constructor(private resultsService: HealthPrintResultsService) { }
+  constructor(private healthPrintResultsService: HealthPrintResultsService) { }
 
   ngOnInit() {
-    this.kidsBundle = this.resultsService.getKidsSkus()
-    console.log('kidsBundle', this.kidsBundle);
+    const tiers: string[] = ["KIDS"];
+    this.healthPrintResultsService.getBundles().subscribe(bundle => {
+      for(let val in bundle) {
+          if(tiers.indexOf(bundle[val]['bundle']) !== -1) {
+              this.bundles.push(bundle[val]);
+          }
+      }
+      this.kidsBundle = this.bundles[0];
+    });
   }
 
   kidsBundleOn = function () {

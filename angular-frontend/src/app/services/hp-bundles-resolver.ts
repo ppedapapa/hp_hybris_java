@@ -23,9 +23,9 @@ export class HealthPrintBundlesResolver implements Resolve <any>, OnDestroy{
 
     resolve (route: ActivatedRouteSnapshot): Observable<any>{
 
-        this. subscription = this.questionService.getAnsweredSubject().subscribe((value) => {
-            this.answered = value;
-        });
+        // this. subscription = this.questionService.getAnsweredSubject().subscribe((value) => {
+        //     this.answered = value;
+        // });
 
         console.log('subscribtion value', this.answered);
 

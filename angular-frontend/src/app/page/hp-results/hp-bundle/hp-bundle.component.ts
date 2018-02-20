@@ -8,14 +8,18 @@ import { environment } from "../../../../environments/environment";
   styleUrls: ['./hp-bundle.component.scss']
 })
 export class HpBundleComponent implements OnInit {
-  bundles;
+  bundles = [];
 
   constructor(private healthPrintResultsService: HealthPrintResultsService) { }
 
   ngOnInit() {
     const tiers: string[] = ['TIER_1', 'TIER_2', 'TIER_3'];
-    this.bundles = this.healthPrintResultsService.getBundles(tiers);
-
-    console.log('rec bundles', this.bundles );
+    this.healthPrintResultsService.getBundles().subscribe(bundle => {
+        for(let val in bundle) {
+            if(tiers.indexOf(bundle[val]['bundle']) !== -1) {
+                this.bundles.push(bundle[val]);
+            }
+        }
+    });
   }
 }

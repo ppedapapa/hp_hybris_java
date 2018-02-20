@@ -12,9 +12,7 @@ export class HpSkuListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log('bundletype', this.bundleType)
-  }
+  ngOnInit() {}
 
   shakeSkuList(sku) {
     if(this.shakesSkuList.indexOf(sku) > -1){

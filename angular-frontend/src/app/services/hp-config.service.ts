@@ -112,4 +112,8 @@ export class HpConfigService {
           return '56261';
       }
   }
+
+  getCleanSku = function() {
+      return '50456';//same sku for US and Canada
+  }
 }

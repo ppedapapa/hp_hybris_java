@@ -45,6 +45,7 @@ import { HpBundleComponent } from './page/hp-results/hp-bundle/hp-bundle.compone
 import { HpYouMayLikeComponent } from './page/hp-results/hp-you-may-like/hp-you-may-like.component';
 import { HpSkuListComponent } from './page/hp-results/hp-sku-list/hp-sku-list.component';
 import { HpKidsComponent } from './page/hp-results/hp-kids/hp-kids.component';
+import { HpGetCleanComponent } from './page/hp-results/hp-get-clean/hp-get-clean.component';
 
 // AoT requires an exported function for factories
 /* export function createTranslateLoader(http: HttpClient) {
@@ -86,7 +87,8 @@ export function translateLoader(http: HttpClient) {
         FormatPricePipe,
         HpYouMayLikeComponent,
         HpSkuListComponent,
-        HpKidsComponent
+        HpKidsComponent,
+        HpGetCleanComponent
     ],
     imports: [
         NgbModule.forRoot(),

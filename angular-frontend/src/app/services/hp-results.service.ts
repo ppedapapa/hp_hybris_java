@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { QuestionsService } from "./questions.service";
 import { environment } from "../../environments/environment";
 import { HpConfigService } from "./hp-config.service";
+import 'rxjs/add/operator/filter';
 // import {variable} from "@angular/compiler/src/output/output_ast";
 
 @Injectable()
@@ -22,7 +23,6 @@ export class HealthPrintResultsService {
     };
     resultsData;
     questions;
-    bundles;
     endPointAllHealthPrintResults = '/services/hp/getAllHealthPrints';
     endPointContent =  '/assets/mockjson/content.json';
     endPointRecommendation = '/services/hp/recommendations';
@@ -52,13 +52,33 @@ export class HealthPrintResultsService {
         return this.http.post(this.endPointRecommendation, this.questions, this.httpOptions);
     }
 
-    setResultsData(data) {
-        this.resultsData = data;
-        this.setBundles(this.resultsData);
+    private bundlesSubject: BehaviorSubject<any> = new BehaviorSubject({});
+    private bundles = this.bundlesSubject.asObservable();
+
+    private skuSubject: BehaviorSubject<any> = new BehaviorSubject({});
+    private skuInfo = this.skuSubject.asObservable();
+
+    getBundles() {
+       return this.bundles;
     }
 
-    setBundles(data) {
-        let bundles = data['recommendations']['bundles'];
+    getSkuInfo() {
+       return this.skuInfo;
+    }
+
+    /*getAnsweredSubject(): Observable<any>  {
+      return this.answeredSubject.asObservable();
+    }
+
+    setAnsweredSubject(answered: any) {
+        console.log('setAnsweredSubject', answered);
+        this.answeredSubject.next(answered);
+    }*/
+
+    setResultsData(responseData) {
+        this.resultsData = responseData;
+        let bundles = responseData['recommendations']['bundles'];
+        let getCleanSku = this.hpConfigService.getCleanSku();
         let productDetails;
         let tmpArray = [];
 
@@ -67,13 +87,15 @@ export class HealthPrintResultsService {
         for (let sku in skuList) {
             tmpArray.push(sku);
         }
+
+        //Get Kids sku list and getClean sku
         const kidsSkuList = this.getKidsSkus();
-        const skuString = tmpArray.join() + ',' + kidsSkuList.join();
+        const skuString = tmpArray.join() + ',' + kidsSkuList.join() + ',' + getCleanSku;
 
         // get productInfo using skustring as input
         this.getProductContent(skuString).subscribe(responseData => {
             productDetails = responseData['products'];
-            const productInfo = {};
+            let productInfo = {};
             let image, price;
 
             if (!productDetails) {
@@ -105,6 +127,8 @@ export class HealthPrintResultsService {
                 };
             });
 
+            this.skuSubject.next(productInfo);
+
             bundles.forEach((value, key) => {
                 value.skus.forEach(function (value2, key2) {
                     if (value2.category === 'membership') {
@@ -127,6 +151,7 @@ export class HealthPrintResultsService {
                     }
                 });
             });
+
             let kidSkus = [];
             kidsSkuList.forEach(function (value, key) {
                 const skuInfo =  productInfo[value] ? productInfo[value] : {
@@ -141,16 +166,9 @@ export class HealthPrintResultsService {
             });
             const kidsBundle = {skus: kidSkus, bundle: 'KIDS'};
             bundles.push(kidsBundle);
-        });
-        this.bundles = bundles;
-        console.log('bundles', bundles);
 
-    }
-    getBundles(tiers) {
-        console.log('bundles', this.bundles);
-        return this.bundles
-            .filter((bundle) => tiers.indexOf(bundle.bundle) !== -1)
-            .sort((a, b) => a.bundle < b.bundle ? -1 : 1);
+            this.bundlesSubject.next(bundles);
+        });
     }
 
     getKidsSkus(){
