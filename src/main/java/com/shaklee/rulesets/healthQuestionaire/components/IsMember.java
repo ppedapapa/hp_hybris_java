@@ -15,7 +15,8 @@ public class IsMember extends AbstractComponent<Questions> implements Condition<
 
 	@Override
 	public boolean evaluate(PromoRequest<Questions> q) throws InputValidationException {
-		return member ^ !member(q.request);
+		boolean notMember = !member(q.request);
+		return member ^ notMember;
 	}
 
 	public boolean member(Questions q) {

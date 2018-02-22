@@ -88,6 +88,7 @@ public class CachingSingletonLoader<V> implements Loader<Object, V> {
 		cache = new TimeCacheEntry<V>(val);
 		return val;
 	}
+	
 
 	public void clear() {
 		cache = null;
