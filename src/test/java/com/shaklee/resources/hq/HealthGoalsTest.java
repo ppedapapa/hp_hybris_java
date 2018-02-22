@@ -263,14 +263,14 @@ public class HealthGoalsTest {
 		// q.health_goals = Arrays.asList(FITNESS, BONE);
 		// testOverall(q);
 
-		q.age = 51;
+		//q.age = 51;
 		{
-			JSONObject r = callQuestions(resource, q);
-			assertBundleContains(r, TIER_1, "20284");
+			//JSONObject r = callQuestions(resource, q);
+			//assertBundleContains(r, TIER_1, "20284");
 
-			assertBundleContains(r, TIER_2, "20284");
+			//assertBundleContains(r, TIER_2, "20284");
 
-			assertBundleContains(r, TIER_3, "21293");
+			//assertBundleContains(r, TIER_3, "21293");
 		}
 	}
 
