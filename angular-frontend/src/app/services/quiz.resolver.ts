@@ -15,7 +15,11 @@ export class QuizResolver implements Resolve <Quiz[]> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Quiz[]> {
         console.log('quiz resolver');
         let healthProfile = JSON.parse(this.questionService.getHealthProfileInfo());
-        if(healthProfile !== null) {
+        let hpRetakeQuiz = JSON.parse(localStorage.getItem('hpRetakeQuiz'));
+        localStorage.removeItem('hpRetakeQuiz');
+        console.log('healthProfile', healthProfile);
+        console.log('hpRetakeQuiz', hpRetakeQuiz);
+        if(healthProfile !== null && hpRetakeQuiz === null) {
             this.router.navigate(['/healthprint-results']);
         }else {
             return Observable.create((observer: Observer<Quiz[]>) => {

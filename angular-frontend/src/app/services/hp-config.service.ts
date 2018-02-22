@@ -77,6 +77,11 @@ export class HpConfigService {
     this.pager.index = index;
   }
 
+  isMobile() {
+      console.log('isMobile', /Mobi/.test(navigator.userAgent));
+    return /Mobi/.test(navigator.userAgent);
+  }
+
   getExcludeKidQuestionList() {
       return ["stress", "sleep", "energy", "pregnant", "memory", "stress", "sleep", "exercise_frequency", "exercise_intensity", "fruits", "vegetables", "grains", "dairy", "healthy_fats", "water", "junk_food", "sugar_drinks", "breakfast", "organic", "health_goals"];
   }
@@ -115,5 +120,17 @@ export class HpConfigService {
 
   getCleanSku = function() {
       return '50456';//same sku for US and Canada
+  }
+
+  getDiet = function() {
+    return ['healthy_fats', 'water', 'sugar_drinks', 'junk_food', 'breakfast', 'organic', 'dietary_restrictions'];
+  }
+
+  getDietChart = function() {
+    return ['fruits', 'vegetables', 'grains', 'dairy'];
+  }
+
+  getLifeStyle = function() {
+    return ['energy', 'stress', 'sleep', 'memory', 'exercise_frequency', 'exercise_intensity', 'toxins', 'pregnant', 'spending'];
   }
 }

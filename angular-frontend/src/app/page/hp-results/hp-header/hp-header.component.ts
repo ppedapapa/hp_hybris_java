@@ -37,11 +37,8 @@ export class HpHeaderComponent implements OnInit {
        }
     }
 
-    public startOverQuiz(event) {
-        event.stopPropagation();
-       console.log("start over quiz");
-        console.log(this.healthPrintResultInfo);
-       return false;
+    startOverQuiz(){
+        this.healthPrintResultsService.startOverQuiz();
     }
 
     public printResults(event) {

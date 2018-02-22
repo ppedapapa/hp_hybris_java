@@ -1,0 +1,80 @@
+<section id="yourAnswers" *ngIf="!kids">
+    <div class="row recap">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="title" [innerHTML]="'results.recap-title'|translate"></div>
+            <p *ngIf="!readOnly && !isUplineReadFlag" class="desc"><span [innerHTML]="'results.answers-change'|translate"></span><a (click)="startOverQuiz();" [innerHTML]="'results.take-quiz'|translate"></a></p>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col">
+            <div class="diet">
+                <h5 [innerHTML]="'results.diet'|translate"></h5>
+                <div class="chart">
+                    <div id="chart1" [chart]="chart" class="span10"></div>
+                </div>
+                <div class="row question" *ngFor="let diet of dietRecap;">
+                    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                        <img class="img-fluid" src="{{'results.'+diet.question|translate}}"/>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-10">
+                        <p>
+                            <b>
+                                <span [innerHTML]="'questions.ques'|translate"></span>
+                                <span [innerHTML]="'questions.'+diet.question|translate"></span>
+                            </b>
+                        </p>
+                        <p *ngIf="diet.question != 'dietary-restrictions'"><span [innerHTML]="'questions.ans'|translate"></span><span [innerHTML]="'label.'+diet.answer|translate"></span></p>
+                        <p *ngIf="diet.question == 'dietary-restrictions'">
+                            <span [innerHTML]="'questions.ans'|translate"></span>
+                            <span class="chart-option" *ngFor="let options of diet.answer; let last = last">
+                                <span [innerHTML]="'label.'+options.diet| lowercase |translate"></span>
+                                <span *ngIf="!last">,</span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col">
+            <div class="life">
+                <h5 [innerHTML]="'results.life-style'|translate"></h5>
+                <div class="row question" *ngFor="let life of lifeStyleRecap">
+                    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                        <img class="img-fluid" src="{{'results.'+life.question|translate}}"/>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-10">
+                        <p>
+                            <b>
+                                <span [innerHTML]="'questions.ques'|translate"></span>
+                                <span [innerHTML]="'questions.'+life.question|translate"></span>
+                            </b>
+                        </p>
+                        <p>
+                            <span [innerHTML]="'questions.ans'|translate"></span>
+                            <span [innerHTML]="'label.'+life.answer| lowercase |translate"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row legal-disclaimers">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  *ngIf="isUS">
+        <ul class="legal-note">
+            <li>{{'legal.disclaimer-1'|translate}}</li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul>
+            <li [innerHTML]="'legal.disclaimer-2'|translate"></li>
+            <li *ngIf="vegeterian"  [innerHTML]="'legal.disclaimer-3'|translate"></li>
+            <li><span [innerHTML]="'legal.disclaimer-4'|translate"></span> <a href="" (click)='openFreeMembershipInfo()' [innerHTML]="'legal.click-here'|translate"></a>.</li>
+            <li><span [innerHTML]="'legal.disclaimer-5'|translate"></span> <a href="" (click)='openFreeWipeDetails()' [innerHTML]="'legal.click-here'|translate"></a>.</li>
+            <li *ngIf="gluten" [innerHTML]="'legal.disclaimer-6'|translate"></li>
+            <li *ngIf="pregnant" [innerHTML]="'legal.disclaimer-7'|translate"></li>
+            <li [innerHTML]="'legal.disclaimer-8'|translate"></li>
+        </ul>
+    </div>
+</div>

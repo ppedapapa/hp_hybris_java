@@ -253,4 +253,10 @@ console.log('this.questions', this.questions);
 
         return skuList;
     }
+
+    startOverQuiz() {
+        const gotoUrl =  '/healthprint';
+        localStorage.setItem('hpRetakeQuiz','true');
+        window.location.href = gotoUrl;
+    }
 }

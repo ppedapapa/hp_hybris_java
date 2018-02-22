@@ -7,6 +7,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CookieService } from 'ngx-cookie-service';
+import { ChartModule } from 'angular-highcharts';
 
 import { MultiTranslateHttpLoader } from './MultiTranslateHttpLoader';
 
@@ -46,6 +47,7 @@ import { HpYouMayLikeComponent } from './page/hp-results/hp-you-may-like/hp-you-
 import { HpSkuListComponent } from './page/hp-results/hp-sku-list/hp-sku-list.component';
 import { HpKidsComponent } from './page/hp-results/hp-kids/hp-kids.component';
 import { HpGetCleanComponent } from './page/hp-results/hp-get-clean/hp-get-clean.component';
+import { HpRecapComponent } from './page/hp-results/hp-recap/hp-recap.component';
 
 // AoT requires an exported function for factories
 /* export function createTranslateLoader(http: HttpClient) {
@@ -88,7 +90,8 @@ export function translateLoader(http: HttpClient) {
         HpYouMayLikeComponent,
         HpSkuListComponent,
         HpKidsComponent,
-        HpGetCleanComponent
+        HpGetCleanComponent,
+        HpRecapComponent
     ],
     imports: [
         NgbModule.forRoot(),
@@ -104,7 +107,8 @@ export function translateLoader(http: HttpClient) {
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        NgSelectModule
+        NgSelectModule,
+        ChartModule
     ],
     providers: [
         AppService,
