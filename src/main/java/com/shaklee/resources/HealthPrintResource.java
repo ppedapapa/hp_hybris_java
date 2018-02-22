@@ -2,6 +2,8 @@ package com.shaklee.resources;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,23 @@ public class HealthPrintResource {
 		return "forward:/";
 	}
 	
+	@RequestMapping("/{country}/{language}")
+	public String indexWithCountry(@PathVariable(value="country") String country,
+			@PathVariable(value="language") String language) {
+		return "forward:/?country="+country+"&language="+language;
+	}
+	@RequestMapping("/samlSuccess")
+	public String samlSuccess(HttpSession session) {
+		String country = (String) session.getAttribute("country");
+		String language = (String) session.getAttribute("language");
+		
+		return "forward:/?userLogged=true&country="+country+"&language="+language;
+	}
+	
 	@RequestMapping("/healthprint/{country}/{language}")
 	public String healthprintByCountry(@PathVariable(value="country") String country,
 			@PathVariable(value="language") String language) {
-		return "forward:/?country="+country+"&language="+"language";
+		return "forward:/?country="+country+"&language="+language;
 	}
 	
 	@RequestMapping("/healthprint-results")
