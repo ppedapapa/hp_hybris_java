@@ -101,7 +101,7 @@ public class HealthQuestionnaireResource {
 			String msg = "Rule engine crashed for user " + questions.user_id;
 			try {
 				String json = JSONSerializer.toJacksonJaxbJson(questions, true);
-				msg = msg + " questions:\n" + json;
+				msg = msg + " questions:\n" + json + e.toString();
 			} catch (Exception e1) {
 				logger.error("Error generating json from questions (for logging purpose)", e1);
 				// add the error string to the m

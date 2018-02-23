@@ -40,5 +40,15 @@ public class HybrisProductModelTest {
 		assertNotNull(p);
 		
 	}
+	
+	@Test
+	public void testGetMemebershipSKUs() throws Exception {
+
+		
+		List<Product> p =  hybrisProductModel.getMembershipSkus("US", "en");
+
+		assertNotNull(p);
+
+	}
 
 }

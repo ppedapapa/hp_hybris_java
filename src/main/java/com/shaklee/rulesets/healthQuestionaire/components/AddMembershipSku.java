@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shaklee.DAO.ProductPriceDAO;
 import com.shaklee.entity.Product;
 import com.shaklee.healthPrint.data.Bundle;
 import com.shaklee.healthPrint.data.SKU;
@@ -31,8 +32,8 @@ public class AddMembershipSku extends AbstractComponent<PromoRequest<Questions>>
 
 	public String category;
 
-	//@Autowired
-	// ProductPriceDAO productDAO;
+	@Autowired
+	ProductPriceDAO productDAO;
 
 	@Override
 	public void exec(PromoRequest<Questions> r) {
@@ -40,15 +41,20 @@ public class AddMembershipSku extends AbstractComponent<PromoRequest<Questions>>
 		if (q.country_code == null || q.language == null)
 			return;
 
-		//Product p = productDAO.getMembershipSku(q.country_code, Language.valueOf(q.language));
-		Product p = null;
-		for (Bundle b : bundle) {
-			JoinSKUAction s = new JoinSKUAction();
-			s.item_sku = p.code;
-			s.bundle = b;
-			s.category = category;
-			s.sn_price = new BigDecimal(p.getPriceByPriceTier("SN").floatValue()).setScale(2, BigDecimal.ROUND_HALF_DOWN);
-			PromoActionUtils.addAction(r, ruleset, s);
+		Product p = productDAO.getMembershipSku(q.country_code, Language.valueOf(q.language));
+		if( p != null)
+		{
+			for (Bundle b : bundle) {
+				JoinSKUAction s = new JoinSKUAction();
+				s.item_sku = p.code;
+				s.bundle = b;
+				s.category = category;
+				BigDecimal sn_price = p.getPriceByPriceTier("SN");
+				// TODO: Remove below code after Hybris has prices for the skus
+				if (sn_price == null) sn_price = new BigDecimal("0");
+				s.sn_price = new BigDecimal(sn_price.floatValue()).setScale(2, BigDecimal.ROUND_HALF_DOWN);
+				PromoActionUtils.addAction(r, ruleset, s);
+			}
 		}
 	}
 

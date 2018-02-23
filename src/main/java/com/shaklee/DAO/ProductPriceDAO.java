@@ -3,6 +3,11 @@ package com.shaklee.DAO;
 import static com.shaklee.shared.data.Language.en;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -48,7 +53,7 @@ public class ProductPriceDAO {
 
 	private final MultiCachingLoader<ProductSkuKey, Product> productCache;
 	private final CachingSingletonLoader<Map<String, List<String>>> packCache;
-	private final CachingSingletonLoader<Map<String, Product>> membershipSkuCache;
+	private final MultiCachingLoader<String, Product> membershipSkuCache;
 	private final CachingSingletonLoader<Set<String>> joinKitsCache;
 	private final CachingSingletonLoader<Map<String, Product>> distributorKitSkuCache;
 
@@ -75,13 +80,13 @@ public class ProductPriceDAO {
 					}
 				}, CACHE_EXPIRATION_SEC, true);
 
-		membershipSkuCache = new CachingSingletonLoader<Map<String, Product>>(
-				new Loader<Object, Map<String, Product>>() {
+		membershipSkuCache = new MultiCachingLoader<String, Product>(
+				new Loader<Collection<String>, Map<String, Product>>() {
 					@Override
-					public Map<String, Product> get(Object key) {
-						return getMembershipSkus();
+					public Map<String, Product> get(Collection<String> key) {
+						return getMembershipSkus(key);
 					}
-				}, CACHE_EXPIRATION_SEC, true);
+				}, CACHE_EXPIRATION_SEC);
 
 		joinKitsCache = new CachingSingletonLoader<Set<String>>(new Loader<Object, Set<String>>() {
 			@Override
@@ -219,10 +224,12 @@ public class ProductPriceDAO {
 	}
 	
 	public Product getMembershipSku(String country, Language l) {
-		final Map<String, Product> skus = membershipSkuCache.get();
+		String key = l.name() + '_' + country;
+		
+		final Map<String, Product> skus = membershipSkuCache.get(new ArrayList<String>(Arrays.asList(key)));
 
 		{
-			String key = l.name() + '_' + country;
+			// String key = l.name() + '_' + country;
 			Product sku = skus.get(key);
 			if (sku != null)
 				return sku;
@@ -236,8 +243,32 @@ public class ProductPriceDAO {
 		return null;
 	}
 
-	Map<String, Product> getMembershipSkus() {
+	Map<String, Product> getMembershipSkus(Collection<String> key) {
 		final Map<String, Product> skus = new HashMap<String, Product>();
+		
+		try {
+			String countryLang = key.iterator().next();
+			
+			if (countryLang == null)
+			{
+				return null;
+			}
+			
+			String lang = countryLang.split("_")[0];
+			String country = countryLang.split("_")[1];
+			
+			List<Product> products = hybrisProductModel.getMembershipSkus(country.toUpperCase(), lang);
+			
+			for(Product p: products)
+			{
+				p.country = Country2.getCountry(country.toLowerCase());
+				skus.put(lang + '_' + country, p);
+			}
+		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
+				| JSONException e) {
+			logger.error("Error adding membership sku", e);
+		}
+		
 		/*
 		jdbcTemplate.query(getMembershipSku, new RowCallbackHandler() {
 
@@ -274,7 +305,8 @@ public class ProductPriceDAO {
 		// dirty low memory conversion by reusing the same collection
 		for (@SuppressWarnings("rawtypes") Map.Entry e : products.entrySet()) {
 			Product p = (Product)e.getValue();
-			e.setValue(Float.valueOf(p.getPriceByPriceTier("MP").floatValue()));
+			// TODO: update below code 
+			e.setValue(Float.valueOf(p.getPriceByPriceTier("MP") != null ? p.getPriceByPriceTier("MP").toString(): "0"));
 		}
 		
 		return (Map<String, Float>) products;

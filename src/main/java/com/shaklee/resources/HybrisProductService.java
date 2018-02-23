@@ -39,6 +39,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.shaklee.entity.Product;
+import com.shaklee.shared.data.Language;
 
 @Component
 public class HybrisProductService {
@@ -57,6 +58,8 @@ public class HybrisProductService {
 	final static String uri2 = "?fields=BASIC";
 
 	final static String uri2_fields = "&fields=BASIC";
+	
+	final static String uri3 = "&lang=";
 
 	private static Logger logger = LoggerFactory.getLogger(HybrisProductService.class);
 
@@ -72,18 +75,7 @@ public class HybrisProductService {
 
 			// TODO: Refactore the below code once certificate is added to
 			// www.shakleedev.com
-			SSLContextBuilder builder = new SSLContextBuilder();
-			builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-			SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(builder.build(),
-					NoopHostnameVerifier.INSTANCE);
-
-			Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
-					.register("http", new PlainConnectionSocketFactory()).register("https", sslConnectionSocketFactory)
-					.build();
-			PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
-			cm.setMaxTotal(100);
-			CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory)
-					.setConnectionManager(cm).build();
+			CloseableHttpClient httpclient = getHttpClient();
 
 			String restUrl = null;
 			if (skus.size() == 1) {
@@ -109,7 +101,9 @@ public class HybrisProductService {
 						List<Product> p = Arrays.asList(mapper.readValue(response, Product.class));
 						return p;
 					} else {
-						List<Product> p = mapper.readValue(jsonResponse.getString("products"), new TypeReference<List<Product>>(){});
+						List<Product> p = mapper.readValue(jsonResponse.getString("products"),
+								new TypeReference<List<Product>>() {
+								});
 						return p;
 					}
 
@@ -122,6 +116,64 @@ public class HybrisProductService {
 
 		return null;
 
+	}
+
+	public List<Product> getMembershipSkus(String country, String l) throws KeyManagementException,
+			NoSuchAlgorithmException, KeyStoreException, ClientProtocolException, IOException, JSONException {
+		// TODO: Refactore the below code once certificate is added to
+		// www.shakleedev.com
+		
+		hybrisUrl = env.getProperty("hybrisUrl");
+
+		CloseableHttpClient httpclient = getHttpClient();
+
+		String uri_membership = "getMembershipProducts";
+
+		String restUrl = null;
+		if (l != null && country != null)
+			 restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 + uri3 + l + '_' + country;
+		
+		else
+			 restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 ;
+		
+
+		if (restUrl != null) {
+			HttpGet httpGet = new HttpGet(restUrl);
+
+			HttpResponse response1 = httpclient.execute(httpGet);
+			HttpEntity responseEntity = response1.getEntity();
+			if (responseEntity != null) {
+
+				String response = EntityUtils.toString(responseEntity);
+				JSONObject jsonResponse = new JSONObject(response);
+				ObjectMapper mapper = new ObjectMapper();
+
+				List<Product> p = mapper.readValue(jsonResponse.getString("products"),
+						new TypeReference<List<Product>>() {
+						});
+				return p;
+			}
+
+		}
+
+		return null;
+	}
+
+	private CloseableHttpClient getHttpClient()
+			throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+		SSLContextBuilder builder = new SSLContextBuilder();
+		builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+		SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(builder.build(),
+				NoopHostnameVerifier.INSTANCE);
+
+		Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+				.register("http", new PlainConnectionSocketFactory()).register("https", sslConnectionSocketFactory)
+				.build();
+		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
+		cm.setMaxTotal(100);
+		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory)
+				.setConnectionManager(cm).build();
+		return httpclient;
 	}
 
 }
