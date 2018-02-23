@@ -1,12 +1,9 @@
 import 'rxjs/add/operator/map';
 
-import {Injectable, Input, OnInit} from '@angular/core';
+import {Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Quiz } from '../models/quiz';
 import { HpConfigService } from './hp-config.service';
-import { Question, Option } from '../models/index';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Observable } from "rxjs/Observable";
+import { Quiz, Question, Option } from '../models';
 import { Router } from "@angular/router";
 
 @Injectable()
@@ -22,20 +19,20 @@ export class QuestionsService {
   isShaklee180;
   pws_owner_id = null; // update this value based on req -- revisit
 
-  private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
+  // private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
 
   constructor(private http: HttpClient,
               private hpconfigService: HpConfigService,
               private router: Router) {}
 
-  getAnsweredSubject(): Observable<any>  {
+  /*getAnsweredSubject(): Observable<any>  {
     return this.answeredSubject.asObservable();
   }
 
   setAnsweredSubject(answered: any) {
       console.log('setAnsweredSubject', answered);
       this.answeredSubject.next(answered);
-  }
+  }*/
 
   getAnswered(): any {
       return this.answered;
@@ -149,14 +146,21 @@ export class QuestionsService {
     console.log('answered',this.answered);
   }
 
+  setHealthProfileInfo(profile) {
+      localStorage.setItem('healthProfile', JSON.stringify(profile) );
+  };
+
+  getHealthProfileInfo() {
+      return localStorage.getItem('healthProfile' );
+  };
+
   update(){
       let data = this.formatPostData();
-console.log('data answered', data);
       this.http.post('/services/hp/questions/update', data)
       .subscribe(responseData => {
-          console.log('responseData', responseData);
+          let profileInfo = {healthProfileId:responseData['healthProfileId'],email:data['email']};
+          this.setHealthProfileInfo(profileInfo);
           this.router.navigate(['/healthprint-results']);
-
       });
   }
 
@@ -180,7 +184,7 @@ console.log('data answered', data);
     let postData = {questions:{}};
     for(let key in tempPostData){
         if((excludeNonQuestions.indexOf(key) == -1)) {
-            postData.questions[key] = ((kidExcludeList.indexOf(key) >= 0) && (parseInt(this.answered.age) < 13))?undefined:this.stringToNumber(tempPostData[key]);
+            postData.questions[key] = ((kidExcludeList.indexOf(key) >= 0) && (parseInt(this.answered.age) < 13))?undefined:QuestionsService.stringToNumber(tempPostData[key]);
 
         }
         else if (excludeNonQuestions.indexOf(key) >=0) {
@@ -188,12 +192,12 @@ console.log('data answered', data);
         }
     }
     console.log('PostData', postData);
-    this.setAnsweredSubject(postData);
+    // this.setAnsweredSubject(postData);
 
     return postData;
   }
 
-  stringToNumber(value) {
+  static stringToNumber(value) {
     if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
         return parseInt(value);
     }

@@ -23,14 +23,14 @@ public class HealthPrintResource {
 	@RequestMapping("/{country}/{language}")
 	public String indexWithCountry(@PathVariable(value="country") String country,
 			@PathVariable(value="language") String language) {
-		return "forward:/?country="+country+"&language="+language;
+		return "redirect:/?country="+country+"&language="+language;
 	}
 	@RequestMapping("/samlSuccess")
 	public String samlSuccess(HttpSession session) {
 		String country = (String) session.getAttribute("country");
 		String language = (String) session.getAttribute("language");
 		
-		return "forward:/?userLogged=true&country="+country+"&language="+language;
+		return "redirect:/?userLogged=true&country="+country+"&language="+language;
 	}
 	
 	@RequestMapping("/healthprint/{country}/{language}")
@@ -40,8 +40,11 @@ public class HealthPrintResource {
 	}
 	
 	@RequestMapping("/healthprint-results")
-	public String results() {
-		return "forward:/";
+	public String results(HttpSession session) {
+		String country = (String) session.getAttribute("country");
+        String language = (String) session.getAttribute("language");
+
+        return "redirect:/?userLogged=true&country="+country+"&language="+language;
 	}
 	
 	@RequestMapping("/healthprint-results/{hpid}")

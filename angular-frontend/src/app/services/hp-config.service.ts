@@ -9,7 +9,7 @@ export class HpConfigService {
   };
 
   private pageLength = new Subject<number>();
-
+  isUS = true;
   length = this.pageLength.asObservable();
 
   updatelength(length: number) {
@@ -77,7 +77,60 @@ export class HpConfigService {
     this.pager.index = index;
   }
 
+  isMobile() {
+      console.log('isMobile', /Mobi/.test(navigator.userAgent));
+    return /Mobi/.test(navigator.userAgent);
+  }
+
   getExcludeKidQuestionList() {
       return ["stress", "sleep", "energy", "pregnant", "memory", "stress", "sleep", "exercise_frequency", "exercise_intensity", "fruits", "vegetables", "grains", "dairy", "healthy_fats", "water", "junk_food", "sugar_drinks", "breakfast", "organic", "health_goals"];
+  }
+
+  getKosherSkus = function() {
+      if (this.isUS) {
+          return ['20001', '21261', '20096', '21216'];
+      } else {
+          return ['57475', '55400', '54420'];
+      }
+  }
+
+  getNonKosherSkus = function() {
+      if(this.isUS){
+          return ['20002', '20076', '20096', '21261'];
+      }else{
+          return ['57475', '55400', '54420', '57860'];
+      }
+  }
+
+  getNonSoySku = function() {
+      if(this.isUS) {
+          return '21275';
+      }else{
+          return '56278';
+      }
+  }
+
+  getSoySku = function() {
+      if(this.isUS) {
+          return '21261';
+      }else{
+          return '56261';
+      }
+  }
+
+  getCleanSku = function() {
+      return '50456';//same sku for US and Canada
+  }
+
+  getDiet = function() {
+    return ['healthy_fats', 'water', 'sugar_drinks', 'junk_food', 'breakfast', 'organic', 'dietary_restrictions'];
+  }
+
+  getDietChart = function() {
+    return ['fruits', 'vegetables', 'grains', 'dairy'];
+  }
+
+  getLifeStyle = function() {
+    return ['energy', 'stress', 'sleep', 'memory', 'exercise_frequency', 'exercise_intensity', 'toxins', 'pregnant', 'spending'];
   }
 }
