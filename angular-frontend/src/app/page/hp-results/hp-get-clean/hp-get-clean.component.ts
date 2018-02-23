@@ -9,7 +9,7 @@ import {isEmpty} from "rxjs/operators";
   styleUrls: ['./hp-get-clean.component.scss']
 })
 export class HpGetCleanComponent implements OnInit {
-  kids = false;
+  kids = this.healthPrintResultsService.isKids();
   image;
   price;
   getCleanSkuInfo = [];

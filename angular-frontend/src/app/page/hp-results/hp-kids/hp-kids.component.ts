@@ -10,7 +10,7 @@ export class HpKidsComponent implements OnInit {
   showKids = false;
   bundles = [];
   kidsBundle = [];
-  kids = false;
+  kids = this.healthPrintResultsService.isKids();
 
   constructor(private healthPrintResultsService: HealthPrintResultsService) { }
 

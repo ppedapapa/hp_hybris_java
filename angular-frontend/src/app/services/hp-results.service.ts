@@ -197,6 +197,10 @@ console.log('this.questions', this.questions);
         return this.http.get(this.endPointContent);
     }
 
+    isKids() {
+        return this.questions.age <= 12;
+    }
+
     getProductContent(sku) {
         let codes= '&codes='+sku;
         return this.http.get(this.endPointProduct+codes);

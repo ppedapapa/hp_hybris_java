@@ -21,7 +21,7 @@ export class HpRecapComponent implements OnInit {
   gluten = false;
   bmiWeightRange = {};
   recap = this.healthprintResultsService.questions;
-  kids;
+  kids = this.healthprintResultsService.isKids();
   chart;
   isUS;
 
@@ -31,11 +31,8 @@ export class HpRecapComponent implements OnInit {
               private hpConfigService: HpConfigService) { }
 
   ngOnInit() {
-      if(this.recap.age > 12){
-          this.kids = false;
+      if(this.kids === false){
           this.getRecap()
-      }else{
-          this.kids = true;
       }
       this.isUS = this.appConst.country === "US";
   }
