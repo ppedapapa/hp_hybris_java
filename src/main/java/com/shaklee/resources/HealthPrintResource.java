@@ -19,7 +19,7 @@ public class HealthPrintResource {
 	@RequestMapping("/healthprint")
 	public String healthprint(@RequestParam(value="country") String country,
 			@RequestParam(value="language") String language) {
-		return "forward:/?country="+country+"&language="+language;
+		return "redirect:/?country="+country+"&language="+language;
 	}
 	
 	

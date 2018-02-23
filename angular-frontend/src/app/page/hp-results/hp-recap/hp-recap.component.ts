@@ -19,7 +19,6 @@ export class HpRecapComponent implements OnInit {
   pregnant = false;
   vegeterian = false;
   gluten = false;
-  bmiWeightRange = {};
   recap = this.healthprintResultsService.questions;
   kids = this.healthprintResultsService.isKids();
   chart;
@@ -41,11 +40,6 @@ export class HpRecapComponent implements OnInit {
       let lifeStyleJson = this.hpConfigService.getLifeStyle();
       let dietJson = this.hpConfigService.getDiet();
       let dietChartJson = this.hpConfigService.getDietChart();
-      let minWeight = this.getBMI(18.5, this.recap.height_inches);
-      let maxWeight = this.getBMI(24.9, this.recap.height_inches);
-      this.bmiWeightRange['minWeight'] = Math.floor(minWeight);
-      this.bmiWeightRange['maxWeight'] = Math.floor(maxWeight);
-
       let chartCategory = [];
       let chartIntake = [];
       let question, answer;
@@ -280,10 +274,6 @@ export class HpRecapComponent implements OnInit {
       });
   }
 
-  getBMI(bmi, height) {
-      var heightInches = (parseInt(height.foot) * 12)+parseInt(height.inches);
-      return (Math.pow(heightInches, 2) * bmi / 703);
-  }
   startOverQuiz(){
       this.healthprintResultsService.startOverQuiz();
   }
