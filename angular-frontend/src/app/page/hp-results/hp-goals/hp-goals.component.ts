@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HealthPrintResultsService } from "../../../services/hp-results.service";
 
 @Component({
   selector: 'app-hp-goals',
@@ -19,9 +20,13 @@ export class HpGoalsComponent implements OnInit {
       }
     ];
 
-  constructor() { }
+  constructor(private healthPrinResultsService: HealthPrintResultsService) { }
 
   ngOnInit() {
+  }
+
+  readGoalInfo(){
+      this.healthPrinResultsService.openModal('goal', 'data');
   }
 
 }

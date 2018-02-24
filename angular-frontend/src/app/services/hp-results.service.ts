@@ -269,10 +269,11 @@ console.log('this.questions', this.questions);
         window.location.href = gotoUrl;
     }
 
-    openModal(content) {
-        console.log('content', content);
+    openModal(name, data) {
+        console.log('modalName', name);
         const modalRef = this.modalService.open(HpResultsModalComponent);
-        modalRef.componentInstance.name = 'World';
+        modalRef.componentInstance.modalName = name;
+        modalRef.componentInstance.modalData = data;
     }
 
     static getDismissReason(reason: any): string {

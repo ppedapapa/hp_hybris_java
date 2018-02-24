@@ -19,8 +19,10 @@ export class HpHealthScoreComponent implements OnInit {
     console.log('scoreName', this.scoreName);
   }
 
-  readMoreInfo(type, data) {
-    this.healthPrintResultsService.openModal(type);
+  readMoreInfo(data) {
+    const modalName = 'readMore';
+    const modalData = 'modalData';
+    this.healthPrintResultsService.openModal(modalName, modalData);
   }
 
 }
