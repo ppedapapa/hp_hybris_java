@@ -13,10 +13,10 @@ public class LoginResource {
 	
 	@RequestMapping("/healthprint-login")
 	public String login(@RequestParam(value="country") String country,
-			@RequestParam(value="language") String language, HttpSession session) {
+			@RequestParam(value="lang") String lang, HttpSession session) {
 		  
 		session.setAttribute("country", country);
-		session.setAttribute("language", language);
+		session.setAttribute("lang", lang);
 		
 		return "redirect:/saml/login";
 	}

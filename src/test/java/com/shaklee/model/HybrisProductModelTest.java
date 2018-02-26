@@ -19,15 +19,15 @@ import com.shaklee.Application;
 import com.shaklee.entity.Product;
 import com.shaklee.resources.HybrisProductService;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @PropertySource("classpath:application-local.properties")
 public class HybrisProductModelTest {
 
 	@Autowired
 	HybrisProductService hybrisProductModel;
 
-	@Test
+	//@Test
 	public void testGetProducts() throws Exception {
 
 		
@@ -41,7 +41,7 @@ public class HybrisProductModelTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetMemebershipSKUs() throws Exception {
 
 		
