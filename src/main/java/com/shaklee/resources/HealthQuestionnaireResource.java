@@ -142,9 +142,8 @@ public class HealthQuestionnaireResource {
 	}
 
 	public static class UserRequestForGetAllHealthPrints {
-		@Optional
-		public String user_id;
 		
+		public String user_id;
 		public String email;
 		public String downline_id;
 		public String health_profile_id;
