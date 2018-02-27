@@ -9,6 +9,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.jvnet.hk2.annotations.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,17 +115,6 @@ public class HealthQuestionnaireResource {
 
 	}
 	
-	@RequestMapping(path = "/testUserId", method = GET)
-	public String testUserId(@CurrentUser User user)
-	{
-		
-		if (user == null)
-			return "user_not_logged" ;
-		
-		return user.getUsername() ;
-		
-	}
-
 	@RequestMapping(path = "/questions/update", method = POST)
 	public StorageResponse update(@RequestBody StorageRequest request, @CurrentUser User user) throws InputValidationException
 	{
@@ -145,17 +135,19 @@ public class HealthQuestionnaireResource {
 		
 		if (user != null && user.getUsername() != null)
 		{
-			return healthQuestionnaireModel.getAllHealthPrints(user.getUsername(), request.email, request.downline_id);
+			request.user_id = user.getUsername();
 			
 		}
-		return healthQuestionnaireModel.getAllHealthPrints(null, request.email, request.downline_id);
+		return healthQuestionnaireModel.getAllHealthPrints(request);
 	}
 
 	public static class UserRequestForGetAllHealthPrints {
-		// @ShakleeID
-		// public String user_id;
+		@Optional
+		public String user_id;
+		
 		public String email;
 		public String downline_id;
+		public String health_profile_id;
 	}
 	
 	public static final class MultipleHealthProfilesResponse extends StatusResponse {
