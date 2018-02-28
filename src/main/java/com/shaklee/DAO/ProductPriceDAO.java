@@ -215,8 +215,25 @@ public class ProductPriceDAO {
 	}
 
 	Set<String> _getJoinKits() {
+		Set<String> joinKits  = null;
+		try {
+			List<ProductSkuKey> products = hybrisProductModel.getJoinSkus("US");
+			
+			products.addAll(hybrisProductModel.getJoinSkus("CA"));
+			
+			joinKits = new HashSet<String>();
+			
+			for (ProductSkuKey skuKey: products)
+			{
+				joinKits.add(skuKey.code);
+			}
+		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
+				| JSONException e) {
+			return null;
+		}
+
 		//return new HashSet<String>(jdbcTemplate.query(getJoinKits, STRING_ROW_MAPPER));
-		return null;
+		return joinKits;
 	}
 
 	public Set<String> getJoinKits() {

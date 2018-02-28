@@ -39,6 +39,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.shaklee.entity.Product;
+import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
 import com.shaklee.shared.data.Language;
 
 @Component
@@ -149,6 +150,42 @@ public class HybrisProductService {
 				ObjectMapper mapper = new ObjectMapper();
 
 				List<Product> p = mapper.readValue(jsonResponse.getString("products"),
+						new TypeReference<List<Product>>() {
+						});
+				return p;
+			}
+
+		}
+
+		return null;
+	}
+	
+	public List<ProductSkuKey> getJoinSkus(String country) throws KeyManagementException, NoSuchAlgorithmException,
+			KeyStoreException, ClientProtocolException, IOException, JSONException {
+		// TODO: Refactore the below code once certificate is added to
+		// www.shakleedev.com
+
+		hybrisUrl = env.getProperty("hybrisUrl");
+
+		CloseableHttpClient httpclient = getHttpClient();
+
+		String uri_join = "getJoinSkus?fields=SKU";
+
+		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_join ;
+
+	
+		if (restUrl != null) {
+			HttpGet httpGet = new HttpGet(restUrl);
+
+			HttpResponse response1 = httpclient.execute(httpGet);
+			HttpEntity responseEntity = response1.getEntity();
+			if (responseEntity != null) {
+
+				String response = EntityUtils.toString(responseEntity);
+				JSONObject jsonResponse = new JSONObject(response);
+				ObjectMapper mapper = new ObjectMapper();
+
+				List<ProductSkuKey> p = mapper.readValue(jsonResponse.getString("products"),
 						new TypeReference<List<Product>>() {
 						});
 				return p;
