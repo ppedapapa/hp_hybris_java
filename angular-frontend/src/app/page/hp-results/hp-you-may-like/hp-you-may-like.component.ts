@@ -26,5 +26,7 @@ export class HpYouMayLikeComponent implements OnInit {
 
             this.considerBundle = this.bundles[0];
         });
+
+        console.log('considerBundle', this.considerBundle);
     }
 }

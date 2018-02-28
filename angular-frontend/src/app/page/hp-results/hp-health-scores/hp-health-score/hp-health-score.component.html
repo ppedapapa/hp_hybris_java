@@ -2,15 +2,16 @@
   <h3 class="title">Your Healthprint diet score of <b>43</b> indicates you’re ready to make a change.</h3>
   <div class="row score-bar">
     <div class="col-xs-4 col-sm-6 col-md-6 col-lg-6">
-      <img class="img-responsive" src="//images.shaklee.com/healthprint/score-diet-blue.png">
+      <img class="img-fluid" src="//images.shaklee.com/healthprint/score-diet-blue.png">
     </div>
     <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
-      <h3 class="img-label ng-binding" ng-bind-html="'personalize-health.results.diet-score'|translate">DIET SCORE</h3>
+      <h3 class="img-label" [innerHTML]="'results.'+scoreName+'-score'|translate"></h3>
     </div>
   </div>
-  <div class="row score-bar ">
+  <div class="row score-bar">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="legend"><span class="score-mover" ng-style="{width: contRecomInfo.diet.score+'%'}" style="width: 43%;"><em class="ng-binding">43</em></span></div>
+      <!--[ngStyle]="{width: contentInfo.diet.score+'%'}"-->
+      <div class="legend"><span class="score-mover"><em>43</em></span></div>
       <div class="bar">
         <div class="scale red"> </div>
         <div class="scale orange"> </div>
@@ -21,9 +22,10 @@
     </div>
   </div>
   <div class="score-info">
-    <p class="info"><span ng-bind-html="'personalize-health.results.content-recom.intro-'+contRecomInfo.diet.key|translate" class="ng-binding">Completing your Shaklee Healthprint is a great first step on the path to a healthier you.  Based on your responses, here are some ways you can improve your diet</span>...</p>
+    <!--<p class="info"><span [innerHTML]="'results.content-recom.intro-'+contentInfo.diet.key|translate"></span>...</p>-->
+    <p class="info">Completing your Shaklee Healthprint is a great first step on the path to a healthier you.  Based on your responses, here are some ways you can improve your diet...</p>
   </div>
   <div class="read-more-box">
-    <span class="learn-more ng-binding" ng-bind-html="'personalize-health.label.read-more'|translate" ng-click="readMoreInfo(contRecomInfo.diet,'diet')">Read More</span>
+    <span class="learn-more" [innerHTML]="'label.read-more'|translate" (click)="readMoreInfo('dietLifestyle')">Read More</span>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, OnInit} from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
 
 import { PageComponent } from './page/page.component';
@@ -49,6 +49,9 @@ const appRoutes: Routes = [
     ],
     exports: [RouterModule]
 })
-export class AppRoutingModule {
+export class AppRoutingModule implements OnInit {
 
+    ngOnInit() {
+        console.log('window.location.pathname', window.location.pathname)
+    }
 }

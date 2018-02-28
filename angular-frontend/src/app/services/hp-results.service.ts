@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { QuestionsService } from "./questions.service";
 import { environment } from "../../environments/environment";
-import { HpConfigService } from "./hp-config.service";
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import 'rxjs/add/operator/filter';
+
+import { HpConfigService } from "./hp-config.service";
+import { QuestionsService } from "./questions.service";
+import { HpResultsModalComponent } from "../page/hp-results/hp-results-modal/hp-results-modal.component";
 // import {variable} from "@angular/compiler/src/output/output_ast";
 
 @Injectable()
@@ -23,6 +26,7 @@ export class HealthPrintResultsService {
     };
     resultsData;
     questions;
+    closeResult: string;
     endPointAllHealthPrintResults = '/services/hp/getAllHealthPrints';
     endPointContent =  '/assets/mockjson/content.json';
     endPointRecommendation = '/services/hp/recommendations';
@@ -30,7 +34,8 @@ export class HealthPrintResultsService {
 
     constructor(private http: HttpClient,
                 private questionsService: QuestionsService,
-                private hpConfigService: HpConfigService) {}
+                private hpConfigService: HpConfigService,
+                private modalService: NgbModal) {}
 
     getAllHealthPrints() {
         let healthProfile = JSON.parse(this.questionsService.getHealthProfileInfo());
@@ -262,5 +267,22 @@ console.log('this.questions', this.questions);
         const gotoUrl =  '/healthprint';
         localStorage.setItem('hpRetakeQuiz','true');
         window.location.href = gotoUrl;
+    }
+
+    openModal(name, data) {
+        console.log('modalName', name);
+        const modalRef = this.modalService.open(HpResultsModalComponent);
+        modalRef.componentInstance.modalName = name;
+        modalRef.componentInstance.modalData = data;
+    }
+
+    static getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return  `with: ${reason}`;
+        }
     }
 }

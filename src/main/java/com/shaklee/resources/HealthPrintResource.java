@@ -17,25 +17,18 @@ import com.shaklee.security.stereotypes.CurrentUser;
 public class HealthPrintResource {
 
 	@RequestMapping("/healthprint")
-	public String healthprint(@RequestParam(value="country", required = false) String country,
-			@RequestParam(value="lang", required = false) String lang) {
-		
-		if (country != null && lang != null)
-			return "redirect:/?country="+country+"&lang="+lang;
-		else
-			return "redirect:/";
+	public String healthprint(@RequestParam(value="country") String country,
+			@RequestParam(value="language") String language) {
+		return "redirect:/?country="+country+"&language="+language;
 	}
 	
 	
 	@RequestMapping("/samlSuccess")
 	public String samlSuccess(HttpSession session) {
 		String country = (String) session.getAttribute("country");
-		String lang = (String) session.getAttribute("lang");
+		String language = (String) session.getAttribute("language");
 		
-		if (country != null && lang != null)
-			return "redirect:/?userLogged=true&country="+country+"&lang="+lang;
-		else
-			return "redirect:/?userLogged=true";
+		return "redirect:/?userLogged=true&country="+country+"&language="+language;
 	}
 	
 	
@@ -43,9 +36,9 @@ public class HealthPrintResource {
 	@RequestMapping("/healthprint-results")
 	public String results(HttpSession session) {
 		String country = (String) session.getAttribute("country");
-        String lang = (String) session.getAttribute("lang");
+        String language = (String) session.getAttribute("language");
 
-        return "redirect:/?userLogged=true&country="+country+"&lang="+lang;
+        return "redirect:/?userLogged=true&country="+country+"&language="+language;
 	}
 	
 	@RequestMapping("/healthprint-results/{hpid}")

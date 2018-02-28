@@ -1,8 +1,10 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Buffer } from 'buffer';
+import { environment } from '../../../../environments/environment';
+
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from '../../../services/cart.service';
-import { environment } from '../../../../environments/environment';
+import {HealthPrintResultsService} from "../../../services/hp-results.service";
 
 @Component({
   selector: 'app-hp-add-cart',
@@ -14,7 +16,9 @@ export class HpAddCartComponent implements OnInit {
 
   @Input() bundle;
   @Input() sku;
-  constructor( private cookieService: CookieService, private cartService: CartService ) { }
+  constructor( private cookieService: CookieService,
+               private cartService: CartService,
+               private healthPrinResultsService: HealthPrintResultsService,) { }
 
   ngOnInit() {
   }
@@ -24,6 +28,7 @@ export class HpAddCartComponent implements OnInit {
     sku.push(this.sku.sku);
     this.cartService.addToCart(this.sku);
     console.log(sku);
+    this.healthPrinResultsService.openModal('addCart', 'data');
     // this.cartService.addToCart(['20282', '21261']);
   }
   // addBundleToCart() {
