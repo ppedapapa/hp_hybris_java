@@ -23,6 +23,7 @@ import com.shaklee.resources.HealthQuestionnaireResource.CommonStorageRequest;
 import com.shaklee.common.util.LazyLoadingSecureRandom;
 import com.shaklee.resources.HealthQuestionnaireResource.StorageRequest;
 import com.shaklee.resources.HealthQuestionnaireResource.StorageResponse;
+import com.shaklee.resources.HealthQuestionnaireResource.UserRequestForGetAllHealthPrints;
 import com.shaklee.util.DataResponse;
 import com.shaklee.resources.HealthQuestionnaireResource;
 import com.shaklee.resources.HealthQuestionnaireResource.MultipleHealthProfilesResponse;
@@ -50,16 +51,18 @@ public class HealthQuestionnaireModel {
 
 
 	
-	public MultipleHealthProfilesResponse getAllHealthPrints(String shakleeId, String email, String downline_id)
+	public MultipleHealthProfilesResponse getAllHealthPrints(UserRequestForGetAllHealthPrints requestObj)
 		{
 
-		String request = "shakleeId: " + shakleeId + ", email: " + email + " , downline_id:" + downline_id;
+		String request = "shakleeId: " + requestObj.user_id + ", email: " + requestObj.email + " , downline_id:" + requestObj.downline_id
+				+ "health profile id: " + requestObj.health_profile_id;
 		
-		email = normalizeEmail(email);
+		requestObj.email = normalizeEmail(requestObj.email);
 		
 		try {
 
-			final List<UserDataResponse> data = getAllHealthProfileIds(shakleeId, email, downline_id);
+			final List<UserDataResponse> data = getAllHealthProfileIds(requestObj.health_profile_id, requestObj.user_id, 
+					requestObj.email, requestObj.downline_id);
 
 			if (data == null) {
 				
@@ -71,8 +74,8 @@ public class HealthQuestionnaireModel {
 		
 			return r;
 		  } catch (Exception e) {
-			String msg = "FAILED for shakleeId: " + shakleeId + ", email: " + email
-					+ " , downline_id:" + downline_id;
+			String msg = "FAILED for shakleeId: " + requestObj.user_id + ", email: " + requestObj.email
+					+ " , downline_id:" + requestObj.downline_id + "health_print_id" + requestObj.health_profile_id;
 
 			
 			return (MultipleHealthProfilesResponse) new MultipleHealthProfilesResponse(StatusResponse.SERVER_ERROR);
@@ -87,9 +90,8 @@ public class HealthQuestionnaireModel {
 		return s;
 	}
 	
-	public List<UserDataResponse> getAllHealthProfileIds(final String userId, final String email,
-			final String downlineId) {
-		return userDataStorageDAO.getTop20HealthPrints(userId, email, downlineId);
+	public List<UserDataResponse> getAllHealthProfileIds(String health_print_id, String user_id, String email, String downline_id) {
+		return userDataStorageDAO.getTop20HealthPrints(health_print_id, user_id, email, downline_id);
 	}
 	
 	public StorageResponse insert(final StorageRequest request, final String shakleeId)

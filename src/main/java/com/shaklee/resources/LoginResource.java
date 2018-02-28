@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginResource {
 	
 	@RequestMapping("/healthprint-login")
-	public String login(@RequestParam(value="country") String country,
-			@RequestParam(value="language") String language, HttpSession session) {
-		  
-		session.setAttribute("country", country);
-		session.setAttribute("language", language);
+	public String login(@RequestParam(value="country" , required = false) String country,
+			@RequestParam(value="lang", required = false) String lang, HttpSession session) {
 		
+		if (country != null && lang != null)
+		{
+			session.setAttribute("country", country);
+			session.setAttribute("lang", lang);
+		}
 		return "redirect:/saml/login";
 	}
+	
+	
 }

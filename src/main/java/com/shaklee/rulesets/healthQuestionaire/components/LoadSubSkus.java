@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shaklee.DAO.ProductPriceDAO;
 import com.shaklee.healthPrint.data.HPRequest;
 import com.shaklee.healthPrint.data.SKU;
 import com.shaklee.healthPrint.data.SKUList;
@@ -19,8 +20,8 @@ import com.shaklee.promo.Action;
 @Component
 public class LoadSubSkus implements Action<HPRequest<?, ?, SKU>> {
 
-	//@Autowired
-	//ProductPriceDAO dao;
+	@Autowired
+	ProductPriceDAO dao;
 
 	/** required for json serializer **/
 	public boolean blah;
@@ -30,8 +31,7 @@ public class LoadSubSkus implements Action<HPRequest<?, ?, SKU>> {
 		if (request.bundles == null)
 			return;
 
-		// final Map<String, List<String>> packs = dao.getPacks();
-		final Map<String, List<String>> packs = null;
+		final Map<String, List<String>> packs = dao.getPacks();
 		for (SKUList<?, SKU> skList : request.bundles) {
 			for (SKU pack : skList.skus) {
 				List<String> defaults = packs.get(pack.sku);

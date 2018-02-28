@@ -82,17 +82,21 @@ public class UserDataStorageDAO extends BaseJdbcTemplateDAO {
 		return data;
 	}*/
 	
-	public <T> List<UserDataResponse> getTop20HealthPrints(final String userId, final String email,
+	public <T> List<UserDataResponse> getTop20HealthPrints(final String healthPrintId, final String userId, final String email,
 			final String downlineId) {
 
-		List<UserDataResponse> response = null;
 		// make the SQL based on email OR downline_Id or user_Id
-		final String sql = (email != null) ? GET_TOP_20_HEALTHPRINTS.replace("??", "S.EMAIL")
+		final String sql = (healthPrintId != null) ? GET_TOP_20_HEALTHPRINTS.replace("??", "S.HEALTH_PROFILE_ID")
+				: (email != null) ? GET_TOP_20_HEALTHPRINTS.replace("??", "S.EMAIL")
 				: GET_TOP_20_HEALTHPRINTS_FOR_DOWNLINES.replace("??", "S.CONTACT_ID");
-		String param = (email != null) ? email : (downlineId != null) ? downlineId : userId;
+		
+		String param = (healthPrintId != null) ? healthPrintId 
+				: (email != null) ? email 
+				: (downlineId != null) ? downlineId 
+				: userId;
 
 		logger.debug(sql + "PARAM : " + param + " ,input sent are: userId:" + userId + " ,email:" + email
-				+ " ,downlineId:" + downlineId);
+				+ " ,downlineId:" + downlineId + " , healthProfileId:" + healthPrintId);
 		final List<UserDataResponse> top20HealthPrints = jdbcTemplate.query(sql, userRowMapper, param);
 
 	

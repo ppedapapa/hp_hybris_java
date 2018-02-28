@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.shaklee.Application;
 import com.shaklee.entity.Product;
 import com.shaklee.resources.HybrisProductService;
+import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -27,7 +29,7 @@ public class HybrisProductModelTest {
 	@Autowired
 	HybrisProductService hybrisProductModel;
 
-	@Test
+	//@Test
 	public void testGetProducts() throws Exception {
 
 		
@@ -48,6 +50,35 @@ public class HybrisProductModelTest {
 		List<Product> p =  hybrisProductModel.getMembershipSkus("US", "en");
 
 		assertNotNull(p);
+
+	}
+	
+	@Test
+	public void testJoinSKUs() throws Exception {
+
+		
+		List<String> p =  hybrisProductModel.getJoinSkus("US");
+		assertNotNull(p);
+		
+		p = hybrisProductModel.getJoinSkus("CA");
+		
+		assertNotNull(p);
+		
+
+	}
+	
+
+	@Test
+	public void testPacks() throws Exception {
+
+		
+		Map<String, List<String>> p =  hybrisProductModel.getPacks("US");
+		assertNotNull(p);
+		
+		//p = hybrisProductModel.getJoinSkus("CA");
+		
+		//assertNotNull(p);
+		
 
 	}
 
