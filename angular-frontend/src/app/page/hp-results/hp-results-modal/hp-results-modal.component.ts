@@ -9,6 +9,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 export class HpResultsModalComponent {
 
   @Input() modalName;
+  @Input() data;
 
   constructor(public activeModal: NgbActiveModal) {}
 }
