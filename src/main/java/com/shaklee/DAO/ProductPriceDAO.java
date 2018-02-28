@@ -55,7 +55,7 @@ public class ProductPriceDAO {
 	private final CachingSingletonLoader<Map<String, List<String>>> packCache;
 	private final MultiCachingLoader<String, Product> membershipSkuCache;
 	private final CachingSingletonLoader<Set<String>> joinKitsCache;
-	private final CachingSingletonLoader<Map<String, Product>> distributorKitSkuCache;
+	// private final CachingSingletonLoader<Map<String, Product>> distributorKitSkuCache;
 
 	@Autowired
 	public ProductPriceDAO() {
@@ -95,13 +95,14 @@ public class ProductPriceDAO {
 			}
 		}, CACHE_EXPIRATION_SEC, true);
 		
+		/*
 		distributorKitSkuCache = new CachingSingletonLoader<Map<String, Product>>(
 				new Loader<Object, Map<String, Product>>() {
 					@Override
 					public Map<String, Product> get(Object key) {
 						return getDistributorKitSkus();
 					}
-				}, CACHE_EXPIRATION_SEC, true);
+				}, CACHE_EXPIRATION_SEC, true); */
 	}
 
 	private static final BeanPropertyRowMapper<Product> productMapper = BeanPropertyRowMapper
@@ -184,7 +185,7 @@ public class ProductPriceDAO {
 		return packCache.get();
 	}
 
-	public Product getDistributorKitSku(String country, Language l) {
+	/*public Product getDistributorKitSku(String country, Language l) {
 		final Map<String, Product> skus = distributorKitSkuCache.get();
 
 		{
@@ -200,7 +201,7 @@ public class ProductPriceDAO {
 			return skus.get(enKey);
 		}
 		return null;
-	}
+	}*/
 
 	private Map<String, List<String>> _getPacks() {
 		/*final MultivaluedMapImpl packs = new MultivaluedMapImpl();
@@ -211,22 +212,25 @@ public class ProductPriceDAO {
 				packs.add(rs.getString(1), rs.getString(2));
 			}
 		});*/
-		return null;
+		try {
+			return  hybrisProductModel.getPacks("US");
+		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
+				| JSONException e) {
+			return null;
+		}
 	}
 
 	Set<String> _getJoinKits() {
 		Set<String> joinKits  = null;
 		try {
-			List<ProductSkuKey> products = hybrisProductModel.getJoinSkus("US");
+			List<String> products = hybrisProductModel.getJoinSkus("US");
 			
 			products.addAll(hybrisProductModel.getJoinSkus("CA"));
 			
 			joinKits = new HashSet<String>();
 			
-			for (ProductSkuKey skuKey: products)
-			{
-				joinKits.add(skuKey.code);
-			}
+			joinKits.addAll(joinKits);
+			
 		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
 				| JSONException e) {
 			return null;
@@ -300,9 +304,9 @@ public class ProductPriceDAO {
 		return skus;
 	}
 	
-	Map<String, Product> getDistributorKitSkus() {
+	/*Map<String, Product> getDistributorKitSkus() {
 		final Map<String, Product> skus = new HashMap<String, Product>();
-		/*
+		
 		jdbcTemplate.query(getDistributorKitSku, new RowCallbackHandler() {
 
 			@Override
@@ -312,9 +316,9 @@ public class ProductPriceDAO {
 				p.sn_price = rs.getFloat(3);
 				skus.put(rs.getString(1).trim(), p);
 			}
-		});*/
+		});
 		return skus;
-	}
+	}*/
 	
 	public Map<String, Float> getPrices(String country, Collection<String> skus) {
 		Country2 c2 = Country2.valueOf(country);

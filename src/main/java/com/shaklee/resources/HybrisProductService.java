@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -35,9 +38,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
 import com.shaklee.entity.Product;
 import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
 import com.shaklee.shared.data.Language;
@@ -160,7 +165,7 @@ public class HybrisProductService {
 		return null;
 	}
 	
-	public List<ProductSkuKey> getJoinSkus(String country) throws KeyManagementException, NoSuchAlgorithmException,
+	public List<String> getJoinSkus(String country) throws KeyManagementException, NoSuchAlgorithmException,
 			KeyStoreException, ClientProtocolException, IOException, JSONException {
 		// TODO: Refactore the below code once certificate is added to
 		// www.shakleedev.com
@@ -185,17 +190,83 @@ public class HybrisProductService {
 				JSONObject jsonResponse = new JSONObject(response);
 				ObjectMapper mapper = new ObjectMapper();
 
-				List<ProductSkuKey> p = mapper.readValue(jsonResponse.getString("products"),
-						new TypeReference<List<Product>>() {
+				List<JoinSKUResponse> p = mapper.readValue(jsonResponse.getString("products"),
+						new TypeReference<List<JoinSKUResponse>>() {
 						});
-				return p;
+				
+				List<String> productSkus = new ArrayList<String>();
+				
+				for(JoinSKUResponse joinSKU: p)
+				{
+					productSkus.add(joinSKU.sku);
+				}
+				return productSkus;
 			}
 
 		}
 
 		return null;
 	}
+	
+	public static class  JoinSKUResponse
+	{
+		public String sku;
+	}
+	
+	public Map<String,List<String>> getPacks(String country) throws KeyManagementException, NoSuchAlgorithmException,
+			KeyStoreException, ClientProtocolException, IOException, JSONException {
+		// TODO: Refactore the below code once certificate is added to
+		// www.shakleedev.com
 
+		hybrisUrl = env.getProperty("hybrisUrl");
+
+		CloseableHttpClient httpclient = getHttpClient();
+
+		String uri_packs = "getCustomizableBundles";
+
+		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_packs + uri2;
+
+		if (restUrl != null) {
+			HttpGet httpGet = new HttpGet(restUrl);
+
+			HttpResponse response1 = httpclient.execute(httpGet);
+			HttpEntity responseEntity = response1.getEntity();
+			if (responseEntity != null) {
+
+				String response = EntityUtils.toString(responseEntity);
+				JSONObject jsonResponse = new JSONObject(response);
+				ObjectMapper mapper = new ObjectMapper();
+
+				List<PackResponse> p = mapper.readValue(jsonResponse.getString("customizableBundles"),
+						new TypeReference<List<PackResponse>>() {
+						});
+				
+				Map<String,List<String>> packs = new HashMap<>();
+				
+				for(PackResponse pack: p)
+				{
+					packs.put(pack.sku, pack.defaultProductOptions);
+				}
+				
+				//List<String> productSkus = new ArrayList<String>();
+
+				//for (JoinSKUResponse joinSKU : p) {
+				//	productSkus.add(joinSKU.sku);
+				//}
+				return packs;
+			}
+
+		}
+
+		return null;
+	}
+	
+	public static class  PackResponse
+	{
+		public String sku;
+		public List<String> defaultProductOptions;
+	}
+	
 	private CloseableHttpClient getHttpClient()
 			throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
 		SSLContextBuilder builder = new SSLContextBuilder();
