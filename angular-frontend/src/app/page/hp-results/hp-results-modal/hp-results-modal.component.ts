@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-hp-results-modal',
@@ -11,5 +12,8 @@ export class HpResultsModalComponent {
   @Input() modalName;
   @Input() data;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal, public cartService: CartService) {}
+  redirectToCart() {
+      this.cartService.redirectCart();
+  }
 }

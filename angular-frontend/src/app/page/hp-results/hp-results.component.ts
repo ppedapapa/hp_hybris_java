@@ -17,9 +17,9 @@ export class HpResultsComponent implements OnInit {
       this.route.data.subscribe((data: {}) => {
           this.resultsData = this.route.snapshot.data['healthPrintResults'];
           this.healthPrintResultsService.setResultsData(this.resultsData);
+          this.healthPrintResultsService.setAllHealthPrintResult(this.resultsData['data']);
           // this.resultsBundle = this.resultsData['recommendations'];
           console.log('this.resultsData ', this.resultsData );
-          // this.healthPrintResultsService.setAllHealthPrintResult(this.resultsData);
           // this.healthPrintResultsService.setHealthPrintResultInfo(this.resultsData);
       });
 

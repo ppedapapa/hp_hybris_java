@@ -28,7 +28,7 @@ export class CartService {
         console.log('hpCartCookie', hpCartCookie);
         const hpcartCookieeEncode = btoa(hpCartCookie);
         this.document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
-        this.document.location.href = environment.hybrisServerName + '/cart';
+        //this.document.location.href = environment.hybrisServerName + '/cart';
     }
 
     addBundleToCart(skuList, bundle, recommendationTotal, freeProduct) {
@@ -54,6 +54,9 @@ export class CartService {
         const hpCartCookie = JSON.stringify(healthprintCart);
         const hpcartCookieeEncode = btoa(hpCartCookie);
         this.document.cookie = 'shakleeUS-healthprint-cart' + '='  + hpcartCookieeEncode + ';domain=' + environment.domainName + ';path=/';
-        this.document.location.href = 'https://' + environment.hybrisServerName + '/cart';
+    }
+    
+    redirectCart() {
+       this.document.location.href = environment.hybrisServerName + '/cart';
     }
 }
