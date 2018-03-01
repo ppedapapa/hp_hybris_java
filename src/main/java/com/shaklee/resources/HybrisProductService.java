@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.Registry;
@@ -64,38 +65,42 @@ public class HybrisProductService {
 	final static String uri2 = "?fields=BASIC";
 
 	final static String uri2_fields = "&fields=BASIC";
-	
+
 	final static String uri3 = "&lang=";
 
 	private static Logger logger = LoggerFactory.getLogger(HybrisProductService.class);
 
 	public List<Product> getProducts(String countryCode, Collection<String> skus)
-			throws ClientProtocolException, IOException, JSONException {
+			throws ClientProtocolException, JSONException {
 
 		hybrisUrl = env.getProperty("hybrisUrl");
 
 		if (skus == null)
 			return null;
 
-		try {
+		// TODO: Refactore the below code once certificate is added to
+		// www.shakleedev.com
+		CloseableHttpClient httpclient = getHttpClient();
 
-			// TODO: Refactore the below code once certificate is added to
-			// www.shakleedev.com
-			CloseableHttpClient httpclient = getHttpClient();
+		String restUrl = null;
+		if (skus.size() == 1) {
+			restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2;
+		} else {
+			restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields;
 
-			String restUrl = null;
-			if (skus.size() == 1) {
-				restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2;
-			} else {
-				restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields;
+		}
 
-			}
-
-			if (restUrl != null) {
+		if (httpclient != null) {
+			try {
 				HttpGet httpGet = new HttpGet(restUrl);
 
 				HttpResponse response1 = httpclient.execute(httpGet);
 				HttpEntity responseEntity = response1.getEntity();
+
+				if (response1.getStatusLine().getStatusCode() != 200
+						&& response1.getStatusLine().getStatusCode() != 201)
+					return null;
+
 				if (responseEntity != null) {
 
 					String response = EntityUtils.toString(responseEntity);
@@ -114,21 +119,20 @@ public class HybrisProductService {
 					}
 
 				}
+			} catch (IOException e) {
+				logger.debug("Could not get join skus from hybris: " + restUrl, e);
+
+				return null;
 			}
-
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
-			logger.error("error connecting to Hybris: ", e);
 		}
-
 		return null;
 
 	}
 
-	public List<Product> getMembershipSkus(String country, String l) throws KeyManagementException,
-			NoSuchAlgorithmException, KeyStoreException, ClientProtocolException, IOException, JSONException {
+	public List<Product> getMembershipSkus(String country, String l)  {
 		// TODO: Refactore the below code once certificate is added to
 		// www.shakleedev.com
-		
+
 		hybrisUrl = env.getProperty("hybrisUrl");
 
 		CloseableHttpClient httpclient = getHttpClient();
@@ -137,36 +141,45 @@ public class HybrisProductService {
 
 		String restUrl = null;
 		if (l != null && country != null)
-			 restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 + uri3 + l + '_' + country;
-		
+			restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 + uri3 + l + '_' + country;
+
 		else
-			 restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 ;
-		
+			restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2;
 
-		if (restUrl != null) {
-			HttpGet httpGet = new HttpGet(restUrl);
+		if (httpclient != null) {
+			try {
+				HttpGet httpGet = new HttpGet(restUrl);
 
-			HttpResponse response1 = httpclient.execute(httpGet);
-			HttpEntity responseEntity = response1.getEntity();
-			if (responseEntity != null) {
+				HttpResponse response1 = httpclient.execute(httpGet);
 
-				String response = EntityUtils.toString(responseEntity);
-				JSONObject jsonResponse = new JSONObject(response);
-				ObjectMapper mapper = new ObjectMapper();
+				if (response1.getStatusLine().getStatusCode() != 200
+						&& response1.getStatusLine().getStatusCode() != 201)
+					return null;
 
-				List<Product> p = mapper.readValue(jsonResponse.getString("products"),
-						new TypeReference<List<Product>>() {
-						});
-				return p;
+				HttpEntity responseEntity = response1.getEntity();
+				if (responseEntity != null) {
+
+					String response = EntityUtils.toString(responseEntity);
+					JSONObject jsonResponse = new JSONObject(response);
+					ObjectMapper mapper = new ObjectMapper();
+
+					List<Product> p = mapper.readValue(jsonResponse.getString("products"),
+							new TypeReference<List<Product>>() {
+							});
+					return p;
+				}
+			} catch (IOException | JSONException e) {
+				logger.debug("Could not get membership skus from hybris: " + restUrl, e);
+
+				return null;
 			}
 
 		}
 
 		return null;
 	}
-	
-	public List<String> getJoinSkus(String country) throws KeyManagementException, NoSuchAlgorithmException,
-			KeyStoreException, ClientProtocolException, IOException, JSONException {
+
+	public List<String> getJoinSkus(String country) {
 		// TODO: Refactore the below code once certificate is added to
 		// www.shakleedev.com
 
@@ -176,45 +189,55 @@ public class HybrisProductService {
 
 		String uri_join = "getJoinSkus?fields=SKU";
 
-		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_join ;
+		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_join;
 
-	
-		if (restUrl != null) {
-			HttpGet httpGet = new HttpGet(restUrl);
+		if (httpclient != null) {
+			try {
+				HttpGet httpGet = new HttpGet(restUrl);
 
-			HttpResponse response1 = httpclient.execute(httpGet);
-			HttpEntity responseEntity = response1.getEntity();
-			if (responseEntity != null) {
+				HttpResponse response1;
 
-				String response = EntityUtils.toString(responseEntity);
-				JSONObject jsonResponse = new JSONObject(response);
-				ObjectMapper mapper = new ObjectMapper();
+				response1 = httpclient.execute(httpGet);
 
-				List<JoinSKUResponse> p = mapper.readValue(jsonResponse.getString("products"),
-						new TypeReference<List<JoinSKUResponse>>() {
-						});
-				
-				List<String> productSkus = new ArrayList<String>();
-				
-				for(JoinSKUResponse joinSKU: p)
-				{
-					productSkus.add(joinSKU.sku);
+				HttpEntity responseEntity = response1.getEntity();
+
+				if (response1.getStatusLine().getStatusCode() != 200
+						&& response1.getStatusLine().getStatusCode() != 201)
+					return null;
+
+				if (responseEntity != null) {
+
+					String response = EntityUtils.toString(responseEntity);
+					JSONObject jsonResponse = new JSONObject(response);
+					ObjectMapper mapper = new ObjectMapper();
+
+					List<JoinSKUResponse> p = mapper.readValue(jsonResponse.getString("products"),
+							new TypeReference<List<JoinSKUResponse>>() {
+							});
+
+					List<String> productSkus = new ArrayList<String>();
+
+					for (JoinSKUResponse joinSKU : p) {
+						productSkus.add(joinSKU.sku);
+					}
+					return productSkus;
 				}
-				return productSkus;
+			} catch (IOException | JSONException e) {
+				logger.debug("Could not get join skus from hybris: " + restUrl, e);
+
+				return null;
 			}
 
 		}
 
 		return null;
 	}
-	
-	public static class  JoinSKUResponse
-	{
+
+	public static class JoinSKUResponse {
 		public String sku;
 	}
-	
-	public Map<String,List<String>> getPacks(String country) throws KeyManagementException, NoSuchAlgorithmException,
-			KeyStoreException, ClientProtocolException, IOException, JSONException {
+
+	public Map<String, List<String>> getPacks(String country) {
 		// TODO: Refactore the below code once certificate is added to
 		// www.shakleedev.com
 
@@ -226,62 +249,80 @@ public class HybrisProductService {
 
 		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_packs + uri2;
 
-		if (restUrl != null) {
-			HttpGet httpGet = new HttpGet(restUrl);
+		if (httpclient != null) {
+			try {
 
-			HttpResponse response1 = httpclient.execute(httpGet);
-			HttpEntity responseEntity = response1.getEntity();
-			if (responseEntity != null) {
+				HttpGet httpGet = new HttpGet(restUrl);
 
-				String response = EntityUtils.toString(responseEntity);
-				JSONObject jsonResponse = new JSONObject(response);
-				ObjectMapper mapper = new ObjectMapper();
+				HttpResponse response1;
 
-				List<PackResponse> p = mapper.readValue(jsonResponse.getString("customizableBundles"),
-						new TypeReference<List<PackResponse>>() {
-						});
-				
-				Map<String,List<String>> packs = new HashMap<>();
-				
-				for(PackResponse pack: p)
-				{
-					packs.put(pack.sku, pack.defaultProductOptions);
+				response1 = httpclient.execute(httpGet);
+
+				if (response1.getStatusLine().getStatusCode() != 200
+						&& response1.getStatusLine().getStatusCode() != 201)
+					return null;
+
+				HttpEntity responseEntity = response1.getEntity();
+				if (responseEntity != null) {
+
+					String response = EntityUtils.toString(responseEntity);
+					JSONObject jsonResponse = new JSONObject(response);
+					ObjectMapper mapper = new ObjectMapper();
+
+					List<PackResponse> p = mapper.readValue(jsonResponse.getString("customizableBundles"),
+							new TypeReference<List<PackResponse>>() {
+							});
+
+					Map<String, List<String>> packs = new HashMap<>();
+
+					for (PackResponse pack : p) {
+						packs.put(pack.sku, pack.defaultProductOptions);
+					}
+
+					// List<String> productSkus = new ArrayList<String>();
+
+					// for (JoinSKUResponse joinSKU : p) {
+					// productSkus.add(joinSKU.sku);
+					// }
+					return packs;
 				}
-				
-				//List<String> productSkus = new ArrayList<String>();
-
-				//for (JoinSKUResponse joinSKU : p) {
-				//	productSkus.add(joinSKU.sku);
-				//}
-				return packs;
+			} catch (IOException | JSONException e) {
+				logger.debug("Could not get pack from hybris : " + restUrl, e);
+				return null;
 			}
 
 		}
 
 		return null;
 	}
-	
-	public static class  PackResponse
-	{
+
+	public static class PackResponse {
 		public String sku;
 		public List<String> defaultProductOptions;
 	}
-	
-	private CloseableHttpClient getHttpClient()
-			throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-		SSLContextBuilder builder = new SSLContextBuilder();
-		builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-		SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(builder.build(),
-				NoopHostnameVerifier.INSTANCE);
 
-		Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
-				.register("http", new PlainConnectionSocketFactory()).register("https", sslConnectionSocketFactory)
-				.build();
-		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
-		cm.setMaxTotal(100);
-		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory)
-				.setConnectionManager(cm).build();
-		return httpclient;
+	private CloseableHttpClient getHttpClient() {
+		SSLContextBuilder builder = new SSLContextBuilder();
+		try {
+			builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+
+			SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(builder.build(),
+					NoopHostnameVerifier.INSTANCE);
+
+			Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+					.register("http", new PlainConnectionSocketFactory()).register("https", sslConnectionSocketFactory)
+					.build();
+			PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
+			cm.setMaxTotal(100);
+			CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory)
+					.setConnectionManager(cm).build();
+			return httpclient;
+		} catch (NoSuchAlgorithmException | KeyStoreException | KeyManagementException e) {
+
+			logger.debug("Error: ", e);
+
+			return null;
+		}
 	}
 
 }

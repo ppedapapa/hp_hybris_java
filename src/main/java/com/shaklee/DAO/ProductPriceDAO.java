@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
+import org.apache.http.ParseException;
 import org.codehaus.jettison.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -212,29 +213,22 @@ public class ProductPriceDAO {
 				packs.add(rs.getString(1), rs.getString(2));
 			}
 		});*/
-		try {
-			return  hybrisProductModel.getPacks("US");
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
-				| JSONException e) {
-			return null;
-		}
+		
+		return  hybrisProductModel.getPacks("US");
+		
 	}
 
 	Set<String> _getJoinKits() {
 		Set<String> joinKits  = null;
-		try {
-			List<String> products = hybrisProductModel.getJoinSkus("US");
-			
-			products.addAll(hybrisProductModel.getJoinSkus("CA"));
-			
-			joinKits = new HashSet<String>();
-			
-			joinKits.addAll(joinKits);
-			
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
-				| JSONException e) {
-			return null;
-		}
+
+		List<String> products = hybrisProductModel.getJoinSkus("US");
+		
+		products.addAll(hybrisProductModel.getJoinSkus("CA"));
+		
+		joinKits = new HashSet<String>();
+		
+		joinKits.addAll(joinKits);
+		
 
 		//return new HashSet<String>(jdbcTemplate.query(getJoinKits, STRING_ROW_MAPPER));
 		return joinKits;
@@ -267,28 +261,25 @@ public class ProductPriceDAO {
 	Map<String, Product> getMembershipSkus(Collection<String> key) {
 		final Map<String, Product> skus = new HashMap<String, Product>();
 		
-		try {
-			String countryLang = key.iterator().next();
-			
-			if (countryLang == null)
-			{
-				return null;
-			}
-			
-			String lang = countryLang.split("_")[0];
-			String country = countryLang.split("_")[1];
-			
-			List<Product> products = hybrisProductModel.getMembershipSkus(country.toUpperCase(), lang);
-			
-			for(Product p: products)
-			{
-				p.country = Country2.getCountry(country.toLowerCase());
-				skus.put(lang + '_' + country, p);
-			}
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException
-				| JSONException e) {
-			logger.error("Error adding membership sku", e);
+	
+		String countryLang = key.iterator().next();
+		
+		if (countryLang == null)
+		{
+			return null;
 		}
+		
+		String lang = countryLang.split("_")[0];
+		String country = countryLang.split("_")[1];
+		
+		List<Product> products = hybrisProductModel.getMembershipSkus(country.toUpperCase(), lang);
+		
+		for(Product p: products)
+		{
+			p.country = Country2.getCountry(country.toLowerCase());
+			skus.put(lang + '_' + country, p);
+		}
+		
 		
 		/*
 		jdbcTemplate.query(getMembershipSku, new RowCallbackHandler() {

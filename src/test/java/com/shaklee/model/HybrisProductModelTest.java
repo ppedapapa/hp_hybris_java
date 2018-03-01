@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.shaklee.Application;
@@ -23,13 +24,13 @@ import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@PropertySource("classpath:application-local.properties")
+@ActiveProfiles(profiles = "local")
 public class HybrisProductModelTest {
 
 	@Autowired
 	HybrisProductService hybrisProductModel;
 
-	//@Test
+	@Test
 	public void testGetProducts() throws Exception {
 
 		
@@ -37,9 +38,13 @@ public class HybrisProductModelTest {
 
 		assertNotNull(p);
 		
+		
+		
 		p = hybrisProductModel.getProducts("US", Arrays.asList("89384", "22067"));
 		
 		assertNotNull(p);
+
+		
 		
 	}
 	
