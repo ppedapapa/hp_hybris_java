@@ -17,18 +17,26 @@ import com.shaklee.security.stereotypes.CurrentUser;
 public class HealthPrintResource {
 
 	@RequestMapping("/healthprint")
-	public String healthprint(@RequestParam(value="country") String country,
-			@RequestParam(value="language") String language) {
-		return "redirect:/?country="+country+"&language="+language;
+	public String healthprint(@RequestParam(value="country", required = false) String country,
+			@RequestParam(value="lang", required = false) String lang) {
+		
+		if (country != null && lang != null)
+			return "redirect:/?country="+country+"&lang="+lang;
+		else
+			return "redirect:/";
 	}
 	
 	
 	@RequestMapping("/samlSuccess")
 	public String samlSuccess(HttpSession session) {
 		String country = (String) session.getAttribute("country");
-		String language = (String) session.getAttribute("language");
+		String lang = (String) session.getAttribute("lang");
 		
-		return "redirect:/?userLogged=true&country="+country+"&language="+language;
+		if (country != null && lang != null)
+			return "redirect:/?userLogged=true&country="+country+"&lang="+lang;
+		else
+			return "redirect:/?userLogged=true";
+
 	}
 	
 	
