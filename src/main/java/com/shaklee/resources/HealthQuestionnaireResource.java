@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shaklee.DAO.UserDAO;
 import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
+import com.shaklee.DAOImpl.UserDAOImpl;
 import com.shaklee.common.util.JSONSerializer;
 import com.shaklee.common.util.validation.BeanValidator;
 import com.shaklee.healthPrint.data.Bundle;
@@ -49,6 +51,9 @@ public class HealthQuestionnaireResource {
 
 	@Autowired
 	HQService service;
+	
+	@Autowired
+	UserDAOImpl userDao;
 
 	
 	@Autowired
@@ -119,11 +124,17 @@ public class HealthQuestionnaireResource {
 	public StorageResponse update(@RequestBody StorageRequest request, @CurrentUser User user) throws InputValidationException
 	{
 		if (user == null)
+		{
+			request.questions.is_guest = true;
 			return healthQuestionnaireModel.insert(request, null);
+		}
 		
 		else
+		{
+			request.questions.is_guest = false;
+			
 			return healthQuestionnaireModel.insert(request, user.getUsername());
-		
+		}
 		
 	}
 	

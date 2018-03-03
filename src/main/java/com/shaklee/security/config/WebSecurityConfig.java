@@ -376,7 +376,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	SimpleUrlAuthenticationFailureHandler failureHandler =
     			new SimpleUrlAuthenticationFailureHandler();
     	failureHandler.setUseForward(true);
-    	failureHandler.setDefaultFailureUrl("/error");
+    	failureHandler.setDefaultFailureUrl("/");
     	return failureHandler;
     }
      
