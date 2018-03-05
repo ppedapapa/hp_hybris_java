@@ -59,7 +59,6 @@ import junit.framework.Assert;
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "local")
 @AutoConfigureMockMvc
-@WithMockUser(username = "test.bogo6@user.com")
 public class HealthQuestionnaireResourceTest {
 	
 	  @Autowired
@@ -381,6 +380,7 @@ public class HealthQuestionnaireResourceTest {
 	private void deleteTestData() {
 
 		userDataStorageDAO.delete(null, "test.bogo6@user.com");
+		userDataStorageDAO.delete("AI47342-1", null);
 
 	}
 
@@ -535,6 +535,7 @@ public class HealthQuestionnaireResourceTest {
 	}
 	
 	@Test
+	@WithMockUser(username = "test.bogo6@user.com")
 	public void testGetAllHealthPrintsForUserId() throws JsonProcessingException, Exception {
 
 		deleteTestData();
