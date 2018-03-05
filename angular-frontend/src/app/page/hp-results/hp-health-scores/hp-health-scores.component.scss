@@ -1,0 +1,40 @@
+@import "../../../../assets/scss/variables";
+
+.bmi-scale {
+ margin:15px;
+ .title {
+   font-size: 15px;
+   font-weight: 700;
+   line-height: 22px;
+   padding: 10px 0;
+   height: 4.25em;
+   margin: 10px 0;
+   b{
+     font-size: 120%;
+     color: $shaklee-green1;
+   }
+ }
+ .info{
+   margin: 60px 0 0;
+   padding: 0;
+   line-height: 19px;
+   font-size: 12px;
+ }
+ .bmi{
+   background:url(//images.shaklee.com/healthprint/scale.png) no-repeat scroll center center;
+   display: block;
+   font-size: 23px;
+   font-weight: bold;
+   height: 140px;
+   line-height: 18px;
+   padding: 70px 0;
+   text-align: center;
+   width: 100%;
+   background-size: 100%;
+   max-width: 95px;
+   margin: 10px auto 0;
+ }
+ .bmi-text {
+
+ }
+}

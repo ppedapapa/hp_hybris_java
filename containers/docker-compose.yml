@@ -1,0 +1,38 @@
+version: "3.4"
+
+services:
+
+  springhp:
+      container_name: springhp
+      image: spring:hp
+      restart: always
+      ports:
+          - "8080:8080"
+          - "5005:5005"
+      volumes:
+        - /DataDisc/TempDir/IDE/SpringBootSAML2/target:/opt/spring-cloud/lib/
+
+  angularhp:
+      container_name: angularhp
+      image: angular:hp
+      restart: always
+      ports:
+          - "4200:4200"
+      volumes:
+        - ./../FrontEndAng/:/FrontEndAng/
+        - ./../src/main/resources/static/hp/:/AngularOut/
+
+  nginxhp:
+      container_name: nginxhp
+      depends_on:
+          - angularhp
+          - springhp
+      image: nginx:hp
+      restart: always
+      ports:
+          - "80:80"
+          - "443:443"
+
+      volumes:
+            - ./../src/main/resources/static:/usr/share/nginx/html
+

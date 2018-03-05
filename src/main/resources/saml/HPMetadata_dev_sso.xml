@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://shaklee--hybrisdev.cs13.my.salesforce.com" validUntil="2028-01-18T19:40:09.875Z" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+   <md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+      <md:KeyDescriptor use="signing">
+         <ds:KeyInfo>
+            <ds:X509Data>
+               <ds:X509Certificate>MIIErDCCA5SgAwIBAgIOAVfA9/OPAAAAACVFpLQwDQYJKoZIhvcNAQELBQAwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzE0T2N0MjAxNl8wMjE0MTcxGDAWBgNVBAsMDzAwRDM2MDAwMDAwSmF1UzEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0EwHhcNMTYxMDE0MDIxNDE3WhcNMTcxMDE0MDAwMDAwWjCBkDEoMCYGA1UEAwwfU2VsZlNpZ25lZENlcnRfMTRPY3QyMDE2XzAyMTQxNzEYMBYGA1UECwwPMDBEMzYwMDAwMDBKYXVTMRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExDDAKBgNVBAYTA1VTQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJfZiUjosj0TGbOwPEMbo+E6NTlpNLsOMkQFpiOMj1Bm9QVE3dLbfkQykfNdZyUr/nT5vFuoSBsIoNzc8fBruXvhW7X5hSepJJSxeK4ya3+VSzpx44N1sha9iZlxv8sJqguO6x5jnz5SPhGGTfckyhp5IVAXip6y143BDt/BoTR1ps0rsltO5rwde8pax2dCOsRwmp2fLapzqzk78XKsetk9+Omt1pBYTOX+2JOARRp0Pxr8EPX2R8GxCdsFW7ctumqdSDaPLDQSVLIUsXoExrouBYJl3U4UUMNAWf8T6lerlqprdoQGzoD0YZSJDncIE5jOUhw17lIdTkD944KuAfcCAwEAAaOCAQAwgf0wHQYDVR0OBBYEFBDyS5y0v9+FYg5CL/mxrfQ5lW9ZMA8GA1UdEwEB/wQFMAMBAf8wgcoGA1UdIwSBwjCBv4AUEPJLnLS/34ViDkIv+bGt9DmVb1mhgZakgZMwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzE0T2N0MjAxNl8wMjE0MTcxGDAWBgNVBAsMDzAwRDM2MDAwMDAwSmF1UzEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0GCDgFXwPfzjwAAAAAlRaS0MA0GCSqGSIb3DQEBCwUAA4IBAQBvo1++37mU4Q8TJyAuKOpEE5dKtaHGq9doXoQDP9rOqly4XdoOL+YncFdS+vFx1uQcHIzaU0jGkIy0Db/zERTGMlRl0BIU4TG8Sd6wZ4HxRpON52KBA5vCQNVdWlS3WJeh0fzhN5vON+fKPaJEbNvhXQBKDlkU1i0S1i3sYmtUsbJVmceU3zbg5ohwENUNFpuW542UC5aM99uzoSnNd7aj0f+co3baGUIFjMP4DrK0+oKMCRr01WsdFkmrnMObH7XH1Vvj9lXtIR+Qvq0oPjNkVjl+1rEe42T7Kgm6CwQakWI+X3on4sPBU1BBl5Mbv+aeq+MFkLbZiwku2BPKDEg1</ds:X509Certificate>
+            </ds:X509Data>
+         </ds:KeyInfo>
+      </md:KeyDescriptor>
+      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/services/auth/idp/saml2/logout"/>
+      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/services/auth/idp/saml2/logout"/>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/idp/endpoint/HttpPost"/>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://hybrisdev-myshaklee.cs13.force.com/sso/idp/endpoint/HttpRedirect"/>
+   </md:IDPSSODescriptor>
+</md:EntityDescriptor>

@@ -1,0 +1,27 @@
+<div class="question-content col-8 offset-2" *ngFor="let question of questions;">
+    <h4 class="text-center" [innerHTML]="'questions.thank-you'|translate"></h4>
+    <p class="text-center" [innerHTML]="'questions.'+question.label|translate"></p>
+    <form [formGroup]="form" class="row">
+        <div class="col-12 options" *ngFor="let option of question.options" [ngClass]="{'col-md-6 col-lg-6':option.name === 'first_name'||option.name === 'last_name'}">
+            <input [formControlName]="option.name"
+                   class="form-control"
+                   placeholder="{{ ('label.'+option.name) | translate}}"
+                   value="{{answered[option.name]}}"
+                   [ngClass]="option.name" />
+        </div>
+    </form>
+    <div class="row btn-container">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 guest-results-btn">
+          <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn" [ngClass]="{'continue-answered-btn':form.valid}" (click)="getResults()">
+            <span [innerHTML]="'questions.get-results'|translate"></span>
+            <i class="fa fa-chevron-right"></i>
+          </button>
+        </div>
+    </div>
+    <div class="disclaimer">
+        <p class="get-results-info" [innerHTML]="'questions.email-disclaimer-3'|translate"></p>
+        <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn ng-binding" type="submit" (click)="trackGuestEvent()">
+            {{'questions.member-login-view-results'|translate}}
+        </button>
+    </div>
+</div>

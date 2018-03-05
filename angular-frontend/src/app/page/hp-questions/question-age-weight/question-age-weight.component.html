@@ -1,0 +1,26 @@
+<div class="question-content col-5" *ngFor="let question of questions;">
+  <div class="text-center">
+    <img class="img-fluid question-img" src="{{question.image}}">
+    <p class="question-text"><span [innerHTML]="'questions.'+question.label|translate"></span></p>
+  </div>
+  <div class="options" *ngFor="let option of question.options">
+    <div *ngIf="option.name !== 'height_inches'">
+      <input type="text" id="ageWeight" name="ageWeight" class="form-control"
+             placeholder="{{ ('questions.' +option.name+ '-placeholder') | translate}}"
+             value="{{answered[option.name]}}"
+             required
+             [pattern]="option.pattern"
+             [(ngModel)]="answered[option.name]" #name="ngModel"
+             (change)="inputChange(option.name, name, $event)"/>
+
+      <div *ngIf="answered[option.name] >= 4 && answered[option.name] <= 17 && option.name === 'age'" [innerHTML]="'questions.age-4-17-disclaimer'|translate"></div>
+      <div class="error" *ngIf="name.touched && name.invalid && option.name === 'age'" [innerHTML]="'error.min-max-age'|translate"></div>
+      <div class="error" *ngIf="name.touched && name.invalid && option.name === 'weight_lbs'" [innerHTML]="'error.weight-over-1000'|translate"></div>
+    </div>
+
+    <div *ngIf="option.name === 'height_inches'" class="row">
+      <app-question-dropdown [dropdown]="height_feet" firstLabel="height-ft" label="foot" type="height_inches" class="col-6"></app-question-dropdown>
+      <app-question-dropdown [dropdown]="height_inches" firstLabel="height-in" label="inches" type="height_inches" class="col-6"></app-question-dropdown>
+    </div>
+  </div>
+</div>
