@@ -14,7 +14,6 @@ export class HpGoalsComponent implements OnInit {
 	ngOnInit() {
 		this.healthPrinResultsService.healthPrintResultInfo.subscribe(
             healthPrintResultInfo => this.healthPrintResultInfo = healthPrintResultInfo);
-            console.log(this.healthPrintResultInfo.questions.health_goals);
 	}
 
 	readGoalInfo(){
