@@ -64,7 +64,7 @@ public class HealthQuestionnaireModel {
 			final List<UserDataResponse> data = getAllHealthProfileIds(requestObj.health_profile_id, requestObj.user_id, 
 					requestObj.email, requestObj.downline_id);
 
-			if (data == null) {
+			if (data == null || data.size() < 1) {
 				
 				return new MultipleHealthProfilesResponse(StatusResponse.NOT_FOUND);
 			}

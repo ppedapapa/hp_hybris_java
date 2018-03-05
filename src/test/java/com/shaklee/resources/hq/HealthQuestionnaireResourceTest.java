@@ -59,7 +59,7 @@ import junit.framework.Assert;
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "local")
 @AutoConfigureMockMvc
-@WithMockUser(username = "WN09078-1")
+@WithMockUser(username = "test.bogo6@user.com")
 public class HealthQuestionnaireResourceTest {
 	
 	  @Autowired
@@ -380,31 +380,7 @@ public class HealthQuestionnaireResourceTest {
 
 	private void deleteTestData() {
 
-		userDataStorageDAO.delete(null, "testerpwstest1@email.com");
-
-		userDataStorageDAO.delete(null, "testerpwstest2@email.com");
-
-		userDataStorageDAO.delete(null, "testerpwstest3@email.com");
-
-		userDataStorageDAO.delete(null, "testerpwstest4@email.com");
-
-		userDataStorageDAO.delete(null, "testerpwstest5@email.com");
-
-		userDataStorageDAO.delete(null, "testerpwstest6@email.com");
-
-		// Test data 1
-
-		userDataStorageDAO.delete("WN09078-1", null);
-
-		// Test data 2 ( email of Test data 1)
-
-		userDataStorageDAO.delete(null, "ldflasdlf@fdsfwe.com");
-
-		userDataStorageDAO.delete(null, "gurpiarsi3dhu@yahoo.com");
-
-		userDataStorageDAO.delete(null, "iwerk@ewr.com");
-
-		userDataStorageDAO.delete(null, "test@test1.com");
+		userDataStorageDAO.delete(null, "test.bogo6@user.com");
 
 	}
 
@@ -564,8 +540,17 @@ public class HealthQuestionnaireResourceTest {
 		deleteTestData();
 		// Scenario 1: testing with shakleeId
 
-		final String email = "test@test1.com";
-		createStorageRequestForGuest(email, "ZV68934");
+		StorageRequest re = new StorageRequest();
+		Questions q = new Questions();
+		q.age = 100;
+		re.questions = q;
+		re.referrer_id = "AG80348";
+		re.questions.is_guest = false;
+		re.opt_in = true;
+		re.first_name = "test2";
+		re.last_name = "test2";
+		re.referrer_code = "TEST_FB";
+		setGet(re);
 		
 		UserRequestForGetAllHealthPrints req = new UserRequestForGetAllHealthPrints();
 	

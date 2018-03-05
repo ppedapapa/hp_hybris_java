@@ -39,8 +39,6 @@ import com.shaklee.shared.util.StatusResponse;
 import com.shaklee.shared.validation.InputValidationException;
 import com.shaklee.shared.validation.ShakleeIDValidator.ShakleeID;
 
-
-
 @RestController
 @RequestMapping("/services/hp")
 public class HealthQuestionnaireResource {
@@ -131,9 +129,14 @@ public class HealthQuestionnaireResource {
 		
 		else
 		{
-			request.questions.is_guest = false;
+			//get the contactId from User table 
+			com.shaklee.entity.User currentUser = userDao.findByEmail(user.getUsername());
 			
-			return healthQuestionnaireModel.insert(request, user.getUsername());
+			String contactId = currentUser != null ? currentUser.getContactId() : null;
+			
+			request.questions.is_guest = false;
+				
+			return healthQuestionnaireModel.insert(request, contactId);
 		}
 		
 	}
@@ -146,7 +149,10 @@ public class HealthQuestionnaireResource {
 		
 		if (user != null && user.getUsername() != null)
 		{
-			request.user_id = user.getUsername();
+			
+			com.shaklee.entity.User currentUser = userDao.findByEmail(user.getUsername());
+			
+			request.user_id = currentUser != null ? currentUser.getContactId() : null;
 			
 		}
 		return healthQuestionnaireModel.getAllHealthPrints(request);
@@ -252,7 +258,7 @@ public class HealthQuestionnaireResource {
 		
 		
 		public static class StorageRequest extends CommonStorageRequest {
-			@ShakleeID
+			
 			public String referrer_id;
 
 			public String recaptcha_response;

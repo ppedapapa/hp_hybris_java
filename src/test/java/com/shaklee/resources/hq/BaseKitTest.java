@@ -54,14 +54,14 @@ public class BaseKitTest {
 		assertBundleContains(r, CONSIDER, "21264");
 
 		// kosher
-		//q.dietary_restrictions = Arrays.asList(Questions.DietaryRestriction.KOSHER);
-		//q.gender = Gender.F;
-		//r = callQuestions(resource, q);
+		q.dietary_restrictions = Arrays.asList(Questions.DietaryRestriction.KOSHER);
+		q.gender = Gender.F;
+		r = callQuestions(resource, q);
 
-		//assertBundleContains(r, TIER_1, "20001");
-		//assertBundleContains(r, TIER_2, "21261");
-		//assertBundleContains(r, TIER_3, "20096");
-		//assertBundleContains(r, CONSIDER, "21267");
+		assertBundleContains(r, TIER_1, "20001");
+		assertBundleContains(r, TIER_2, "21261");
+		assertBundleContains(r, TIER_3, "20096");
+		assertBundleContains(r, CONSIDER, "21267");
 	}
 
 	//@Test
