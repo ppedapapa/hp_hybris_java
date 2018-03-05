@@ -1,11 +1,10 @@
 <div class="row">
   <div class="col-12 health-goal-title" [innerHTML]="'results.content-recom.goals-title'|translate"></div>
-
-  <div class="col-4 health-goals" *ngFor="let goal of goals; let i = index;">
-    <img [src]="'//images.shaklee.com/healthprint/goals/'+goal.name.toLowerCase()+'.png'" />
-    <h3>{{'results.content-recom.goal'|translate:{index:i+1} }} {{'label.health-goals-'+goal.name|lowercase|translate}}</h3>
+  <div class="col-4 health-goals" *ngFor="let goal of healthPrintResultInfo.questions.health_goals; let i = index;">
+    <img [src]="'//images.shaklee.com/healthprint/goals/'+goal.toLowerCase()+'.png'" />
+    <h3>{{'results.content-recom.goal'|translate:{index:i+1} }} {{'label.health-goals-'+goal|lowercase|translate}}</h3>
     <p class="goal-info">
-      <span [innerHTML]="'0.'+goal.name+'-intro'|lowercase|translate|shortString"></span>...&nbsp;<span class="read-more" (click)="readGoalInfo(goal, $index+1)" [innerHTML]="'label.continue'|translate"></span>
+      <span [innerHTML]="'0.'+goal+'-intro'|lowercase|translate|shortString"></span>...&nbsp;<span class="read-more" (click)="readGoalInfo(goal, $index+1)" [innerHTML]="'label.continue'|translate"></span>
     </p>
   </div>
 </div>

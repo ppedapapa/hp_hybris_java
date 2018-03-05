@@ -7,26 +7,18 @@ import { HealthPrintResultsService } from "../../../services/hp-results.service"
   styleUrls: ['./hp-goals.component.scss']
 })
 export class HpGoalsComponent implements OnInit {
+	private healthPrintResultInfo: any;
+	
+	constructor(private healthPrinResultsService: HealthPrintResultsService) { }
 
-  goals =  [
-      { name:"PERFORMANCE",
-        keys:["performance-key-1","performance-key-1","performance-key-1"]
-      },
-      { name:"AGING",
-        keys:["aging-key-13","aging-key-55","aging-key-9"]
-      },
-      { name:"WEIGHT",
-        keys:["weight-key-55","weight-key-59","weight-key-9"]
-      }
-    ];
+	ngOnInit() {
+		this.healthPrinResultsService.healthPrintResultInfo.subscribe(
+            healthPrintResultInfo => this.healthPrintResultInfo = healthPrintResultInfo);
+            console.log(this.healthPrintResultInfo.questions.health_goals);
+	}
 
-  constructor(private healthPrinResultsService: HealthPrintResultsService) { }
-
-  ngOnInit() {
-  }
-
-  readGoalInfo(){
-      this.healthPrinResultsService.openModal('goal', 'data');
-  }
+	readGoalInfo(){
+		this.healthPrinResultsService.openModal('goal', 'data');
+	}
 
 }
