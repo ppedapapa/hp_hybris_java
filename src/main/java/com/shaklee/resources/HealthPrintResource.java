@@ -2,8 +2,11 @@ package com.shaklee.resources;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,14 +31,18 @@ public class HealthPrintResource {
 	
 	
 	@RequestMapping("/samlSuccess")
-	public String samlSuccess(HttpSession session) {
+	public String samlSuccess(HttpSession session, HttpServletResponse response) {
 		String country = (String) session.getAttribute("country");
 		String lang = (String) session.getAttribute("lang");
 		
+		Cookie isUserLoggedIn = new Cookie("userLogged", "true");
+		
+		response.addCookie(isUserLoggedIn);
+		
 		if (country != null && lang != null)
-			return "redirect:/?userLogged=true&country="+country+"&lang="+lang;
+			return "redirect:/?country="+country+"&lang="+lang;
 		else
-			return "redirect:/?userLogged=true";
+			return "redirect:/";
 
 	}
 	
