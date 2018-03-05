@@ -7,35 +7,3 @@ build
 bin
 .idea
 target/
-
-
-# compiled output
-/angular-frontend/dist
-/tmp
-/out-tsc
-
-# e2e
-/e2e/*.js
-/e2e/*.map
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-testem.log
-/typings
-yarn-error.log
-
-# dependencies
-/angular-frontend/e2e/node_modules
-/angular-frontend/node_modules 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-

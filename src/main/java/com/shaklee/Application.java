@@ -4,42 +4,23 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer{
-	
-	@Value("${baseUrl}")
-	String baseUrl; 
+public class Application {
 
-	    @Override
-	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	        return application.sources(Application.class);
-	    }
-
-	    public static void main(String[] args) throws Exception {
-	        SpringApplication.run(Application.class, args);
-	    }
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
@@ -56,13 +37,12 @@ public class Application extends SpringBootServletInitializer{
         };
     }
     
-    
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*").allowedOrigins(baseUrl);
+                registry.addMapping("/*").allowedOrigins("https://storage.googleapis.com");
             }
         };
     }
@@ -72,13 +52,11 @@ public class Application extends SpringBootServletInitializer{
     public DataSource dataSource() {
         return DataSourceBuilder.create()
         		.driverClassName("com.mysql.jdbc.Driver")
-        		.url("jdbc:mysql://google/ICSHKTST?cloudSqlInstance=shaklee-gps:us-central1:us-dev&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false")
+        		.url("jdbc:mysql://google/ICSHKTST?cloudSqlInstance=shaklee-gps:us-central1:us-dev&socketFactory=com.google.cloud.sql.mysql.SocketFactory")
         		.username("root").
         		password("us@dev").build()
         		;
     }
- 
-    
     
 
 }
