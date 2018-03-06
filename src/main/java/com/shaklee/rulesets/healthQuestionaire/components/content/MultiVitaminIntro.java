@@ -29,7 +29,7 @@ import com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminHe
  *
  */
 @Component
-public class MultiVitaminIntro extends AbstractComponent<HPRequest> implements Action<HPRequest> {
+public class MultiVitaminIntro extends AbstractComponent<HPRequest<Questions, Bundle, SKU>> implements Action<HPRequest<Questions, Bundle, SKU>> {
 
 	@NotNull
 	public String promo_code;
@@ -56,7 +56,7 @@ public class MultiVitaminIntro extends AbstractComponent<HPRequest> implements A
 	}
 
 	@Override
-	public void exec(HPRequest q) {
+	public void exec(HPRequest<Questions, Bundle, SKU> q) {
 		// Step 1: verify PromoCode And Action class is available
 		boolean success = MultiVitaminHelper.hasPromoCodeAndAction(q.response, promo_code, action_class);
 
@@ -70,7 +70,7 @@ public class MultiVitaminIntro extends AbstractComponent<HPRequest> implements A
 		}
 	}
 
-	private void setFillerMessages(HPRequest q, List<MVIntro> macthes) {
+	private void setFillerMessages(HPRequest<Questions, Bundle, SKU> q, List<MVIntro> macthes) {
 		if (macthes.size() == 1) {
 			MultiVitaminHelper.addAllFillerMessages(q, macthes, fillerMessages);
 		} else {
@@ -92,7 +92,7 @@ public class MultiVitaminIntro extends AbstractComponent<HPRequest> implements A
 		}
 	}
 
-	private void createMessage(HPRequest q, MVIntro mvIntro) {
+	private void createMessage(HPRequest<Questions, Bundle, SKU> q, MVIntro mvIntro) {
 		PromoMessage message = new PromoMessage();
 		message.key = mvIntro.key;
 		if (mvIntro.skus != null) {
@@ -107,7 +107,7 @@ public class MultiVitaminIntro extends AbstractComponent<HPRequest> implements A
 		arbitrateMatchCancelsSamePriority(macthes);
 	}
 
-	private void createPromoMessage(HPRequest q, List<MVIntro> macthes) {
+	private void createPromoMessage(HPRequest<Questions, Bundle, SKU> q, List<MVIntro> macthes) {
 		for (MVIntro mvIntro : macthes) {
 			createMessage(q, mvIntro);
 		}
