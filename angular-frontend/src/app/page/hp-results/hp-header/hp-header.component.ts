@@ -19,20 +19,21 @@ export class HpHeaderComponent implements OnInit {
    constructor(private healthPrintResultsService:HealthPrintResultsService) {}
 
     ngOnInit() {
-        this.healthPrintResultsService.allHealthPrintResults.subscribe(allHealthPrintsResults => this.allHealthPrintsResults = allHealthPrintsResults);
+        this.healthPrintResultsService.allHealthPrintResults.subscribe( allHealthPrintsResults => this.allHealthPrintsResults = allHealthPrintsResults );
         this.healthPrintResultsService.healthPrintResultInfo.subscribe(healthPrintResultInfo => this.healthPrintResultInfo = healthPrintResultInfo);
         this.healthProfileId = this.healthPrintResultInfo.health_profile_id;
-
-        //this.deviceInfo = this.deviceService.getDeviceInfo();
-        //console.log(this.deviceInfo);
    }
 
-    public changeHealthPrintResultInfo(event):void{
+    public changeHealthPrintResultInfo(event):void {
        for (let index in this.allHealthPrintsResults) {
            let curHealthPrintResult = this.allHealthPrintsResults[index];
 
-           if(this.healthProfileId == curHealthPrintResult.health_profile_id) {
+           if ( this.healthProfileId == curHealthPrintResult.health_profile_id ) {
                this.healthPrintResultsService.setHealthPrintResultInfo(curHealthPrintResult);
+               this.healthPrintResultsService.getRecommendation(curHealthPrintResult).subscribe(responseData => {
+                   let recommendationData = {recommendations:responseData};
+                   this.healthPrintResultsService.setResultsData(recommendationData);
+                })
            }
        }
     }

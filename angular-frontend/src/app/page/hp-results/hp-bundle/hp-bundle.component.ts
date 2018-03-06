@@ -15,6 +15,7 @@ export class HpBundleComponent implements OnInit {
   ngOnInit() {
     const tiers: string[] = ['TIER_1', 'TIER_2', 'TIER_3'];
     this.healthPrintResultsService.getBundles().subscribe(bundle => {
+        this.bundles = [];
         for(let val in bundle) {
             if(tiers.indexOf(bundle[val]['bundle']) !== -1) {
                 this.bundles.push(bundle[val]);
