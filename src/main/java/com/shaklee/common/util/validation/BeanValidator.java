@@ -15,7 +15,10 @@ import javax.validation.Configuration;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.spi.ValidationProvider;
+
+import org.apache.bval.jsr.ApacheValidationProvider;
 
 import com.shaklee.shared.validation.InputValidationException;
 
@@ -27,9 +30,11 @@ import com.shaklee.shared.validation.InputValidationException;
 
 public class BeanValidator {
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private Validator validator = BeanValidator
-			.<Configuration> createValidator("org.apache.bval.jsr303.ApacheValidationProvider");
+	ValidatorFactory validatorFactory 
+	  = Validation.byProvider(ApacheValidationProvider.class)
+	  .configure().buildValidatorFactory();
+	
+	Validator validator = validatorFactory.getValidator();
 
 	@SuppressWarnings("unchecked")
 	static <T extends Configuration<T>> Validator createValidator(String className) {
