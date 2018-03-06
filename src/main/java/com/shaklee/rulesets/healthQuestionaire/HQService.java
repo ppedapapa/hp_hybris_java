@@ -3,16 +3,21 @@ package com.shaklee.rulesets.healthQuestionaire;
 import static com.shaklee.common.util.CollectionUtils.combine;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.shaklee.healthPrint.data.HPRequest;
+import com.shaklee.healthPrint.data.HealthPrintContentRequest;
 import com.shaklee.promo.LocalizedDataImpl;
 import com.shaklee.promo.PromoDatabase;
 import com.shaklee.promo.PromoEngine;
 import com.shaklee.promo.PromoExecutionInstance;
 import com.shaklee.promo.PromoRequest;
+import com.shaklee.promo.PromoRequest.Action;
+import com.shaklee.promo.PromoRequest.PromoAction;
 import com.shaklee.promo.impl.DefaultPromoDatabase;
 import com.shaklee.promo.impl.PromoEngineLoader;
 import com.shaklee.shared.data.Language;
@@ -28,7 +33,6 @@ public class HQService {
 
 	// Logger logger = LoggerFactory.getLogger(PromoService.class);
 
-	
 	PromoDatabase<Questions> db;
 
 	@Autowired
@@ -47,7 +51,7 @@ public class HQService {
 	 * 
 	 * @throws InputValidationException
 	 */
-	public <BundleType, ItemListType> HPRequest<Questions, BundleType, ItemListType> runPromoEngine(
+	public <BundleType, ItemListType> HealthPrintContentRequest<Questions, BundleType, ItemListType> runPromoEngine(
 			PromoRequest<Questions> r) throws InputValidationException {
 
 		// Must override the request since there is one ruleset for US and CA.
@@ -83,11 +87,56 @@ public class HQService {
 			engine.runPromos(engineLogic, promosRequest);
 		}
 
-		// merge results
+		/*
+		 * Adding new flows called as Score and Content for current Health print
+		 * services as an third and fourth execution.
+		 */
+		// Third execution: score results on top of the questionnaire results
+		final HPRequest<Questions, BundleType, ItemListType> scoreRequest = new HPRequest<Questions, BundleType, ItemListType>(
+				r.request, null, null);
+		{
+			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
+					.loadPromoExecutionInstance(rulesDataRequest("HP_SCORES"));
+			scoreRequest.bundles = request.bundles;
+			scoreRequest.response = new ArrayList<PromoRequest.PromoAction>(2);
+			engine.runPromos(engineLogic, scoreRequest);
+		}
 
-		request.response = combine(request.response, promosRequest.response);
-		request.log = combine(request.log, promosRequest.log);
-		return request;
+		/*
+		 * Fourth execution: content keys on top of the questionnaire results
+		 */
+		final HPRequest<Questions, BundleType, ItemListType> contentRequest = new HPRequest<Questions, BundleType, ItemListType>(
+				r.request, null, null);
+		{
+			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
+					.loadPromoExecutionInstance(rulesDataRequest("HP_CONTENT"));
+			contentRequest.bundles = request.bundles;
+			contentRequest.score = scoreRequest.score;
+			contentRequest.response = new ArrayList<PromoRequest.PromoAction>(2);
+			engine.runPromos(engineLogic, contentRequest);
+		}
+
+		// merge results
+		final HealthPrintContentRequest<Questions, BundleType, ItemListType> results = new HealthPrintContentRequest<Questions, BundleType, ItemListType>(
+				r.request, null, null);
+		results.bundles = request.bundles;
+		results.recommended = request.recommended;
+		results.response = combine(request.response, promosRequest.response);
+		results.log = combine(request.log, promosRequest.log);
+		// adding score results
+		results.score = scoreRequest.score;
+		results.content = contentReducer(contentRequest.response);
+		List<Action> content2 = contentRequest.response.stream().map(promoAction -> promoAction.messages)
+				.flatMap(List::stream).collect(Collectors.toList());
+		return results;
+	}
+
+	private List<Action> contentReducer(List<PromoAction> response) {
+		List<Action> content = new ArrayList<Action>();
+		for (final PromoAction promoAction : response) {
+			content.addAll(promoAction.messages);
+		}
+		return content;
 	}
 
 	// public static <BundleType> HPRequest<Questions, BundleType, ?>
