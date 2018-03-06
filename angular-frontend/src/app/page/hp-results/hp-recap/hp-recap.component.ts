@@ -19,8 +19,8 @@ export class HpRecapComponent implements OnInit {
   pregnant = false;
   vegeterian = false;
   gluten = false;
-  recap = this.healthprintResultsService.questions;
-  kids = this.healthprintResultsService.isKids();
+  recap = {};
+  kids = false;
   chart;
   isUS;
 
@@ -30,9 +30,13 @@ export class HpRecapComponent implements OnInit {
               private hpConfigService: HpConfigService) { }
 
   ngOnInit() {
-      if(this.kids === false){
-          this.getRecap()
-      }
+      this.healthprintResultsService.healthPrintResultInfo.subscribe( healthPrintResultInfo => {
+          this.recap = healthPrintResultInfo['questions'];
+          this.kids = (this.recap['age'] <= this.hpConfigService.getKitsAge())?true:false;
+          if(this.kids === false){
+              this.getRecap()
+          }
+      });
       this.isUS = this.appConst.country === "US";
   }
 
@@ -45,8 +49,13 @@ export class HpRecapComponent implements OnInit {
       let question, answer;
       let chartValue:number = null;
 
-      console.log('this.recap', this.recap);
-      if(this.recap.gender === "M")
+    /*
+     * clearing data
+     */
+      this.lifeStyleRecap = [];
+      this.dietRecap = [];
+    
+      if(this.recap['gender'] === "M")
       {
           lifeStyleJson.splice(7, 1);
       }
@@ -72,7 +81,6 @@ export class HpRecapComponent implements OnInit {
 
           if(question == 'dietary-restrictions'){
               let options = [];
-              console.log('this.recap', this.recap[value], value);
               if(this.recap[value] !== null) {
                   this.recap[value].forEach((value1, key1) => {
                       let val = question+'-'+key1;
@@ -97,7 +105,7 @@ export class HpRecapComponent implements OnInit {
           else {
               answer = question+this.recap[value];
           }
-          console.log('dietRecap', this.dietRecap);
+         
           this.dietRecap.push({ question: question, answer: answer });
       });
 
@@ -128,7 +136,7 @@ export class HpRecapComponent implements OnInit {
       this.translate.get('chart.times-week').subscribe((res)=>{weekTimes = res});
       this.translate.get('chart.less-than-7').subscribe((res)=>{lessThan7 = res});
 
-      this.chart = new Chart({
+      this['chart'] = new Chart({
           chart: {
               type: 'bar',
               height: 280

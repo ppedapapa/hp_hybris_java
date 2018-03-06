@@ -9,7 +9,7 @@ import {isEmpty} from "rxjs/operators";
   styleUrls: ['./hp-get-clean.component.scss']
 })
 export class HpGetCleanComponent implements OnInit {
-  kids = this.healthPrintResultsService.isKids();
+  kids = false;
   image;
   price;
   getCleanSkuInfo = [];
@@ -19,7 +19,12 @@ export class HpGetCleanComponent implements OnInit {
               private hpConfigService: HpConfigService) { }
 
   ngOnInit() {
+      this.healthPrintResultsService.healthPrintResultInfo.subscribe( healthPrintResultInfo => {
+          this.kids = (healthPrintResultInfo['questions']['age'] <= this.hpConfigService.getKosherSkus())?true:false;
+      });
+      
       this.healthPrintResultsService.getSkuInfo().subscribe(skuInfo => {
+        this.getCleanSkuInfo = [];
         if(Object.keys(skuInfo).length !== 0) {
           this.getCleanSkuInfo.push({sku: this.getCleanSku, info: skuInfo[this.getCleanSku]});
         }

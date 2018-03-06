@@ -8,6 +8,7 @@ export class HpConfigService {
     count: 1
   };
 
+  kidsAge = 12;
   private pageLength = new Subject<number>();
   isUS = true;
   length = this.pageLength.asObservable();
@@ -132,5 +133,9 @@ export class HpConfigService {
 
   getLifeStyle = function() {
     return ['energy', 'stress', 'sleep', 'memory', 'exercise_frequency', 'exercise_intensity', 'toxins', 'pregnant', 'spending'];
+  }
+  
+  getKitsAge = function() {
+      return this.kidsAge;
   }
 }

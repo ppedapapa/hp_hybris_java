@@ -16,6 +16,13 @@ export class HealthPrintResultsService {
     private healthPrintResultInfoSource = new BehaviorSubject<object>({});
     allHealthPrintResults = this.allHealthPrintResultsSource.asObservable();
     healthPrintResultInfo = this.healthPrintResultInfoSource.asObservable();
+    
+    private bundlesSubject: BehaviorSubject<any> = new BehaviorSubject({});
+    private bundles = this.bundlesSubject.asObservable();
+
+    private skuSubject: BehaviorSubject<any> = new BehaviorSubject({});
+    private skuInfo = this.skuSubject.asObservable();
+    
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json; charset=utf-8',
@@ -40,8 +47,7 @@ export class HealthPrintResultsService {
     getAllHealthPrints() {
         let healthProfile = JSON.parse(this.questionsService.getHealthProfileInfo());
         let request = {};
-        console.log('getAllHealthPrints', healthProfile, request);
-
+       
         if(healthProfile !== null) {
             if (healthProfile.email !== undefined) {
                 request = {email: healthProfile.email};
@@ -56,12 +62,6 @@ export class HealthPrintResultsService {
         this.questions = healthPrints.questions;
         return this.http.post(this.endPointRecommendation, this.questions, this.httpOptions);
     }
-
-    private bundlesSubject: BehaviorSubject<any> = new BehaviorSubject({});
-    private bundles = this.bundlesSubject.asObservable();
-
-    private skuSubject: BehaviorSubject<any> = new BehaviorSubject({});
-    private skuInfo = this.skuSubject.asObservable();
 
     getBundles() {
        return this.bundles;
@@ -179,7 +179,7 @@ export class HealthPrintResultsService {
     getKidsSkus(){
         let kidsSkus =[];
         let dietRestrictions = this.questions.dietary_restrictions;
-console.log('this.questions', this.questions);
+
         if(dietRestrictions !== null && dietRestrictions.indexOf('KOSHER')){
             kidsSkus = this.hpConfigService.getKosherSkus();
         }else{
