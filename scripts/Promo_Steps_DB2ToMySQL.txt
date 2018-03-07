@@ -1,4 +1,4 @@
--- updating promo sqls
+-- updating promo sqls..
 
 -- Use below sql before any ruleset when you need to create  PROMO_COMPONENT_SEQ.nextval
 insert into PROMO_RULESET_SEQ(PROMO_ID) values (10001);
