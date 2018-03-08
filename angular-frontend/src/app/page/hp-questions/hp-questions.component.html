@@ -8,11 +8,11 @@
 
   <div class="question" *ngFor="let page of pages;let i=index;">
     <app-question-mixed-content [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-mixed-content'" class="row"></app-question-mixed-content>
-    <app-question-selections [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-selections'" class="row justify-content-center"></app-question-selections>
-    <app-question-age-weight [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-age-weight'" class="row justify-content-center"></app-question-age-weight>
-    <app-question-goals [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-goals'" class="row justify-content-center"></app-question-goals>
-    <app-question-dietary-restrictions [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-dietary-restrictions'" class="row justify-content-center"></app-question-dietary-restrictions>
-    <app-question-form [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-form'" class="row justify-content-center"></app-question-form>
+    <app-question-selections [@transition] [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-selections'" class="row justify-content-center"></app-question-selections>
+    <app-question-age-weight [@transition] [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-age-weight'" class="row justify-content-center"></app-question-age-weight>
+    <app-question-goals [@transition] [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-goals'" class="row justify-content-center"></app-question-goals>
+    <app-question-dietary-restrictions [@transition] [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-dietary-restrictions'" class="row justify-content-center"></app-question-dietary-restrictions>
+    <app-question-form [@transition] [pageIndex] = 'i' [questions]="page.questions" *ngIf="page.component === 'question-form'" class="row justify-content-center"></app-question-form>
   </div>
 </section>
 

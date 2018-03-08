@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CookieService } from 'ngx-cookie-service';
@@ -107,6 +107,7 @@ export function translateLoader(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
+        BrowserAnimationsModule,
         HttpClientModule,
         BrowserModule,
         AppRoutingModule,
