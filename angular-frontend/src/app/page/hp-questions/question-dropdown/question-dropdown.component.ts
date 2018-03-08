@@ -19,6 +19,7 @@ export class QuestionDropdownComponent implements OnInit {
   selectedOption;
   answered = this.questionsService.getAnswered();
   goals =  this.questionsService.goals;
+  heightInches = this.questionsService.heightInches;
 
   constructor(private translate: TranslateService,
               private questionsService: QuestionsService) { }
@@ -39,7 +40,7 @@ export class QuestionDropdownComponent implements OnInit {
           } else {
               this.translate.get('label.' + this.label).subscribe((res: string) => {
                   this.currentDropdown[item] = item + ' ' + res;
-                  const selectedAnswer = this.answered['height_inches'];
+                  const selectedAnswer = this.heightInches[this.label];
                   if(selectedAnswer !== undefined) {
                       this.selectedOption = this.currentDropdown[selectedAnswer];
                   }

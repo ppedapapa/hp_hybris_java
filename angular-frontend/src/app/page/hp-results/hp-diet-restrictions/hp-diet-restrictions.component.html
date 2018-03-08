@@ -1,0 +1,6 @@
+<div class="diet-restrictions">
+  <span class="nongmo" *ngIf="restrictions.nongmo"><img src="//images.shaklee.com/healthprint/gmo.png" class="img-fluid"/> <span [innerHTML]="'results.nongmo'|translate"></span></span>
+  <span class="gluten" *ngIf="restrictions.gluten"><img src="//images.shaklee.com/healthprint/gluten-free.png" class="img-fluid"/> <span [innerHTML]="'results.gluten'|translate"></span></span>
+  <span class="dairy" *ngIf="restrictions.dairy"><img src="//images.shaklee.com/healthprint/lactose-free.png" class="img-fluid"/> <span [innerHTML]="'results.lactose'|translate"></span></span>
+  <span class="kosher" *ngIf="restrictions.kosher"><img src="//images.shaklee.com/healthprint/kosher.png" class="img-fluid"/> <span [innerHTML]="'results.kosher'|translate"></span></span>
+</div>

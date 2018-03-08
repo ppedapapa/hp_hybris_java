@@ -49,6 +49,7 @@ import { HpKidsComponent } from './page/hp-results/hp-kids/hp-kids.component';
 import { HpGetCleanComponent } from './page/hp-results/hp-get-clean/hp-get-clean.component';
 import { HpRecapComponent } from './page/hp-results/hp-recap/hp-recap.component';
 import { HpResultsModalComponent } from './page/hp-results/hp-results-modal/hp-results-modal.component';
+import { HpDietRestrictionsComponent } from './page/hp-results/hp-diet-restrictions/hp-diet-restrictions.component';
 
 // AoT requires an exported function for factories
 /* export function createTranslateLoader(http: HttpClient) {
@@ -93,7 +94,8 @@ export function translateLoader(http: HttpClient) {
         HpKidsComponent,
         HpGetCleanComponent,
         HpRecapComponent,
-        HpResultsModalComponent
+        HpResultsModalComponent,
+        HpDietRestrictionsComponent
     ],
     entryComponents: [
         HpResultsModalComponent
