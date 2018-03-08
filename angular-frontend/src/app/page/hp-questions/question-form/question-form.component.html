@@ -10,7 +10,7 @@
                    [ngClass]="option.name" />
         </div>
     </form>
-    <div class="row btn-container">
+    <div class="row btn-container" *ngIf="!isUserLogin">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 guest-results-btn">
           <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn" [ngClass]="{'continue-answered-btn':form.valid}" (click)="getResults()">
             <span [innerHTML]="'questions.get-results'|translate"></span>
@@ -20,7 +20,7 @@
     </div>
     <div class="disclaimer">
         <p class="get-results-info" [innerHTML]="'questions.email-disclaimer-3'|translate"></p>
-        <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn ng-binding" type="submit" (click)="trackGuestEvent()">
+        <button class="btn btn-primary hq-nav-btn continue-btn continue-answered-btn ng-binding" type="submit" (click)="trackGuestEvent()" *ngIf="!isUserLogin">
             {{'questions.member-login-view-results'|translate}}
         </button>
     </div>

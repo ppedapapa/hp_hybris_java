@@ -86,7 +86,6 @@ export class QuestionsService {
   }
 
   setSelected(question: Question, option: Option) {
-    console.log(this.answered);
     this.answered[question.name] = option.index;
     let index = option.index;
 
@@ -96,8 +95,8 @@ export class QuestionsService {
       } else if(index === 1 && question.name === 'gender') {
         this.quiz = this.baseQuiz;
       }
+      this.hpconfigService.updatelength(this.quiz['pages'].length);
     }
-    this.hpconfigService.updatelength(this.quiz['pages'].length);
     this.setAutomove();
   }
 

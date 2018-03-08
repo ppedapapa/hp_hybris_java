@@ -3,7 +3,12 @@
     <div class="container">
       <div class="row">
           <div class="col-12 header-col">
-            <a class="header-link" href="https://www.shakleedev.com:9002/login"><span><i class="fa fa-user" aria-hidden="true"></i> {{'login'|translate}}</span></a>
+            <a class="header-link" href="healthprint-login"  *ngIf="isUserLogin; else elseBlock">
+            	<span><i class="fa fa-user" aria-hidden="true"></i> {{'logout'|translate}}</span>
+            </a>
+            <ng-template #elseBlock>
+            	<a class="header-link" href="healthprint-login"><span><i class="fa fa-user" aria-hidden="true"></i>{{'login'|translate}}</span></a>
+            </ng-template>
             <a class="header-link nav-cart" href="https://www.shakleedev.com:9002/cart"><span><i class="fa fa-shopping-cart" aria-hidden="true"></i>  {{'cart'|translate}}</span></a>
           </div>
       </div>
