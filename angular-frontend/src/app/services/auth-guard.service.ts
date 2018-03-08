@@ -3,26 +3,27 @@ import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {QuestionsService} from "./questions.service";
 import {AuthService} from "./auth.service";
+import {AppService} from "../app.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
     constructor(private authService: AuthService,
                 private questionsService: QuestionsService,
-                private router: Router) {}
+                private router: Router,
+                private appService: AppService) {}
 
     canActivate( route: ActivatedRouteSnapshot,
                  state: RouterStateSnapshot ): Observable<boolean> | Promise<boolean> | boolean {
         let healthProfile = JSON.parse(this.questionsService.getHealthProfileInfo());
-        let isUserLoggedin = route.queryParams['userLogged'];
+        let isUserLoggedin = this.appService.isUserLogin();
+ 
         this.authService.setLogin(isUserLoggedin);
 
-        console.log('authGuard',isUserLoggedin, healthProfile);
-
-        if(isUserLoggedin != 'true' && healthProfile === null ) {
-console.log('guard to questions');
+        if ( isUserLoggedin != true && healthProfile === null ) {
+          
             this.router.navigate(['/healthprint']);
         } else {
-console.log('guard to results');
+           
             this.router.navigate(['/healthprint-results']);
         }
         return false;
