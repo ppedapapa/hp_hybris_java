@@ -13,11 +13,12 @@ export class QuestionsService {
   baseQuiz: Quiz[];
   questions: string;
   answered = this.hpconfigService.getAnsweredJsonObj();
-  goals: string[] = [];
+  goals = {goal0: undefined,goal1: undefined,goal2: undefined};
   heightInches = {foot: undefined, inches: undefined};
   isPWS;
   isShaklee180;
   pws_owner_id = null; // update this value based on req -- revisit
+  goalDropdown = [];
 
   // private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
 
@@ -201,6 +202,9 @@ export class QuestionsService {
         return parseInt(value);
     }
     return value;
+  }
+  setGoalDropdown(list){
+      this.goalDropdown = list;
   }
 
 }

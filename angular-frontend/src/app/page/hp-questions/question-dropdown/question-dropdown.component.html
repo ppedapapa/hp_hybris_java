@@ -1,5 +1,5 @@
 <div ngbDropdown class="d-inline-block btn-group btn-group-select-option">
-  <button class="btn btn-outline-primary btn-select-option" id="dropdownBasic1" ngbDropdownToggle [innerHTML]="selectedOption"></button>
+  <button class="btn btn-outline-primary btn-select-option" id="dropdownBasic1" ngbDropdownToggle [innerHTML]="selectedOption" (mouseenter)="formatGoalList()"></button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
     <button class="dropdown-item" *ngFor="let option of dropdown" (click)="setValue(label, option, type)" [innerHTML]="currentDropdown[option]"></button>
   </div>
