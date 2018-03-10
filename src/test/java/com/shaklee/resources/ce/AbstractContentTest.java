@@ -36,7 +36,8 @@ import com.shaklee.rulesets.healthQuestionaire.Questions;
  * Abstract Test Config Class that mocks the actual implementation using the
  * Mockito mock objects.
  * 
- * There are some utils function to help JUnit and integration test cases.
+ * There are some test helper functions to help JUnit and integration test
+ * cases.
  *
  * @author ekoca
  */
@@ -60,6 +61,66 @@ public class AbstractContentTest {
 		T data = targetClass.newInstance();
 		loader.deserialize(data, json);
 		return data;
+	}
+
+	protected static class MockConfig {
+		@Bean
+		@SuppressWarnings("unchecked")
+		public PromoEngine<PromoRequest<Questions>> getPromoEngine() {
+			return mock(PromoEngine.class);
+		}
+
+		@Bean
+		public HQService getHQService() {
+			return mock(HQService.class);
+		}
+
+		@Bean
+		public DataSource getDataSource() {
+			return mock(DataSource.class);
+		}
+
+		@Bean
+		public HealthQuestionnaireResource getHealthQuestionnaireResource() {
+			return mock(HealthQuestionnaireResource.class);
+		}
+
+		@Bean
+		public UserDAOImpl getUserDAOImpl() {
+			return mock(UserDAOImpl.class);
+		}
+
+		@Bean
+		public HealthQuestionnaireModel getHealthQuestionnaireModel() {
+			return mock(HealthQuestionnaireModel.class);
+		}
+
+		@Bean
+		public UserDataStorageDAO getUserDataStorageDAO() {
+			return mock(UserDataStorageDAO.class);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Bean
+		public DefaultPromoDatabase<Questions> getDefaultPromoDatabase() {
+			return mock(DefaultPromoDatabase.class);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Bean
+		public PromoLoader<PromoRequest<Questions>> getPromoLoader() {
+			return mock(PromoLoader.class);
+		}
+
+		@Bean
+		public JsonLoader getJsonLoader() {
+			return mock(JsonLoader.class);
+		}
+
+		@Bean
+		public PromoJsonLoader getPromoJsonLoader() {
+			return mock(PromoJsonLoader.class);
+		}
 	}
 
 	/**
@@ -267,65 +328,5 @@ public class AbstractContentTest {
 		final HealthPrintContentRequest<Questions, Object, Object> results = new HealthPrintContentRequest<>(
 				request.request, null, null);
 		return results;
-	}
-
-	protected static class MockConfig {
-		@Bean
-		@SuppressWarnings("unchecked")
-		public PromoEngine<PromoRequest<Questions>> getPromoEngine() {
-			return mock(PromoEngine.class);
-		}
-
-		@Bean
-		public HQService getHQService() {
-			return mock(HQService.class);
-		}
-
-		@Bean
-		public DataSource getDataSource() {
-			return mock(DataSource.class);
-		}
-
-		@Bean
-		public HealthQuestionnaireResource getHealthQuestionnaireResource() {
-			return mock(HealthQuestionnaireResource.class);
-		}
-
-		@Bean
-		public UserDAOImpl getUserDAOImpl() {
-			return mock(UserDAOImpl.class);
-		}
-
-		@Bean
-		public HealthQuestionnaireModel getHealthQuestionnaireModel() {
-			return mock(HealthQuestionnaireModel.class);
-		}
-
-		@Bean
-		public UserDataStorageDAO getUserDataStorageDAO() {
-			return mock(UserDataStorageDAO.class);
-		}
-
-		@SuppressWarnings("unchecked")
-		@Bean
-		public DefaultPromoDatabase<Questions> getDefaultPromoDatabase() {
-			return mock(DefaultPromoDatabase.class);
-		}
-
-		@SuppressWarnings("unchecked")
-		@Bean
-		public PromoLoader<PromoRequest<Questions>> getPromoLoader() {
-			return mock(PromoLoader.class);
-		}
-
-		@Bean
-		public JsonLoader getJsonLoader() {
-			return mock(JsonLoader.class);
-		}
-
-		@Bean
-		public PromoJsonLoader getPromoJsonLoader() {
-			return mock(PromoJsonLoader.class);
-		}
 	}
 }
