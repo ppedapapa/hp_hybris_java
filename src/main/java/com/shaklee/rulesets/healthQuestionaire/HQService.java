@@ -121,16 +121,26 @@ public class HQService {
 				r.request, null, null);
 		results.bundles = request.bundles;
 		results.recommended = request.recommended;
-		results.response = combine(request.response, promosRequest.response);
+		results.response = combine(combine(request.response, promosRequest.response),
+				combine(scoreRequest.response, contentRequest.response));
 		results.log = combine(request.log, promosRequest.log);
 		// adding score results
 		results.score = scoreRequest.score;
-		results.content = contentReducer(contentRequest.response);
-		List<Action> content2 = contentRequest.response.stream().map(promoAction -> promoAction.messages)
-				.flatMap(List::stream).collect(Collectors.toList());
+		// adding filtered content data
+		results.content = contentRequest.response.stream() // open the stream to reduce content data
+				.map(promoAction -> promoAction.messages) // return the list of message actions
+				.flatMap(List::stream) // transform array of messages to stream,
+				.collect(Collectors.toList()); // collect stream back to List<Action>
 		return results;
 	}
 
+	@Deprecated
+	/**
+	 * We will remove this method since it is deprecated with Java Streams API
+	 * 
+	 * @param response
+	 * @return
+	 */
 	private List<Action> contentReducer(List<PromoAction> response) {
 		List<Action> content = new ArrayList<Action>();
 		for (final PromoAction promoAction : response) {

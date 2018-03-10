@@ -1,13 +1,21 @@
 package com.shaklee.resources.ce;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
+
+import java.io.IOException;
 
 import javax.sql.DataSource;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.junit.Assert;
 import org.springframework.context.annotation.Bean;
 
 import com.shaklee.DAO.UserDataStorageDAO;
 import com.shaklee.DAOImpl.UserDAOImpl;
+import com.shaklee.common.util.ClasspathFileLoader;
 import com.shaklee.common.util.JsonLoader;
 import com.shaklee.healthPrint.data.Bundle;
 import com.shaklee.healthPrint.data.HPRequest;
@@ -27,10 +35,226 @@ import com.shaklee.rulesets.healthQuestionaire.Questions;
 /**
  * Abstract Test Config Class that mocks the actual implementation using the
  * Mockito mock objects.
+ * 
+ * There are some utils function to help JUnit and integration test cases.
  *
  * @author ekoca
  */
 public class AbstractContentTest {
+
+	/**
+	 * Load JSON file to memory
+	 * 
+	 * @param fileName
+	 * @param targetClass
+	 * @param callingClass
+	 * @param loader
+	 * @return
+	 * @throws IOException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
+	protected <T> T loadJsonFile(String fileName, Class<T> targetClass, Class<?> callingClass, JsonLoader loader)
+			throws IOException, InstantiationException, IllegalAccessException {
+		String json = ClasspathFileLoader.load(fileName, callingClass);
+		T data = targetClass.newInstance();
+		loader.deserialize(data, json);
+		return data;
+	}
+
+	/**
+	 * Assert bmi section result that includes key, bullet keys, bmi score,
+	 * min_desirable_weight and max_desirable_weight
+	 * 
+	 * @param response
+	 * @param key
+	 * @param score
+	 * @param min
+	 * @param max
+	 * @throws JSONException
+	 */
+	public void assertBMI(JSONObject response, final String key, final double score, int min, int max)
+			throws JSONException {
+		JSONObject section = assertSection(response, "bmi");
+		JSONObject params = assertContentKeys(section, key);
+		assertSectionScore(params, score, min, max);
+	}
+
+	/**
+	 * Assert the lifestyle section that includes key, bullet keys and lifestyle
+	 * score
+	 * 
+	 * @param response
+	 * @param key
+	 * @param bulletKeys
+	 * @throws JSONException
+	 */
+	public void assertLifeStyle(JSONObject response, final int score, final String key, final String... bulletKeys)
+			throws JSONException {
+		final JSONObject section = assertSection(response, "lifestyle");
+		final JSONObject params = assertContentKeys(section, key, bulletKeys);
+		assertSectionScore(params, score);
+	}
+
+	/**
+	 * Assert the diet section that includes key, bullet keys and diet score
+	 * 
+	 * @param response
+	 * @param key
+	 * @param bulletKeys
+	 * @throws JSONException
+	 */
+	public void assertDiet(JSONObject response, final int score, final String key, final String... bulletKeys)
+			throws JSONException {
+		final JSONObject section = assertSection(response, "diet");
+		final JSONObject params = assertContentKeys(section, key, bulletKeys);
+		assertSectionScore(params, score);
+	}
+
+	/**
+	 * Assert true if there is a content result. Otherwise, fail.
+	 * 
+	 * @param JSONObject
+	 *            response
+	 * @throws JSONException
+	 */
+	protected void assertNoContent(JSONObject response) throws JSONException {
+		try {
+			response.getJSONObject("content");
+			fail("Content found!");
+		} catch (JSONException ex) {
+		}
+	}
+
+	/**
+	 * Assert true if there is a content result. Otherwise, fail.
+	 * 
+	 * @param JSONObject
+	 *            response
+	 * @throws JSONException
+	 */
+	protected JSONArray assertContent(JSONObject response) throws JSONException {
+		try {
+			return response.getJSONArray("content");
+		} catch (JSONException ex) {
+			fail("Content not found");
+		}
+		return null;
+	}
+
+	/**
+	 * Assert each section of content scope like bmi, lifestyle or diet
+	 * 
+	 * @param JSONObject
+	 *            response
+	 * @param String
+	 *            section
+	 * @return JSONObject params
+	 * @throws JSONException
+	 */
+	protected JSONObject assertSection(JSONObject response, final String section) throws JSONException {
+		try {
+			JSONArray contents = response.getJSONArray("content");
+			for (int i = 0; i < contents.length(); i++) {
+				JSONObject sec = contents.getJSONObject(i);
+				JSONObject params = sec.getJSONObject("params");
+				final String actualSection = params.getString("section");
+				if (actualSection.equals(section)) {
+					return sec;
+				}
+			}
+		} catch (JSONException ex) {
+			fail(section + " section not found");
+		}
+		return null;
+	}
+
+	/**
+	 * Assert all the keys for content scope like header key and bullet keys
+	 * 
+	 * @param JSONObject
+	 *            section
+	 * @param String
+	 *            key
+	 * @param String[]
+	 *            bulletKeys
+	 * @return
+	 * @throws JSONException
+	 */
+	protected JSONObject assertContentKeys(JSONObject section, final String key, final String... bulletKeys)
+			throws JSONException {
+		final String actualKey = section.getString("key");
+		Assert.assertEquals(key, actualKey);
+		JSONObject params = section.getJSONObject("params");
+		if (bulletKeys.length == 3) {
+			JSONArray bullet_keys = params.getJSONArray("bullet_keys");
+			for (int i = 0; i < bullet_keys.length(); i++) {
+				final String bullet_key = bullet_keys.getString(i);
+				Assert.assertEquals(bulletKeys[i], bullet_key);
+			}
+		}
+		return params;
+	}
+
+	/**
+	 * Assert given lifestyle or diet score
+	 * 
+	 * @param JSONObject
+	 *            params
+	 * @param int
+	 *            score
+	 * @throws JSONException
+	 */
+	protected void assertSectionScore(JSONObject params, int score) throws JSONException {
+		assertSectionScore(params, score, 0, 0);
+	}
+
+	/**
+	 * Assert given any section's score like bmi (float), lifestyle (int) or diet
+	 * score (int)
+	 * 
+	 * @param JSONObject
+	 *            params
+	 * @param T
+	 *            score
+	 * @param int
+	 *            min
+	 * @param int
+	 *            max
+	 * @throws JSONException
+	 */
+	protected <T> void assertSectionScore(JSONObject params, T score, int min, int max) throws JSONException {
+		@SuppressWarnings("unchecked")
+		final T actualScore = (T) params.get("score");
+		if (!score.equals(actualScore))
+			fail("Expected score: " + score + " but got: " + actualScore + " for the section: "
+					+ params.getString("section"));
+		if (min > 0) {
+			final int actualMin = params.getInt("min_desirable_weight");
+			Assert.assertEquals(min, actualMin);
+		}
+		if (max > 0) {
+			final int actualMax = params.getInt("max_desirable_weight");
+			Assert.assertEquals(max, actualMax);
+		}
+	}
+
+	/**
+	 * Verify given key and value pair matches with actual result.
+	 * 
+	 * @deprecated please use assertSectionScore instead.
+	 * 
+	 * @param response
+	 * @throws JSONException
+	 */
+	@SuppressWarnings("unused")
+	@Deprecated
+	protected void assertScoreKeyValue(JSONObject response, String key, float value) throws JSONException {
+		JSONObject score = response.getJSONObject("score");
+		float actualValue = (float) score.getDouble(key);
+		if (value != actualValue)
+			fail("Expected: " + value + " but got: " + actualValue + " for the given key: " + key);
+	}
 
 	protected HQResponse mockHQResponse() {
 		HQResponse response = new HQResponse(0);

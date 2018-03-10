@@ -22,15 +22,15 @@ import com.shaklee.shared.validation.InputValidationException;
 
 /**
  * Testing Core Content flow without initialize entire SpringBoot Application
+ * using abstract mock config.
  * 
  * @author ekoca
  *
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ContentTest.MockConfig.class)
+@ContextConfiguration(classes = ContentUnitTest.MockConfig.class)
 @ActiveProfiles(profiles = "local")
-public class ContentTest extends AbstractContentTest {
+public class ContentUnitTest extends AbstractContentTest {
 	@Autowired
 	HealthQuestionnaireResource resource;
 
