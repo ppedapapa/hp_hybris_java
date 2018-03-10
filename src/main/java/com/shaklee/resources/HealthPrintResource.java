@@ -1,20 +1,15 @@
 package com.shaklee.resources;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shaklee.security.stereotypes.CurrentUser;
+import com.shaklee.entity.HPEntity;
 
 @Controller
 public class HealthPrintResource {
@@ -35,14 +30,20 @@ public class HealthPrintResource {
 		String country = (String) session.getAttribute("country");
 		String lang = (String) session.getAttribute("lang");
 		
-		Cookie isUserLoggedIn = new Cookie("userLogged", "true");
+		HPEntity hpEntity = new HPEntity();
 		
-		response.addCookie(isUserLoggedIn);
+		hpEntity.setCountry(country);
+		hpEntity.setLang( lang);
+		hpEntity.setUserLogged(true);
 		
-		if (country != null && lang != null)
-			return "redirect:/?country="+country+"&lang="+lang;
-		else
-			return "redirect:/";
+		
+		Cookie hpEntityCookie = new Cookie("hpEntity", hpEntity.toString());
+		Cookie testCookie = new Cookie("test", "test");
+		
+		response.addCookie(hpEntityCookie);
+		response.addCookie(testCookie);
+		
+		return "redirect:/";
 
 	}
 	
@@ -53,7 +54,7 @@ public class HealthPrintResource {
 		String country = (String) session.getAttribute("country");
         String language = (String) session.getAttribute("language");
 
-        return "redirect:/?userLogged=true&country="+country+"&language="+language;
+        return "redirect:/?country="+country+"&language="+language;
 	}
 	
 	@RequestMapping("/healthprint-results/{hpid}")
