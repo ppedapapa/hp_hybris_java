@@ -2,7 +2,7 @@ package com.shaklee.resources.ce.integration;
 
 import static com.shaklee.promo.QuestionsTestutils.callQuestions;
 import static com.shaklee.promo.QuestionsTestutils.createQuestions;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
