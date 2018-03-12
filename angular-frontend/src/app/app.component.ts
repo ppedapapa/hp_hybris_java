@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
     router.events.subscribe((event: RouterEvent) => {
         this.navigationInterceptor(event)
     });
-    translate.setDefaultLang('us-en');
+    let appConst = appService.getAppConst();
+    translate.setDefaultLang(appConst.selectedLang);
     this.appendGaTrackingCode();
   }
 

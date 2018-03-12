@@ -16,10 +16,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                  state: RouterStateSnapshot ): Observable<boolean> | Promise<boolean> | boolean {
         let healthProfile = JSON.parse(this.questionsService.getHealthProfileInfo());
         let isUserLoggedin = this.appService.isUserLogin();
- 
+        let hpRetakeQuiz = JSON.parse(localStorage.getItem('hpRetakeQuiz'));
+      
         this.authService.setLogin(isUserLoggedin);
 
-        if ( isUserLoggedin != true && healthProfile === null ) {
+        if ( isUserLoggedin != true && healthProfile === null || hpRetakeQuiz) {
           
             this.router.navigate(['/healthprint']);
         } else {
