@@ -23,7 +23,6 @@ import com.shaklee.DAOImpl.UserDAOImpl;
 import com.shaklee.common.util.JSONSerializer;
 import com.shaklee.common.util.validation.BeanValidator;
 import com.shaklee.healthPrint.data.Bundle;
-import com.shaklee.healthPrint.data.HPScore;
 import com.shaklee.healthPrint.data.HealthPrintContentRequest;
 import com.shaklee.healthPrint.data.SKU;
 import com.shaklee.healthPrint.data.SKUList;
@@ -76,7 +75,7 @@ public class HealthQuestionnaireResource {
 			response.data = req.response;
 			response.bundles = TieredSKUList.fromAbstractType(req.bundles);
 			response.recommended = req.recommended;
-			response.score = req.score;
+			// response.score = req.score;
 			response.content = req.content;
 			response.ms = System.currentTimeMillis() - start;
 			response.debug = req.log;
@@ -212,8 +211,8 @@ public class HealthQuestionnaireResource {
 		public List<PromoAction> data;
 		public Collection<TieredSKUList> bundles;
 		public Bundle recommended;
-		// Content and Score flows
-		protected HPScore score;
+
+		// Content provider
 		public List<Action> content;
 
 		public HQResponse(String message) {
