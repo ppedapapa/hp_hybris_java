@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   domainName: '.shakleedev.com',
-  hybrisServerName: 'https://www.shakleedev.com:9002'
+  hybrisServerName: 'https://www.shakleedev.com:9002',
+  googleAnalysAccount:'UA-80512355-1',
 };

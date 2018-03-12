@@ -19,6 +19,9 @@ export class QuestionDropdownComponent implements OnInit {
   selectedOption;
   answered = this.questionsService.getAnswered();
   goals =  this.questionsService.goals;
+  heightInches = this.questionsService.heightInches;
+  goalDropdown;
+  currentGoals = [];
 
   constructor(private translate: TranslateService,
               private questionsService: QuestionsService) { }
@@ -27,39 +30,56 @@ export class QuestionDropdownComponent implements OnInit {
       this.translate.get('label.' + this.firstLabel).subscribe((res: string) => {
           this.selectedOption = res;
       });
-      this.dropdown.forEach(item => {
-          if (this.fromComponent === 'goal') {
+      if (this.fromComponent === 'goal') {
+          this.goalDropdown = this.questionsService.goalDropdown;
+          this.goalDropdown.forEach(item => {
               this.translate.get('label.' + this.label + item.toLowerCase()).subscribe((res: string) => {
                   this.currentDropdown[item] = res;
-                  const selectedAnswer = this.goals[this.index];
+                  const selectedAnswer = this.goals['goal'+this.index];
                   if(selectedAnswer !== undefined) {
                       this.selectedOption = this.currentDropdown[selectedAnswer];
                   }
               });
-          } else {
+          });
+      } else {
+          this.dropdown.forEach(item => {
               this.translate.get('label.' + this.label).subscribe((res: string) => {
                   this.currentDropdown[item] = item + ' ' + res;
-                  const selectedAnswer = this.answered['height_inches'];
+                  const selectedAnswer = this.heightInches[this.label];
                   if(selectedAnswer !== undefined) {
                       this.selectedOption = this.currentDropdown[selectedAnswer];
                   }
               });
-          }
-      });
+          });
+      }
+
+  }
+
+  formatGoalList() {
+      if (this.fromComponent === 'goal') {
+          this.dropdown = [];
+          this.goalDropdown.forEach(val => {
+              if (this.goals['goal0'] != val && this.goals['goal1'] != val && this.goals['goal2'] != val) {
+                  this.dropdown.push(val);
+              }
+          });
+      }
   }
 
   setValue(label, val, type) {
-    console.log(label, val, type);
     if (this.fromComponent === 'goal') {
         this.translate.get('label.' + label + val.toLowerCase()).subscribe((res: string) => {
             this.selectedOption = res;
         });
-        const index = this.goals.indexOf(val);
-        if (index === -1) {
-            this.goals.push(val);
+        this.goals['goal'+this.index] = val;
+
+        for(let key in this.goals) {
+            if(this.goals[key] != undefined) {
+                this.currentGoals.push(this.goals[key]);
+            }
         }
-        if(this.goals.length === 3) {
-            this.questionsService.setDropdown(label, this.goals, type);
+        if(this.currentGoals.length === 3) {
+            this.questionsService.setDropdown(label, this.currentGoals, type);
         }
     } else {
         this.translate.get('label.' + label).subscribe((res: string) => {

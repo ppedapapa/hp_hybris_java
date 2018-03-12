@@ -1,10 +1,11 @@
 import 'rxjs/add/operator/map';
 
-import {Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HpConfigService } from './hp-config.service';
 import { Quiz, Question, Option } from '../models';
 import { Router } from "@angular/router";
+import { GoogleAnalyticsService } from "./google-analytics.service";
 
 @Injectable()
 export class QuestionsService {
@@ -13,17 +14,19 @@ export class QuestionsService {
   baseQuiz: Quiz[];
   questions: string;
   answered = this.hpconfigService.getAnsweredJsonObj();
-  goals: string[] = [];
+  goals = {goal0: undefined,goal1: undefined,goal2: undefined};
   heightInches = {foot: undefined, inches: undefined};
   isPWS;
   isShaklee180;
   pws_owner_id = null; // update this value based on req -- revisit
+  goalDropdown = [];
 
   // private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
 
   constructor(private http: HttpClient,
               private hpconfigService: HpConfigService,
-              private router: Router) {}
+              private router: Router,
+              private analyticsService: GoogleAnalyticsService) {}
 
   /*getAnsweredSubject(): Observable<any>  {
     return this.answeredSubject.asObservable();
@@ -106,10 +109,35 @@ export class QuestionsService {
   }
 
   goTo(index: number) {
+  console.log('index', index);
     const pageCount = this.hpconfigService.getPagerCount();
     if (index >= 0 && index < pageCount && this.validCurrentPage()) {
         this.hpconfigService.setPagerIndex(index);
+        this.questionsAnalytics(index);
     }
+  }
+
+  questionsAnalytics(questionId){
+    var label = 'User on question page-'+questionId+'-A';
+    var question;
+    switch(questionId){
+        case 1: question = 'gender';break;
+        case 2: question = 'fruit-vegetables-whole grains';break;
+        case 3: question = 'dairy-fish-water';break;
+        case 4: question = 'sugary drinks-unhealthy snacks';break;
+        case 5: question = 'breakfast-organic foods';break;
+        case 6: question = 'bleach ammonia';break;
+        case 7: question = 'energy-stress-sleep';break;
+        case 8: question = 'memory-often exercise-describe weekly exercise';break;
+        case 9: question = 'age-weight-height';break;
+        case 10: question = 'health goals';break;
+        case 11: question = 'dietary restrictions';break;
+        case 12: question = 'pregnant';break;
+        case 13: question = 'spend each day';break;
+        case 14: question = 'name-email';break;
+        default: question = 'questionnaire';
+    }
+    this.analyticsService.emitEvent(label, question);
   }
 
   validCurrentPage() {
@@ -161,6 +189,8 @@ export class QuestionsService {
           this.setHealthProfileInfo(profileInfo);
           this.router.navigate(['/healthprint-results']);
       });
+      this.questionsAnalytics(this.hpconfigService.getPagerCount());
+      this.analyticsService.emitEvent('complete', 'Complete-Quiz');
   }
 
   formatPostData() {
@@ -201,6 +231,9 @@ export class QuestionsService {
         return parseInt(value);
     }
     return value;
+  }
+  setGoalDropdown(list){
+      this.goalDropdown = list;
   }
 
 }
