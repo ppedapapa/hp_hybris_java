@@ -5,6 +5,7 @@ import { Event as RouterEvent,     Router, NavigationStart, NavigationEnd, Navig
 
 import { environment } from '../environments/environment';
 import { GoogleAnalyticsService } from "./services/google-analytics.service";
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,14 @@ export class AppComponent implements OnInit {
 
   loading = true;
   constructor(private googleAnalyticsService: GoogleAnalyticsService,
+  			  private appService: AppService,
               private translate: TranslateService,
               private router: Router) {
     router.events.subscribe((event: RouterEvent) => {
         this.navigationInterceptor(event)
     });
-    translate.setDefaultLang('us-en');
+    let appConst = appService.getAppConst();
+    translate.setDefaultLang(appConst.selectedLang);
     this.appendGaTrackingCode();
   }
 

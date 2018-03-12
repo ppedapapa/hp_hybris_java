@@ -4,5 +4,9 @@
   "cart": "Cart",
   "shop": "shop",
   "hp-health": "Personalized Health",
-  "distributor": "Become a Distributor"
+  "distributor": "Become a Distributor",
+  "us-en":"US English",
+  "us-es":"US Spanish",
+  "ca-en":"Canada English",
+  "ca-fr":"Canada French"
 }

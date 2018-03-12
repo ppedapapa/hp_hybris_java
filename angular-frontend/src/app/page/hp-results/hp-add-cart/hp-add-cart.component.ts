@@ -27,7 +27,6 @@ export class HpAddCartComponent implements OnInit {
     let sku = [];
     sku.push(this.sku.sku);
     this.cartService.addToCart(this.sku);
-    console.log(sku);
     this.healthPrinResultsService.openModal('addCart', 'data');
     // this.cartService.addToCart(['20282', '21261']);
   }

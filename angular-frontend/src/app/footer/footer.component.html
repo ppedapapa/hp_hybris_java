@@ -21,10 +21,11 @@
       </div>
       <div class="col-md-3 offset-md-4 float-right">
         <h4>Corporate Carreer</h4>
-        <select class="form-control" (change)="switchLanguage($event)">
-          <option value="us-en">US English</option>
-          <option value="us-es">US Spanish</option>
-        </select>
+        <select class="form-control"  id="lang" [(ngModel)]="lang" name="lang" (change)="switchLanguage($event)">
+		    <option *ngFor="let lang of langList" [value]="lang">
+		  		    {{country.toLowerCase()+'-'+lang|translate}}
+		    </option>
+		 </select>
       </div>
     </div>
   </div>

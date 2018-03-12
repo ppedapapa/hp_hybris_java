@@ -30,6 +30,7 @@ export class QuizResolver implements Resolve <any> {
         }
         else {
                return Observable.create((observer: Observer<Quiz[]>) => {
+               /** this is may need.
                  if (!hpRetakeQuiz && isUserLoggedin) {
                      this.healthPrintResultsService.getAllHealthPrints().subscribe(responseData => {
                          if (responseData['status'] == 0 && responseData['data'].length > 0) {
@@ -38,6 +39,7 @@ export class QuizResolver implements Resolve <any> {
                           }
                       });
                 }
+               */ 
                 this.questionService.getQuestions().subscribe(
                         (data) => {
                             observer.next(data);
