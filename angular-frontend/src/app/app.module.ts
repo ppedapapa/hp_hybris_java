@@ -19,6 +19,7 @@ import { HealthPrintResultsService } from './services/hp-results.service';
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 import { ShortStringPipe } from './pipe/shortString';
 import { FormatPricePipe } from './pipe/formatPrice';
@@ -126,7 +127,8 @@ export function translateLoader(http: HttpClient) {
         HealthPrintResultsService,
         CartService,
         AuthService,
-        AuthGuard
+        AuthGuard,
+        GoogleAnalyticsService
     ],
     bootstrap: [AppComponent]
 })
