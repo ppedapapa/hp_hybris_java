@@ -33,7 +33,7 @@ import com.shaklee.shared.validation.InputValidationException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "emre")
-public class ContentTest extends AbstractContentTest {
+public class ContentInvalidTest extends AbstractContentTest {
 
 	@Autowired
 	HealthQuestionnaireResource resource;
@@ -42,9 +42,6 @@ public class ContentTest extends AbstractContentTest {
 	public void testScoreWithAgeLessThan13() throws InputValidationException, JSONException {
 		Questions questions = createQuestions(10, Gender.M);
 		questions.health_goals = Arrays.asList(HealthGoal.OVERALL);
-		questions.age = 12;
-		questions.exercise_frequency = 3;
-		questions.exercise_intensity = 3;
 
 		JSONObject response = callQuestions(resource, questions);
 		final JSONArray contents = assertContent(response);
@@ -56,11 +53,8 @@ public class ContentTest extends AbstractContentTest {
 
 	@Test
 	public void testScoreWithAgeBiggerThan100() throws InputValidationException, JSONException {
-		Questions questions = createQuestions(101, Gender.F);
+		Questions questions = createQuestions(100, Gender.F);
 		questions.health_goals = Arrays.asList(HealthGoal.OVERALL);
-		questions.age = 101;
-		questions.exercise_frequency = 3;
-		questions.exercise_intensity = 3;
 
 		JSONObject response = callQuestions(resource, questions);
 		final JSONArray contents = assertContent(response);
