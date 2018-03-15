@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Question } from '../../../models/question';
 import { QuestionsService } from '../../../services/questions.service';
 import { HpConfigService } from '../../../services/hp-config.service';
+import { GoogleAnalyticsService } from "../../../services/google-analytics.service";
 
 @Component({
   selector: 'app-question-mixed-content',
@@ -23,7 +24,8 @@ export class QuestionMixedContentComponent implements OnInit {
   answered = this.questionsService.getAnswered();
 
   constructor(private questionsService: QuestionsService,
-              private hpConfigService: HpConfigService) { }
+              private hpConfigService: HpConfigService,
+              private analyticsService: GoogleAnalyticsService) { }
 
   ngOnInit() {
     this.pager = this.hpConfigService.getPager();
@@ -34,5 +36,6 @@ export class QuestionMixedContentComponent implements OnInit {
     if(this.answered[name] != undefined) {
       this.questionsService.goTo(index);
     }
+    this.analyticsService.emitEvent('take', 'Start-Quiz');
   }
 }

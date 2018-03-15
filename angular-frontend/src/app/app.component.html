@@ -1,5 +1,6 @@
 <div class="hp">
   <app-header></app-header>
+  <div *ngIf="loading" class="spinner"></div>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>

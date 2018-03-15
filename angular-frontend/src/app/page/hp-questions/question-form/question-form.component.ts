@@ -3,6 +3,7 @@ import { QuestionsService } from "../../../services/questions.service";
 import { Router } from "@angular/router";
 import { Validators, FormControl, FormGroup } from '@angular/forms'
 import { HpConfigService } from "../../../services/hp-config.service";
+import { AppService } from '../../../app.service';
 
 @Component({
   selector: 'app-question-form',
@@ -18,11 +19,18 @@ export class QuestionFormComponent implements OnInit {
     form: FormGroup;
     firstLastName = "^[a-zA-Z\s\&/\.()-,']+$";
     emailPattern = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
-
+    isUserLogin: boolean  = false;
+  
     constructor(private questionsService: QuestionsService,
-                private router: Router) {}
+                private router: Router,
+                private appService: AppService) {}
 
     ngOnInit() {
+        this.isUserLogin = this.appService.isUserLogin();
+        if (this.isUserLogin) {
+          this.questions[0].options = this.questions[0].options.filter(option => option.name !== "email"); 
+        }
+      
         this.form = this.toFormGroup(this.questions);
         this.form.valueChanges.subscribe(
             val => {

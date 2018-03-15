@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,6 +19,7 @@ import { HealthPrintResultsService } from './services/hp-results.service';
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 import { ShortStringPipe } from './pipe/shortString';
 import { FormatPricePipe } from './pipe/formatPrice';
@@ -49,6 +50,7 @@ import { HpKidsComponent } from './page/hp-results/hp-kids/hp-kids.component';
 import { HpGetCleanComponent } from './page/hp-results/hp-get-clean/hp-get-clean.component';
 import { HpRecapComponent } from './page/hp-results/hp-recap/hp-recap.component';
 import { HpResultsModalComponent } from './page/hp-results/hp-results-modal/hp-results-modal.component';
+import { HpDietRestrictionsComponent } from './page/hp-results/hp-diet-restrictions/hp-diet-restrictions.component';
 
 // AoT requires an exported function for factories
 /* export function createTranslateLoader(http: HttpClient) {
@@ -93,7 +95,8 @@ export function translateLoader(http: HttpClient) {
         HpKidsComponent,
         HpGetCleanComponent,
         HpRecapComponent,
-        HpResultsModalComponent
+        HpResultsModalComponent,
+        HpDietRestrictionsComponent
     ],
     entryComponents: [
         HpResultsModalComponent
@@ -107,6 +110,7 @@ export function translateLoader(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
+        BrowserAnimationsModule,
         HttpClientModule,
         BrowserModule,
         AppRoutingModule,
@@ -123,7 +127,8 @@ export function translateLoader(http: HttpClient) {
         HealthPrintResultsService,
         CartService,
         AuthService,
-        AuthGuard
+        AuthGuard,
+        GoogleAnalyticsService
     ],
     bootstrap: [AppComponent]
 })

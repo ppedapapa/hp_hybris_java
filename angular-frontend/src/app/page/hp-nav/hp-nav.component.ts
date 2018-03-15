@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import { QuestionsService } from '../../services/questions.service';
 import { HpConfigService } from '../../services/hp-config.service';
 import { Subscription } from "rxjs/Subscription";
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-hp-nav',
@@ -14,12 +15,15 @@ export class HpNavComponent implements OnInit, OnDestroy {
   pagelength: number = 0;
   arr = Array;
   pager;
+  isUserLogin: boolean  = false;
   // validCurrentPage;
 
   constructor(private questionsService: QuestionsService,
-              private hpconfigService: HpConfigService) { }
+              private hpconfigService: HpConfigService,
+              private appService: AppService) { }
 
   ngOnInit() {
+    this.isUserLogin = this.appService.isUserLogin();
     this.pager = this.hpconfigService.getPager();
     this.pagelengthSub = this.hpconfigService.length.subscribe(length => this.pagelength = length);
   }
@@ -39,4 +43,8 @@ export class HpNavComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.pagelengthSub.unsubscribe();
   }
+  
+  getResults() {
+      this.questionsService.update();
+   }
 }

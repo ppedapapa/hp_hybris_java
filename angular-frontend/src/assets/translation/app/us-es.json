@@ -3,5 +3,9 @@
   "cart": "Carrito de compras",
   "shop": "compras",
   "hp-health": "SALUD PERSONALIZADA",
-  "distributor": "Únete como Distribuidor"
+  "distributor": "Únete como Distribuidor",
+  "us-en":"US English",
+  "us-es":"US Spanish",
+  "ca-en":"Canada English",
+  "ca-fr":"Canada French"
 }
