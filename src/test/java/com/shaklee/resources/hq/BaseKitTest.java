@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,6 +29,7 @@ import com.shaklee.resources.HealthQuestionnaireResource;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.rulesets.healthQuestionaire.Questions.DietaryRestriction;
 import com.shaklee.rulesets.healthQuestionaire.Questions.Gender;
+import com.shaklee.rulesets.healthQuestionaire.Questions.HealthGoal;
 import com.shaklee.rulesets.healthQuestionaire.Questions.Pregnant;
 import com.shaklee.shared.validation.InputValidationException;
 
@@ -40,13 +42,14 @@ public class BaseKitTest {
 	HealthQuestionnaireResource resource;
 
 	@Test
+	@WithMockUser(username = "AB00000-1")
 	public void testKids() throws InputValidationException, JSONException {
 		// male
 		Questions q = createQuestions(10, Gender.M);
 		q.language = "es";
 
 		q.pregnant = Pregnant.NO;
-		// q.health_goals = Arrays.asList(Questions.HealthGoal.OVERALL);
+		q.health_goals = Arrays.asList(HealthGoal.AGING, HealthGoal.FITNESS, HealthGoal.JOINT);
 		JSONObject r = callQuestions(resource, q);
 		assertBundleContains(r, TIER_1, "20002");
 		assertBundleContains(r, TIER_2, "20076");

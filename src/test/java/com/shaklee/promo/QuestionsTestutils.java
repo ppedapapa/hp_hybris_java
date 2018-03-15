@@ -69,6 +69,7 @@ public class QuestionsTestutils {
 
 		q.toxins = 0;
 		q.spending = 0;
+		q.user_id="AB00000-1";
 
 		// q.price_tier = PriceTier.DN;
 		return q;
