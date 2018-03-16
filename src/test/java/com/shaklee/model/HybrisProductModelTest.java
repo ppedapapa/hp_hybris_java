@@ -30,7 +30,7 @@ public class HybrisProductModelTest {
 	@Autowired
 	HybrisProductService hybrisProductModel;
 
-	@Test
+	//@Test
 	public void testGetProducts() throws Exception {
 
 		
@@ -58,7 +58,7 @@ public class HybrisProductModelTest {
 
 	}
 	
-	@Test
+	//@Test
 	public void testJoinSKUs() throws Exception {
 
 		
@@ -73,7 +73,7 @@ public class HybrisProductModelTest {
 	}
 	
 
-	@Test
+	//@Test
 	public void testPacks() throws Exception {
 
 		

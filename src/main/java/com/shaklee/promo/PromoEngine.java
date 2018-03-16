@@ -33,7 +33,17 @@ public class PromoEngine<T> {
 		List<RuleSet<T>> rulesets = PromoCollections.getRuleSets(promos);
 		List<RuleSet<T>> matches = evaluateConditionsAndArbitrate(rulesets, request, engineLogic.arbitrator);
 		for (RuleSet<T> rs : matches)
-			execMessages(request, rs.actions);
+		{
+			try
+			{
+				execMessages(request, rs.actions);
+			}
+			catch(Exception e)
+			{
+				logger.debug("Exception details ::::"+e+"\n"+rs);
+			}
+			
+		}
 		for (RuleSet<T> rs : matches)
 			execMessages(request, rs.messages);
 	}

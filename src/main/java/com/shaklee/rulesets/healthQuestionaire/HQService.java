@@ -68,11 +68,13 @@ public class HQService {
 			// rulesDataRequest.request.rulesetGroup = "MC_HQ";
 			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
 					.loadPromoExecutionInstance(rulesDataRequest("MC_HQ"));
+			request.bundles = request.bundles;
+			request.response = new ArrayList<PromoRequest.PromoAction>(2);
 			engine.runPromos(engineLogic, request);
 		}
 
 		// Second execution: promos on top of the questionnaire results
-		HPRequest<Questions, BundleType, ItemListType> promosRequest = new HPRequest<Questions, BundleType, ItemListType>(
+		/*HPRequest<Questions, BundleType, ItemListType> promosRequest = new HPRequest<Questions, BundleType, ItemListType>(
 				r.request, r.request, null);
 		{
 			// rulesDataRequest.request.rulesetGroup = "HQ_PROMOS";
@@ -81,12 +83,12 @@ public class HQService {
 			promosRequest.bundles = request.bundles;
 			promosRequest.response = new ArrayList<PromoRequest.PromoAction>(2);
 			engine.runPromos(engineLogic, promosRequest);
-		}
+		}*/
 
 		// merge results
 
-		request.response = combine(request.response, promosRequest.response);
-		request.log = combine(request.log, promosRequest.log);
+		request.response = combine(request.response, request.response);
+		request.log = combine(request.log, request.log);
 		return request;
 	}
 
