@@ -285,4 +285,12 @@ export class HpRecapComponent implements OnInit {
   startOverQuiz(){
       this.healthprintResultsService.startOverQuiz();
   }
+
+  openFreeMembershipInfo() {
+      this.healthprintResultsService.openModal('freeMembershipInfo', '');
+  }
+
+  openFreeWipeDetails() {
+      this.healthprintResultsService.openModal('FreeWipeDetails', '');
+  }
 }

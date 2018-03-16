@@ -1,16 +1,16 @@
 <!--Read More Modal-->
 <div *ngIf="modalName == 'readMore'">
   <!--<div class="modal-header">-->
-    <!--<h4 class="modal-title">Hi there!</h4>-->
-    <!--<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
-      <!--<span aria-hidden="true">&times;</span>-->
-    <!--</button>-->
+  <!--<h4 class="modal-title">Hi there!</h4>-->
+  <!--<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
+  <!--<span aria-hidden="true">&times;</span>-->
+  <!--</button>-->
   <!--</div>-->
   <!--<div class="modal-body">-->
-    <!--<p>Hello, {{modalName}}!</p>-->
+  <!--<p>Hello, {{modalName}}!</p>-->
   <!--</div>-->
   <!--<div class="modal-footer">-->
-    <!--<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
+  <!--<button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>-->
   <!--</div>-->
 
 
@@ -85,7 +85,7 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
     <button type="button" class="btn btn-outline-dark" (click)="redirectToCart()">Checkout</button>
-  
+
   </div>
 </div>
 
@@ -122,6 +122,33 @@
         <button class="start-over-btn" (click)="sendHQEmail()" [innerHTML]="'email-quiz-result.text3'|translate"></button>
       </div>
     </div>
+  </div>
+  <div class="modal-footer"></div>
+</div>
+
+<!--Free Membership Info Modal-->
+<div *ngIf="modalName == 'freeMembershipInfo'" class="free-membership-modal">
+  <div class="modal-header">
+    <div class="modal-title" [innerHTML]="'legal.free-memeberhip-title'|translate"></div>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" [innerHTML]="'legal.free-memeberhip-details'|translate"></div>
+  <div class="modal-footer"></div>
+</div>
+
+<!--Free Wipe Details Modal-->
+<div *ngIf="modalName == 'FreeWipeDetails'" class="free-wipe-details">
+  <div class="modal-header">
+    <div class="modal-title" [innerHTML]="'legal.free-wipes-title'|translate"></div>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div [innerHTML]="'legal.free-wipes-details-1'|translate"></div>
+    <div [innerHTML]="'legal.free-wipes-details-2'|translate"></div>
   </div>
   <div class="modal-footer"></div>
 </div>
