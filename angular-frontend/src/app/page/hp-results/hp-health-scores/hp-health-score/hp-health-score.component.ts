@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { HealthPrintResultsService } from "../../../../services/hp-results.service";
+import { GoogleAnalyticsService } from "../../../../services/google-analytics.service";
 
 @Component({
   selector: 'app-hp-health-score',
@@ -13,7 +14,8 @@ export class HpHealthScoreComponent implements OnInit {
   @Input() contentInfo;
   @Input() healthPrintResultInfo: any;
 
-  constructor(private healthPrintResultsService: HealthPrintResultsService) { }
+  constructor(private healthPrintResultsService: HealthPrintResultsService,
+              private analyticsService: GoogleAnalyticsService) { }
 
   ngOnInit() {
     console.log('scoreName', this.scoreName);
@@ -21,8 +23,9 @@ export class HpHealthScoreComponent implements OnInit {
 
   readMoreInfo(data) {
     const modalName = 'readMore';
-    const modalData = 'modalData';
-    this.healthPrintResultsService.openModal(modalName, modalData);
+    // const modalData = 'modalData';
+    this.healthPrintResultsService.openModal(modalName, this.scoreName);
+    this.analyticsService.emitEvent(this.scoreName.toLowerCase()+' - '+'read more', this.scoreName);
   }
 
 }

@@ -91,7 +91,7 @@
 
 
 
-<!--Add Cart Modal-->
+<!--More Info Modal-->
 <div *ngIf="modalName == 'moreInfo'">
   <div class="modal-header">
     <h4 class="modal-title">Hi there!</h4>
@@ -105,4 +105,23 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
   </div>
+</div>
+
+<!--Email Results Modal-->
+<div *ngIf="modalName == 'emailResults'" class="email-quiz-result-modal">
+  <div class="modal-header">
+    <h1>{{'email-quiz-result.text0'|translate}}<br /><b class="retake-quiz" [innerHTML]="'email-quiz-result.text1'|translate"></b></h1>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="email-quiz-info">
+        {{'email-quiz-result.text2'|translate}} {{data.email}}
+        <button class="start-over-btn" (click)="sendHQEmail()" [innerHTML]="'email-quiz-result.text3'|translate"></button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
 </div>

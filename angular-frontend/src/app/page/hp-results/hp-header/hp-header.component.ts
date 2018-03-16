@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HealthPrintResultsService } from "../../../services/hp-results.service";
+import { GoogleAnalyticsService } from "../../../services/google-analytics.service";
 
 
 
@@ -16,7 +17,8 @@ export class HpHeaderComponent implements OnInit {
     private healthPrintResultInfo:any;
     private healthProfileId:string;
 
-   constructor(private healthPrintResultsService:HealthPrintResultsService) {}
+   constructor(private healthPrintResultsService:HealthPrintResultsService,
+               private analyticsService: GoogleAnalyticsService) {}
 
     ngOnInit() {
         this.healthPrintResultsService.allHealthPrintResults.subscribe( allHealthPrintsResults => this.allHealthPrintsResults = allHealthPrintsResults );
@@ -42,19 +44,17 @@ export class HpHeaderComponent implements OnInit {
         this.healthPrintResultsService.startOverQuiz();
     }
 
-    public printResults(event) {
-        event.stopPropagation();
-        console.log("print result page");
-        console.log(this.healthPrintResultInfo);
-        return false;
+    public printResults() {
+        this.analyticsService.emitEvent('print results', 'print results');
+        window.print();
     }
 
 
-    public openEmailResultMore(event) {
-        event.stopPropagation();
-        console.log("open Email results more");
-        console.log(this.healthPrintResultInfo);
-        return false;
+    public openEmailResultMore() {
+        let data = {};
+        data['email'] = 'temp@temp.com';
+        this.healthPrintResultsService.openModal('emailResults', data);
+        this.analyticsService.emitEvent('email results', 'results');
     }
 
 }
