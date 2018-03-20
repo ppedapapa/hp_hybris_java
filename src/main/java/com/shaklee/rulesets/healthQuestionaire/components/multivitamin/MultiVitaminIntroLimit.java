@@ -1,4 +1,4 @@
-package com.shaklee.rulesets.healthQuestionaire.components.content;
+package com.shaklee.rulesets.healthQuestionaire.components.multivitamin;
 
 import java.util.HashMap;
 import java.util.List;

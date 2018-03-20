@@ -1,4 +1,4 @@
-package com.shaklee.rulesets.healthQuestionaire.components.content;
+package com.shaklee.rulesets.healthQuestionaire.components.multivitamin;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import com.shaklee.promo.basic.AbstractComponent;
 import com.shaklee.promo.basic.PromoActionUtils;
 import com.shaklee.promo.basic.PromoMessage;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
-import com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminHelper.MultiVitaminQuestion;
+import com.shaklee.rulesets.healthQuestionaire.components.content.util.HPContentQuestionUtils;
 
 /**
  * Multi-Vitamin introduction
@@ -29,7 +29,8 @@ import com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminHe
  *
  */
 @Component
-public class MultiVitaminIntro extends AbstractComponent<HPRequest<Questions, Bundle, SKU>> implements Action<HPRequest<Questions, Bundle, SKU>> {
+public class MultiVitaminIntro extends AbstractComponent<HPRequest<Questions, Bundle, SKU>>
+		implements Action<HPRequest<Questions, Bundle, SKU>> {
 
 	@NotNull
 	public String promo_code;
@@ -129,7 +130,7 @@ public class MultiVitaminIntro extends AbstractComponent<HPRequest<Questions, Bu
 	private List<MVIntro> getMacthedRules(HPRequest<Questions, Bundle, SKU> q) {
 		List<MVIntro> macthes = new ArrayList<MVIntro>();
 		for (MVIntro rule : questionRules) {
-			int choosen = MultiVitaminQuestion.getAnswer(rule.question, q.request);
+			int choosen = HPContentQuestionUtils.getAnswer(rule.question, q.request);
 			if (choosen == rule.answer) {
 				MultiVitaminHelper.applyToBundles(q, rule);
 				macthes.add(rule);

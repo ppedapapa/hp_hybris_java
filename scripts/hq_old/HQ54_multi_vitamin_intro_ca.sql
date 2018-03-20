@@ -15,7 +15,7 @@ insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'country_code', 'CA');
 
 insert into PROMO_COMPONENT (ID, PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS) values (PROMO_COMPONENT_SEQ.nextval, 10055, PROMO_RULESET_SEQ.currval,
-	'com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminIntro');
+	'com.shaklee.rulesets.healthQuestionaire.components.multivitamin.MultiVitaminIntro');
 
 insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'promo_code', 'HQ_MULTI_V'),
@@ -92,7 +92,7 @@ insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'country_code', 'CA');
 
 insert into PROMO_COMPONENT (ID, PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS) values (PROMO_COMPONENT_SEQ.nextval, 10055, PROMO_RULESET_SEQ.currval,
-	'com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminIntro');
+	'com.shaklee.rulesets.healthQuestionaire.components.multivitamin.MultiVitaminIntro');
 
 insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'promo_code', 'HQ_OVERALL'),
@@ -169,7 +169,7 @@ insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'country_code', 'CA');
 
 insert into PROMO_COMPONENT (ID, PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS) values (PROMO_COMPONENT_SEQ.nextval, 10055, PROMO_RULESET_SEQ.currval,
-	'com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminIntroLimit');
+	'com.shaklee.rulesets.healthQuestionaire.components.multivitamin.MultiVitaminIntroLimit');
 insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'promo_code', 'HQ_MULTI_V'),
 	(PROMO_COMPONENT_SEQ.currval, 'action_class', 'SKUs');
@@ -186,7 +186,7 @@ insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'country_code', 'CA');
 
 insert into PROMO_COMPONENT (ID, PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS) values (PROMO_COMPONENT_SEQ.nextval, 10055, PROMO_RULESET_SEQ.currval,
-	'com.shaklee.rulesets.healthQuestionaire.components.content.MultiVitaminIntroLimit');
+	'com.shaklee.rulesets.healthQuestionaire.components.multivitamin.MultiVitaminIntroLimit');
 insert into PROMO_COMPONENT_PARAM (PROMO_COMPONENT_ID, NAME, VAL) values
 	(PROMO_COMPONENT_SEQ.currval, 'promo_code', 'HQ_OVERALL'),
 	(PROMO_COMPONENT_SEQ.currval, 'action_class', 'SKUs');

@@ -1,4 +1,4 @@
-package com.shaklee.resources.ce;
+package com.shaklee.resources.hp.content;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;

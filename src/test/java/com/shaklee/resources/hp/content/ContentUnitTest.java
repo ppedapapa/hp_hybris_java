@@ -1,4 +1,4 @@
-package com.shaklee.resources.ce;
+package com.shaklee.resources.hp.content;
 
 import static com.shaklee.promo.QuestionsTestutils.createQuestions;
 import static org.mockito.Mockito.when;

@@ -92,11 +92,11 @@ public class HQService {
 		 * services as an third and fourth execution.
 		 */
 		// Third execution: score results on top of the questionnaire results
-		final HPRequest<Questions, BundleType, ItemListType> scoreRequest = new HPRequest<Questions, BundleType, ItemListType>(
+		final HealthPrintContentRequest<Questions, BundleType, ItemListType> scoreRequest = new HealthPrintContentRequest<Questions, BundleType, ItemListType>(
 				r.request, null, null);
 		{
 			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
-					.loadPromoExecutionInstance(rulesDataRequest("HP_SCORES"));
+					.loadPromoExecutionInstance(rulesDataRequest("HP_SCORE"));
 			scoreRequest.bundles = request.bundles;
 			scoreRequest.response = new ArrayList<PromoRequest.PromoAction>(2);
 			engine.runPromos(engineLogic, scoreRequest);
@@ -105,7 +105,7 @@ public class HQService {
 		/*
 		 * Fourth execution: content keys on top of the questionnaire results
 		 */
-		final HPRequest<Questions, BundleType, ItemListType> contentRequest = new HPRequest<Questions, BundleType, ItemListType>(
+		final HealthPrintContentRequest<Questions, BundleType, ItemListType> contentRequest = new HealthPrintContentRequest<Questions, BundleType, ItemListType>(
 				r.request, null, null);
 		{
 			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
