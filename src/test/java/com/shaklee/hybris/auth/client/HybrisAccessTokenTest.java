@@ -31,7 +31,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
  */
 public class HybrisAccessTokenTest {
 
-	@Test
+//	@Test
 	public void getAccessTokenViaSpringSecurityOAuthClient() {
 		try {
 			TrustStrategy acceptingTrustStrategy = (chain, authType) -> true;
