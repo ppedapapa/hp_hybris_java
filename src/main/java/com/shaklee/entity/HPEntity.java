@@ -20,6 +20,8 @@ public class HPEntity {
 	private String country;
 	private String lang;
 	private boolean userLogged;
+	private String firstName;
+	private String lastName;
 	
 	public String getCountry() {
 		return country;
@@ -40,6 +42,20 @@ public class HPEntity {
 		this.userLogged = userLogged;
 	}
 	
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	@Override
 	public String toString() {
 		String json = JSONSerializer.toJacksonJaxbJson(this, false, true);
