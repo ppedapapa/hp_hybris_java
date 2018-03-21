@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -33,8 +34,16 @@ public class LoginResource {
 	
 	@RequestMapping(path="/hp-logout", method = GET)
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		
+		deleteCookies(request, response);
+
+	    return "redirect:/";
+	}
+
+	public static void deleteCookies(HttpServletRequest request, HttpServletResponse response) {
+		
 		Cookie[] cookies = request.getCookies();
-		 
+		
 	    // Delete all the cookies
 	    if (cookies != null) {
 	 
@@ -46,8 +55,6 @@ public class LoginResource {
 	            response.addCookie(cookie);
 	        }
 	    }
-
-	    return "redirect:/";
 	}
 	
 	@RequestMapping(path="/samlLogout", method = GET)

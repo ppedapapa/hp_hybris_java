@@ -1,6 +1,7 @@
 package com.shaklee.resources;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -23,12 +24,26 @@ public class HealthPrintResource {
 
 	@RequestMapping("/healthprint")
 	public String healthprint(@RequestParam(value="country", required = false) String country,
-			@RequestParam(value="lang", required = false) String lang) {
+			@RequestParam(value="lang", required = false) String lang, @CurrentUser User user,  HttpServletRequest request, HttpServletResponse response) {
 		
 		if (country != null && lang != null)
-			return "redirect:/?country="+country+"&lang="+lang;
-		else
-			return "redirect:/";
+		{
+			LoginResource.deleteCookies(request, response);
+			
+			HPEntity hpEntity = new HPEntity();
+			
+			hpEntity.setCountry(country);
+			hpEntity.setLang( lang);
+			
+			Cookie hpEntityCookie = new Cookie("hpEntity", hpEntity.toString());
+			
+			response.addCookie(hpEntityCookie);
+			
+		}
+		
+		
+		return "forward:/";
+	
 	}
 	
 	
@@ -48,10 +63,8 @@ public class HealthPrintResource {
 		hpEntity.setFirstName(userBean.getFirstName());
 		
 		Cookie hpEntityCookie = new Cookie("hpEntity", hpEntity.toString());
-		Cookie testCookie = new Cookie("test", "test");
-		
+	
 		response.addCookie(hpEntityCookie);
-		response.addCookie(testCookie);
 		
 		return "redirect:/";
 
@@ -60,11 +73,9 @@ public class HealthPrintResource {
 	
 	
 	@RequestMapping("/healthprint-results")
-	public String results(HttpSession session) {
-		String country = (String) session.getAttribute("country");
-        String language = (String) session.getAttribute("language");
-
-        return "redirect:/?country="+country+"&language="+language;
+	public String results(HttpSession session,HttpServletRequest request, HttpServletResponse response) {
+		
+        return "forward:/";
 	}
 	
 	@RequestMapping("/healthprint-results/{hpid}")
