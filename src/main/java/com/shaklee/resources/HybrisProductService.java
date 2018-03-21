@@ -47,12 +47,16 @@ import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
 import com.shaklee.entity.Product;
 import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
 import com.shaklee.shared.data.Language;
+import com.shaklee.shared.oauth.OauthClientService;
 
 @Component
 public class HybrisProductService {
 
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private OauthClientService oauthClientService;
 
 	static String hybrisUrl;
 
@@ -71,7 +75,7 @@ public class HybrisProductService {
 	private static Logger logger = LoggerFactory.getLogger(HybrisProductService.class);
 
 	public List<Product> getProducts(String countryCode, Collection<String> skus)
-			throws ClientProtocolException, JSONException {
+			throws ClientProtocolException, JSONException, IOException {
 
 		hybrisUrl = env.getProperty("hybrisUrl");
 
@@ -81,12 +85,24 @@ public class HybrisProductService {
 		// TODO: Refactore the below code once certificate is added to
 		// www.shakleedev.com
 		CloseableHttpClient httpclient = getHttpClient();
+		
+		JSONObject jsonObject = oauthClientService.getoAuthAccessToken();
+		
+		String access_token="";
+		String token_type="";
+		if(jsonObject != null)
+		{
+			access_token = jsonObject.getString("access_token");
+			token_type = jsonObject.getString("token_type");
+		}
 
+		String oAuthCredentials = "&access_token="+access_token+"&token_type="+token_type;
+		
 		String restUrl = null;
 		if (skus.size() == 1) {
-			restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2;
+			restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2 + oAuthCredentials;
 		} else {
-			restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields;
+			restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields + oAuthCredentials;
 
 		}
 
