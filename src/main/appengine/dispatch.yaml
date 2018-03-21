@@ -1,0 +1,6 @@
+dispatch:
+  - url: "hp-qa.shakleeqa.com/*"
+    service: hp-qa
+
+  - url: "hp-test.shakleedev.com/*"
+    service: hp-test
