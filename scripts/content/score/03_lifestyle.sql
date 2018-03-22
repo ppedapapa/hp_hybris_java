@@ -18,8 +18,7 @@ insert into PROMO_COMPONENT (PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS, JSON_SERI
 -- Diet Score
 insert into PROMO_COMPONENT (PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS, JSON_SERIALIZED) 
 	values (50002, @PROMO_RULESET_SEQ_VAL, 'com.shaklee.rulesets.healthQuestionaire.components.content.DietScore',
-	'[{
-		"bmi_factor": [0.9, 1, 0.9, 0.75],
+	'{
 		"scores": {
 			"energy": [95, 80, 60, 35],
 			"stress": [95, 80, 60, 35],
@@ -30,4 +29,4 @@ insert into PROMO_COMPONENT (PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS, JSON_SERI
 			"smoke": [95, 35, 25],
 			"alcohol": [95, 80, 65, 50]
 		}
-	}]');
+	}');

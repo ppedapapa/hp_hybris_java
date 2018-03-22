@@ -1,5 +1,7 @@
 package com.shaklee.rulesets.healthQuestionaire.components.content;
 
+import org.springframework.stereotype.Component;
+
 import com.shaklee.healthPrint.data.Bundle;
 import com.shaklee.healthPrint.data.HealthPrintContentRequest;
 import com.shaklee.healthPrint.data.SKU;
@@ -14,6 +16,7 @@ import com.shaklee.shared.validation.InputValidationException;
  * @author ekoca
  *
  */
+@Component
 public class MaximumDesirableWeightScore extends AbstractComponent<HealthPrintContentRequest<Questions, Bundle, SKU>>
 		implements Action<HealthPrintContentRequest<Questions, Bundle, SKU>> {
 

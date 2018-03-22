@@ -4,6 +4,9 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.sql.DataSource;
 
@@ -18,12 +21,12 @@ import com.shaklee.DAOImpl.UserDAOImpl;
 import com.shaklee.common.util.ClasspathFileLoader;
 import com.shaklee.common.util.JsonLoader;
 import com.shaklee.healthPrint.data.Bundle;
-import com.shaklee.healthPrint.data.HPRequest;
 import com.shaklee.healthPrint.data.HealthPrintContentRequest;
 import com.shaklee.healthPrint.data.SKU;
 import com.shaklee.model.HealthQuestionnaireModel;
 import com.shaklee.promo.PromoEngine;
 import com.shaklee.promo.PromoRequest;
+import com.shaklee.promo.basic.PromoMessage;
 import com.shaklee.promo.impl.DefaultPromoDatabase;
 import com.shaklee.promo.impl.PromoLoader;
 import com.shaklee.promo.util.PromoJsonLoader;
@@ -33,15 +36,19 @@ import com.shaklee.rulesets.healthQuestionaire.HQService;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 
 /**
- * Abstract Test Config Class that mocks the actual implementation using the
- * Mockito mock objects.
  * 
  * There are some test helper functions to help JUnit and integration test
  * cases.
+ * 
+ * Moreover, it has mock config class that mocks the actual implementation using
+ * the Mockito mock objects.s
  *
  * @author ekoca
  */
 public class AbstractContentTest {
+	protected final static String SECTION_NAME = "EMRE";
+	protected final static String[] KEYS = { "mock_message_key", "mock-exercise-frequency-0",
+			"mock-exercise-intensity-0", "mock-energy-0" };
 
 	/**
 	 * Load JSON file to memory
@@ -63,64 +70,20 @@ public class AbstractContentTest {
 		return data;
 	}
 
-	protected static class MockConfig {
-		@Bean
-		@SuppressWarnings("unchecked")
-		public PromoEngine<PromoRequest<Questions>> getPromoEngine() {
-			return mock(PromoEngine.class);
-		}
-
-		@Bean
-		public HQService getHQService() {
-			return mock(HQService.class);
-		}
-
-		@Bean
-		public DataSource getDataSource() {
-			return mock(DataSource.class);
-		}
-
-		@Bean
-		public HealthQuestionnaireResource getHealthQuestionnaireResource() {
-			return mock(HealthQuestionnaireResource.class);
-		}
-
-		@Bean
-		public UserDAOImpl getUserDAOImpl() {
-			return mock(UserDAOImpl.class);
-		}
-
-		@Bean
-		public HealthQuestionnaireModel getHealthQuestionnaireModel() {
-			return mock(HealthQuestionnaireModel.class);
-		}
-
-		@Bean
-		public UserDataStorageDAO getUserDataStorageDAO() {
-			return mock(UserDataStorageDAO.class);
-		}
-
-		@SuppressWarnings("unchecked")
-		@Bean
-		public DefaultPromoDatabase<Questions> getDefaultPromoDatabase() {
-			return mock(DefaultPromoDatabase.class);
-		}
-
-		@SuppressWarnings("unchecked")
-		@Bean
-		public PromoLoader<PromoRequest<Questions>> getPromoLoader() {
-			return mock(PromoLoader.class);
-		}
-
-		@Bean
-		public JsonLoader getJsonLoader() {
-			return mock(JsonLoader.class);
-		}
-
-		@Bean
-		public PromoJsonLoader getPromoJsonLoader() {
-			return mock(PromoJsonLoader.class);
-		}
+	/**
+	 * Assert the lifestyle section that includes key, bullet keys and lifestyle
+	 * score
+	 * 
+	 * @param response
+	 * @param key
+	 * @param bulletKeys
+	 * @throws JSONException
+	 */
+	public void assertSectionAndKeys(JSONObject response, final String sectionName, final int score,
+			final String[] keys) throws JSONException {
+		final JSONObject section = assertSection(response, sectionName);
+		final JSONObject params = assertContentKeys(section, keys);
+		assertSectionScore(params, score);
 	}
 
 	/**
@@ -242,6 +205,22 @@ public class AbstractContentTest {
 	 * @return
 	 * @throws JSONException
 	 */
+	protected JSONObject assertContentKeys(JSONObject section, final String[] keys) throws JSONException {
+		return assertContentKeys(section, keys[0], keys[1], keys[2], keys[3]);
+	}
+
+	/**
+	 * Assert all the keys for content scope like header key and bullet keys
+	 * 
+	 * @param JSONObject
+	 *            section
+	 * @param String
+	 *            key
+	 * @param String[]
+	 *            bulletKeys
+	 * @return
+	 * @throws JSONException
+	 */
 	protected JSONObject assertContentKeys(JSONObject section, final String key, final String... bulletKeys)
 			throws JSONException {
 		final String actualKey = section.getString("key");
@@ -317,16 +296,96 @@ public class AbstractContentTest {
 			fail("Expected: " + value + " but got: " + actualValue + " for the given key: " + key);
 	}
 
+	/**
+	 * Mock config
+	 * 
+	 * @author ekoca
+	 *
+	 */
+	protected static class MockConfig {
+		@Bean
+		@SuppressWarnings("unchecked")
+		public PromoEngine<PromoRequest<Questions>> getPromoEngine() {
+			return mock(PromoEngine.class);
+		}
+
+		@Bean
+		public HQService getHQService() {
+			return mock(HQService.class);
+		}
+
+		@Bean
+		public DataSource getDataSource() {
+			return mock(DataSource.class);
+		}
+
+		@Bean
+		public HealthQuestionnaireResource getHealthQuestionnaireResource() {
+			return mock(HealthQuestionnaireResource.class);
+		}
+
+		@Bean
+		public UserDAOImpl getUserDAOImpl() {
+			return mock(UserDAOImpl.class);
+		}
+
+		@Bean
+		public HealthQuestionnaireModel getHealthQuestionnaireModel() {
+			return mock(HealthQuestionnaireModel.class);
+		}
+
+		@Bean
+		public UserDataStorageDAO getUserDataStorageDAO() {
+			return mock(UserDataStorageDAO.class);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Bean
+		public DefaultPromoDatabase<Questions> getDefaultPromoDatabase() {
+			return mock(DefaultPromoDatabase.class);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Bean
+		public PromoLoader<PromoRequest<Questions>> getPromoLoader() {
+			return mock(PromoLoader.class);
+		}
+
+		@Bean
+		public JsonLoader getJsonLoader() {
+			return mock(JsonLoader.class);
+		}
+
+		@Bean
+		public PromoJsonLoader getPromoJsonLoader() {
+			return mock(PromoJsonLoader.class);
+		}
+	}
+
+	/**
+	 * Don't chance this unless you make a actual changes in content provider such
+	 * as implementation of content provider or its rules have been changed!
+	 * 
+	 * @return
+	 */
 	protected HQResponse mockHQResponse() {
 		HQResponse response = new HQResponse(0);
+		response.content = new ArrayList<>();
+		response.content.add(createContentSection(SECTION_NAME));
 		return response;
 	}
 
-	protected HealthPrintContentRequest<Questions, Object, Object> mockHQRequest(
-			HPRequest<Questions, Bundle, SKU> request) {
-		// HQResponse response = new HQResponse(0);
-		final HealthPrintContentRequest<Questions, Object, Object> results = new HealthPrintContentRequest<>(
-				request.request, null, null);
-		return results;
+	private PromoMessage createContentSection(String name) {
+		PromoMessage mockMessage = new PromoMessage();
+		mockMessage.key = KEYS[0];
+		mockMessage.params = new HashMap<>();
+		mockMessage.params.put("bullet_keys", Arrays.asList(KEYS[1], KEYS[2], KEYS[3]));
+		mockMessage.params.put("section", name);
+		mockMessage.params.put("score", 100);
+		return mockMessage;
+	}
+
+	protected HealthPrintContentRequest<Questions, Bundle, SKU> mockHQRequest(Questions question) {
+		return new HealthPrintContentRequest<>(question, null, null);
 	}
 }

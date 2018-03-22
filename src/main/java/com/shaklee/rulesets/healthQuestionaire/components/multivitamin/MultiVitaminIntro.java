@@ -130,7 +130,7 @@ public class MultiVitaminIntro extends AbstractComponent<HPRequest<Questions, Bu
 	private List<MVIntro> getMacthedRules(HPRequest<Questions, Bundle, SKU> q) {
 		List<MVIntro> macthes = new ArrayList<MVIntro>();
 		for (MVIntro rule : questionRules) {
-			int choosen = HPContentQuestionUtils.getAnswer(rule.question, q.request);
+			int choosen = HPContentQuestionUtils.getUserAnswer(rule.question, q.request);
 			if (choosen == rule.answer) {
 				MultiVitaminHelper.applyToBundles(q, rule);
 				macthes.add(rule);

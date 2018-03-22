@@ -33,20 +33,18 @@ import com.shaklee.shared.validation.InputValidationException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "emre")
-public class ContentInvalidTest extends AbstractContentTest {
+public class BMIScoreTest extends AbstractContentTest {
 
 	@Autowired
 	HealthQuestionnaireResource resource;
 
 	@Test
-	public void testScoreWithAgeLessThan13() throws InputValidationException, JSONException {
-		Questions questions = createQuestions(10, Gender.M);
+	public void testBMIScore() throws InputValidationException, JSONException {
+		Questions questions = createQuestions(20, Gender.M);
 		questions.health_goals = Arrays.asList(HealthGoal.OVERALL);
 
 		JSONObject response = callQuestions(resource, questions);
 		final JSONArray contents = assertContent(response);
-
-		// check if empty fail
 		for (int i = 0; i < contents.length(); i++) {
 			JSONObject obj = contents.getJSONObject(i);
 			assertEquals("hp-under-age", obj.getString("key"));
@@ -54,17 +52,28 @@ public class ContentInvalidTest extends AbstractContentTest {
 	}
 
 	@Test
-	public void testScoreWithAgeBiggerThan100() throws InputValidationException, JSONException {
-		Questions questions = createQuestions(100, Gender.F);
+	public void testMinimumDesirableWeightScore() throws InputValidationException, JSONException {
+		Questions questions = createQuestions(20, Gender.M);
 		questions.health_goals = Arrays.asList(HealthGoal.OVERALL);
 
 		JSONObject response = callQuestions(resource, questions);
 		final JSONArray contents = assertContent(response);
-
-		// check if empty fail
 		for (int i = 0; i < contents.length(); i++) {
 			JSONObject obj = contents.getJSONObject(i);
-			assertEquals("hp-over-age", obj.getString("key"));
+			assertEquals("hp-under-age", obj.getString("key"));
+		}
+	}
+
+	@Test
+	public void testMaximumDesirableWeightScore() throws InputValidationException, JSONException {
+		Questions questions = createQuestions(20, Gender.M);
+		questions.health_goals = Arrays.asList(HealthGoal.OVERALL);
+
+		JSONObject response = callQuestions(resource, questions);
+		final JSONArray contents = assertContent(response);
+		for (int i = 0; i < contents.length(); i++) {
+			JSONObject obj = contents.getJSONObject(i);
+			assertEquals("hp-under-age", obj.getString("key"));
 		}
 	}
 }

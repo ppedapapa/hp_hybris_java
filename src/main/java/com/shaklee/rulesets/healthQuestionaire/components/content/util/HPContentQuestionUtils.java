@@ -11,45 +11,45 @@ import com.shaklee.rulesets.healthQuestionaire.Questions;
 public enum HPContentQuestionUtils {
 	energy, stress, memory, sleep, exercise_frequency, exercise_intensity, spending, fruits, vegetables, grains, dairy, healthy_fats, water, sugar_drinks, junk_food, breakfast, organic;
 
-	public static int getAnswer(String question, Questions req) {
-		switch (HPContentQuestionUtils.valueOf(question)) {
+	public static int getUserAnswer(String questionType, Questions questions) {
+		switch (HPContentQuestionUtils.valueOf(questionType)) {
 		// lifestyle
 		case energy:
-			return req.energy;
+			return questions.energy;
 		case stress:
-			return req.stress;
+			return questions.stress;
 		case memory:
-			return req.memory;
+			return questions.memory;
 		case sleep:
-			return req.sleep;
+			return questions.sleep;
 		case exercise_frequency:
-			return req.exercise_frequency;
+			return questions.exercise_frequency;
 		case exercise_intensity:
-			return req.exercise_intensity;
+			return questions.exercise_intensity;
 		// diet
 		case fruits:
-			return req.fruits;
+			return questions.fruits;
 		case vegetables:
-			return req.vegetables;
+			return questions.vegetables;
 		case grains:
-			return req.grains;
+			return questions.grains;
 		case dairy:
-			return req.dairy;
+			return questions.dairy;
 		case healthy_fats:
-			return req.healthy_fats;
+			return questions.healthy_fats;
 		case water:
-			return req.water;
+			return questions.water;
 		case sugar_drinks:
-			return req.sugar_drinks;
+			return questions.sugar_drinks;
 		case junk_food:
-			return req.junk_food;
+			return questions.junk_food;
 		case breakfast:
-			return req.breakfast;
+			return questions.breakfast;
 		case organic:
-			return req.organic;
+			return questions.organic;
 		default:
 			break;
 		}
-		throw new IllegalArgumentException("No question " + question);
+		throw new IllegalArgumentException("No question " + questionType);
 	}
 }

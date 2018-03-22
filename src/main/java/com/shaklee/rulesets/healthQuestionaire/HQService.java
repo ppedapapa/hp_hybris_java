@@ -72,7 +72,7 @@ public class HQService {
 			// rulesDataRequest.request.rulesetGroup = "MC_HQ";
 			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
 					.loadPromoExecutionInstance(rulesDataRequest("MC_HQ"));
-			engine.runPromos(engineLogic, request);
+			// engine.runPromos(engineLogic, request);
 		}
 
 		// Second execution: promos on top of the questionnaire results
@@ -84,7 +84,7 @@ public class HQService {
 					.loadPromoExecutionInstance(rulesDataRequest("HQ_PROMOS"));
 			promosRequest.bundles = request.bundles;
 			promosRequest.response = new ArrayList<PromoRequest.PromoAction>(2);
-			engine.runPromos(engineLogic, promosRequest);
+			// engine.runPromos(engineLogic, promosRequest);
 		}
 
 		/*
@@ -111,6 +111,7 @@ public class HQService {
 			PromoExecutionInstance<PromoRequest<Questions>> engineLogic = loader
 					.loadPromoExecutionInstance(rulesDataRequest("HP_CONTENT"));
 			contentRequest.bundles = request.bundles;
+			// adding score results
 			contentRequest.score = scoreRequest.score;
 			contentRequest.response = new ArrayList<PromoRequest.PromoAction>(2);
 			engine.runPromos(engineLogic, contentRequest);
@@ -121,11 +122,8 @@ public class HQService {
 				r.request, null, null);
 		results.bundles = request.bundles;
 		results.recommended = request.recommended;
-		results.response = combine(combine(request.response, promosRequest.response),
-				combine(scoreRequest.response, contentRequest.response));
-		results.log = combine(request.log, promosRequest.log);
-		// adding score results
-		results.score = scoreRequest.score;
+		results.response = combine(combine(request.response, promosRequest.response), contentRequest.response);
+		results.log = combine(combine(request.log, promosRequest.log), combine(scoreRequest.log, contentRequest.log));
 		// adding filtered content data
 		results.content = contentRequest.response.stream() // open the stream to reduce content data
 				.map(promoAction -> promoAction.messages) // return the list of message actions

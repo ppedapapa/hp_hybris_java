@@ -20,21 +20,17 @@ import org.codehaus.jettison.json.JSONObject;
 import org.hamcrest.CoreMatchers;
 
 import com.shaklee.common.util.JSONSerializer;
+import com.shaklee.healthPrint.data.Bundle;
+import com.shaklee.promo.PromoRequest.PromoAction;
 import com.shaklee.resources.HealthQuestionnaireResource;
 import com.shaklee.resources.HealthQuestionnaireResource.DebugHQResponse;
-import com.shaklee.promo.PromoRequest;
-import com.shaklee.promo.PromoRequest.PromoAction;
-import com.shaklee.promo.PromoTestUtils;
 import com.shaklee.rulesets.healthQuestionaire.HQService;
 import com.shaklee.rulesets.healthQuestionaire.Questions;
 import com.shaklee.rulesets.healthQuestionaire.Questions.DietaryRestriction;
 import com.shaklee.rulesets.healthQuestionaire.Questions.Gender;
 import com.shaklee.rulesets.healthQuestionaire.Questions.HealthGoal;
 import com.shaklee.rulesets.healthQuestionaire.components.SKUs;
-import com.shaklee.healthPrint.data.Bundle;
 import com.shaklee.shared.validation.InputValidationException;
-
-import junit.framework.Assert;
 
 public class QuestionsTestutils {
 
@@ -69,6 +65,11 @@ public class QuestionsTestutils {
 
 		q.toxins = 0;
 		q.spending = 0;
+
+		// Content Provider
+		q.height_inches = 63;
+		q.weight_lbs = 180;
+		q.dietary_restrictions = new ArrayList<>(3);
 
 		// q.price_tier = PriceTier.DN;
 		return q;
@@ -151,7 +152,7 @@ public class QuestionsTestutils {
 		ArrayList<String> skus = new ArrayList<String>(4);
 		for (PromoAction pa : response.response) {
 			if (pa.actions == null) {
-				//System.out.println(pa.promo_code);
+				// System.out.println(pa.promo_code);
 				continue;
 			}
 			for (com.shaklee.promo.PromoRequest.Action action : pa.actions) {

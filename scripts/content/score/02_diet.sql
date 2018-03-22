@@ -18,16 +18,15 @@ insert into PROMO_COMPONENT (PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS, JSON_SERI
 -- Diet Score
 insert into PROMO_COMPONENT (PROMO_ID, RULESET_ID, IMPLEMENTING_CLASS, JSON_SERIALIZED) 
 	values (50001, @PROMO_RULESET_SEQ_VAL, 'com.shaklee.rulesets.healthQuestionaire.components.content.DietScore',
-	'[{
-		"bmi_factor": [0.9, 1, 0.9, 0.75],
+	'{
 		"scores": {
-			"breakfast_times": [25, 50, 70, 95],
+			"fruits": [30, 75, 95, 95],
 			"vegetables": [25, 50, 85, 95],
-			"meat_fish": [50, 60, 75, 95],
-			"days_fruits": [30, 75, 80, 95],
-			"days_dairy": [25, 50, 85, 95],
-			"times_sugary_drinks": [95, 70, 40, 25],
-			"times_eat_out": [95, 80, 60, 40],
-			"snacks_per_day": [95, 70, 40, 25]
+			"grains": [25, 50, 85, 95],
+			"dairy": [25, 50, 85, 95],
+			"healthy_fats": [20, 30, 64, 95],
+			"sugar_drinks": [95, 70, 40, 25],
+			"junk_food": [95, 70, 40, 25],
+			"breakfast": [25, 70, 25, 85, 95]
 		}
-	}]');
+	}');
