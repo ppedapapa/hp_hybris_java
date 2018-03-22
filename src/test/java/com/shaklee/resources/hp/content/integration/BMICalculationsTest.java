@@ -33,7 +33,7 @@ import com.shaklee.shared.validation.InputValidationException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "emre")
-public class BMIScoreTest extends AbstractContentTest {
+public class BMICalculationsTest extends AbstractContentTest {
 
 	@Autowired
 	HealthQuestionnaireResource resource;
