@@ -210,8 +210,8 @@ public class QuestionsTestutils {
 			DebugHQResponse debug = (DebugHQResponse) resp;
 			if (debug.debug instanceof List<?>) {
 				List<?> log = (List<?>) debug.debug;
-				for (Object match : log)
-					System.out.println(match);
+				for (Object match : log) {}
+					// System.out.println(match);
 			}
 		}
 
