@@ -37,8 +37,8 @@ import com.shaklee.shared.validation.InputValidationException;
  * @author ekoca
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ContentUnitTest.MockConfig.class)
-public class ContentUnitTest extends AbstractContentTest {
+@ContextConfiguration(classes = ContentProviderUnitTest.MockConfig.class)
+public class ContentProviderUnitTest extends AbstractContentTest {
 
 	@Autowired
 	HealthQuestionnaireResource resource;
