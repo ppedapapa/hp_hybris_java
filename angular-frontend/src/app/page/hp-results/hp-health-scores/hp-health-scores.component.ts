@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Observable} from 'rxjs/Observable';
 
 import { HealthPrintResultsService } from '../../../services/hp-results.service';
+import { GoogleAnalyticsService } from "../../../services/google-analytics.service";
 
 @Component({
     selector: 'app-hp-health-scores',
@@ -19,7 +20,8 @@ export class HpHealthScoresComponent implements OnInit {
     bmiWeightRange = {};
     recap = this.healthPrintResultsService.questions;
 
-    constructor(private healthPrintResultsService: HealthPrintResultsService) { }
+    constructor(private healthPrintResultsService: HealthPrintResultsService,
+                private analyticsService: GoogleAnalyticsService) { }
 
     ngOnInit() {
         let minWeight = this.getBMI(18.5, this.recap.height_inches);
@@ -43,5 +45,9 @@ export class HpHealthScoresComponent implements OnInit {
     getBMI(bmi, height) {
         var heightInches = (parseInt(height.foot) * 12)+parseInt(height.inches);
         return (Math.pow(heightInches, 2) * bmi / 703);
+    }
+
+    trackEventOnResults = function(label, section) {
+        this.analyticsService.emitEvent(label, section);
     }
 }

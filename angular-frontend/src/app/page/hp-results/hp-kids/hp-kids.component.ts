@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HpConfigService } from "../../../services/hp-config.service";
 import { HealthPrintResultsService } from "../../../services/hp-results.service";
+import { GoogleAnalyticsService } from "../../../services/google-analytics.service";
 
 @Component({
   selector: 'app-hp-kids',
@@ -14,6 +15,7 @@ export class HpKidsComponent implements OnInit {
   kids = false;
 
   constructor(private healthPrintResultsService: HealthPrintResultsService,
+              private analyticsService: GoogleAnalyticsService,
               private hpConfigService: HpConfigService ) { }
 
   ngOnInit() {
@@ -37,9 +39,11 @@ export class HpKidsComponent implements OnInit {
 
   kidsBundleOn = function () {
       this.showKids = true;
+      this.analyticsService.emitEvent('view kids bundle', 'Kids');
   };
 
   kidsBundleOff = function () {
       this.showKids = false;
+      this.analyticsService.emitEvent('close kids bundle', 'Kids');
   };
 }

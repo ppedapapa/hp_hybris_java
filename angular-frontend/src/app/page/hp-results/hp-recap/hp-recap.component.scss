@@ -97,7 +97,7 @@ g.highcharts-legend text {
         margin:0;
       }
       a {
-        color: #009eb7;
+        color: $shaklee-blue3;
       }
     }
   }
@@ -106,5 +106,9 @@ g.highcharts-legend text {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-right: 20px;
+  }
+  .link {
+    color: $shaklee-blue3;
+    cursor: pointer;
   }
 }

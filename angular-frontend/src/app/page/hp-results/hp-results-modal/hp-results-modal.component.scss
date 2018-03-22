@@ -1,0 +1,112 @@
+@import "../../../../assets/scss/variables";
+.modal-header, .modal-footer {
+  border: none;
+}
+.modal-header {
+  text-align: center;
+  padding-bottom: 0;
+  h2 {
+    color: #000;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  .close {
+    background: url(//images.shaklee.com/public/us/en/assets/images/design/close.png) no-repeat;
+    margin: -30px -30px 0px 0px;
+    opacity: 1;
+    color: transparent;
+    font-size: 0;
+  }
+}
+.modal-body{
+  sub {
+    line-height: 14px;
+  }
+  .add-scroll{
+    height: 550px;
+    overflow: scroll;
+    clear: none;
+  }
+  .no-scroll {
+    clear: none;
+  }
+}
+.modal-dialog {
+  top:3%;
+  max-width: 600px;
+  color: $grey1;
+  font-size: 14px;
+
+  .modal-content{
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  }
+}
+.retake-quiz-modal, .email-quiz-result-modal, .email-result-send-modal {
+  h1{
+    font-family: "Open Sans",Helvetica,Arial,Verdana,sans-serif;
+    font-weight: 300;
+    color:#000;
+    text-align: center;
+    font-size: 24px;
+    margin: auto;
+    b{
+      font-weight: bold;
+    }
+  }
+  .start-over-btn{
+    background: $shaklee-green1 none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    font-family: verlagblack;
+    line-height: 2em;
+    text-transform: uppercase;
+    padding:3px 15px;
+    margin: 20px auto 0;
+    display:block;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .retake-info, .email-result-send-info {
+    width:65%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .email-quiz-info {
+    color: #666;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .textContainer {
+    margin-top: 25px;
+  }
+
+  .yourText {
+    font-size: 18px;
+  }
+  .healthPrintText {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  .sentText {
+    display: block;
+    font-size: 18px;
+  }
+}
+
+.free-membership-modal, .free-wipe-details {
+  h1 {
+    text-align: left;
+    font-size: 24px;
+    color: #006341;
+  }
+  ol {
+    list-style: disc;
+  }
+  p{
+    text-align: left;
+  }
+}

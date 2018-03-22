@@ -70,8 +70,8 @@
         <ul>
             <li [innerHTML]="'legal.disclaimer-2'|translate"></li>
             <li *ngIf="vegeterian"  [innerHTML]="'legal.disclaimer-3'|translate"></li>
-            <li><span [innerHTML]="'legal.disclaimer-4'|translate"></span> <a href="" (click)='openFreeMembershipInfo()' [innerHTML]="'legal.click-here'|translate"></a>.</li>
-            <li><span [innerHTML]="'legal.disclaimer-5'|translate"></span> <a href="" (click)='openFreeWipeDetails()' [innerHTML]="'legal.click-here'|translate"></a>.</li>
+            <li><span [innerHTML]="'legal.disclaimer-4'|translate"></span> <span class="link" (click)='openFreeMembershipInfo($event)' [innerHTML]="'legal.click-here'|translate"></span>.</li>
+            <li><span [innerHTML]="'legal.disclaimer-5'|translate"></span> <span class="link" (click)='openFreeWipeDetails($event)' [innerHTML]="'legal.click-here'|translate"></span>.</li>
             <li *ngIf="gluten" [innerHTML]="'legal.disclaimer-6'|translate"></li>
             <li *ngIf="pregnant" [innerHTML]="'legal.disclaimer-7'|translate"></li>
             <li [innerHTML]="'legal.disclaimer-8'|translate"></li>

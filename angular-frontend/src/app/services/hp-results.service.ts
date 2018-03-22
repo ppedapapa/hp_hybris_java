@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from "../../environments/environment";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import 'rxjs/add/operator/filter';
 
 import { HpConfigService } from "./hp-config.service";
 import { QuestionsService } from "./questions.service";
 import { HpResultsModalComponent } from "../page/hp-results/hp-results-modal/hp-results-modal.component";
+import { GoogleAnalyticsService } from "./google-analytics.service";
 // import {variable} from "@angular/compiler/src/output/output_ast";
 
 @Injectable()
@@ -42,6 +43,7 @@ export class HealthPrintResultsService {
     constructor(private http: HttpClient,
                 private questionsService: QuestionsService,
                 private hpConfigService: HpConfigService,
+                private analyticsService: GoogleAnalyticsService,
                 private modalService: NgbModal) {}
 
     getAllHealthPrints() {
@@ -267,13 +269,19 @@ export class HealthPrintResultsService {
         const gotoUrl =  '/healthprint';
         localStorage.setItem('hpRetakeQuiz','true');
         window.location.href = gotoUrl;
+        this.analyticsService.emitEvent('retake', 'Retake-Quiz');
     }
 
     openModal(name, data) {
+        console.log('data', data);
         console.log('modalName', name);
-        const modalRef = this.modalService.open(HpResultsModalComponent);
+        let ngbModalOptions: NgbModalOptions = {
+            backdrop : false,
+            keyboard : false
+        };
+        const modalRef = this.modalService.open(HpResultsModalComponent, ngbModalOptions);
         modalRef.componentInstance.modalName = name;
-        modalRef.componentInstance.modalData = data;
+        modalRef.componentInstance.data = data;
     }
 
     static getDismissReason(reason: any): string {
