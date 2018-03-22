@@ -10,13 +10,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.Registry;
@@ -39,14 +35,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.shaklee.DAO.UserDataStorageDAO.UserDataResponse;
 import com.shaklee.entity.Product;
-import com.shaklee.rulesets.healthQuestionaire.ProductSkuKey;
-import com.shaklee.shared.data.Language;
 import com.shaklee.shared.oauth.OauthClientService;
 
 @Component
@@ -97,7 +88,8 @@ public class HybrisProductService {
 		}
 
 		String oAuthCredentials = "&access_token="+access_token+"&token_type="+token_type;
-		
+
+		System.out.println("--------------------------------"+oAuthCredentials);
 		String restUrl = null;
 		if (skus.size() == 1) {
 			restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2 + oAuthCredentials;
