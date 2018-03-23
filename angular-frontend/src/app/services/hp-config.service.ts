@@ -23,8 +23,8 @@ export class HpConfigService {
     // var isMC = (appConst.site === "mc") ? true : false;
     const isMC =  false;
     const jsonObject = {
-      country_code: 'US',
-      language: 'en',
+      country_code: undefined,
+      language: undefined,
       opt_in: true,
       email: undefined,
       referrer_id: undefined,

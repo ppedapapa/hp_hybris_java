@@ -18,7 +18,10 @@
     "text26": "20 questions that can change your life",
     "text27": "Find out your health score and get personalized health recommendations—all based on the work of Nobel Prize-winning scientists and award-winning doctors.",
     "text28": "Start Now",
-    "shaklee-guaranteed-image":"//images.shaklee.com/healthprint/guarantee-seal.png"
+    "shaklee-guaranteed-image":"//images.shaklee.com/healthprint/guarantee-seal.png",
+    "hp-landing-lifestyle":"https://images.shaklee.com/healthprint/landing/hp-landing-lifestyle-01a-usen.jpg",
+    "hp-landing-chart":"https://images.shaklee.com/healthprint/landing/hp-landing-chart-01a-usen.jpg",
+    "hp-landing-logo":"https://images.shaklee.com/healthprint/landing/hp-landing-logos-01a-usen.jpg"
   },
   "questions":{
     "ques": "Q: ",

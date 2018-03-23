@@ -3,8 +3,8 @@
     <h1 class="hp-landing-title" [innerHTML]="'landing.text0' | translate"></h1>
   </div>
   <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
-    <img [src]="imagePath+image1" class="img-fluid img-landing " />
-    <img [src]="imagePath+image2" class="img-fluid img-landing" />
+    <img [src]="'landing.hp-landing-lifestyle'|translate" class="img-fluid img-landing " />
+    <img [src]="'landing.hp-landing-chart'|translate" class="img-fluid img-landing" />
   </div>
   <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
     <div class="landing-question">
@@ -17,7 +17,7 @@
         <a class="btn btn-block start-btn" translate (click)="startQuiz(pager.index + 1);">landing.text7</a>
       </div>
     </div>
-    <img [src]="imagePath+image3" class="img-fluid img-landing-logo" />
+    <img [src]="'landing.hp-landing-logo'|translate" class="img-fluid img-landing-logo" />
   </div>
 </div>
 <div class="row landing">
