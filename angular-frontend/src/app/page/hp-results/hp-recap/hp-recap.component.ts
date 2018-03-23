@@ -127,14 +127,14 @@ export class HpRecapComponent implements OnInit {
 
   setChart(chartCategory, chartIntake) {
       let title1, title2, fruits, veg, grains, dairy, weekTimes, lessThan7;
-      this.translate.get('chart.your-intake').subscribe((res) => {title1 = res});
-      this.translate.get('chart.rec-intake').subscribe((res) => {title2 = res});
-      this.translate.get('chart.fruits').subscribe((res)=>{fruits = res});
-      this.translate.get('chart.vegetables').subscribe((res)=>{veg = res});
-      this.translate.get('chart.grains').subscribe((res)=>{grains = res});
-      this.translate.get('chart.dairy').subscribe((res)=>{dairy = res});
-      this.translate.get('chart.times-week').subscribe((res)=>{weekTimes = res});
-      this.translate.get('chart.less-than-7').subscribe((res)=>{lessThan7 = res});
+      this.translate.stream('chart.your-intake').subscribe((res) => {title1 = res});
+      this.translate.stream('chart.rec-intake').subscribe((res) => {title2 = res});
+      this.translate.stream('chart.fruits').subscribe((res)=>{fruits = res});
+      this.translate.stream('chart.vegetables').subscribe((res)=>{veg = res});
+      this.translate.stream('chart.grains').subscribe((res)=>{grains = res});
+      this.translate.stream('chart.dairy').subscribe((res)=>{dairy = res});
+      this.translate.stream('chart.times-week').subscribe((res)=>{weekTimes = res});
+      this.translate.stream('chart.less-than-7').subscribe((res)=>{lessThan7 = res});
 
       this['chart'] = new Chart({
           chart: {

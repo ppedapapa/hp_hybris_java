@@ -6,6 +6,7 @@ import { HpConfigService } from './hp-config.service';
 import { Quiz, Question, Option } from '../models';
 import { Router } from "@angular/router";
 import { GoogleAnalyticsService } from "./google-analytics.service";
+import { AppService } from "../app.service";
 
 @Injectable()
 export class QuestionsService {
@@ -20,12 +21,13 @@ export class QuestionsService {
   isShaklee180;
   pws_owner_id = null; // update this value based on req -- revisit
   goalDropdown = [];
-
+  appConst = this.appService.appConst;
   // private answeredSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.hpconfigService.getAnsweredJsonObj());
 
   constructor(private http: HttpClient,
               private hpconfigService: HpConfigService,
               private router: Router,
+              private appService: AppService,
               private analyticsService: GoogleAnalyticsService) {}
 
   /*getAnsweredSubject(): Observable<any>  {
@@ -197,6 +199,9 @@ export class QuestionsService {
     let excludeNonQuestions = ["email","first_name","last_name","referrer_id","health_profile_id","opt_in","recaptcha_response","completed_time_stamp","share_with_distributors"];
     let kidExcludeList = this.hpconfigService.getExcludeKidQuestionList();
     let tempPostData = Object.assign({}, this.answered);
+
+    tempPostData.country_code = this.appConst.country;
+    tempPostData.language = this.appConst.lang;
 
     //referrer_id logic
     if(this.isPWS || this.isShaklee180){

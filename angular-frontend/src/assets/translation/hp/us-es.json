@@ -171,8 +171,8 @@
     "select-option-goal":"—Selecciona un objetivo de salud --",
     "height-ft":"Alt. (pies)",
     "height-in":"Alt. (plgds.)",
-    "feet":"{{option}} pies",
-    "inches":"{{option}} pulgadas"
+    "foot":"pies",
+    "inches":"pulgadas"
   },
   "error": {
     "min-max-age":"Lo sentimos, el Shaklee Healthprint solo aplica a las personas entre 4 y 99 años de edad.",

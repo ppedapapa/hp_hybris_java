@@ -27,13 +27,13 @@ export class QuestionDropdownComponent implements OnInit {
               private questionsService: QuestionsService) { }
 
   ngOnInit() {
-      this.translate.get('label.' + this.firstLabel).subscribe((res: string) => {
+      this.translate.stream('label.' + this.firstLabel).subscribe((res: string) => {
           this.selectedOption = res;
       });
       if (this.fromComponent === 'goal') {
           this.goalDropdown = this.questionsService.goalDropdown;
           this.goalDropdown.forEach(item => {
-              this.translate.get('label.' + this.label + item.toLowerCase()).subscribe((res: string) => {
+              this.translate.stream('label.' + this.label + item.toLowerCase()).subscribe((res: string) => {
                   this.currentDropdown[item] = res;
                   const selectedAnswer = this.goals['goal'+this.index];
                   if(selectedAnswer !== undefined) {
@@ -43,7 +43,7 @@ export class QuestionDropdownComponent implements OnInit {
           });
       } else {
           this.dropdown.forEach(item => {
-              this.translate.get('label.' + this.label).subscribe((res: string) => {
+              this.translate.stream('label.' + this.label).subscribe((res: string) => {
                   this.currentDropdown[item] = item + ' ' + res;
                   const selectedAnswer = this.heightInches[this.label];
                   if(selectedAnswer !== undefined) {
@@ -68,7 +68,7 @@ export class QuestionDropdownComponent implements OnInit {
 
   setValue(label, val, type) {
     if (this.fromComponent === 'goal') {
-        this.translate.get('label.' + label + val.toLowerCase()).subscribe((res: string) => {
+        this.translate.stream('label.' + label + val.toLowerCase()).subscribe((res: string) => {
             this.selectedOption = res;
         });
         this.goals['goal'+this.index] = val;
@@ -82,7 +82,7 @@ export class QuestionDropdownComponent implements OnInit {
             this.questionsService.setDropdown(label, this.currentGoals, type);
         }
     } else {
-        this.translate.get('label.' + label).subscribe((res: string) => {
+        this.translate.stream('label.' + label).subscribe((res: string) => {
             this.selectedOption = val + ' ' + res;
             let height = this.questionsService.heightInches;
             height[label] = val;

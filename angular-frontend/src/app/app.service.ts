@@ -33,6 +33,7 @@ export class AppService {
   }
   
   resetLanguage(curLanguage) {
+        this.appConst.lang = curLanguage;
         this.hpEntity['lang']=curLanguage;
         const hpEntityCookie = JSON.stringify(this.hpEntity);
         const hpEntityCookieEncode = btoa(hpEntityCookie);
