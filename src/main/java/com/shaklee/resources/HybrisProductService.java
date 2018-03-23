@@ -77,24 +77,13 @@ public class HybrisProductService {
 		// www.shakleedev.com
 		CloseableHttpClient httpclient = getHttpClient();
 		
-		JSONObject jsonObject = oauthClientService.getoAuthAccessToken();
-		
-		String access_token="";
-		String token_type="";
-		if(jsonObject != null)
-		{
-			access_token = jsonObject.getString("access_token");
-			token_type = jsonObject.getString("token_type");
-		}
+		String oAuthCredentials = getAccessTokenAndTokenType();
 
-		String oAuthCredentials = "&access_token="+access_token+"&token_type="+token_type;
-
-		System.out.println("--------------------------------"+oAuthCredentials);
 		String restUrl = null;
 		if (skus.size() == 1) {
-			restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2 + oAuthCredentials;
+			restUrl = hybrisUrl + uri1 + countryCode + uri_products + skus.stream().findFirst().get() + uri2 + "&" + oAuthCredentials;
 		} else {
-			restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields + oAuthCredentials;
+			restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + String.join(",", skus) + uri2_fields + "&" + oAuthCredentials;
 
 		}
 
@@ -146,13 +135,15 @@ public class HybrisProductService {
 		CloseableHttpClient httpclient = getHttpClient();
 
 		String uri_membership = "getMembershipProducts";
+		
+		String oAuthCredentials = getAccessTokenAndTokenType();
 
 		String restUrl = null;
 		if (l != null && country != null)
-			restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 + uri3 + l + '_' + country;
+			restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 + uri3 + l + '_' + country + "&" + oAuthCredentials;
 
 		else
-			restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2;
+			restUrl = hybrisUrl + uri1 + country + uri_products + uri_membership + uri2 + "&" + oAuthCredentials;
 
 		if (httpclient != null) {
 			try {
@@ -197,7 +188,9 @@ public class HybrisProductService {
 
 		String uri_join = "getJoinSkus?fields=SKU";
 
-		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_join;
+		String oAuthCredentials = getAccessTokenAndTokenType();
+		
+		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_join + "&" + oAuthCredentials;
 
 		if (httpclient != null) {
 			try {
@@ -255,7 +248,9 @@ public class HybrisProductService {
 
 		String uri_packs = "getCustomizableBundles";
 
-		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_packs + uri2;
+		String oAuthCredentials = getAccessTokenAndTokenType();
+		
+		String restUrl = hybrisUrl + uri1 + country + uri_products + uri_packs + uri2 + "&" + oAuthCredentials;
 
 		if (httpclient != null) {
 			try {
@@ -331,6 +326,28 @@ public class HybrisProductService {
 
 			return null;
 		}
+	}
+	
+	public String getAccessTokenAndTokenType()
+	{
+		try{
+			JSONObject jsonObject = oauthClientService.getoAuthAccessToken();
+			
+			String access_token="";
+			String token_type="";
+			if(jsonObject != null)
+			{
+				access_token = jsonObject.getString("access_token");
+				token_type = jsonObject.getString("token_type");
+			}
+			return "access_token="+access_token+"&token_type="+token_type;
+		
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }

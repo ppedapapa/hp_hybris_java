@@ -1,13 +1,13 @@
-package com.shaklee.model;
-
-import static org.junit.Assert.assertNotNull;
+package com.shaklee.resources;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,82 +27,44 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shaklee.Application;
-import com.shaklee.entity.Product;
-import com.shaklee.resources.HybrisProductService;
 import com.shaklee.shared.oauth.OauthClientService;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@PropertySource("classpath:application-local.properties")
-public class HybrisProductModelTest {
-
-	@Autowired
-	HybrisProductService hybrisProductModel;
-
-	@Autowired
-	private Environment env;
+@Controller
+public class ProductResource {
 	
 	@Autowired
 	private OauthClientService oauthClientService;
 	
-	@Test
-	public void testGetProducts() throws Exception {
-
-		
-		List<Product> p =  hybrisProductModel.getProducts("US", Arrays.asList("89384"));
-
-		assertNotNull(p);
-		
-		p = hybrisProductModel.getProducts("US", Arrays.asList("89384", "22067"));
-		
-		assertNotNull(p);
-		
-	}
-	@Test
-	public void testGetoAuthAccessToken()
-			throws ClientProtocolException, IOException, JSONException {
-
-		try {
-				JSONObject jsonObject = oauthClientService.getoAuthAccessToken();
-				assertNotNull(jsonObject);
-				String access_token="";
-				String token_type="";
-				if(jsonObject != null)
-				{
-					access_token = jsonObject.getString("access_token");
-					token_type = jsonObject.getString("token_type");
-				}
-				assertNotNull(access_token);
-				assertNotNull(token_type);
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	@Autowired
+	private Environment env;
 	
-	@Test
-	public void testGetProductsForProductService()throws ClientProtocolException, IOException, JSONException {
+	private static Logger logger = LoggerFactory.getLogger(ProductResource.class);
+	
+	static String hybrisUrl;
+
+	final static String uri1 = "/shakleeintegration/v2/shaklee";
+
+	final static String uri1_multipleProducts = "/products?codes=";
+	
+	
+	@RequestMapping("/getproducts")
+	public JSONObject getProducts(@RequestParam(value="productCodes") String[] productCodes,HttpSession session,HttpServletRequest request, HttpServletResponse response) 
+			throws ClientProtocolException, IOException, JSONException {
 		
-		String hybrisUrl = env.getProperty("hybrisUrl");
-		String uri1 = "/shakleeintegration/v2/shaklee";
-		String uri1_multipleProducts = "/products?codes=";
-		
+		hybrisUrl = env.getProperty("hybrisUrl");
 		JSONObject jsonResponse = null;
 		
-		String country = "US";
+		String country = (String) session.getAttribute("country");
 		
 		String restUrl = null;
-		
-		String[] productCodes={"20282","20435","20652","20732"};
 		
 		String codes = "";
 		if(productCodes != null && productCodes.length !=0)
@@ -121,15 +83,19 @@ public class HybrisProductModelTest {
 				HttpEntity responseEntity = response1.getEntity();
 				
 				if (responseEntity != null) {
+
 					String pResponse = EntityUtils.toString(responseEntity);
 					jsonResponse = new JSONObject(pResponse);
-					assertNotNull(jsonResponse);
+					return jsonResponse;
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				logger.debug("Could not get getProducts from hybris: " + restUrl, e);
+
+				return null;
 			}
 		}
+		return null;
 	}
 	
 	public String getAccessTokenAndTokenType()
@@ -171,9 +137,9 @@ public class HybrisProductModelTest {
 			return httpclient;
 		} catch (NoSuchAlgorithmException | KeyStoreException | KeyManagementException e) {
 
-			e.printStackTrace();
+			logger.debug("Error: ", e);
+
 			return null;
 		}
 	}
-
 }

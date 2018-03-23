@@ -35,7 +35,9 @@ public class OauthClientService {
 
 	@Autowired
 	private Environment env;
+	
 	static String hybrisUrl;
+	
 	final static String uri = "/shakleeintegration/oauth/token";
 	
 	public JSONObject getoAuthAccessToken()
