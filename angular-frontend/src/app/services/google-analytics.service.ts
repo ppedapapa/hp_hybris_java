@@ -12,7 +12,6 @@ export class GoogleAnalyticsService {
                     if (event instanceof NavigationEnd) {
                         ga('set', 'page', event.urlAfterRedirects);
                         ga('send', 'pageview', {page: window.location.pathname, title: "Personalized Health Questionnaire", dimension3: window.location.search});
-                        console.log('%%% Google Analytics page view event %%%');
                     }
                 }
             } catch (e) {
