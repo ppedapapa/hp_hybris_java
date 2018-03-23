@@ -72,10 +72,10 @@ public class PromoEngine<T> {
 			for (RuleSet<T> rs : rulesets) {
 				if (rs.condition.evaluate(request)) {
 					matches.add(rs);
-					//log.debug("RULE MATCH:  " + rs.promo.code + ' ' + rs.id + ' '+ rs.condition);
+					log.debug("RULE MATCH:  " + rs.promo.code + ' ' + rs.id + ' '+ rs.condition);
 				}else
 				{
-					//log.debug("RULE FAILED: " + rs.promo.code + ' ' + rs.id + ' '+ rs.condition);
+					log.debug("RULE FAILED: " + rs.promo.code + ' ' + rs.id + ' '+ rs.condition);
 				}
 			}
 		} else
