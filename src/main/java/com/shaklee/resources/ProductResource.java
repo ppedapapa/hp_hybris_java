@@ -1,5 +1,7 @@
 package com.shaklee.resources;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -31,13 +33,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.shaklee.shared.oauth.OauthClientService;
 
-@Controller
+@RestController
+@RequestMapping("/services/hp")
 public class ProductResource {
 	
 	@Autowired
@@ -55,14 +58,14 @@ public class ProductResource {
 	final static String uri1_multipleProducts = "/products?codes=";
 	
 	
-	@RequestMapping("/getproducts")
-	public JSONObject getProducts(@RequestParam(value="productCodes") String[] productCodes,HttpSession session,HttpServletRequest request, HttpServletResponse response) 
-			throws ClientProtocolException, IOException, JSONException {
+	@RequestMapping(path="/getproducts", method = GET)
+	public String  getProducts(@RequestParam(value="productcodes") String[] productCodes,@RequestParam(value="country", required = false) String country,
+			HttpSession session,HttpServletRequest request, HttpServletResponse response) throws ClientProtocolException, IOException, JSONException {
 		
 		hybrisUrl = env.getProperty("hybrisUrl");
-		JSONObject jsonResponse = null;
+		String jsonResponse = null;
 		
-		String country = (String) session.getAttribute("country");
+		String countryCode = (country == null || "".equalsIgnoreCase(country))?(String) session.getAttribute("country"):country;
 		
 		String restUrl = null;
 		
@@ -70,8 +73,8 @@ public class ProductResource {
 		if(productCodes != null && productCodes.length !=0)
 		  codes=String.join(",", productCodes);
 		
-		restUrl = hybrisUrl + uri1 + country + uri1_multipleProducts + codes+ "&" + getAccessTokenAndTokenType();
-		
+		restUrl = hybrisUrl + uri1 + countryCode + uri1_multipleProducts + codes+ "&" + getAccessTokenAndTokenType();
+
 		CloseableHttpClient httpclient = getHttpClient();
 		
 		if (httpclient != null) {
@@ -85,7 +88,7 @@ public class ProductResource {
 				if (responseEntity != null) {
 
 					String pResponse = EntityUtils.toString(responseEntity);
-					jsonResponse = new JSONObject(pResponse);
+					jsonResponse = new JSONObject(pResponse).toString();
 					return jsonResponse;
 				}
 			}
