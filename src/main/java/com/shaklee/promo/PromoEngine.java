@@ -74,7 +74,9 @@ public class PromoEngine<T> {
 					matches.add(rs);
 					log.debug("RULE MATCH:  " + rs.promo.code + ' ' + rs.id + ' '+ rs.condition);
 				}else
+				{
 					log.debug("RULE FAILED: " + rs.promo.code + ' ' + rs.id + ' '+ rs.condition);
+				}
 			}
 		} else
 			// no debugging

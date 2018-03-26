@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.shaklee.DAOImpl.UserDAOImpl;
 import com.shaklee.entity.HPEntity;
 import com.shaklee.security.stereotypes.CurrentUser;
+import com.shaklee.shared.oauth.OauthClientService;
 
 @Controller
 public class HealthPrintResource {
 	
 	@Autowired
 	UserDAOImpl userDao;
+	
+	@Autowired
+	private OauthClientService oauthClientService;
 
 	@RequestMapping("/healthprint")
 	public String healthprint(@RequestParam(value="country", required = false) String country,
@@ -42,7 +47,7 @@ public class HealthPrintResource {
 		}
 		
 		
-		return "forward:/";
+		return "forward:/"+"?"+getAccessTokenAndTokenType();
 	
 	}
 	
@@ -66,7 +71,7 @@ public class HealthPrintResource {
 	
 		response.addCookie(hpEntityCookie);
 		
-		return "redirect:/";
+		return "redirect:/"+"?"+getAccessTokenAndTokenType();
 
 	}
 	
@@ -75,11 +80,33 @@ public class HealthPrintResource {
 	@RequestMapping("/healthprint-results")
 	public String results(HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		
-        return "forward:/";
+        return "forward:/"+"?"+getAccessTokenAndTokenType();
 	}
 	
 	@RequestMapping("/healthprint-results/{hpid}")
 	public String resultsWithId(@PathVariable(value="hpid") String hpid) {
-		return "forward:/";
+		return "forward:/"+"?"+getAccessTokenAndTokenType();
+	}
+	
+	public String getAccessTokenAndTokenType()
+	{
+		try{
+			JSONObject jsonObject = oauthClientService.getoAuthAccessToken();
+			
+			String access_token="";
+			String token_type="";
+			if(jsonObject != null)
+			{
+				access_token = jsonObject.getString("access_token");
+				token_type = jsonObject.getString("token_type");
+			}
+			return "access_token="+access_token+"&token_type="+token_type;
+		
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

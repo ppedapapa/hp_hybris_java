@@ -1,7 +1,7 @@
 <div class="row health-results-above-banner hp-results-banner">
   <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
     <img class="logo-img" src="//images.shaklee.com/healthprint/Healthprint-Logo.png">
-    <span class="logo-text ng-binding" ng-bind-html="'personalize-health.results.shaklee_healthprint'|translate">Shaklee <b>HEALTHPRINT</b><sup>TM</sup></span>
+    <span class="logo-text" [innerHTML]="'results.shaklee_healthprint'|translate"></span>
   </div>
   <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 hp-results-selection">
     <ng-select [items]="allHealthPrintsResults"
@@ -17,7 +17,7 @@
 
   <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">
       <div class="resultTopLinks">
-        <a (click)="startOverQuiz();">RETAKE YOUR ASSESSMENT</a>
+        <a (click)="startOverQuiz();"><span [innerHTML]="'results.retake-quiz'|translate"></span></a>
         <a (click)="printResults()"><i class="fa fa-print fa-2x" aria-hidden="true"></i></a>
         <a (click)="openEmailResultMore()"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a>
       </div>
