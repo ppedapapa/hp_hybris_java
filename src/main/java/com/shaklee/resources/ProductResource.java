@@ -65,7 +65,9 @@ public class ProductResource {
 		hybrisUrl = env.getProperty("hybrisUrl");
 		String jsonResponse = null;
 		
-		String countryCode = (country == null || "".equalsIgnoreCase(country))?(String) session.getAttribute("country"):country;
+		String sessionCountryCode = ((String) session.getAttribute("country")== null ?"US":(String) session.getAttribute("country"));
+		
+		String countryCode = (country == null || "".equalsIgnoreCase(country))?sessionCountryCode:country;
 		
 		String restUrl = null;
 		
