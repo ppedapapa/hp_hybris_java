@@ -3,6 +3,17 @@
 .bundle {
   background: $background-grey;
   margin: 40px 0;
+  .promo-btn {
+    .less-text {
+      color: #ff8c00;
+      margin: 0;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 12px !important;
+    }
+  }
+
   .section-title {
     color: $shaklee-question-text-color;
     font-weight: 400;

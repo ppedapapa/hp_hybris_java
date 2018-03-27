@@ -1,134 +1,97 @@
 <div class="row bundle">
-  <div class="col-12">
-    <h1 class="section-title"><b>Your Personalized Recommendations</b><br>based on your results and top health goals</h1>
-  </div>
-  <div class="col-12 bundle-container">
-    <ngb-tabset>
-      <ngb-tab *ngFor="let tier of bundles;">
-        <ng-template ngbTabTitle>
-            <div class="tab-title">{{'results.'+tier.bundle|translate}}</div>
-            <div class="less-text" *ngIf="!isMobile">Less than <span *ngIf="!isCanFr" class="ng-scope">$</span>3 a day</div>
-        </ng-template>
-        <ng-template ngbTabContent>
-          <div class="basic">
-            <div class="row product-recommendation {{sku.category}}" ngClass="isMultiVitaminMessage?'hasMessage':'noMessage'" *ngFor="let sku of tier['skus']">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sku-category">
-                <span *ngIf="sku.goal">
-                    <b *ngIf="sku.goal.length == 1" [innerHTML]="'tags.your-goal'|translate"></b>
-                    <b *ngIf="sku.goal.length > 1" [innerHTML]="'tags.your-goals-are'|translate"></b>
-                    <span *ngFor="let goal of sku.goal">
-                        <b [innerHTML]="'label.health-goals-'+goal|translate"></b><b *ngIf="goal !== 'weight'">*</b><b *ngIf="sku.goal.length > 1 && !$last">, </b>
-                    </span>
-                </span>
-                <span *ngIf="!sku.goal">
-                  <b *ngIf="sku.category != 'personalized_nutrition'">{{'tags.your-interest-in'|translate}}</b>
-                  <b>{{'tags.'+sku.category|translate}}</b>
-                </span>
-                <b>&nbsp;--&nbsp;{{'results.recommend'|translate}}&nbsp;:</b>
-              </div>
-              <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 message" sk-dr-set-height *ngIf="sku.category == 'personalized_nutrition' && mutiVitaminTier1"><p *ngFor="let message of mutiVitaminTier1|limitTo:limit.TIER_1">{{'mutiVitamin.'+message|translate}}</p></div>-->
-              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 image">
-                <img [src]="sku.info.itemImage" class="img-fluid"/>
-                <div *ngIf="!isMobile" sk-dr-sku-dietary-restrictions restrictions="sku.info.restrictions"></div>
-              </div>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 description">
-                <b>{{sku.info.title}}</b>
-                <p class="short-desc aem-desc">{{sku.info.healthPrintDescription}}</p>
-                <a *ngIf="!isMobile" (click)="openLearnMoreModal(sku, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
-                <div *ngIf="isMobile" sk-dr-sku-dietary-restrictions restrictions="sku.info.restrictions"></div>
-              </div>
-
-              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 buttons">
-                <p class="price">{{sku.info.price| formatPrice}}</p>
-                <!--<a *ngIf="(!hideAddToItem) && (sku.sn_price != 0)" (click)="addToCart(sku, $event, 'Basic');" class="add-item">{{'results.add-item'|translate}}</a>-->
-                <app-hp-add-cart [sku]="sku"></app-hp-add-cart>
-                <a *ngIf="isMobile" (click)="openLearnMoreModal(sku, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
-              </div>
-            </div>
-            <!--<div class="row product-recommendation {{sku.category}}" ngClass="isMultiVitaminMessage?'hasMessage':'noMessage'" *ngFor="let sku of tier['skus']">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sku-category">
-                <b [innerHTML]="'tags.'+sku.category|translate"></b>
-              </div>
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 message" sk-dr-set-height *ngIf="sku.category == 'personalized_nutrition' && mutiVitaminTier1">
-                <p *ngFor="let message of mutiVitaminTier1|limitTo:limit.TIER_1">{{'mutiVitamin.'+message|translate}}</p>
-              </div>
-              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 image">
-                <img src="//images.shaklee.com/healthprint/ico-leaf.png" class="img-fluid"/>
-              </div>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 description">
-                <b [innerHTML]="'results.shaklee-membership-title'|translate"></b>
-                <p class="short-desc aem-desc" [innerHTML]="'results.shaklee-membership-description'|translate"></p>
-                <b *ngIf="sku.sn_price == 0" class="free">{{'results.free'|translate}}</b>
-              </div>
-
-              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 buttons">
-                <p *ngIf="sku.sn_price != 0" class="price">{{sku.sn_price| formatPrice}}</p>
-                <a *ngIf="(!hideAddToItem) && (sku.sn_price != 0)" (click)="addToCart(sku, $event, 'Basic');" class="add-item">{{'results.add-item'|translate}}</a>
-              </div>
-            </div> -->
-            <!--<div class="row bundle-price">
-              <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-                <div class="savings">
-                  <div class="less-text">{{'results.less-than'|translate}} <span *ngIf="!isCanFr">$</span>{{basicBundle.perDayPrice}}<span *ngIf="isCanFr"> $</span> {{'results.a-day'|translate}}</div>
-                  <b *ngIf="!isMC && isUS" class="red">{{basicBundle.totalDiscount|currency}} <span [innerHTML]="'results.members-savings'|translate"></span></b>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 total-list">
-                <div class="total-price">
-                  <p *ngIf="!isMC && !membershipTier1"><span class="sub-total">{{'results.sub-total'|translate}}</span><b>{{basicBundle.subTotalbundlePrice| formatPrice}}</b></p>
-                  <p *ngIf="!isMC && !membershipTier1" class="free-membership-text" [innerHTML]="'results.one-time-membership'|translate"></p>
-                  <p><span>{{'results.total'|translate}}</span><b>{{basicBundle.bundlePrice| formatPrice}}</b></p>
-                  <p *ngIf="isUS">({{'results.prices-reflect'|translate}})</p>
-                </div>
-                <button *ngIf="(!hideAddToItem)" (click)="addBundleToCart(basicBundle, $event, 'advanced');" type="button" class="btn add-btn continue-btn">{{'results.add-all-cart'|translate}}</button>
-              </div>
-            </div> -->
-            <!-- Recommended Life Shake -->
-            <!-- <div class="row life_shake shake" *ngIf="!kids && showLifeShake">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sku-category"><b [innerHTML]="'results.add-life-shake'|translate"></b></div>
-              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 image">
-                <img [src]="currentLifeShakeBasic.info.itemImage" class="img-fluid"/>
-                <div sk-dr-sku-dietary-restrictions restrictions="currentLifeShakeBasic.info.restrictions"></div>
-              </div>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 description">
-                <b [innerHTML]="currentLifeShakeBasic.info.title"></b>
-                <p class="short-desc aem-desc" [innerHTML]="currentLifeShakeBasic.info.healthPrintDescription"></p>
-                <p class="select shake-select-main">
-                  <select class="form-control shake-select" name="shake" ng-model="selectedLifeShake" ng-init="selectedLifeShake='0'" ng-change="changeLifeShake(selectedLifeShake, 'Basic')">
-                    <option *ngFor="let lifeShake of lifeShakeBundle" value="{{$index}}" ng-selected="currentLifeShakeBasic.sku == lifeShake.sku">{{lifeShake.info.variant}}</option>
-                  </select>
-                </p>
-                <p class="short-desc aem-desc servings" [innerHTML]="'results.15-servings'|translate"></p>
-                <span class="price">{{currentLifeShakeBasic.price| formatPrice}}</span>
-                <a  *ngIf="(!hideAddToItem)" (click)="addToCart(currentLifeShakeBasic, $event, 'Basic');" class="add-item">{{'results.add-item'|translate}}</a>
-                <a (click)="openLearnMoreModal(currentLifeShakeBasic, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
-              </div>
-            </div> -->
-          </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-  </div>
-
- <!-- <div class="col-2 image">
-    <img src="https://assets.shaklee.com/publish/content/dam/shakleemedia/products/new_products_us/healthy_foundation/b20282.jpg" class="img-fluid">
-    <div class="img-res">
-      <img src="//images.shaklee.com/healthprint/gluten-free.png" class="img-fluid"> <span>Gluten Free</span><br>
-      <img src="//images.shaklee.com/healthprint/lactose-free.png" class="img-fluid"> <span>Lactose Free</span>
+    <div class="col-12">
+        <h1 class="section-title" [innerHTML]="'results.now-choose-bundles'|translate"></h1>
     </div>
-  </div>
-  <div class="col-8 description">
-    <b>Vitalizer™</b>
-    <p>Vital, advanced nutrition in a convenient, multi-nutrient strip. 100% or more of the Daily Value of all essential vitamins to provide a foundation of nutritional support plus:</p>
-    <ul>
-      <li><b>Caroto-E-Omega: </b>500mg DHA/EPA ultra-pure Omega-3 fatty acids, plus vitamin E to support a healthy heart and joint comfort*</li>
-      <li><b>B+C Complex: </b>for increased energy and added immune support*</li>
-      <li><b>Optiflora: </b>probiotic to support digestive health*</li>
-      <li>Based on the <b>Landmark Study</b>, one of the largest studies of loterm supplementation conducted by UC Berkele</li>
-    </ul>
-  </div>
-  <div class="col-2 buttons">
-    <p class="price">$79.25</p>
-    <app-hp-add-cart></app-hp-add-cart>
-  </div> -->
+    <div class="col-12 bundle-container">
+        <ngb-tabset>
+            <ngb-tab *ngFor="let tier of bundles;">
+                <ng-template ngbTabTitle>
+                    <div class="tab-title">{{'results.'+tier.bundle|translate}}</div>
+                    <div class="less-text" *ngIf="!isMobile">{{'results.less-than'|translate}} <span *ngIf="!isCanFr">$</span>{{tier.perDayPrice}}<span *ngIf="isCanFr"> $</span>{{'results.a-day'|translate}}</div>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <div [ngClass]="tier.bundle">
+                        <div class="row d-flex justify-content-end">
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 promo-btn">
+                                <div class="less-text">{{'results.less-than'|translate}} <span *ngIf="!isCanFr">$</span>{{tier.perDayPrice}}<span *ngIf="isCanFr"> $</span> {{'results.a-day'|translate}}</div>
+                                <button (click)="addBundleToCart(basicBundle, $event, 'basic');" type="button" class="btn add-btn continue-btn">{{'results.add-all-cart'|translate}}</button>
+                            </div>
+                        </div>
+                        <div class="row product-recommendation {{sku.category}}" *ngFor="let sku of filterNoMembership(tier['skus'])">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sku-category">
+                                <span *ngIf="sku.goal">
+                                    <b *ngIf="sku.goal.length == 1" [innerHTML]="'tags.your-goal'|translate"></b>
+                                    <b *ngIf="sku.goal.length > 1" [innerHTML]="'tags.your-goals-are'|translate"></b>
+                                    <span *ngFor="let goal of sku.goal">
+                                        <b [innerHTML]="'label.health-goals-'+goal|translate"></b>
+                                        <b *ngIf="goal !== 'weight'">*</b><b *ngIf="sku.goal.length > 1 && !$last">, </b>
+                                    </span>
+                                </span>
+                                <span *ngIf="!sku.goal">
+                                    <b *ngIf="sku.category != 'personalized_nutrition'">{{'tags.your-interest-in'|translate}}</b>
+                                    <b>{{'tags.'+sku.category|translate}}</b>
+                                </span>
+                                <b>&nbsp;--&nbsp;{{'results.recommend'|translate}}&nbsp;:</b>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 image">
+                                <img [src]="sku.info.itemImage" class="img-fluid"/>
+                                <div *ngIf="!isMobile" restrictions="sku.info.restrictions"></div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 description">
+                                <b>{{sku.info.title}}</b>
+                                <p class="short-desc aem-desc">{{sku.info.healthPrintDescription}}</p>
+                                <a *ngIf="!isMobile" (click)="openLearnMoreModal(sku, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
+                                <div *ngIf="isMobile" restrictions="sku.info.restrictions"></div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 buttons">
+                                <p class="price">{{sku.info.price| formatPrice}}</p>
+                                <!--<a *ngIf="(!hideAddToItem) && (sku.sn_price != 0)" (click)="addToCart(sku, $event, 'Basic');" class="add-item">{{'results.add-item'|translate}}</a>-->
+                                <app-hp-add-cart [sku]="sku"></app-hp-add-cart>
+                                <a *ngIf="isMobile" (click)="openLearnMoreModal(sku, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
+                            </div>
+                        </div>
+                        <div class="row product-recommendation {{sku.category}}" *ngFor="let sku of filterMembership(tier['skus'])">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sku-category">
+                                <span *ngIf="sku.goal">
+                                    <b *ngIf="sku.goal.length == 1" [innerHTML]="'tags.your-goal'|translate"></b>
+                                    <b *ngIf="sku.goal.length > 1" [innerHTML]="'tags.your-goals-are'|translate"></b>
+                                    <span *ngFor="let goal of sku.goal">
+                                        <b [innerHTML]="'label.health-goals-'+goal|translate"></b>
+                                        <b *ngIf="goal !== 'weight'">*</b><b *ngIf="sku.goal.length > 1 && !$last">, </b>
+                                    </span>
+                                </span>
+                                <span *ngIf="!sku.goal">
+                                    <b *ngIf="sku.category != 'personalized_nutrition'">{{'tags.your-interest-in'|translate}}</b>
+                                    <b>{{'tags.'+sku.category|translate}}</b>
+                                </span>
+                                <b>&nbsp;--&nbsp;{{'results.recommend'|translate}}&nbsp;:</b>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 image">
+                                <img [src]="sku.info.itemImage" class="img-fluid"/>
+                                <div *ngIf="!isMobile" restrictions="sku.info.restrictions"></div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 description">
+                                <b>{{sku.info.title}}</b>
+                                <p class="short-desc aem-desc">{{sku.info.healthPrintDescription}}</p>
+                                <a *ngIf="!isMobile" (click)="openLearnMoreModal(sku, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
+                                <div *ngIf="isMobile" restrictions="sku.info.restrictions"></div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 buttons">
+                                <p class="price">{{sku.info.price| formatPrice}}</p>
+                                <!--<a *ngIf="(!hideAddToItem) && (sku.sn_price != 0)" (click)="addToCart(sku, $event, 'Basic');" class="add-item">{{'results.add-item'|translate}}</a>-->
+                                <app-hp-add-cart [sku]="sku"></app-hp-add-cart>
+                                <a *ngIf="isMobile" (click)="openLearnMoreModal(sku, 'Basic');" class="learn-more">{{'results.more-info'|translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
 </div>

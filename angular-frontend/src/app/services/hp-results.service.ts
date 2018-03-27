@@ -38,7 +38,7 @@ export class HealthPrintResultsService {
     endPointAllHealthPrintResults = '/services/hp/getAllHealthPrints';
     endPointContent =  '/assets/mockjson/content.json';
     endPointRecommendation = '/services/hp/recommendations';
-    endPointProduct = 'https://www.shakleedev.com:9002/shakleeintegration/v2/shakleeUS/products?fields=DEFAULT';
+    endPointProduct = '/services/hp/getproducts';
 
     constructor(private http: HttpClient,
                 private questionsService: QuestionsService,
@@ -88,6 +88,7 @@ export class HealthPrintResultsService {
         let getCleanSku = this.hpConfigService.getCleanSku();
         let productDetails;
         let tmpArray = [];
+        let priceTier = 'MP'; // get it from getAllHealthprints api, once it is available
 
         //Get healthprint skulist
         const skuList = this.getSkuList(bundles);
@@ -103,7 +104,7 @@ export class HealthPrintResultsService {
         this.getProductContent(skuString).subscribe(responseData => {
             productDetails = responseData['products'];
             let productInfo = {};
-            let image, price;
+            let image, price, srpPrice;
 
             if (!productDetails) {
                 return;
@@ -119,8 +120,11 @@ export class HealthPrintResultsService {
                 }
                 if (val.prices) {
                     val.prices.forEach(function (priceVal) {
-                        if (priceVal.priceTier === 'SN') {
+                        if (priceVal.priceTier === priceTier) {
                             price = priceVal.value;
+                        }
+                        if(priceVal.priceTier === 'SRP') {
+                            srpPrice = priceVal.value;
                         }
                     });
                 }
@@ -130,7 +134,8 @@ export class HealthPrintResultsService {
                     description: val.longDescription,
                     shortDescription: val.description,
                     itemImage: environment.hybrisServerName + image,
-                    price: price
+                    price: price,
+                    srpPrice: price
                 };
             });
 
@@ -153,7 +158,8 @@ export class HealthPrintResultsService {
                             description: 'temp longDescription',
                             shortDescription: 'temp description',
                             itemImage: '//images.shaklee.com/healthprint/ico-leaf.png',
-                            price: 'temp price'
+                            price: 0,
+                            srpPrice: 0
                         };
                     }
                 });
@@ -209,7 +215,7 @@ export class HealthPrintResultsService {
     }
 
     getProductContent(sku) {
-        let codes= '&codes='+sku;
+        let codes= '?country=US&productcodes='+sku;
         return this.http.get(this.endPointProduct+codes);
     }
     setAllHealthPrintResult(allHealthPrintResults:object) {
